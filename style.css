@@ -1,0 +1,40 @@
+*{
+    margin:0;
+    padding:0;
+}
+:root{
+    --flagColor:#36502A;
+    --background:#ede9b2;
+    --textColor:white;
+}
+html{
+    font-size: 100%;
+    line-height: 1.5em;
+    margin:auto;
+    background-color:var(--background);
+
+}
+header{
+    background-color:var(--flagColor);
+    color:var(--textColor);
+    text-align:center;
+    
+}
+/*header h1{
+   
+    text-align: center;
+}*/
+#menu{
+    background-color:var(--flagColor) ;
+    margin-right: 90%;
+    color: var(--textColor);
+}
+.genere{
+    background-color: var(--flagColor);
+}
+footer{
+    background-color:var(--flagColor);
+    color:var(--textColor);
+    text-align:left;
+
+}
