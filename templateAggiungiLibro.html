@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home - BookClub</title>
+        <meta name="keywords" content="libri ,migliori, generi, bestseller">
+        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <meta name="author" content="">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header id="header">
+            <nav aria-label="Aiuti alla navigazione">
+            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+            </nav> 
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
+        </header>
+        <nav id="menu">
+            <ul>
+                <li><a href="templateAggiungiLibro.html"></a>Aggiungi un libro</li>
+                <li><a href="templateAggiungiGenere.html"></a>Aggiungi Genere</li>
+                <li><a href="templateRiumuoviLibro.html"></a>Rimuovi un Libro</li>
+                <li><a href="templateRiumuoviRecensione.html"></a>Rimuovi una Recensione</li>
+                <li><a href="templateRiumuoviUtenti.html"></a>Rimuovi Utenti</li>
+                <li><a href="cerca.html">Cerca</a></li>
+            </ul>
+        </nav>
+        <nav id="breadcrumbs" aria-label="Percorso">
+            <p>Ti trovi in: :<a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Libro</p>
+        <span class="separatore"></span>
+        </nav>
+        <main  id="content">
+<main id="content">
+    <section id="sectionAggiungiLibro">
+        <h2>Inserisci una nuovo Libro</h2>
+        <form method="post" action="aggiungiLibroAdmin.php"> 
+            {messaggiForm}
+            <fieldset>
+                <legend>Autore</legend>
+                <label for="album">Seleziona : </label>
+                <select id="album" name="album">
+                    {listaAutori}
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>Informazioni sul libro:</legend>
+                <label for="titolo">Titolo: </label>
+                <input type="text" name="titolo" id="titolo" value="{valoreTitolo}"/><br/>
+                <label for="durata">Nunero capitoli: </label>
+                <input type="number" name="numerocapitoli" id="numerocapitoli" max="1000" value="{valoreDurata}" />
+            </fieldset>
+            <fieldset>
+                <legend>Informazioni specifiche:</legend>
+                <label for="Lingua">Lingua originale : </label>
+                <select id="Lingua" name="Lingua">
+                    {listaLingue}
+                </select><br/>
+                <label for="casa editrice">Casa editrice: </label>
+                <input type="text" name="editore" id="editore" value="{valoreeditore}"/><br/>
+            </fieldset>
+            <fieldset>
+                <legend>Storia :</legend>
+                <legend for="trama">Trama del libro:</legend>
+                <textarea id="trama" name="trama"></textarea>
+            </fieldset>
+            <fieldset>
+                <legend>Genere</legend>
+                <label for="genere">Seleziona : </label>
+                <select id="genere" name="genere">
+                    {listaGeneri}
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>Invia i dati inseriti:</legend>
+                <button type="submit">Invia</button>
+                <button type="reset">Reset</button>
+            </fieldset>
+        </form>
+    </section>
+</main>
+<footer id="footer">
+    <ul>
+        <li><a href="contatti.html">Contatti</a></li>
+        <li><a href="chisiamo.html">Chi siamo</a></li>
+        <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
+    </ul>
+    <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Prima pagina</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+        <header>
+            <h1 class="titolo">BookClub</h1>
+
+        </header>
+        <nav id="menu">
+            <ul>
+                <li>Accedi</li>
+                <li>Registrati</li>
+                <li><a href="cerca.html">Cerca</a></li>
+            </ul>
+
+        </nav>
+        <nav id="breadcrumbs">
+            <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt;  Registrati</p>
+            <span class="separatore"></span>
+        </nav>
+        <main>
+            <h2>Registrati:</h2>
+            <form id="registrationForm">
+                <p>Inserisci il tuo nome:</p>
+                <label for="firstName">Nome:</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <span class="separatore"></span>
+
+                <p>Inserisci il tuo cognome:</p>
+                <label for="lastName">Cognome:</label>
+                <input type="text" id="lastName" name="lastName" required>
+               <span class="separatore"></span>
+
+                <p>Crea un username </p>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+               <span class="separatore"></span>
+
+                <div><p>La password deve contenere:</p>
+                <ul>
+                    <li>-Almeno una lettera maiuscola</li>
+                    <li>-Almeno un numero</li>
+                    <li>-Almeno un simbolo esempio :{! ? # * }</li>
+                    <li>-Deve essere lunga 8 caratteri</li>
+                </ul>
+                </div>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <span class="separatore"></span>
+
+                <p>Ripetere la stessa password:</p>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="button" >Registrati</button>
+                </form>
+        
+        </main>
+        <footer id="footer">
+            <ul>
+                <li><a href="contatti.html">Contatti</a></li>
+                <li><a href="chisiamo.html">Chi siamo</a></li>
+                <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
+            </ul>
+            <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
+        </footer>
+    </body>
+</html>
