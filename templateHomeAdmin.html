@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home - BookClub</title>
+        <meta name="keywords" content="libri ,migliori, generi, bestseller">
+        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <meta name="author" content="">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header id="header">
+            <nav aria-label="Aiuti alla navigazione">
+            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+            </nav> 
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            <img src="logo" alt="">
+        </header>
+        <nav id="menu">
+            <ul>
+                <li><a href="templateAggiungiLibroAdmin.html">Aggiungi un libro</a></li>
+                <li><a href="templateAggiungiGenere.html">Aggiungi Genere</a></li>
+                <li><a href="templateRiumuoviLibro.html">Rimuovi un Libro</a></li>
+                <li><a href="templateRiumuoviRecensione.html">Rimuovi una Recensione</a></li>
+                <li><a href="templateRiumuoviUtenti.html">Rimuovi Utenti</a></li>
+                <li><a href="cerca.html">Cerca</a></li>
+            </ul>
+
+        </nav>
+        <nav id="breadcrumbs" aria-label="Percorso">
+            <p>Ti trovi in: <span lang="en">Home</span></p>
+        <span class="separatore"></span>
+        </nav>
+        <main  id="content">
+            <h2>Statistiche:</h2>
+                <dl class="Statistiche">
+                    <dt>Numero Utenti Registrati:</dt>
+                    <dd>{numeroUtentiRegistrati}</dd>
+                    <dt>Numero Recensioni:</dt>
+                    <dd>{NumeroRecensioni}</dd>
+                    <dt>Libri Letti Oggi:</dt>
+                    <dd>{LibriLettiTotOggi}</dd>
+                </dl>
+        </main>
+        <footer id="footer">
+            <ul>
+                <li><a href="contatti.html">Contatti</a></li>
+                <li><a href="chisiamo.html">Chi siamo</a></li>
+                <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
+            </ul>
+            <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
+        </footer>
+    </body>
+</html>
