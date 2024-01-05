@@ -37,6 +37,18 @@ class DBAccess {
             return null;
         }
     }
+
+    public function login($username, $password) {
+        $query = "SELECT * FROM utenti WHERE username = '$username' AND password = '$password'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row;
+        }else{
+            return null;
+        }
+    }
 }
 
 ?>

@@ -22,11 +22,10 @@ try {
             $listaBestSeller .= "<li>".$libro["autore"]." - ".$libro["titolo"]." - ".$libro["genere"]."</li>";
         }
     }
-} catch(Exception $e) {
+    $connection -> closeConnection();
+} catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
-
-$connection -> closeConnection();
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);
 echo $paginaHTML;
