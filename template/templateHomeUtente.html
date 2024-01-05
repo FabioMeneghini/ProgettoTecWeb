@@ -6,7 +6,7 @@
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
         <header id="header">
@@ -22,26 +22,49 @@
                 <li><a href="templateTerminati.html">Libri terminati</a></li>
                 <li><a href="templateSalvati.html">Libri salvati</a></li>
                 <li><a href="templateEsplora.html">Esplora</a></li>
-                <li>Statistiche</li>
+                <li><a href="templateStatistiche.html">Statistiche</a></li>
                 <li><a href="templateAreaPersonale.html">Area Personale</a></li>
                 <li><a href="cerca.html">Cerca</a></li>
             </ul>
 
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt; Statistiche</p>
+            <p>Ti trovi in: <span lang="en">Home</span></p>
         <span class="separatore"></span>
         </nav>
         <main  id="content">
-            <h2>Statistiche:</h2>
-            <dl class="Statistiche">
-                <dt>Numero Utenti Registrati:</dt>
-                <dd>{numeroUtentiRegistrati}</dd>
-                <dt>Numero Recensioni:</dt>
-                <dd>{NumeroRecensioni}</dd>
-                <dt>Libri Letti Oggi:</dt>
-                <dd>{LibriLettiTotOggi}</dd>
-            </dl>
+            <ul>
+                <li><a href="templateAggiungiLibro.html">Aggiungi Libro</a></li>
+                <button type="button">+</button>
+                <li><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></li>
+                <button type="button">+</button>
+            </ul>
+            <h3 class="titologenere"><a href="templateGenere.html">Consigliati per te:</a></h3>
+               {listaLibriConsigliati}
+
+            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere1}</a></h3>
+            <ul class="listageneri"> 
+                {ListaGenereConsigliati}
+            </ul>
+            <span class="separatore"></span>
+            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere2}</a></h3>
+            <ul class="listageneri"> 
+                {ListaGenere2}
+            </ul>
+            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere3}</a></h3>
+            <ul class="listageneri"> 
+                {ListaGenere3}
+            </ul>
+            <span class="separatore"></span>
+            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere4}</a></h3>
+            <ul class="listageneri"> 
+                {ListaGenere4}
+            </ul>
+            <span class="separatore"></span>
+            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere5}</a></h3>
+            <ul class="listageneri"> 
+                {ListaGenere5}
+            </ul>
         </main>
         <footer id="footer">
             <ul>

@@ -6,8 +6,7 @@
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="mobile.css" media="screen and (max-width:600px)">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
         <header id="header">
@@ -19,42 +18,24 @@
         </header>
         <nav id="menu">
             <ul>
-                <li><a href="templateAccedi.html">Accedi</a></li>
-                <li><a href="templateRegistrati.html">Registrati</a></li>
+                <li><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></li>
+                <li>Libri terminati</li>
+                <li><a href="templateSalvati.html">Libri salvati</a></li>
                 <li><a href="templateEsplora.html">Esplora</a></li>
+                <li><a href="templateStatistiche.html">Statistiche</a></li>
+                <li><a href="templateAreaPersonale.html">Area Personale</a></li>
                 <li><a href="cerca.html">Cerca</a></li>
             </ul>
 
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <span lang="en">Home</span></p>
+            <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt;Libri Terminati</p>
         <span class="separatore"></span>
         </nav>
         <main  id="content">
-            <h2>Migliori titoli del momento</h2>
-               {listaMiglioriLibri}
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere1}</a></h3>
-            <ul class="listageneri"> 
-                {ListaGenere1}
-            </ul>
-            <span class="separatore"></span>
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere2}</a></h3>
-            <ul class="listageneri"> 
-                {ListaGenere2}
-            </ul>
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere3}</a></h3>
-            <ul class="listageneri"> 
-                {ListaGenere3}
-            </ul>
-            <span class="separatore"></span>
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere4}</a></h3>
-            <ul class="listageneri"> 
-                {ListaGenere4}
-            </ul>
-            <span class="separatore"></span>
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere5}</a></h3>
-            <ul class="listageneri"> 
-                {ListaGenere5}
+            <h2>Libri che hai letto</h2>
+            <ul>
+                <li><a href="templateSchedaLibro.html">{Titolo}</a></li>
             </ul>
         </main>
         <footer id="footer">

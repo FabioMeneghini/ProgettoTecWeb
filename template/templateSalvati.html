@@ -6,7 +6,7 @@
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
         <header id="header">
@@ -14,23 +14,29 @@
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
         </header>
         <nav id="menu">
             <ul>
-                <li><a href="templateAccedi.html">Accedi</a></li>
-                <li><a href="templateRegistrati.html">Registrati</a></li>
+                <li><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></li>
+                <li><a href="templateTerminati.html">Libri terminati</a></li>
+                <li>Libri salvati</li>
+                <li><a href="templateEsplora.html">Esplora</a></li>
+                <li><a href="templateStatistiche.html">Statistiche</a></li>
+                <li><a href="templateAreaPersonale.html">Area Personale</a></li>
                 <li><a href="cerca.html">Cerca</a></li>
             </ul>
 
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in:<a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt;  {NomeGenere}</p>
+            <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt;Libri Terminati</p>
         <span class="separatore"></span>
         </nav>
         <main  id="content">
-            <h2>{NomeGenere}</h2>
-            {Lista_tutti_libri}
-
+            <h2>Libri che hai salvato</h2>
+            <ul>
+                <li><a href="templateSchedaLibro.html">{Titolo}</a></li>
+            </ul>
         </main>
         <footer id="footer">
             <ul>
