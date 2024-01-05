@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Home - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
+        <meta name="keywords" content="libri, migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
         <header id="header">
@@ -14,37 +14,30 @@
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
         </header>
         <nav id="menu">
             <ul>
+                <li><a href="../cerca.html">Cerca</a></li>
                 <li><a href="templateAccedi.html">Accedi</a></li>
-                <li><a href="templateRegistrati.html">Registrati</a></li>
-                <li><a href="cerca.html">Cerca</a></li>
+                <li><a href="templateAccedi.html">Registrati</a></li>
             </ul>
 
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt; Chi Siamo </p>
-            <span class="separatore"></span>
+            <p>Ti trovi in: <span lang="en">Home</span></p>
+        <span class="separatore"></span>
         </nav>
         <main  id="content">
-            <h2>Collaboratori: </h2>
-            <dl id="componenti">
-                <dt>Admin 1</dt>
-                <dd>
-                    <img src="./images/RiccardoZanotti.jpg" alt="">
-                        <dt>Ruolo:</dt>
-                        <dd>Aggiungere libri, Rimuovere recensioni ,Rispondere al telefono </dd>
-                        <dt>Biografia:</dt>
-                        <dd><strong>Admin 1 </strong>Lavora a questo progetto da 10 anni per assicurarsi che non ci siano liti tra gli iscritti e che i libri ricevano l'interesse che meritano</dd>
-                </dd>
-            </dl>
-            <span class="separatore"></span>
+            <h3 class="titologenere"><a href="templateGenere.html">Best seller:</a></h3>
+            <ul class="listageneri">
+               {listaBestSeller}
+            </ul>
         </main>
         <footer id="footer">
             <ul>
                 <li><a href="contatti.html">Contatti</a></li>
-                <li>Chi siamo</li>
+                <li><a href="chisiamo.html">Chi siamo</a></li>
                 <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
             </ul>
             <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
