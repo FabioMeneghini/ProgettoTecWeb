@@ -37,8 +37,6 @@ class DBAccess {
             return null;
         }
     }
-
-    
 }
 
 ?>
