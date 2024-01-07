@@ -4,6 +4,14 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
+if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
+    if($_SESSION['admin'] == 1) {
+        header("Location: admin.php");
+    } else {
+        header("Location: utente.php");
+    }
+}
+
 $paginaHTML = file_get_contents("template/templateRegistrati.html");
 
 function controllaInput($nome, $cognome, $username, $email, $password1, $password2) { //da inserire eventualmente altri controlli su username e password
@@ -62,8 +70,8 @@ if(isset($_POST['registrati'])) {
                     $connection -> closeConnection();
 
                     if($erroriRegistrazione == "") {
-                        //header("Location: accedi.php");
-                        $messaggiPerForm .= "<li>Registrazione avvenuta con successo</li>";
+                        //$messaggiPerForm .= "<li>Registrazione avvenuta con successo</li>";
+                        header("Location: accedi.php"); //dovrebbe mostrare un messaggio di successo dopo aver mandato alla pagina di login
                     } else {
                         $messaggiPerForm .= "<li>".$erroriRegistrazione."</li>";
                     }

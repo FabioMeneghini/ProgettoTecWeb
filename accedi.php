@@ -4,6 +4,14 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
+if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
+    if($_SESSION['admin'] == 1) {
+        header("Location: admin.php");
+    } else {
+        header("Location: utente.php");
+    }
+}
+
 $paginaHTML = file_get_contents("template/templateAccedi.html");
 
 function controllaInput($username, $password) { //da inserire eventualmente altri controlli su username e password
@@ -43,7 +51,7 @@ if(isset($_POST['accedi'])) {
             } else {
                 $messaggiPerForm .= "<li>Errore di connessione al database</li>";
             }
-            
+
             if($user!=null) {
                 $_SESSION['username'] = $user['username']; //salva lo username in una variabile di sessione
                 $_SESSION['nome'] = $user['nome'];
