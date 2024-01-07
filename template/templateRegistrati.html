@@ -5,7 +5,7 @@
         <title>Prima pagina</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
-        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="css/style.css">
 
     </head>
     <body>
@@ -19,15 +19,21 @@
                 <li>Registrati</li>
                 <li><a href="cerca.html">Cerca</a></li>
             </ul>
-
         </nav>
+
         <nav id="breadcrumbs">
             <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt;  Registrati</p>
-            <span class="separatore"></span>
         </nav>
+
+        <span class="separatore"></span>
+
         <main>
             <h2>Registrati:</h2>
-            <form id="registrationForm">
+            <form id="registrationForm" action="registrati.php" method="post"> <!-- mi sa che gli id sui textbox del form non servono -->
+                <ul class="messaggiErrore">
+                    {messaggi}
+                </ul>
+
                 <p>Inserisci il tuo nome:</p>
                 <label for="firstName">Nome:</label>
                 <input type="text" id="firstName" name="firstName" required>
@@ -36,32 +42,40 @@
                 <p>Inserisci il tuo cognome:</p>
                 <label for="lastName">Cognome:</label>
                 <input type="text" id="lastName" name="lastName" required>
-               <span class="separatore"></span>
+                <span class="separatore"></span>
 
-                <p>Crea un username </p>
+                <p>Crea uno username (deve essere unico):</p>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
-               <span class="separatore"></span>
+                <span class="separatore"></span>
 
-                <div><p>La password deve contenere:</p>
-                <ul>
-                    <li>-Almeno una lettera maiuscola</li>
-                    <li>-Almeno un numero</li>
-                    <li>-Almeno un simbolo esempio : { ! ? # * }</li>
-                    <li>-Deve essere lunga 8 caratteri</li>
-                </ul>
+                <p>Inserisci la tua email:</p>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span class="separatore"></span>
+
+                <div>
+                    <p>La password deve contenere:</p>
+                    <ul>
+                        <li>Almeno una lettera maiuscola</li>
+                        <li>Almeno un numero</li>
+                        <li>Almeno un carattere speciale, per esempio: { ! ? # * }</li>
+                        <li>Deve essere lunga almeno 8 caratteri</li>
+                    </ul>
                 </div>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password1" name="password1" required>
                 <span class="separatore"></span>
 
                 <p>Ripetere la stessa password:</p>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password2" name="password2" required>
 
-                <button type="button">Registrati</button>
+                <span class="separatore"></span>
+                <input type="submit" id="registrati" name="registrati" value="Registrati">
+                <input type="reset" value="Cancella tutto"/>
                 </form>
         
         </main>

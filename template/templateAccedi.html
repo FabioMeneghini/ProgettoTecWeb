@@ -27,17 +27,20 @@
         <main>
             <h2>Accedi</h2>
             <form id="loginForm" action="accedi.php" method="post">
-                {messaggi}
+                <ul class="messaggiErrore">
+                    {messaggi}
+                </ul>
+
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
                 <span class="separatore"></span>
 
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-
                 <span class="separatore"></span>
-                <input type="submit" id="submit" name="submit" value="Accedi">
-                <input type="reset" id="reset" value="Cancella tutto"/>
+
+                <input type="submit" id="accedi" name="accedi" value="Accedi">
+                <input type="reset" value="Cancella tutto"/>
             </form>
 
             <span class="separatore"></span>
