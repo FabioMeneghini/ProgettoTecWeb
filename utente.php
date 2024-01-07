@@ -1,15 +1,18 @@
 <?php
 
 include "config.php";
+echo "Prova utente.php";
+/*
 require_once "DBAccess.php";
 use DB\DBAccess;
 
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         header("Location: admin.php");
-    } else {
-        header("Location: utente.php");
     }
+}
+else {
+    header("Location: index.php");
 }
 
 $listaBestSeller = "";
@@ -31,5 +34,6 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);
 echo $paginaHTML;
+*/
 
 ?>

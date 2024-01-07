@@ -1,36 +1,32 @@
 <?php
 
+include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-setlocale(LC_ALL, 'it_IT');
-
 $paginaHTML = file_get_contents("template/templateAccedi.html");
 
-function pulisciInput($value) {
-    $value = trim($value); //elimina gli spazi
-    $value = strip_tags($value); //rimuovi tag html
-    $value = htmlentities($value); //converte i caratteri speciali in entità html
-    return $value;
+function controllaInput($username, $password) { //da inserire eventualmente altri controlli su username e password
+    $messaggi = "";
+    if(strlen($username) <= 2) {
+        $messaggi .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
+    }
+    return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
 $messaggiPerForm = "";
 
 $ok = true;
 if(isset($_POST['submit'])) {
-    $username = pulisciInput($_POST['username']);
-    if(strlen($username) <= 2) {
-        $messaggiPerForm .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
-        $ok = false;
-    }
-    //$password = pulisciInput($_POST['password']);
+    $username = trim($_POST['username']);
+    //$password = md5($_POST['password']); //calcola l'hash md5 della password
     $password = $_POST['password'];
 
-    if($ok) {
+    $tmp = controllaInput($username, $password);
+    $ok = $tmp['ok'];
+    $messaggiPerForm .= $tmp['messaggi'];
+
+    if($ok) { //si connette al database solamente se i dati inseriti sono validi
         try {
             $connection = new DBAccess();
             $connectionOk = $connection -> openDBConnection();
@@ -38,8 +34,18 @@ if(isset($_POST['submit'])) {
             $user = $connection -> login($username, $password);
             $connection -> closeConnection();
             if($user!=null) {
-                //header("Location: pagina_successo.php");
-                $messaggiPerForm .= "<li>Login effettuato con successo</li>";
+                $_SESSION['username'] = $user['username']; //salva lo username in una variabile di sessione
+                $_SESSION['nome'] = $user['nome'];
+                $_SESSION['cognome'] = $user['cognome'];
+                $_SESSION['email'] = $user['email'];
+                if($user['admin']==1) {
+                    $_SESSION['admin'] = true;
+                    header("Location: admin.php");
+                }
+                else {
+                    $_SESSION['admin'] = false;
+                    header("Location: utente.php");
+                }
             } else {
                 $messaggiPerForm .= "<li>Credenziali errate. Riprova.</li>";
             }
