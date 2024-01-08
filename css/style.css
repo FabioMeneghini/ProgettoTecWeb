@@ -36,7 +36,6 @@ header{
 
 }
 header h1{
-
     text-align: center;
 }
 #menu{
@@ -58,13 +57,13 @@ h2{
     width:100%;
 }
 
- h3:first-of-type::before{
+/*h3:first-of-type::before{
     content: "";
     display: block;
     width: 100%; 
-    border-bottom: 3px solid var(--flagColor); 
+    border-bottom: 3px solid var(--flagColor);
     margin: 39px 0; 
-}
+}*/
 .titologenere{
     padding-left: 7.5em;
 }
