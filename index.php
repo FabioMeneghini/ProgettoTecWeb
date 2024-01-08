@@ -12,6 +12,8 @@ if(isset($_SESSION['admin'])) {
     }
 }
 
+$paginaHTML = file_get_contents("template/templateHomeNonRegistrato.html");
+
 $listaBestSeller = "";
 
 try {
