@@ -75,7 +75,6 @@ body{
 main{
     grid-area: c;
 }
-
 .genere{
     background-color: var(--flagColor);
 }
@@ -90,6 +89,7 @@ ul.listageneri{
     padding: 0;
     margin: 0;
     display: flex;
+
 }
   
 li.listageneri{
@@ -109,7 +109,7 @@ h3:first-of-type::before{
     display: block;
     width: 100%; 
     border-bottom: 3px solid var(--flagColor); 
-    margin: 39px 0; 
+   
 }
 
 .titologenere{
@@ -120,7 +120,17 @@ h3:first-of-type::before{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    position: relative;
+    right: 50pt;
+ 
+}
+nav.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    position: relative;
+    right: 0pt;
 }
 
 #cercaForm{
