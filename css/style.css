@@ -2,6 +2,7 @@
     margin:0;
     padding:0;
 }
+
 :root{
     --flagColor:#36502A;
     --background:white;
@@ -9,100 +10,113 @@
     --linkColor:#438448;
     --visitedLinkColor:#660030;
 }
- a:link{
+
+a:link{
     color: var(--linkColor);
 }
 
- a:visited{
+a:visited{
     color: var(--visitedLinkColor);
 }
+
 #breadcrumbs{
-    
+    grid-area: b;
     float: left;
     position: left;
     text-align: left;
-    margin-right: 4em;
-    /*margin-left: 10em;*/
 }
+
+html, body{
+    height: 100%;
+}
+
 html{
     font-size: 100%;
     line-height: 1.5em;
     margin:auto;
     background-color:var(--background);
-    /*width:100%; rimosso per allineare con Leonardo*/
+    /*width:100%;*/
 }
+
+/* HEADER */
+
 header{
+    grid-area: h;
     background-color:var(--flagColor);
     color:var(--textColor);
     text-align:center;
     padding: 1.5em;
     font-size: 1.5em;
 }
-header h1{
 
+header h1{
     text-align: center;
 }
+
+body{
+    max-width: 1024px;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: "h h h  "
+                         "m b b"
+                         "m c c"
+                         "m c c"
+                         "f f f ";
+}
+
 #menu{
-    position: relative;
-    left: 0;
-    width:90pt;
-    float:left;
-    padding:0em 1.0em 1em 0.5em;/* rimosso per allineare con Leonardo*/
-   /* margin-right: 90%;aggiunto da leonardo*/
+    grid-area: m;
+    /*width:90pt;*/
+    padding:0em 1.0em 1em 0.5em;
     background-color:var(--flagColor) ;
     color: var(--textColor);
 }
-body{/*aggiunto da leonardo*/
-    display: flex;
-    flex-direction: column;
-    min-height:100vh;
+
+main{
+    grid-area: c;
 }
 .genere{
     background-color: var(--flagColor);
 }
+
 .listageneri{
     text-align:left;
     padding-left: 10em;
 }
-ul.listageneri {
+
+ul.listageneri{
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-  }
+
+}
   
-li.listageneri {
+li.listageneri{
     margin-right: 10px; /* Aggiungi uno spazio tra gli elementi, se lo desideri */
-  }
-h2{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    position: relative;
-   right: 50pt;
 }
 
- h3:first-of-type::before{
+h2{
+    /*display: flex;
+    flex-direction: column;
+    align-items: center;*/
+    text-align: center;
+    width:100%;
+}
+
+h3:first-of-type::before{
     content: "";
     display: block;
     width: 100%; 
     border-bottom: 3px solid var(--flagColor); 
    
 }
+
 .titologenere{
     padding-left: 7.5em;
 }
-#loginForm{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    position: relative;
-    right: 50pt;
- 
-}
-#cercaForm{
+
+#loginForm, #registrationForm{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -118,20 +132,37 @@ nav.login{
     position: relative;
     right: 0pt;
 }
-footer{
-   /* position: absolute;rimosso per leonardo*/
-    bottom: 0;
-    width: 100%;
-   /* height: 10em; rimosso per leonardo */
-    background-color: var(--background); 
-    background-color:var(--flagColor);
-    color:var(--textColor);
-    text-align:center;/*prima era left*/
-    padding: 1em 0em;/*aggiunto*/
-    margin-top: auto;/*per leonardo*/
+
+#cercaForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    right: 50pt;
+ 
 }
-footer ul{
+
+nav.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
+    position: relative;
+    right: 0pt;
+}
+
+/* FOOTER */
+
+footer{
+    grid-area: f;
+    /*width: 100%;*/
+    background-color: var(--flagColor);
+    color: var(--textColor);
+    text-align: center;
+    padding: 1em 0em;
+}
+
+footer ul{
     padding: 0.5em;
 }
 
@@ -139,7 +170,9 @@ footer ul li{
     display: inline-block;
     padding: 0em 4em;
 }
-/*componenti*/
+
+/* COMPONENTI */
+
 #componenti{
     margin: auto;
     width: 90%;
