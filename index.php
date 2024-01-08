@@ -21,11 +21,14 @@ try {
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $resultListaBestSeller = $connection -> getListaBestSeller();
+        $connection -> closeConnection();
         foreach($resultListaBestSeller as $libro) {
             $listaBestSeller .= "<li>".$libro["autore"]." - ".$libro["titolo"]." - ".$libro["genere"]."</li>";
         }
     }
-    $connection -> closeConnection();
+    else {
+        echo "Connessione fallita";
+    }
 }
 catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
