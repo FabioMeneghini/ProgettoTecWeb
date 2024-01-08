@@ -21,10 +21,9 @@ a:visited{
 
 #breadcrumbs{
     grid-area: b;
-    /*float: left;*/
-    /*position: left;*/
+    float: left;
+    position: left;
     text-align: left;
-    /*margin-left: 70pt;*/
 }
 
 html, body{
@@ -38,6 +37,8 @@ html{
     background-color:var(--background);
     /*width:100%;*/
 }
+
+/* HEADER */
 
 header{
     grid-area: h;
@@ -84,27 +85,63 @@ main{
     padding-left: 10em;
 }
 
+ul.listageneri{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+  
+li.listageneri{
+    margin-right: 10px; /* Aggiungi uno spazio tra gli elementi, se lo desideri */
+}
+
 h2{
+    /*display: flex;
+    flex-direction: column;
+    align-items: center;*/
     text-align: center;
     width:100%;
 }
 
- h3:first-of-type::before{
+h3:first-of-type::before{
     content: "";
     display: block;
     width: 100%; 
     border-bottom: 3px solid var(--flagColor); 
     margin: 39px 0; 
 }
+
 .titologenere{
     padding-left: 7.5em;
 }
+
 #loginForm, #registrationForm{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 }
+
+#cercaForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    right: 50pt;
+ 
+}
+
+nav.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    position: relative;
+    right: 0pt;
+}
+
+/* FOOTER */
 
 footer{
     grid-area: f;
@@ -122,4 +159,41 @@ footer ul{
 footer ul li{
     display: inline-block;
     padding: 0em 4em;
+}
+
+/* COMPONENTI */
+
+#componenti{
+    margin: auto;
+    width: 90%;
+    max-width: 1024px;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+
+#componenti > dt{
+    background-color: var(--headTable);
+    color: var(--txtColor);
+    border: 1px solid black;
+    padding: 0.5em;
+    font-size: 1.1em;
+}
+
+#componenti > dd{
+    background-color: var(--bgColor);
+    border: 1px solid black;
+    border-top: none;
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+#componenti > dd img{
+    width: 15%;
+    float: left;
+    margin-right: 1em;
+}
+
+.componente dt{
+    float: left;
+    font-weight: bold;
 }
