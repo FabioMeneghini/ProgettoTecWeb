@@ -80,6 +80,22 @@ class DBAccess {
         }
         return $messaggio;
     }
+
+    public function getListaGeneri() {
+        $query = "SELECT genere FROM libri GROUP BY genere";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
 }
 
 ?>
