@@ -5,7 +5,7 @@
         <title>Prima pagina</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
-        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="css/style.css">
 
     </head>
     <body>
@@ -18,33 +18,42 @@
                 <li>Registrati</li>
                 <li><a href="cerca.html">Cerca</a></li>
             </ul>
-
         </nav>
+
         <nav id="breadcrumbs">
             <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt; Accedi</p>
-
         </nav>
+
         <main>
             <h2>Accedi</h2>
-            <form id="loginForm">
+            <form id="loginForm" action="accedi.php" method="post">
+                <ul class="messaggiErrore">
+                    {messaggi}
+                </ul>
+
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
                 <span class="separatore"></span>
 
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-
                 <span class="separatore"></span>
-                <button type="button" >Accedi</button>
-                </form>
+
+                <input type="submit" id="accedi" name="accedi" value="Accedi">
+                <input type="reset" value="Cancella tutto"/>
+            </form>
+
             <span class="separatore"></span>
-        <nav> 
-            <p>Non hai ancora un account?</p>
-            <a href="templateRegistrati.html">Registrati</a>
-            <p>Entra a far parte della nostra comunity!</p>
-        </nav> 
-        <span class="separatore"></span>
+
+            <nav> 
+                <p>Non hai ancora un account?</p>
+                <a href="templateRegistrati.html">Registrati</a>
+                <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
+            </nav> 
+            
+            <span class="separatore"></span>
         </main>
+
         <footer id="footer">
             <ul>
                 <li><a href="contatti.html">Contatti</a></li>
