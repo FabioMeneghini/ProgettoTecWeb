@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    font-size: 12pt;
+    margin: auto;
+}
+
+header{
+    text-align: center;
+    padding: 1.0em 0.0em 1.0em 0.0em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+}
+
+#breadcrumbs{
+    display:none;
+}
+
+#menu{
+    display: none;
+}
