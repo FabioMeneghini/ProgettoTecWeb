@@ -167,6 +167,22 @@ class DBAccess {
             return null;
         }
     }
+
+    public function getListaSalvati($username) {
+        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, da_leggere WHERE da_leggere.username = '$username' AND da_leggere.id_libro = libri.id";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
 }
 
 ?>
