@@ -183,6 +183,22 @@ class DBAccess {
             return null;
         }
     }
+
+    public function getListaTerminati($username) {
+        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, ha_letto WHERE ha_letto.username = '$username' AND ha_letto.id_libro = libri.id";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
 }
 
 ?>
