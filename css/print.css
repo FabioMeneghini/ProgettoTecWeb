@@ -10,9 +10,8 @@ html, body{
 
 header{
     text-align: center;
-    padding: 1.0em 0.0em 1.0em 0.0em;
-    margin-top:0.5em;
-    margin-bottom:0.5em;
+    padding: 1em 0em 1em 0em;
+    margin: 1em 0em;
 }
 
 #breadcrumbs{
@@ -20,5 +19,15 @@ header{
 }
 
 #menu{
+    display: none;
+}
+
+main{
+    text-align: justify;
+    width: auto;
+    padding: 2em;
+}
+
+footer{
     display: none;
 }
