@@ -9,11 +9,11 @@
     --linkColor:#438448;
     --visitedLinkColor:#660030;
 }
- a:link{
+a:link{
     color: var(--linkColor);
 }
 
- a:visited{
+a:visited{
     color: var(--visitedLinkColor);
 }
 #breadcrumbs{
@@ -42,9 +42,10 @@ header h1{
 #menu{
     width:90pt;
     float:left;
-    padding:0em 1.0em 1em 0.5em;
+    padding: 5px 20px 0%;
     background-color:var(--flagColor) ;
     color: var(--textColor);
+    height: 100%;
 }
 .genere{
     background-color: var(--flagColor);
