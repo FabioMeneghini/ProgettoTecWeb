@@ -80,6 +80,125 @@ class DBAccess {
         }
         return $messaggio;
     }
+
+    public function getListaGeneri() {
+        $query = "SELECT genere FROM libri GROUP BY genere";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getListaLibriGenere($genere) {
+        $query = "SELECT titolo, autore FROM libri WHERE genere = '$genere'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getUtentiRegistratiCount() {
+        $query = "SELECT COUNT(*) AS numeroUtenti FROM utenti";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['numeroUtenti'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getRecensioniCount() {
+        $query = "SELECT COUNT(*) AS numeroRecensioni FROM recensioni";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['numeroRecensioni'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getUtentiCheStannoLeggendoCount() {
+        $query = "SELECT COUNT(*) AS count FROM sta_leggendo";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['count'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getListaStaLeggendo($username) {
+        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, sta_leggendo WHERE sta_leggendo.username = '$username' AND sta_leggendo.id_libro = libri.id";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getListaSalvati($username) {
+        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, da_leggere WHERE da_leggere.username = '$username' AND da_leggere.id_libro = libri.id";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getListaTerminati($username) {
+        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, ha_letto WHERE ha_letto.username = '$username' AND ha_letto.id_libro = libri.id";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
 }
 
 ?>

@@ -1,7 +1,8 @@
-*{
+/*{
     margin:0;
     padding:0;
 }
+
 :root{
     --flagColor:#36502A;
     --background:white;
@@ -9,6 +10,10 @@
     --linkColor:#438448;
     --visitedLinkColor:#660030;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b15095f6800c5b0462d05c83ee4fb59408736921
 a:link{
     color: var(--linkColor);
 }
@@ -16,72 +21,199 @@ a:link{
 a:visited{
     color: var(--visitedLinkColor);
 }
+
 #breadcrumbs{
-    /*float: left;*/
+    grid-area: b;
+    float: left;
     position: left;
     text-align: left;
-    /*margin-left: 70pt;*/
 }
+
+html, body{
+    height: 100%;
+}
+
 html{
     font-size: 100%;
     line-height: 1.5em;
     margin:auto;
     background-color:var(--background);
-    width:100%;
+    /*width:100%;*/
 }
+
+/* HEADER */
+
 header{
+    grid-area: h;
     background-color:var(--flagColor);
     color:var(--textColor);
     text-align:center;
-
+    padding: 1.5em;
+    font-size: 1.5em;
 }
-header h1{
 
+header h1{
     text-align: center;
 }
+
+body{
+    max-width: 1024px;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: "h h h  "
+                         "m b b"
+                         "m c c"
+                         "m c c"
+                         "f f f ";
+}
+
 #menu{
+<<<<<<< HEAD
     width:90pt;
     float:left;
     padding: 5px 20px 0%;
+=======
+    grid-area: m;
+    /*width:90pt;*/
+    padding:0em 1.0em 1em 0.5em;
+>>>>>>> b15095f6800c5b0462d05c83ee4fb59408736921
     background-color:var(--flagColor) ;
     color: var(--textColor);
     height: 100%;
 }
+
+main{
+    grid-area: c;
+}
 .genere{
     background-color: var(--flagColor);
 }
+
 .listageneri{
     text-align:left;
     padding-left: 10em;
 }
+
+ul.listageneri{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+
+}
+  
+li.listageneri{
+    margin-right: 10px; /* Aggiungi uno spazio tra gli elementi, se lo desideri */
+}
+
 h2{
+    /*display: flex;
+    flex-direction: column;
+    align-items: center;*/
     text-align: center;
     width:100%;
 }
 
- h3:first-of-type::before{
+h3:first-of-type::before{
     content: "";
     display: block;
     width: 100%; 
     border-bottom: 3px solid var(--flagColor); 
-    margin: 39px 0; 
+   
 }
+
 .titologenere{
     padding-left: 7.5em;
 }
+
 #loginForm, #registrationForm{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    position: relative;
+    right: 50pt;
+ 
 }
+nav.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    position: relative;
+    right: 0pt;
+}
+
+#cercaForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    right: 50pt;
+ 
+}
+
+nav.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    position: relative;
+    right: 0pt;
+}
+
+/* FOOTER */
+
 footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 10em;  /*Altezza del footer */
-    background-color: var(--background); /*Colore di sfondo del footer */
-    background-color:var(--flagColor);
-    color:var(--textColor);
-    text-align:left;
+    grid-area: f;
+    /*width: 100%;*/
+    background-color: var(--flagColor);
+    color: var(--textColor);
+    text-align: center;
+    padding: 1em 0em;
+}
+
+footer ul{
+    padding: 0.5em;
+}
+
+footer ul li{
+    display: inline-block;
+    padding: 0em 4em;
+}
+
+/* COMPONENTI */
+
+#componenti{
+    margin: auto;
+    width: 90%;
+    max-width: 1024px;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+
+#componenti > dt{
+    background-color: var(--headTable);
+    color: var(--txtColor);
+    border: 1px solid black;
+    padding: 0.5em;
+    font-size: 1.1em;
+}
+
+#componenti > dd{
+    background-color: var(--bgColor);
+    border: 1px solid black;
+    border-top: none;
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+#componenti > dd img{
+    width: 15%;
+    float: left;
+    margin-right: 1em;
+}
+
+.componente dt{
+    float: left;
+    font-weight: bold;
 }
