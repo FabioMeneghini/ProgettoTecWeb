@@ -10,7 +10,6 @@
     --linkColor:#438448;
     --visitedLinkColor:#660030;
 }
-
 a:link{
     color: var(--linkColor);
 }
@@ -70,6 +69,7 @@ body{
     padding:0em 1.0em 1em 0.5em;
     background-color:var(--flagColor) ;
     color: var(--textColor);
+    height: 100%;
 }
 
 main{

@@ -2,46 +2,48 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Home -BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <title>Aggiungi Genere -BookClub</title>
+        <meta name="keywords" content=""><!--hanno senso le keyword qua?-->
+        <meta name="description" content="Questa pagina è per aggiungere un genere">
         <meta name="author" content="">
-        <link rel="stylesheet" href="../css/style.css">
+        <!--<link rel="stylesheet" href="css/style.css">-->
     </head>
     <body>
         <header id="header">
             <nav aria-label="Aiuti alla navigazione">
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
+            <img src="logo" alt="">
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
-            <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
+            
         </header>
         <nav id="menu">
             <ul>
-                <li><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></li>
-                <li><a href="templateTerminati.html">Libri terminati</a></li>
-                <li><a href="templateSalvati.html">Libri salvati</a></li>
-                <li><a href="templateEsplora.html">Esplora</a></li>
-                <li><a href="templateStatistiche.html">Statistiche</a></li>
-                <li><a href="templateAreaPersonale.html">Area Personale</a></li>
+                <!--link di admin-->
+                <li><a href="templateHomeAdmin.html"><span lang="en">Home</span></li>
+                <li><a href="templateAggiungiLibro.html"></a>Aggiungi un libro</li>
+                <li>Aggiungi Genere</li>
+                <li><a href="templateRiumuoviLibro.html"></a>Rimuovi un Libro</li>
+                <li><a href="templateRiumuoviRecensione.html"></a>Rimuovi una Recensione</li>
+                <li><a href="templateRiumuoviUtenti.html"></a>Rimuovi Utenti</li>
+                <li><a href="templateModificaLibro"></a>Modifica Libro</li>
+                <!--non direttemante da qua o si ? -->
                 <li><a href="cerca.html">Cerca</a></li>
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: :<a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Libro</p>
-        <span class="separatore"></span>
         </nav>
         <main  id="content">
 <main id="content">
     <section id="sectionAggiungiGenere">
         <h2>Inserisci una nuovo Genere</h2>
-        <form method="post" action="aggiungiGenereAdmin.php"> 
+        <form method="post" action="aggiungiGenereAdmin.php"> <!--da fare php-->
             {messaggiForm}
             <fieldset>
                 <legend>Genere</legend>
-                <legend for="trama">Inserisci un nuovo genere:</legend>
-                <textarea id="trama" name="trama"></textarea>
-                </select>
+                <legend for="genere">Inserisci un nuovo genere:</legend>
+                <input type="text" id="genere" name="genere" min="1" max="20" required>
             </fieldset>
         </form>
     </section>
