@@ -23,7 +23,7 @@ try {
         $resultListaBestSeller = $connection -> getListaBestSeller();
         $connection -> closeConnection();
         foreach($resultListaBestSeller as $libro) {
-            $listaBestSeller .= "<article><li>".$libro["autore"]." - ".$libro["titolo"]." - ".$libro["genere"]."</li></article>";
+            $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
         }
     }
     else {

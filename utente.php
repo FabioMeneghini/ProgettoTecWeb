@@ -28,7 +28,7 @@ try {
                        <ul class="listageneri">';   
             $listaLibri = $connection -> getListaLibriGenere($genere['genere']);
             foreach($listaLibri as $libro) {
-                $liste .= "<article><li>".$libro["autore"]." - ".$libro["titolo"]."</li></article>";
+                $liste .= "<article><li>".$libro["titolo"]."</li></article>"; //$libro["autore"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
             }
             $liste .= "</ul>";
         }

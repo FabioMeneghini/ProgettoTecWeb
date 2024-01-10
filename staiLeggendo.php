@@ -22,11 +22,22 @@ try {
             $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati
         }
         else {
-            $listaLibri .= "<ul>";
+            $listaLibri .= '<p id="descr">La tabella contiene l\'elenco dei libri che stai leggendo. Ogni riga descrive un libro con tre colonne: titolo, autore e genere.</p>
+                            <table aria-describedby="descr">
+                            <caption>Lista dei libri che stai leggendo</caption>
+                            <tr>
+                                <th scope="col">Titolo</th>
+                                <th scope="col">Autore</th>
+                                <th scope="col">Genere</th>
+                            </tr>';
             foreach($lista as $libro) {
-                $listaLibri .= "<article><li>".$libro["autore"].' - <a href="templateSchedaLibro.html">'.$libro["titolo"]."</a> - ".$libro["genere"]."</li></article>";
+                $listaLibri .= '<tr>
+                                    <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
+                                    <td>'.$libro["autore"].'</td>
+                                    <td>'.$libro["genere"].'</td>
+                                </tr>';
             }
-            $listaLibri .= "</ul>";
+            $listaLibri .= "</table>";
         }
     }
     else {

@@ -19,14 +19,25 @@ try {
         $lista = $connection -> getListaTerminati($_SESSION['username']);
         $connection -> closeConnection();
         if(empty($lista)) {
-            $listaLibri = "Non hai letto nessun libro."; //aggiungere link alla pagina di ricerca?
+            $listaLibri = "Non hai terminato nessun libro."; //aggiungere link alla pagina di ricerca?
         }
         else {
-            $listaLibri .= "<ul>";
+            $listaLibri .= '<p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con tre colonne: titolo, autore e genere.</p>
+                            <table aria-describedby="descr">
+                            <caption>Lista dei libri che hai terminato</caption>
+                            <tr>
+                                <th scope="col">Titolo</th>
+                                <th scope="col">Autore</th>
+                                <th scope="col">Genere</th>
+                            </tr>';
             foreach($lista as $libro) {
-                $listaLibri .= "<article><li>".$libro["autore"].' - <a href="templateSchedaLibro.html">'.$libro["titolo"]."</a> - ".$libro["genere"]."</li></article>";
+                $listaLibri .= '<tr>
+                                    <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
+                                    <td>'.$libro["autore"].'</td>
+                                    <td>'.$libro["genere"].'</td>
+                                </tr>';
             }
-            $listaLibri .= "</ul>";
+            $listaLibri .= "</table>";
         }
     }
     else {
