@@ -6,21 +6,23 @@
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
-        <link rel="stylesheet" href="css/style.css">
+        <!--<link rel="stylesheet" href="css/style.css">-->
     </head>
     <body>
         <header id="header">
             <nav aria-label="Aiuti alla navigazione">
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
+            <img src="logo" alt="">
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
-            <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
+            
         </header>
         <nav id="menu">
             <ul>
+                <li><a href="templateHomeUtente.html"><span lang="en">Home</span></li>
                 <li>Libri che stai leggendo</li>
                 <li><a href="templateTerminati.html">Libri terminati</a></li>
-                <li><a href="templateSalvati.html">Libri salvati</a></li>
+                <li><a href="templateDaLeggere.html">Libri da leggere</a></li>
                 <li><a href="templateEsplora.html">Esplora</a></li>
                 <li><a href="templateStatistiche.html">Statistiche</a></li>
                 <li><a href="templateAreaPersonale.html">Area Personale</a></li>
@@ -34,7 +36,9 @@
         </nav>
         <main  id="content">
             <h2>Libri che stai leggendo</h2>
-            {listaLibri}
+            <ul>
+                <li><a href="templateSchedaLibro.html">{Titolo}</a></li>
+            </ul>
         </main>
         <footer id="footer">
             <ul>

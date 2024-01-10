@@ -1,4 +1,4 @@
-/*{
+*{
     margin:0;
     padding:0;
 }
@@ -10,10 +10,6 @@
     --linkColor:#438448;
     --visitedLinkColor:#660030;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> b15095f6800c5b0462d05c83ee4fb59408736921
 a:link{
     color: var(--linkColor);
 }
@@ -68,15 +64,9 @@ body{
 }
 
 #menu{
-<<<<<<< HEAD
-    width:90pt;
-    float:left;
-    padding: 5px 20px 0%;
-=======
     grid-area: m;
     /*width:90pt;*/
     padding:0em 1.0em 1em 0.5em;
->>>>>>> b15095f6800c5b0462d05c83ee4fb59408736921
     background-color:var(--flagColor) ;
     color: var(--textColor);
     height: 100%;
