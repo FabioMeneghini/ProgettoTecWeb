@@ -24,7 +24,7 @@ try {
         else {
             $listaLibri .= "<ul>";
             foreach($lista as $libro) {
-                $listaLibri .= "<li>".$libro["autore"].' - <a href="templateSchedaLibro.html">'.$libro["titolo"]."</a> - ".$libro["genere"]."</li>";
+                $listaLibri .= "<article><li>".$libro["autore"].' - <a href="templateSchedaLibro.html">'.$libro["titolo"]."</a> - ".$libro["genere"]."</li></article>";
             }
             $listaLibri .= "</ul>";
         }

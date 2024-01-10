@@ -23,7 +23,7 @@ try {
         $resultListaBestSeller = $connection -> getListaBestSeller();
         $connection -> closeConnection();
         foreach($resultListaBestSeller as $libro) {
-            $listaBestSeller .= "<li>".$libro["autore"]." - ".$libro["titolo"]." - ".$libro["genere"]."</li>";
+            $listaBestSeller .= "<article><li>".$libro["autore"]." - ".$libro["titolo"]." - ".$libro["genere"]."</li></article>";
         }
     }
     else {
