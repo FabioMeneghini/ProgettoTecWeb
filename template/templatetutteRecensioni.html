@@ -2,9 +2,9 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>AdminHome - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <title>Recensioni -BookClub</title>
+        <meta name="keywords" content=""><!--hanno senso le keyword qua?-->
+        <meta name="description" content="Questa pagina dell'admin è per aggiungere un genere">
         <meta name="author" content="">
         <!--<link rel="stylesheet" href="css/style.css">-->
     </head>
@@ -13,21 +13,18 @@
             <nav aria-label="Aiuti alla navigazione">
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
+            <img src="logo" alt="">
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
-            <img src="logo" alt="Il logo è un libro aperto da cui escono delle pagine volanti">
+            
         </header>
         <nav id="menu">
             <dl>
                 <!--link di admin-->
-                <dt><span lang="en">Home</span></dt>
-                <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
+                <dt><a href="templateHomeAdmin.html"><span lang="en">Home</span></a></dt>
                 <dt><a href="templateAggiungiLibro.html">Aggiungi un libro</a></dt>
                 <dt><a href="templateAggiungiGenere.html">Aggiungi Genere</a></dt>
-                <!--rimuovi da dove ci arriva? che pagine sono?
-                forse è visualizza tutti i libri e visualizza tutti i generi? 
-                da dentro il libro gestisce le recensioni-->
                 <dt><a href="templateTuttiLibri.html">Catalogo libri</a></dt>
-                <dt><a href="templatetutteRecensioni.html">Recensioni</a></dt>
+                <dt>Recensioni</dt>
                 <dt><a href="templateTuttiUtenti.html">Archivio utenti</a></dt>
                 <dt><a href="templateModificaLibro.html">Modifica Libro</a></dt>
                 <!--non direttemante da qua o si ? -->
@@ -37,32 +34,13 @@
                 <dt><a href="templateCerca.html">Cerca</a></dt>
             </dl>
         </nav>
-
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <span lang="en">Home</span></p>
+            <p>Ti trovi in: :<a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; Recensioni</p>
         </nav>
-        <main  id="content">
-            <h2>Statistiche:</h2>
-                <dl class="Statistiche">
-                    <dt>Numero Utenti Registrati:</dt>
-                    <dd>{numeroUtentiRegistrati}</dd>
-                    <dt>Numero Recensioni:</dt>
-                    <dd>{NumeroRecensioni}</dd>
-                    <dt>Numero capitoli letti Oggi:</dt>
-                    <dd>{NumeroCapitoliLetti}</dd>
-                    <dt>Libri Letti Oggi:</dt>
-                    <dd>{LibriLettiTotOggi}</dd>
-                    <!--se nel form mettiamo data di nascita ecc..
-                    libri detti dall'inizio dell anno(prende l'anno attuale)
-                    media età iscritti
-                    genere iscritti 
-                    area geografica
-
-                    si possono mettere delle canvas per fare i grafici
-                    -->
-                </dl>
+        <main id="content">
+            <h2>Tutte le recensioni:</h2>
+            {Recensioni}<!--trona la lista/tabella delle recensioni con button x eliminarle e button x like-->
         </main>
-        
         <footer id="footer">
             <ul>
                 <li><a href="contatti.html">Contatti</a></li>

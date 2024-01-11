@@ -67,7 +67,7 @@
                             </ul>
                             <!--controlli con php sul nome-->
                         </p>
-                        <label for="titolo">Inserisci un nuovo username : </label>
+                        <label for="username">Inserisci un nuovo username : </label>
                         <input type="text" id="username" name="username" maxlength="10" required>
                         <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
                         <legend>Concludi l'inserimento:</legend>
@@ -96,7 +96,7 @@
                         </p>
                         <label for="passwordnew">  Inserisci una nuova password:</label>
                         <input type="password" id="passwordnew" name="passwordnew" required></br>
-                        <label for="passwordnew1"> Ripeti la password:</label>
+                        <label for="passwordnew1"> Ripeti la stessa password:</label>
                         <input type="password" id="passwordnew1" name="passwordnew1" required>
                         <!--Messaggio di errore se la password è diversa da quella sopra forse value={passwordnew} -->
                         <legend>Concludi l'inserimento:</legend>
@@ -113,10 +113,11 @@
                     <fieldset>
                         <legend>Mail :</legend>
                         <label for="email">Nuovo indirizzo Email:</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" maxlength="30" required>
                         <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
                         <legend>Concludi l'inserimento:</legend>
                         <button type="submit">Modifica Email</button>
+                        <!--controllo anche da php che sia una mail con controllo di caratteri -->
                         <!--<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>

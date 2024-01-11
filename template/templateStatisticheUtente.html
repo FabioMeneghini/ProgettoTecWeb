@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Statistiche - BookClub</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!--<link rel="stylesheet" href="css/style.css">-->
+    </head>
+    <body>
+        <header id="header">
+            <nav aria-label="Aiuti alla navigazione">
+            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+            </nav> 
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            <img src="logo" alt="Il logo è un libro aperto da cui escono delle pagine volanti">
+        </header>
+        <nav id="menu">
+            <dl>
+                <dt><a href="templateHomeUtente.html"><span lang="en">Home</span></a></dt>
+                <dt><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></dt>
+                <dt><a href="templateTerminati.html">Libri terminati</a></dt>
+                <dt><a href="templateDaLeggere.html">Libri da leggere</a></dt>
+                <dt><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></dt>
+                <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
+                <dt>Lista Generi:</dt>
+                <dd>{linkcategorie}</dd> 
+                <!--php x menu con categorie link a templategenere-->
+                <dt>Statistiche</dt>
+                <dt><a href="templateAreaPersonale.html">Area Personale</a></dt>
+                <dt><a href="templateCerca.html">Cerca</a></dt>
+            </dl>
+        </nav>
+
+        <nav id="breadcrumbs" aria-label="Percorso">
+            <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt; Statistiche </p>
+        </nav>
+        <main  id="content">
+            <h2>Statistiche:</h2>
+                <dl class="Statistiche">
+                    <dt>Numero capitoli letti Oggi:</dt>
+                    <dd>{NumeroCapitoliLettiUtente}</dd>
+                    <dt>Numero Recensioni totali:</dt>
+                    <dd>{NumeroRecensioniUtente}</dd>
+                    <dt>Libri Letti quest'anno:</dt>
+                    <dd>{LibriLettiAnnoUtente}</dd>
+
+                    <!--si può mettere link alle recensioni? -->
+
+                    <!--si possono mettere delle canvas per fare i grafici-->
+                </dl>
+        </main>
+        
+        <footer id="footer">
+            <ul>
+                <li><a href="contatti.html">Contatti</a></li>
+                <li><a href="chisiamo.html">Chi siamo</a></li>
+                <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
+            </ul>
+            <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
+        </footer>
+    </body>
+</html>
