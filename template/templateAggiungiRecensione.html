@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Home - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <meta name="keywords" content="registrazione BookClub,traccia letture, salva libri, vota libri,">
+        <meta name="description" content="Questa pagina permette di registrarsi al sito BookClub dove potrai  tracciare l'avanzamento nella lettura di libri, salvarli e votarli.">
         <meta name="author" content="">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
@@ -15,8 +15,9 @@
             <nav aria-label="Aiuti alla navigazione">
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
-            <h1 class="titolo"><span lang="en">BookClub</span></h1>
             <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            
         </header>
         <nav id="menu">
             <ul>
@@ -34,6 +35,35 @@
         </nav>
         <main  id="content">
 <main id="content">
+    <section id="sectionAggiungiRecensione">
+        <h2>Inserisci una nuova recensione</h2>
+        <form method="post" action=".php"> 
+            <!--aggiungi pagina php-->
+            {messaggiForm}
+            <fieldset>
+                <legend>Informazioni sul libro:</legend>
+                <label for="titolo">Inserisci il titolo del libro letto che vuoi recensire: </label>
+                <!--Messaggio se uno vuole recensire un libro che non ha nella lista dei letti  js controllo-->
+                <input list="libri" id="libriInput" name="libri" placeholder="Inserisci il titolo del libro">
+                <datalist id="titolo" name="titolo">
+                    {listaLingue}
+                    <!--opzioni tra i libri letti php-->
+                </datalist><br/>
+            </fieldset>
+            <fieldset>
+                <legend>La tua Recensione:</legend>
+                <label for="Commento">Il tuo commento: </label>
+                <textarea id="commento" name="commento" rows="10" cols="10"></textarea>
+                <label for="voto">Inserisci il tuo voto (da 1 a 10):</label>
+                <input type="number" id="voto" name="voto" min="1" max="10" required>
+                <!--messaggio di errore se il campo voto non viene compilato-->
+                <legend>Invia i dati inseriti:</legend>
+                <button type="submit">Invia</button>
+                <button type="reset">Reset</button>
+                <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
+            </fieldset>
+        </form>
+    </section>
   
 </main>
 <footer id="footer">

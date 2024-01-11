@@ -4,13 +4,13 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
+/*if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
     if($_SESSION['admin'] == 1) {
         header("Location: admin.php");
     } else {
         header("Location: utente.php");
     }
-}
+}*/
 
 $paginaHTML = file_get_contents("template/templateAccedi.html");
 
