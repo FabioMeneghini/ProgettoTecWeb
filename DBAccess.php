@@ -185,7 +185,18 @@ class DBAccess {
     }
 
     public function getListaTerminati($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, ha_letto WHERE ha_letto.username = '$username' AND ha_letto.id_libro = libri.id";
+        $query = "SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, recensioni.voto
+                  FROM libri, ha_letto, recensioni
+                  WHERE ha_letto.username = '$username'
+                  AND ha_letto.id_libro = libri.id /*join*/
+                  AND ha_letto.id_libro = recensioni.id_libro
+                  AND ha_letto.username = recensioni.username_autore
+                  UNION
+                  SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, NULL
+                  FROM libri, ha_letto
+                  WHERE ha_letto.username = '$username'
+                  AND ha_letto.id_libro = libri.id
+                  AND ha_letto.id_libro NOT IN (SELECT DISTINCT id_libro FROM recensioni WHERE username_autore = '$username')";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
