@@ -2,12 +2,13 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Home - BookClub</title>
-        <meta name="keywords" content="libri, migliori, generi, bestseller">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <title>Classifica dei Migliori Libri-BookClub</title>
+        <meta name="keywords" content="migliori libri, libri del momento,libri più letti, letture consigliate,bestseller,nuove uscite libri,classifica libri">
+        <meta name="description" content="Questa pagina è dedicata ai migliori libri (bestseller) e generi per lettori in questo momento offrendo letture consigliate in base ai libri più letti, alla classifica e alle nuove uscite.">
         <meta name="author" content="">
-        <link rel="stylesheet" href="css/style.css"> <!-- da questa cartella il verso percorso dovrebbe essere ../css/style.css,
-                                                          però quando il php carica questa pagina si trova già alla cartella precedente -->
+        <!--<link rel="stylesheet" href="css/style.css">--> 
+        <!-- da questa cartella il verso percorso dovrebbe essere ../css/style.css,
+        però quando il php carica questa pagina si trova già alla cartella precedente -->
     </head>
     <body>
         <header id="header">
@@ -15,30 +16,56 @@
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
-            <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
+            <img src="logo" alt="Il logo è un libro aperto da cui escono delle pagine volanti">
         </header>
         <nav id="menu">
-            <ul>
-                <li><a href="../cerca.html">Cerca</a></li>
-                <li><a href="templateEsplora.html">Esplora</a></li>
-                <li><a href="templateAccedi.html">Accedi</a></li>
-                <li><a href="templateAccedi.html">Registrati</a></li>
-            </ul>
+            <dl>
+                <dt><a href="../cerca.html">Cerca</a></dt>
+                <dt><a href="templateEsplora.html">Esplora</a></dt>
+                <dt><a href="templateAccedi.html">Accedi</a></dt>
+                <dt><a href="templateAccedi.html">Registrati</a></dt>
+                <dt>Categorie</dt>
+                <dd>{linkcategorie}</dd> <!--Fabio metti php x menu-->
+            </dl>
         </nav>
         
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <span lang="en">Home</span></p>
         </nav>
-
-        <span class="separatore"></span>
-
+        <hr>
         <main  id="content">
-            <h3 class="titologenere"><a href="templateGenere.html">Best seller:</a></h3>
-            <ul class="listageneri">
-               {listaBestSeller}
-            </ul>
-        </main>
-
+            <h2 class="titologenere">Best seller:</h2>
+            <ol class="listabestseller">
+                <article>
+                    <li>{listaBestSeller}</li> <!--CHIEDERE 2 CON ARTICLE E LI-->
+                </article>
+            </ol>
+            <hr>
+            <h3><a href="templateGenere.html">{genere1}</a></h3>
+            <ol class="listageneri">
+                <article>
+                    <li>{listaGeneri}</li> <!--CHIEDERE 2 CON ARTICLE E LI-->
+                </article>
+            </ol>
+            <h3><a href="templateGenere.html">{genere2}</a></h3>
+            <ol class="listageneri">
+                <article>
+                    <li>{listaGeneri}</li> <!--CHIEDERE 2 CON ARTICLE E LI-->
+                </article>
+            </ol>
+            <h3><a href="templateGenere.html">{genere3}</a></h3>
+            <ol class="listageneri">
+                <article>
+                    <li>{listaGeneri}</li> <!--CHIEDERE 2 CON ARTICLE E LI-->
+                </article>
+            </ol>
+            <h3><a href="templateGenere.html">{genere4}</a></h3>
+            <ol class="listageneri">
+                <article>
+                    <li>{listaGeneri}</li> <!--CHIEDERE 2 CON ARTICLE E LI-->
+                </article>
+            </ol>
+    </main>
         <footer id="footer">
             <ul>
                 <li><a href="contatti.html">Contatti</a></li>
