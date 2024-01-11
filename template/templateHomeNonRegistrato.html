@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="it">
+    <!--nel file ci sono cose in più per il php da togliere!!-->
     <head>
         <meta charset="UTF-8">
-        <title>Classifica dei Migliori Libri-BookClub</title>
-        <meta name="keywords" content="migliori libri, libri del momento,libri più letti, letture consigliate,bestseller,nuove uscite libri,classifica libri">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri (bestseller) e generi per lettori in questo momento offrendo letture consigliate in base ai libri più letti, alla classifica e alle nuove uscite.">
+        <title>Classifica Libri-BookClub</title>
+        <!--titolo not the best-->
+        <!--IN QUESTA PAGINA è IMPORTANTE IL RANKING-->
+        <meta name="keywords" content="migliori libri, libri del momento,libri più letti, letture consigliate,bestseller,nuove uscite libri,classifica libri,cercare e salvare libri">
+        <meta name="description" content="Questa pagina è dedicata ai migliori libri (bestseller) e generi per lettori in questo momento offrendo letture consigliate in base ai libri più letti, alla classifica e alle nuove uscite.Una volta registrati si possono salvare libri e recensirli">
         <meta name="author" content="">
         <!--<link rel="stylesheet" href="css/style.css">--> 
         <!-- da questa cartella il verso percorso dovrebbe essere ../css/style.css,
@@ -20,12 +23,13 @@
         </header>
         <nav id="menu">
             <dl>
-                <dt><a href="../cerca.html">Cerca</a></dt>
-                <dt><a href="templateEsplora.html">Esplora</a></dt>
-                <dt><a href="templateAccedi.html">Accedi</a></dt>
-                <dt><a href="templateAccedi.html">Registrati</a></dt>
+                <dt><span lang="en">Home</span></dt>
                 <dt>Categorie</dt>
-                <dd>{linkcategorie}</dd> <!--Fabio metti php x menu-->
+                <dd>{linkcategorie}</dd> 
+                <!--php x menu con categorie-->
+                <dt><a href="templateAccedi.html">Accedi</a></dt>
+                <dt><a href="templateRegistrati.html">Registrati</a></dt>
+                <dt><a href="templateCerca.html">Cerca</a></dt>
             </dl>
         </nav>
         
@@ -37,13 +41,18 @@
             <h2 class="titologenere">Best seller:</h2>
             <ol class="listabestseller">
                 <article>
-                    <li>{listaBestSeller}</li> <!--CHIEDERE 2 CON ARTICLE E LI-->
+                    <li><!--sono in realtà link a libri !-->{listaBestSeller}</li> 
+                    <!--article-->
                 </article>
+                <!--da css si deve poter fermare libro che gira-->
             </ol>
-            <hr>
+            <!--css togliere i numeri e i pallini delle liste-->
+            <hr><!--da decidere se da css o qua la linea -->
             <h3><a href="templateGenere.html">{genere1}</a></h3>
             <ol class="listageneri">
                 <article>
+                    <!--sono liste a link template SchedaLibro-->
+                    <!--da togliere , usare article x ogni php-->
                     <li>{listaGeneri}</li> <!--CHIEDERE 2 CON ARTICLE E LI-->
                 </article>
             </ol>

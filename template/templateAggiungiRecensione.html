@@ -2,9 +2,11 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Home - BookClub</title>
-        <meta name="keywords" content="registrazione BookClub,traccia letture, salva libri, vota libri,">
-        <meta name="description" content="Questa pagina permette di registrarsi al sito BookClub dove potrai  tracciare l'avanzamento nella lettura di libri, salvarli e votarli.">
+        <title>Aggiungi Recensione - BookClub</title>
+        <!--IN QUESTA PAGINA è IMPORTANTE IL RANKING se messa dentro ad un libro-->
+        <meta name="keywords" content="recensione libro , utenti bookclub">
+        <!--questa pagina può essere indicizzata?-->
+        <meta name="description" content="Questa pagina permette di lasciare una recesione con un commento e un voto ad un libro letto dagli utenti del BookClub.">
         <meta name="author" content="">
         <!--<link rel="stylesheet" href="css/style.css">-->
     </head>
@@ -18,59 +20,66 @@
             
         </header>
         <nav id="menu">
-            <ul>
-                <li>Aggiungi Libro</li>
-                <li><a href="templateAggiungiGenere.html"></a></li>
-                <li><a href="templateRiumuoviLibro.html"></a></li>
-                <li><a href="templateRiumuoviRecensione.html"></a></li>
-                <li><a href="cerca.html">Cerca</a></li>
-            </ul>
-
+            <dl>
+                <dt><a href="templateHomeUtente.html"><span lang="en">Home</span></a></dt>
+                <dt><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></dt>
+                <dt><a href="templateTerminati.html">Libri terminati</a></dt>
+                <dt><a href="templateDaLeggere.html">Libri da leggere</a></dt>
+                <dt>Aggiungi Recensione</dt>
+                <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
+                <dt>Lista Generi:</dt>
+                <dd>{linkcategorie}</dd> <!--php x menu con categorie link a templategenere-->
+                <dt><a href="templateStatisticheUtente.html">Statistiche</a></dt>
+                <dt><a href="templateAreaPersonale.html">Area Personale</a></dt>
+                <dt><a href="templateCerca.html">Cerca</a></dt>
+            </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: :<a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Libro</p>
-        <span class="separatore"></span>
+            <p>Ti trovi in: :<a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Recensione</p>
+            <!--se può entrare solo dal libro modificare percorso con il nome del libro dinamicamente-->
         </nav>
-        <main  id="content">
-<main id="content">
-    <section id="sectionAggiungiRecensione">
-        <h2>Inserisci una nuova recensione</h2>
-        <form method="post" action=".php"> 
-            <!--aggiungi pagina php-->
-            {messaggiForm}
-            <fieldset>
-                <legend>Informazioni sul libro:</legend>
-                <label for="titolo">Inserisci il titolo del libro letto che vuoi recensire: </label>
-                <!--Messaggio se uno vuole recensire un libro che non ha nella lista dei letti  js controllo-->
-                <input list="libri" id="libriInput" name="libri" placeholder="Inserisci il titolo del libro">
-                <datalist id="titolo" name="titolo">
-                    {listaLingue}
-                    <!--opzioni tra i libri letti php-->
-                </datalist><br/>
-            </fieldset>
-            <fieldset>
-                <legend>La tua Recensione:</legend>
-                <label for="Commento">Il tuo commento: </label>
-                <textarea id="commento" name="commento" rows="10" cols="10"></textarea>
-                <label for="voto">Inserisci il tuo voto (da 1 a 10):</label>
-                <input type="number" id="voto" name="voto" min="1" max="10" required>
-                <!--messaggio di errore se il campo voto non viene compilato-->
-                <legend>Invia i dati inseriti:</legend>
-                <button type="submit">Invia</button>
-                <button type="reset">Reset</button>
-                <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
-            </fieldset>
-        </form>
-    </section>
-  
-</main>
-<footer id="footer">
-    <ul>
-        <li><a href="contatti.html">Contatti</a></li>
-        <li><a href="chisiamo.html">Chi siamo</a></li>
-        <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
-    </ul>
-    <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
-</footer>
-</body>
+        <main id="content">
+            <section id="sectionAggiungiRecensione">
+                <h2>Inserisci una nuova recensione</h2>
+                <form method="post" action=".php"> 
+                    <!--aggiungi pagina php-->
+                    {messaggiForm}
+                    <fieldset>
+                        <legend>Informazioni sul libro:</legend>
+                        <label for="titolo">Inserisci il titolo del libro letto che vuoi recensire: </label>
+                        <!--Messaggio se uno vuole recensire un libro che non ha nella lista dei letti  js controllo-->
+                        <input list="titolo" id="titoloInput" name="titolo">
+                        <datalist id="titolo" name="titolo">
+                            {listalibriletti}
+                            <!--opzioni tra i libri letti php-->
+                        </datalist><br/>
+                    </fieldset>
+                    <fieldset>
+                        <legend>La tua Recensione:</legend>
+                        <label for="Commento">Inserisci un commento: </label>
+                        <textarea id="commento" name="commento" rows="15" cols="60"></textarea>
+                        <!--come far si che non ci sia lo scorrimento orizzonate per il numero di colonne e righe?-->
+                        <label for="voto">Inserisci il tuo voto (da 1 a 10):</label>
+                        <!--graficamente da telefono diverso magari asse in cui postare -1-2-3-4-5--   -->
+                        <input type="number" id="voto" name="voto" min="1" max="10" required>
+                        <!--messaggio di errore se il campo voto non viene compilato -->
+                    </fieldset>
+                    <fieldset>
+                        <legend>Concludi l'inserimento:</legend>
+                        <button type="submit">Invia</button>
+                        <button type="reset">Elimina</button>
+                        <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
+                    </fieldset>
+                </form>
+            </section>
+        </main>
+        <footer id="footer">
+            <ul>
+                <li><a href="contatti.html">Contatti</a></li>
+                <li><a href="chisiamo.html">Chi siamo</a></li>
+                <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
+            </ul>
+            <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
+        </footer>
+    </body>
 </html>
