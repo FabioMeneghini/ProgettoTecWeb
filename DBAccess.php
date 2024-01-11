@@ -153,7 +153,10 @@ class DBAccess {
     }
 
     public function getListaStaLeggendo($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, sta_leggendo WHERE sta_leggendo.username = '$username' AND sta_leggendo.id_libro = libri.id";
+        $query = "SELECT libri.titolo, libri.autore, libri.genere, sta_leggendo.n_capitoli_letti, libri.n_capitoli
+                  FROM libri, sta_leggendo
+                  WHERE sta_leggendo.username = '$username'
+                  AND sta_leggendo.id_libro = libri.id";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -188,11 +191,11 @@ class DBAccess {
         $query = "SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, recensioni.voto
                   FROM libri, ha_letto, recensioni
                   WHERE ha_letto.username = '$username'
-                  AND ha_letto.id_libro = libri.id /*join*/
+                  AND ha_letto.id_libro = libri.id
                   AND ha_letto.id_libro = recensioni.id_libro
                   AND ha_letto.username = recensioni.username_autore
                   UNION
-                  SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, NULL
+                  SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, 'Non assegnato'
                   FROM libri, ha_letto
                   WHERE ha_letto.username = '$username'
                   AND ha_letto.id_libro = libri.id
