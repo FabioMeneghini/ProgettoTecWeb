@@ -8,7 +8,7 @@ if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
 }
 
-$paginaHTML = file_get_contents("template/templateSalvati.html");
+$paginaHTML = file_get_contents("template/templateDaLeggere.html");
 
 $listaLibri = "";
 
@@ -22,7 +22,7 @@ try {
             $listaLibri = "Non hai nessun libro da leggere."; //aggiungere link alla pagina di ricerca?
         }
         else {
-            $listaLibri .= '<p id="descr">La tabella contiene l\'elenco dei libri che hai salvato. Ogni riga descrive un libro con tre colonne: titolo, autore e genere.</p>
+            $listaLibri .= '<p id="descr">La tabella contiene l\'elenco dei tuoi libri da leggere. Ogni riga descrive un libro con tre colonne: titolo, autore e genere.</p>
                             <table aria-describedby="descr">
                             <caption>Lista dei libri salvati</caption>
                             <tr>
