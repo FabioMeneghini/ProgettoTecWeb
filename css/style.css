@@ -4,11 +4,11 @@
 }
 
 :root{
-    --flagColor:#36502A;
-    --background:white;
-    --textColor:black;
-    --linkColor:#438448;
-    --visitedLinkColor:#660030;
+    --flagColor: #36502A;
+    --background: white;
+    --textColor: black;
+    --linkColor: #438448;
+    --visitedLinkColor: #660030;
 }
 a:link{
     color: var(--linkColor);
@@ -32,8 +32,8 @@ html, body{
 html{
     font-size: 100%;
     line-height: 1.5em;
-    margin:auto;
-    background-color:var(--background);
+    margin: auto;
+    background-color: var(--background);
     /*width:100%;*/
 }
 
@@ -41,9 +41,9 @@ html{
 
 header{
     grid-area: h;
-    background-color:var(--flagColor);
-    color:var(--textColor);
-    text-align:center;
+    background-color: var(--flagColor);
+    color: var(--textColor);
+    text-align: center;
     padding: 1.5em;
     font-size: 1.5em;
 }
@@ -66,8 +66,8 @@ body{
 #menu{
     grid-area: m;
     /*width:90pt;*/
-    padding:0em 1.0em 1em 0.5em;
-    background-color:var(--flagColor) ;
+    padding: 0em 1.0em 1em 0.5em;
+    background-color: var(--flagColor) ;
     color: var(--textColor);
     height: 100%;
 }
@@ -80,7 +80,7 @@ main{
 }
 
 .listageneri{
-    text-align:left;
+    text-align: left;
     padding-left: 10em;
 }
 
@@ -101,7 +101,7 @@ h2{
     flex-direction: column;
     align-items: center;*/
     text-align: center;
-    width:100%;
+    width: 100%;
 }
 
 h3:first-of-type::before{

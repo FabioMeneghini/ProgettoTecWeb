@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    font-size: 12pt;
+    margin: auto;
+}
+
+header{
+    text-align: center;
+    padding: 1em 0em;
+}
+
+header h1{
+    font-size: 4em;
+}
+
+#breadcrumbs{
+    display:none;
+}
+
+#menu{
+    display: none;
+}
+
+main{
+    text-align: justify;
+    width: auto;
+    padding: 1.5em;
+}
+
+main h2{
+    text-align: center;
+    font-size: 2em;
+}
+
+main dt{
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 1em 0em 0.5em 0em;
+}
+
+main img{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+footer{
+    display: none;
+}
