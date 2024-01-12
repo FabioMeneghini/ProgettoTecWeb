@@ -8,7 +8,7 @@ if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
 }
 
-$paginaHTML = file_get_contents("template/templateStaiLeggendo.html");
+$paginaHTML = file_get_contents("template/templateDaLeggere.html");
 
 $listaLibri = "";
 
@@ -16,15 +16,15 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
-        $lista = $connection -> getListaStaLeggendo($_SESSION['username']);
+        $lista = $connection -> getListaSalvati($_SESSION['username']);
         $connection -> closeConnection();
         if(empty($lista)) {
-            $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati
+            $listaLibri = "Non hai nessun libro da leggere."; //aggiungere link alla pagina di ricerca?
         }
         else {
-            $listaLibri .= '<p id="descr">La tabella contiene l\'elenco dei libri che stai leggendo. Ogni riga descrive un libro con tre colonne: titolo, autore e genere.</p>
+            $listaLibri .= '<p id="descr">La tabella contiene l\'elenco dei tuoi libri da leggere. Ogni riga descrive un libro con tre colonne: titolo, autore e genere.</p>
                             <table aria-describedby="descr">
-                            <caption>Lista dei libri che stai leggendo</caption>
+                            <caption>Lista dei libri salvati</caption>
                             <tr>
                                 <th scope="col">Titolo</th>
                                 <th scope="col">Autore</th>
