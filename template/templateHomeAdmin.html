@@ -6,7 +6,9 @@
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.css" media="screen">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
+        <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
         <header id="header">
@@ -14,7 +16,7 @@
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
-            <img src="logo" alt="">
+            <img src="logo" alt="Il logo è un libro aperto da cui escono delle pagine volanti">
         </header>
         <nav id="menu">
             <ul>
@@ -36,12 +38,12 @@
         <main  id="content">
             <h2>Statistiche:</h2>
                 <dl class="Statistiche">
-                    <dt>Numero utenti registrati:</dt>
+                    <dt>Numero Utenti Registrati:</dt>
                     <dd>{numeroUtentiRegistrati}</dd>
-                    <dt>Numero recensioni nel sito:</dt>
-                    <dd>{numeroRecensioni}</dd>
-                    <dt>Utenti che stanno leggendo:</dt>
-                    <dd>{numeroUtentiCheStannoLeggendo}</dd>
+                    <dt>Numero Recensioni:</dt>
+                    <dd>{NumeroRecensioni}</dd>
+                    <dt>Libri Letti Oggi:</dt>
+                    <dd>{LibriLettiTotOggi}</dd>
                 </dl>
         </main>
         

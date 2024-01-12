@@ -15,27 +15,30 @@
             <nav aria-label="Aiuti alla navigazione">
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
-            <h1 class="titolo"><span lang="en">BookClub</span></h1>
             <img src="logo" alt="">
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            
         </header>
         <nav id="menu">
+            <ul>
+                <li><a href="templateHomeUtente.html"><span lang="en">Home</span></li>
+                <li><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></li>
+                <li><a href="templateTerminati.html">Libri terminati</a></li>
+                <li>Libri da leggere</li>
+                <li><a href="templateEsplora.html">Esplora</a></li>
+                <li><a href="templateStatistiche.html">Statistiche</a></li>
+                <li><a href="templateAreaPersonale.html">Area Personale</a></li>
+                <li><a href="cerca.html">Cerca</a></li>
+            </ul>
+
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt; Cerca</p>
+            <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt;Libri Terminati</p>
         <span class="separatore"></span>
         </nav>
         <main  id="content">
-            <h2>Ricerca Libri</h2>
-
-        <form method="post" action="ricerca.php">
-        <label for="ricercalibro">Inserisci il titolo del libro:</label>
-        <input type="text" id="cercalibro" name="cercalibro" ></br>
-        <label for="ricercaautore">Inserisci l'autore del libro:</label>
-        <input type="text" id="cercaautore" name="cercautore" ></br>
-        <label for="ricercagenere">Inserisci il genere del libro:</label>
-        <input type="text" id="cercagenere" name="cercagenere" >
-        <button type="submit">Cerca</button>
-        </form>
+            <h2>Libri che hai salvato</h2>
+            {listaLibri}
         </main>
         <footer id="footer">
             <ul>
