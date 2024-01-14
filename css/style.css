@@ -10,6 +10,7 @@
     --linkColor: #438448;
     --visitedLinkColor: #660030;
 }
+
 a:link{
     color: var(--linkColor);
 }
@@ -20,14 +21,11 @@ a:visited{
 
 #breadcrumbs{
     grid-area: b;
-    float: left;
-    position: left;
-    text-align: left;
 }
 
-
 html, body{
-    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 html{
@@ -50,10 +48,11 @@ header{
     text-align: center;
     padding: 1.5em;
     font-size: 1.5em;
+    margin: 0em;
 }
 
 .navigationHelp{
-     position: absolute;
+    position: absolute;
     text-indent: -999em;
 }
 header h1{
@@ -62,24 +61,21 @@ header h1{
 
 body{
     max-width: 1024px;
-    margin-left: 15%;
-    margin-right: 15%;
-   /* margin-top: 2em;*/
     display: grid;
-    grid-template-columns: 1fr 5fr ;
-    grid-template-areas: "h h h  "
-                         "m b b"
-                         "m c c"
-                         "m c c"
-                         "f f f ";
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas: "h h"
+                         "m b"
+                         "m c"
+                         "f f";
+    height: 100vh;
 }
 
 #menu{
     grid-area: m;
-   /* width:5em;*/
-    padding:0em 1.0em 1em 0.5em;
-    background-color:var(--flagColor) ;
-
+    /*width:5em;*/
+    padding: 0.5em 0em;
+    background-color: var(--flagColor);
     color: var(--textColor);
     height: 100%;
 }
@@ -88,6 +84,7 @@ main{
     grid-area: c;
     max-width: 1024px;
 }
+
 .genere{
     background-color: var(--flagColor);
 }
@@ -106,8 +103,8 @@ main{
 ul.listageneri{
     list-style: none;
     margin-right: 15%;
-   /* padding: 0;*/
-   /* margin: 0;*/
+    /*padding: 0;*/
+    /*margin: 0;*/
    
     display: flex;
     
@@ -124,6 +121,7 @@ h2{
     align-items: center;*/
     text-align: center;
     width: 100%;
+    padding-top: 1em;
 }
 
 h3:first-of-type::before{
@@ -148,6 +146,7 @@ h3:first-of-type::before{
     right: 50pt;*/
  
 }
+
 nav.login{
     display: flex;
     flex-direction: column;
@@ -178,8 +177,7 @@ footer{
     color: var(--textColor);
     text-align: center;
     padding: 1em 0em;
-    
-    border-bottom:3em solid var(--flagColor);   ;
+    /*border-bottom:3em solid var(--flagColor);*/
 }
 
 footer ul{
@@ -190,10 +188,13 @@ footer ul li{
     display: inline-block;
     padding: 0em 4em;
 }
+
 ul{
     list-style: none;
 }
+
 /* COMPONENTI */
+
 #componenti{
     margin: auto;
     width: 90%;
