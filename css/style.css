@@ -28,27 +28,27 @@ a:visited{
 
 html, body{
     height: 100%;
+    margin: auto;
 }
 
 html{
     font-size: 100%;
     line-height: 1.5em;
-   /* margin:auto;*/
+    /*margin:auto;*/
     background-color: var(--background);
     /*width:100%;*/
 }
 
 /* HEADER */
-.titolo{
+/*.titolo{
     margin-bottom: 1em;
-}
+}*/
 
 header{
     grid-area: h;
     background-color: var(--flagColor);
     color: var(--textColor);
     text-align: center;
-    padding: 1.5em;
     font-size: 1.5em;
 }
 
@@ -56,15 +56,17 @@ header{
      position: absolute;
     text-indent: -999em;
 }
+
 header h1{
     text-align: center;
+    padding: 0.5em;
 }
 
 body{
     max-width: 1024px;
-    margin-left: 15%;
-    margin-right: 15%;
-   /* margin-top: 2em;*/
+    /*margin-left: 15%;
+    margin-right: 15%;*/
+    /*margin-top: 2em;*/
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-areas: "h h h  "
@@ -76,12 +78,11 @@ body{
 
 #menu{
     grid-area: m;
-   /* width:5em;*/
-    padding:0em 1.0em 1em 0.5em;
-    background-color:var(--flagColor) ;
-
+    /*width:5em;*/
+    padding: 0.5em 0em;
+    background-color:var(--flagColor);
     color: var(--textColor);
-    height: 100%;
+    /*height: 100%;*/
 }
 
 main{
@@ -93,14 +94,12 @@ main{
 }
 
 .listageneri{
-
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-wrap: nowrap; 
     overflow-x: auto; 
- 
 }
 
 ul.listageneri{

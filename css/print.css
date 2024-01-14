@@ -34,6 +34,7 @@ main{
 main h2{
     text-align: center;
     font-size: 2em;
+    padding: 1em 0em;
 }
 
 main dt{
