@@ -4,12 +4,13 @@
 }
 
 :root{
-    --flagColor:#36502A;
-    --background:white;
-    --textColor:black;
-    --linkColor:#438448;
-    --visitedLinkColor:#660030;
+    --flagColor: #36502A;
+    --background: white;
+    --textColor: black;
+    --linkColor: #438448;
+    --visitedLinkColor: #660030;
 }
+
 a:link{
     color: var(--linkColor);
 }
@@ -20,34 +21,40 @@ a:visited{
 
 #breadcrumbs{
     grid-area: b;
-    float: left;
-    position: left;
-    text-align: left;
 }
 
 html, body{
-    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 html{
     font-size: 100%;
     line-height: 1.5em;
-    margin:auto;
-    background-color:var(--background);
+   /* margin:auto;*/
+    background-color: var(--background);
     /*width:100%;*/
 }
 
 /* HEADER */
+.titolo{
+    margin-bottom: 1em;
+}
 
 header{
     grid-area: h;
-    background-color:var(--flagColor);
-    color:var(--textColor);
-    text-align:center;
+    background-color: var(--flagColor);
+    color: var(--textColor);
+    text-align: center;
     padding: 1.5em;
     font-size: 1.5em;
+    margin: 0em;
 }
 
+.navigationHelp{
+    position: absolute;
+    text-indent: -999em;
+}
 header h1{
     text-align: center;
 }
@@ -55,45 +62,57 @@ header h1{
 body{
     max-width: 1024px;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-areas: "h h h  "
-                         "m b b"
-                         "m c c"
-                         "m c c"
-                         "f f f ";
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas: "h h"
+                         "m b"
+                         "m c"
+                         "f f";
+    height: 100vh;
 }
 
 #menu{
     grid-area: m;
-    /*width:90pt;*/
-    padding:0em 1.0em 1em 0.5em;
-    background-color:var(--flagColor) ;
+    /*width:5em;*/
+    padding: 0.5em 0em;
+    background-color: var(--flagColor);
     color: var(--textColor);
     height: 100%;
 }
 
 main{
     grid-area: c;
+    max-width: 1024px;
 }
+
 .genere{
     background-color: var(--flagColor);
 }
 
 .listageneri{
-    text-align:left;
-    padding-left: 10em;
-}
 
-ul.listageneri{
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+ 
+}
 
+ul.listageneri{
+    list-style: none;
+    margin-right: 15%;
+    /*padding: 0;*/
+    /*margin: 0;*/
+   
+    display: flex;
+    
 }
   
 li.listageneri{
     margin-right: 10px; /* Aggiungi uno spazio tra gli elementi, se lo desideri */
+    
 }
 
 h2{
@@ -101,7 +120,8 @@ h2{
     flex-direction: column;
     align-items: center;*/
     text-align: center;
-    width:100%;
+    width: 100%;
+    padding-top: 1em;
 }
 
 h3:first-of-type::before{
@@ -112,18 +132,21 @@ h3:first-of-type::before{
    
 }
 
-.titologenere{
+/*.titologenere{
     padding-left: 7.5em;
-}
+}*/
 
 #loginForm, #registrationForm{
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    right: 50pt;
+  
+    
+   /*position: relative;
+    right: 50pt;*/
  
 }
+
 nav.login{
     display: flex;
     flex-direction: column;
@@ -142,24 +165,19 @@ nav.login{
  
 }
 
-nav.login{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    position: relative;
-    right: 0pt;
-}
+
 
 /* FOOTER */
 
 footer{
     grid-area: f;
+    
     /*width: 100%;*/
     background-color: var(--flagColor);
     color: var(--textColor);
     text-align: center;
     padding: 1em 0em;
+    /*border-bottom:3em solid var(--flagColor);*/
 }
 
 footer ul{
@@ -169,6 +187,10 @@ footer ul{
 footer ul li{
     display: inline-block;
     padding: 0em 4em;
+}
+
+ul{
+    list-style: none;
 }
 
 /* COMPONENTI */
@@ -182,7 +204,7 @@ footer ul li{
 }
 
 #componenti > dt{
-    background-color: var(--headTable);
+    background-color: var(--flagColor);
     color: var(--txtColor);
     border: 1px solid black;
     padding: 0.5em;

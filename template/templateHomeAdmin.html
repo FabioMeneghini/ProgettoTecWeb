@@ -6,7 +6,9 @@
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
-        <!--<link rel="stylesheet" href="css/style.css">-->
+        <link rel="stylesheet" href="css/style.css" media="screen">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
+        <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
         <header id="header">
@@ -43,22 +45,12 @@
         <main  id="content">
             <h2>Statistiche:</h2>
                 <dl class="Statistiche">
-                    <dt>Numero Utenti Registrati:</dt>
+                    <dt>Numero di utenti registrati:</dt>
                     <dd>{numeroUtentiRegistrati}</dd>
-                    <dt>Numero Recensioni:</dt>
-                    <dd>{NumeroRecensioni}</dd>
-                    <dt>Numero capitoli letti Oggi:</dt>
-                    <dd>{NumeroCapitoliLetti}</dd>
-                    <dt>Libri Letti Oggi:</dt>
-                    <dd>{LibriLettiTotOggi}</dd>
-                    <!--se nel form mettiamo data di nascita ecc..
-                    libri detti dall'inizio dell anno(prende l'anno attuale)
-                    media età iscritti
-                    genere iscritti 
-                    area geografica
-
-                    si possono mettere delle canvas per fare i grafici
-                    -->
+                    <dt>Numero di recensioni:</dt>
+                    <dd>{numeroRecensioni}</dd>
+                    <dt>Numero di utenti che stanno leggendo:</dt>
+                    <dd>{numeroUtentiCheStannoLeggendo}</dd>
                 </dl>
         </main>
         

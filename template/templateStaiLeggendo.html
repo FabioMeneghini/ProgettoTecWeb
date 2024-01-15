@@ -7,7 +7,9 @@
         <meta name="description" content="Questa pagina è per tenere traccia dei libri che stai leggendo e il loro avanzamento nei capitoli.">
         <!--questa non può essere indicizzata !?-->
         <meta name="author" content="">
-        <!--<link rel="stylesheet" href="css/style.css">-->
+        <link rel="stylesheet" href="css/style.css" media="screen">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
+        <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
         <header id="header">
@@ -39,7 +41,7 @@
         </nav>
         <main  id="content">
             <h2>Libri che stai leggendo:</h2>
-            {listaLibriStaiLeggendo}
+            {listaLibri}
             <!-- link a template scheda libro-->
             <!--dati tabellari ordinati x data + recente string img(? xo da css togliere la lettura della 1 colonna ), titolo , autore , genere
                 oppure img non passata ma sempre img replace con alt x invogliare alla lettura

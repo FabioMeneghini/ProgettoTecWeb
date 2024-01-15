@@ -6,7 +6,9 @@
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="style.css" media="screen">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
+        <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
         <header id="header">
@@ -14,32 +16,28 @@
             <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
-            <img src="logo" alt="">
         </header>
         <nav id="menu">
+            <ul>
+                <li><a href="templateaAccedi.html">Accedi</a></li>
+                <li><a href="templateRegistrati.html">Registrati</a></li>
+                <li><a href="cerca.html">Cerca</a></li>
+            </ul>
+
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt; Cerca</p>
-        <span class="separatore"></span>
+            <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt; <span lang="en">Privacy</span></p>
+            <span class="separatore"></span>
         </nav>
         <main  id="content">
-            <h2>Ricerca Libri</h2>
-
-        <form method="post" action="ricerca.php">
-        <label for="ricercalibro">Inserisci il titolo del libro:</label>
-        <input type="text" id="cercalibro" name="cercalibro" ></br>
-        <label for="ricercaautore">Inserisci l'autore del libro:</label>
-        <input type="text" id="cercaautore" name="cercautore" ></br>
-        <label for="ricercagenere">Inserisci il genere del libro:</label>
-        <input type="text" id="cercagenere" name="cercagenere" >
-        <button type="submit">Cerca</button>
-        </form>
+            <h2>Privacy</h2>
+            <p>I dati raccolti dal momento della registrzione sono raccolti per assicurarvi il miglior servizio in base alle vostre preferenze</p>
         </main>
         <footer id="footer">
             <ul>
                 <li><a href="contatti.html">Contatti</a></li>
                 <li><a href="chisiamo.html">Chi siamo</a></li>
-                <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
+                <li><span lang="en">Privacy</span></li>
             </ul>
             <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
         </footer>

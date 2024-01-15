@@ -8,7 +8,7 @@ if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
 }
 
-$paginaHTML = file_get_contents("template/templateSalvati.html");
+$paginaHTML = file_get_contents("template/templateTerminati.html");
 
 $listaLibri = "";
 
@@ -16,25 +16,29 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
-        $lista = $connection -> getListaSalvati($_SESSION['username']);
+        $lista = $connection -> getListaTerminati($_SESSION['username']);
         $connection -> closeConnection();
         if(empty($lista)) {
-            $listaLibri = "Non hai nessun libro da leggere."; //aggiungere link alla pagina di ricerca?
+            $listaLibri = "Non hai terminato nessun libro."; //aggiungere link alla pagina di ricerca?
         }
         else {
-            $listaLibri .= '<p id="descr">La tabella contiene l\'elenco dei libri che hai salvato. Ogni riga descrive un libro con tre colonne: titolo, autore e genere.</p>
+            $listaLibri .= '<p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: titolo, autore, genere, data di fine lettura, voto assegnato.</p>
                             <table aria-describedby="descr">
-                            <caption>Lista dei libri salvati</caption>
+                            <caption>Lista dei libri che hai terminato</caption>
                             <tr>
                                 <th scope="col">Titolo</th>
                                 <th scope="col">Autore</th>
                                 <th scope="col">Genere</th>
+                                <th scope="col">Data di fine lettura</th>
+                                <th scope="col">Voto assegnato</th>
                             </tr>';
             foreach($lista as $libro) {
                 $listaLibri .= '<tr>
                                     <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td>'.$libro["genere"].'</td>
+                                    <td>'.$libro["data_fine_lettura"].'</td>
+                                    <td>'.$libro["voto"].'</td>
                                 </tr>';
             }
             $listaLibri .= "</table>";

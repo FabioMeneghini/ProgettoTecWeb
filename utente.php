@@ -5,14 +5,14 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-if(isset($_SESSION['admin'])) {
+/*if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         header("Location: admin.php");
     }
 }
 else {
     header("Location: index.php");
-}
+}*/
 
 $paginaHTML = file_get_contents("template/templateHomeUtente.html");
 
