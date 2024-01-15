@@ -19,8 +19,13 @@ a:visited{
     color: var(--visitedLinkColor);
 }
 
+#logo{
+    grid-area: l;
+}
+
 #breadcrumbs{
     grid-area: b;
+    padding: 0.5em;
 }
 
 html, body{
@@ -31,15 +36,10 @@ html, body{
 html{
     font-size: 100%;
     line-height: 1.5em;
-   /* margin:auto;*/
     background-color: var(--background);
-    /*width:100%;*/
 }
 
 /* HEADER */
-.titolo{
-    margin-bottom: 1em;
-}
 
 header{
     grid-area: h;
@@ -55,16 +55,17 @@ header{
     position: absolute;
     text-indent: -999em;
 }
+
 header h1{
     text-align: center;
 }
 
 body{
-    max-width: 1024px;
+    max-width: 1280px;
     display: grid;
     grid-template-columns: 1fr 5fr;
     grid-template-rows: auto auto 1fr auto;
-    grid-template-areas: "h h"
+    grid-template-areas: "l h"
                          "m b"
                          "m c"
                          "f f";
@@ -77,7 +78,10 @@ body{
     padding: 0.5em 0em;
     background-color: var(--flagColor);
     color: var(--textColor);
-    height: 100%;
+}
+
+#menu li{
+    padding: 0em 1em;
 }
 
 main{
@@ -90,14 +94,12 @@ main{
 }
 
 .listageneri{
-
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-wrap: nowrap; 
     overflow-x: auto; 
- 
 }
 
 ul.listageneri{
@@ -105,14 +107,11 @@ ul.listageneri{
     margin-right: 15%;
     /*padding: 0;*/
     /*margin: 0;*/
-   
-    display: flex;
-    
+    display: flex;  
 }
   
 li.listageneri{
     margin-right: 10px; /* Aggiungi uno spazio tra gli elementi, se lo desideri */
-    
 }
 
 h2{
@@ -120,31 +119,31 @@ h2{
     flex-direction: column;
     align-items: center;*/
     text-align: center;
-    width: 100%;
-    padding-top: 1em;
+    padding: 0.5em 1em;
 }
 
 h3:first-of-type::before{
     content: "";
     display: block;
     width: 100%; 
-    border-bottom: 3px solid var(--flagColor); 
+    /*border-bottom: 3px solid var(--flagColor);*/
    
 }
 
-/*.titologenere{
-    padding-left: 7.5em;
-}*/
-
-#loginForm, #registrationForm{
-    display: flex;
+form{
+    /*display: flex;
     flex-direction: column;
-    align-items: center;
-  
-    
-   /*position: relative;
-    right: 50pt;*/
- 
+    align-items: center;*/
+    text-align: center;
+    padding: 1em;
+}
+
+input{
+    margin-bottom: 2em;
+}
+
+ol{
+    list-style: none;
 }
 
 nav.login{
@@ -171,7 +170,6 @@ nav.login{
 
 footer{
     grid-area: f;
-    
     /*width: 100%;*/
     background-color: var(--flagColor);
     color: var(--textColor);
