@@ -2,9 +2,9 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Home - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <title>Area Personale- BookClub</title>
+        <meta name="keywords" content="area personale, cambia password,disconnetti, cambia nome utente">
+        <meta name="description" content="Questa pagina è l'area personale degli utenti di BookClub in cui possono cambiare il nome utente, la password, disconnettersi ed eliminare il profilo.">
         <meta name="author" content="">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
@@ -19,34 +19,121 @@
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
             
         </header>
+        <!--deve poter modificare nome e passsword e dati-->
+        <!--manca disconnessione e eliminazione profilo -->
         <nav id="menu">
-            <ul>
-                <li><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></li>
-                <li><a href="templateTerminati.html">Libri terminati</a></li>
-                <li><a href="templateDaLeggere.html">Libri da leggere</a></li>
-                <li><a href="templateEsplora.html">Esplora</a></li>
-                <li><a href="templateStatistiche.html">Statistiche</a></li>
-                <li>Area Personale</li>
-                <li><a href="cerca.html">Cerca</a></li>
-            </ul>
+            <dl>
+                <dt><a href="templateHomeUtente.html"><span lang="en">Home</span></a></dt>
+                <dt><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></dt>
+                <dt><a href="templateTerminati.html">Libri terminati</a></dt>
+                <dt><a href="templateDaLeggere.html">Libri da leggere</a></dt>
+                <dt><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></dt>
+                <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
+                <dt>Lista Generi:</dt>
+                <dd>{linkcategorie}</dd> 
+                <!--php x menu con categorie link a templategenere-->
+                <dt><a href="templateStatisticheUtente.html">Statistiche</a></dt>
+                <dt>Area Personale</dt>
+                <dt><a href="templateCerca.html">Cerca</a></dt>
+            </dl>
 
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt; Area Personale</p>
-        <span class="separatore"></span>
         </nav>
         <main  id="content">
-            <h2>I tuoi dati :</h2>
-            <dl class="Statistiche">
-                <dt>Nome:</dt>
-                <dd>{numeroUtentiRegistrati}</dd>
-                <dt>Cognome:</dt>
-                <dd>{NumeroRecensioni}</dd>
-                <dt>Password:</dt>
-                <dd>{LibriLettiTotOggi}</dd>
-                <dt>Esci dal tuo account:</dt>
-                <dd>{LibriLettiTotOggi}</dd>
-            </dl>
+            <!--<div id="profile">
+                <h2>Benvenuto, <span id="username"> {NomeUtente} </span> !</h2>
+            </div>-->
+            <!--mettere nella relazione per il ranking che era troppo pesante e lo abbiamo tolto -->
+            <!-- NON sono sicura sia una form-->
+
+            <!--sarebbe meglio che avesse a disposizione il suo username e che se volesse potesse modificarlo-->
+            <div id="datiattuali" >
+                <h2>Il tuo username attuale: {usernameattuale}</h2>
+                <!--php-->
+                <h2>La tua mail attuale: {mailattuale}</h2>
+                <p>Non ricordi la tua password? contatta il : 0444 3940394 un/a nostro/a operatore/trice sarà a tua disposizione</p>
+            </div>
+            <h3>Modifica I dati di accesso :</h3>
+            <section id="sectionModificaUsername">
+                <form method="post" action=".php"> 
+                    <!--aggiungi pagina php-->
+                    {messaggiForm}
+                    <fieldset>
+                        <legend>Username :</legend>
+                        <p>L'username deve contenere 10 caratteri con:
+                            <ul>
+                                <li>una lettera maiuscola</li>
+                                <li>una lettera minuscola</li>
+                            </ul>
+                            <!--controlli con php sul nome-->
+                        </p>
+                        <label for="username">Inserisci un nuovo username : </label>
+                        <input type="text" id="username" name="username" maxlength="10" required>
+                        <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
+                        <legend>Concludi l'inserimento:</legend>
+                        <button type="submit">Modifica Username</button>
+                        <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
+                    </fieldset>
+                </form>
+            </section>
+            <section id="sectionModificaPassword">
+                <form method="post" action=".php"> 
+                    <!--aggiungi pagina php-->
+                    {messaggiForm}
+                    <fieldset>
+                        <legend>Password :</legend>
+                        <label for="passwordold">  Inserisci la password attuale:</label>
+                        <input type="password" id="passwordold" name="passwordold" required>
+                        <!--value={passwordattuale} , con php deve controllare sia la sua password di ora-->
+                        
+                        <!-- se non è giusta non lascia completare questi sotto : -->
+                        <p>La password deve contenere almeno :
+                            <ul>
+                                <li>un numero</li>
+                                <li>una lettera maiuscola</li>
+                                <li>una lettera minuscola</li>
+                            </ul>
+                        </p>
+                        <label for="passwordnew">  Inserisci una nuova password:</label>
+                        <input type="password" id="passwordnew" name="passwordnew" required></br>
+                        <label for="passwordnew1"> Ripeti la stessa password:</label>
+                        <input type="password" id="passwordnew1" name="passwordnew1" required>
+                        <!--Messaggio di errore se la password è diversa da quella sopra forse value={passwordnew} -->
+                        <legend>Concludi l'inserimento:</legend>
+                        <button type="submit">Cambia Password</button>
+                        <!-- non so se si possa togliere ma non credo abbia senso qua :<button type="reset">Elimina</button>
+                        messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
+                    </fieldset>
+                </form>
+            </section>
+            <section id="sectionModificaEmail">
+                <form method="post" action=".php"> 
+                    <!--aggiungi pagina php-->
+                    {messaggiForm}
+                    <fieldset>
+                        <legend>Mail :</legend>
+                        <label for="email">Nuovo indirizzo Email:</label>
+                        <input type="email" id="email" name="email" maxlength="30" required>
+                        <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
+                        <legend>Concludi l'inserimento:</legend>
+                        <button type="submit">Modifica Email</button>
+                        <!--controllo anche da php che sia una mail con controllo di caratteri -->
+                        <!--<button type="reset">Elimina</button>
+                        messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
+                    </fieldset>
+                </form>
+            </section>
+            <!--forse sarebbe meglio 2 pagine a parte per disconnetti ed elimina account -->
+            <div id="exitaccount">
+                <h4>Disconnessione dell'account:</h4>
+                <button id="disconnessione">Disconnetti account</button>
+                <!--mex che se si disconnette dal dispositivo può rientare in qualsiasi momento con username e password e conferma-->
+                <h4>Eliminazione dell'account:</h4>
+                <button id="eliminazione">Elimina account</button>
+                <!--emiminare utente db-->
+            </div> 
         </main>
         <footer id="footer">
             <ul>
@@ -58,3 +145,4 @@
         </footer>
     </body>
 </html>
+<!--da aggiungere c'è se si vuole che tipo di utente è se il mese scorso ha letto più libri di tutti è nella top 3 account oro..-->

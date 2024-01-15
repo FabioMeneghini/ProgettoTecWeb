@@ -19,53 +19,52 @@
             <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
         </header>
         <nav id="menu">
-            <ul>
-                <li><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></li>
-                <li><a href="templateTerminati.html">Libri terminati</a></li>
-                <li><a href="templateDaLeggere.html">Libri da leggere</a></li>
-                <li><a href="templateEsplora.html">Esplora</a></li>
-                <li><a href="templateStatistiche.html">Statistiche</a></li>
-                <li><a href="templateAreaPersonale.html">Area Personale</a></li>
-                <li><a href="cerca.html">Cerca</a></li>
-            </ul>
+            <dl>
+                <dt><span lang="en">Home</span></dt>
+                <dt><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></dt>
+                <dt><a href="templateTerminati.html">Libri terminati</a></dt>
+                <dt><a href="templateDaLeggere.html">Libri da leggere</a></dt>
+                <dt><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></dt>
+                <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
+                <dt>Lista Generi:</dt>
+                <dd>{linkcategorie}</dd> 
+                <!--php x menu con categorie link a templategenere-->
+                <dt><a href="templateStatisticheUtente.html">Statistiche</a></dt>
+                <dt><a href="templateAreaPersonale.html">Area Personale</a></dt>
+                <dt><a href="templateCerca.html">Cerca</a></dt>
+            </dl>
         </nav>
 
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <span lang="en">Home</span></p>
         </nav>
-
-        <span class="separatore"></span>
-
         <main id="content">
             <ul>
-                <li><a href="templateAggiungiLibro.html">Aggiungi Libro</a></li>
-                <button type="button">+</button>
+                <!--se si tiene solo recensione non ha senso una lista
+                si può mettere quanti capitoli ha letto oggi -->
                 <li><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></li>
-                <button type="button">+</button>
+                <button type="button">+</button><!--<a href="templateAggiungiRecensione.html">Aggiungi Recensione</a> va il link?-->
             </ul>
             <!-- <h3 class="titologenere"><a href="templateGenere.html">Consigliati per te:</a></h3>
                {listaLibriConsigliati}
 
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere1}</a></h3>
+            <h2 class="titologenere"><a href="templateGenere.html">{NomeGenere1}</a></h2>
             <ul class="listageneri"> 
                 {ListaGenereConsigliati}
             </ul>
-            <span class="separatore"></span>
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere2}</a></h3>
+            <h2 class="titologenere"><a href="templateGenere.html">{NomeGenere2}</a></h2>
             <ul class="listageneri"> 
                 {ListaGenere2}
             </ul>
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere3}</a></h3>
+            <h2 class="titologenere"><a href="templateGenere.html">{NomeGenere3}</a></h2>
             <ul class="listageneri"> 
                 {ListaGenere3}
             </ul>
-            <span class="separatore"></span>
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere4}</a></h3>
+            <h2 class="titologenere"><a href="templateGenere.html">{NomeGenere4}</a></h2>
             <ul class="listageneri"> 
                 {ListaGenere4}
             </ul>
-            <span class="separatore"></span>
-            <h3 class="titologenere"><a href="templateGenere.html">{NomeGenere5}</a></h3>
+            <h2 class="titologenere"><a href="templateGenere.html">{NomeGenere5}</a></h2>
             <ul class="listageneri"> 
                 {ListaGenere5}
             </ul> -->

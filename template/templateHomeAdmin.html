@@ -2,7 +2,7 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Home - BookClub</title>
+        <title>AdminHome - BookClub</title>
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
         <meta name="author" content="">
@@ -19,22 +19,29 @@
             <img src="logo" alt="Il logo è un libro aperto da cui escono delle pagine volanti">
         </header>
         <nav id="menu">
-            <ul>
-                <li><a href="templateAggiungiLibroAdmin.html">Aggiungi un libro</a></li>
-                <li><a href="templateAggiungiGenere.html">Aggiungi Genere</a></li>
-                <li><a href="templateRiumuoviLibro.html">Rimuovi un Libro</a></li>
-                <li><a href="templateRiumuoviRecensione.html">Rimuovi una Recensione</a></li>
-                <li><a href="templateRiumuoviUtenti.html">Rimuovi Utenti</a></li>
-                <li><a href="cerca.html">Cerca</a></li>
-            </ul>
+            <dl>
+                <!--link di admin-->
+                <dt><span lang="en">Home</span></dt>
+                <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
+                <dt><a href="templateAggiungiLibro.html">Aggiungi un libro</a></dt>
+                <dt><a href="templateAggiungiGenere.html">Aggiungi Genere</a></dt>
+
+                <dt><a href="templateTuttiLibri.html">Catalogo libri</a></dt>
+                <dt><a href="templatetutteRecensioni.html">Recensioni</a></dt>
+                <dt><a href="templateTuttiUtenti.html">Archivio utenti</a></dt>
+                <dt><a href="templateModificaLibro.html">Modifica Libro</a></dt>                <!--rimuovi da dove ci arriva? che pagine sono?
+                forse è visualizza tutti i libri e visualizza tutti i generi? 
+                da dentro il libro gestisce le recensioni ecc-->
+                <dt>Categorie</dt>
+                <dd>{linkcategorie}</dd> 
+                <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
+                <dt><a href="templateCerca.html">Cerca</a></dt>
+            </dl>
         </nav>
 
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <span lang="en">Home</span></p>
         </nav>
-
-        <span class="separatore"></span>
-
         <main  id="content">
             <h2>Statistiche:</h2>
                 <dl class="Statistiche">
