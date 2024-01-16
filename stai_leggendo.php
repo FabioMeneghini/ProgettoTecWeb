@@ -11,13 +11,18 @@ if(!isset($_SESSION['username'])) {
 $paginaHTML = file_get_contents("template/templateStaiLeggendo.html");
 
 $listaLibri = "";
+$listaGeneri = "";
 
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $lista = $connection -> getListaStaLeggendo($_SESSION['username']);
+        $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
+        foreach($resultListaGeneri as $genere) {
+            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+        }
         if(empty($lista)) {
             $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati
         }
@@ -50,6 +55,7 @@ catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
 
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
 echo $paginaHTML;
 

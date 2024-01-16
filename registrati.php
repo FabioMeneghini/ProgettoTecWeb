@@ -45,6 +45,7 @@ function controllaInput($nome, $cognome, $username, $email, $password1, $passwor
 }
 
 $messaggiPerForm = "";
+$listaGeneri = "";
 
 $ok = true;
 if(isset($_POST['registrati'])) {
@@ -67,8 +68,12 @@ if(isset($_POST['registrati'])) {
             if($connectionOk) {
                 if($connection -> usernameUnico($username)) {
                     $erroriRegistrazione = $connection -> registraUtente($nome, $cognome, $username, $email, $password1);
+                    $resultListaGeneri = $connection -> getListaGeneri();
                     $connection -> closeConnection();
 
+                    foreach($resultListaGeneri as $genere) {
+                        $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+                    }
                     if($erroriRegistrazione == "") {
                         //$messaggiPerForm .= "<li>Registrazione avvenuta con successo</li>";
                         header("Location: accedi.php"); //dovrebbe mostrare un messaggio di successo dopo aver mandato alla pagina di login

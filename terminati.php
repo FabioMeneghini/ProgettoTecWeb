@@ -11,13 +11,18 @@ if(!isset($_SESSION['username'])) {
 $paginaHTML = file_get_contents("template/templateTerminati.html");
 
 $listaLibri = "";
+$listaGeneri = "";
 
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $lista = $connection -> getListaTerminati($_SESSION['username']);
+        $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
+        foreach($resultListaGeneri as $genere) {
+            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+        }
         if(empty($lista)) {
             $listaLibri = "Non hai terminato nessun libro."; //aggiungere link alla pagina di ricerca?
         }

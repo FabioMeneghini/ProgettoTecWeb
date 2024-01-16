@@ -17,6 +17,7 @@ else {
 $paginaHTML = file_get_contents("template/templateHomeUtente.html");
 
 $liste = "";
+$listaGeneri = "";
 
 try {
     $connection = new DBAccess();
@@ -24,11 +25,12 @@ try {
     if($connectionOk) {
         $resultGeneri = $connection -> getListaGeneri();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $liste .= '<h3 class="titologenere"><a href="templateGenere.html">'.$genere['genere'].'</a></h3>
-                       <ul class="listageneri">';   
+            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+            $liste .= '<h2 class="titologenere"><a href="templateGenere.html">'.$genere['genere'].'</a></h2>
+                       <ul class="listageneri">';
             $listaLibri = $connection -> getListaLibriGenere($genere['genere']);
             foreach($listaLibri as $libro) {
-                $liste .= "<article><li>".$libro["titolo"]."</li></article>"; //$libro["autore"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
+                $liste .= "<li>".$libro["titolo"]."</li>"; //$libro["autore"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
             }
             $liste .= "</ul>";
         }
@@ -43,6 +45,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listeLibri}", $liste, $paginaHTML);
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 
 ?>
