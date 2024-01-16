@@ -111,7 +111,7 @@ ul.listageneri{
 }
   
 li.listageneri{
-    margin-right: 10px; /* Aggiungi uno spazio tra gli elementi, se lo desideri */
+    margin-right: 10px; 
 }
 
 h2{
@@ -142,9 +142,14 @@ input{
     margin-bottom: 2em;
 }
 
-ol{
+ol.listabestseller{
     list-style: none;
+   
 }
+ol li {
+    display: inline-block; 
+    margin-right: 10px; 
+  }
 
 nav.login{
     display: flex;
@@ -226,4 +231,133 @@ ul{
 .componente dt{
     float: left;
     font-weight: bold;
+}
+
+/*ID LIBRI*/
+
+.libri a:hover{
+transform: scale(1.3);
+}
+#_1984{
+    background-image: url("copertine_libri/_1984.jpg");
+}
+#anna_karenina{
+    background-image: url("copertine_libri/anna_karenina.jpg");
+}
+#cent_anni_di_solitudine{
+    background-image: url("copertine_libri/cent_anni_di_solitudine.jpg");
+}
+#cime_tempestose{
+    background-image: url("copertine_libri/cime_tempestose.jpg");
+}
+#don_chishotte{
+    background-image: url("copertine_libri/don_chishotte.jpg");
+}
+#dune{
+    background-image: url("copertine_libri/dune.jpg");
+}
+#guerra_e_pace{
+    background-image: url("copertine_libri/guerra_e_pace.jpg");
+}
+#harry_potter_e_la_pietra_filosfale{
+    background-image: url("copertine_libri/harry_potter_e_la_pietra_filosfale.jpg");
+}
+#il_caccaitore_di_aquiloni{
+    background-image: url("copertine_libri/il_caccaitore_di_aquiloni.jpg");
+}
+#il_codice_da_vinci{
+    background-image: url("copertine_libri/il_codice_da_vinci.jpg");
+}
+#il_colore_della_magia{
+    background-image: url("copertine_libri/il_colore_della_magia.jpg");
+}
+#il_conte_di_montecristo{
+    background-image: url("copertine_libri/il_conte_di_montecristo.jpg");
+}
+#il_corvo{
+    background-image: url("copertine_libri/il_corvo.jpg");
+}
+#il_dottor_jekill_e_mr_hide{
+    background-image: url("copertine_libri/il_dottor_jekill_e_mr_hide.jpg");
+}
+#il_dottor_zivago{
+    background-image: url("copertine_libri/il_dottor_zivago.jpg");
+}
+#il_fu_mattia_pascal{
+    background-image: url("copertine_libri/il_fu_mattia_pascal.jpg");
+}
+#il_gattopardo{
+    background-image: url("copertine_libri/il_gattopardo.jpg");
+}
+#il_giovane_holden{
+    background-image: url("copertine_libri/il_giovane_holden.jpg");
+}
+#il_grande_gatsby{
+    background-image: url("copertine_libri/il_grande_gatsby.jpg");
+}
+#il_labirinto_del_fauno{
+    background-image: url("copertine_libri/il_labirinto_del_fauno.jpg");
+}
+#il_lupo_della_steppa{
+    background-image: url("copertine_libri/il_lupo_della_steppa.jpg");
+}
+#il_mondo_nuovo{
+    background-image: url("copertine_libri/il_mondo_nuovo.jpg");
+}
+#il_nome_della_rosa{
+    background-image: url("copertine_libri/il_nome_della_rosa.jpg");
+}
+#il_piccolo_principe{
+    background-image: url("copertine_libri/il_piccolo_principe.jpg");
+}
+#il_processo{
+    background-image: url("copertine_libri/il_processo.jpg");
+}
+#il_ritratto_di_dorian_gray{
+    background-image: url("copertine_libri/il_ritratto_di_dorian_gray.jpg");
+}
+#il_rosso_e_il_nero{
+    background-image: url("copertine_libri/il_rosso_e_il_nero.jpg");
+}
+#il_signore_degli_anelli{
+    background-image: url("copertine_libri/il_signore_degli_anelli.jpg");
+}
+#il_vecchio_e_il_mare{
+    background-image: url("copertine_libri/il_vecchio_e_il_mare.jpg");
+}
+#l_isola_misteriosa{
+    background-image: url("copertine_libri/l_isola_misteriosa.jpg");
+}
+#la_caduta_dei_giganti{
+    background-image: url("copertine_libri/la_caduta_dei_giganti.jpg");
+}
+#la_ragazza_con_il_tatuaggio_del_drago{
+    background-image: url("copertine_libri/la_ragazza_con_il_tatuaggio_del_drago.jpg");
+}
+#la_tregua{
+    background-image: url("copertine_libri/la_tregua.jpg");
+}
+#le_cronache_di_narnia{
+    background-image: url("copertine_libri/le_cronache_di_narnia.jpg");
+}
+#l_isola_del_tesoro{
+    background-image: url("copertine_libri/l_isola_del_tesoro.jpg");
+}
+#lo_hobbit{
+    background-image: url("copertine_libri/lo_hobbit.jpg");
+}
+#meta_del_sole_giallo{
+    background-image: url("copertine_libri/meta_del_sole_giallo.jpg");
+}
+#moby_dick{
+    background-image: url("copertine_libri/moby_dick.jpg");
+}
+#orgoglio_e_pregiudizio{
+    background-image: url("copertine_libri/orgoglio_e_pregiudizio.jpg");
+}
+#orgoglio_e_pregiudizio_e_zombie{
+    background-image: url("copertine_libri/orgoglio_e_pregiudizio_e_zombie.jpg");
+}
+#piccole_donne{
+    background-image: url("copertine_libri/piccole_donne.jpg");
 }
