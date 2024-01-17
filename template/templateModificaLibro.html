@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--arriva da cheda libro se clicca modifica o vede subito questo?-->
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>{TitoloLibro} - BookClub</title>
+        <!--nome libro PHP-->
+        <meta name="keywords" content="{parolechiavelibro}">
+        <!--come trovare le parole chiave?-->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!--<link rel="stylesheet" href="css/style.css">-->
+    </head>
+    <body>
+        <header id="header">
+            <nav aria-label="Aiuti alla navigazione">
+            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+            </nav> 
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            <img src="logo" alt="Il logo del sito è un libro aperto da cui escono delle pagine volanti">
+        </header>
+        <nav id="menu">
+            <dl>
+                <!--link di admin-->
+                <dt><a href="templateHomeAdmin.html"><span lang="en">Home</span></a></dt>
+                <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
+                <dt><a href="templateAggiungiLibro.html">Aggiungi un libro</a></dt>
+                <dt><a href="templateAggiungiGenere.html">Aggiungi Genere</a></dt>
+                <dt><a href="templateTuttiLibri.html">Catalogo Libri</a></dt>
+                <dt><a href="templatetutteRecensioni.html">Recensioni</a></dt>
+                <dt><a href="templateTuttiUtenti.html">Archivio utenti</a></dt>
+                <dt>Modifica Libro</dt>
+                <!--non direttemante da qua o si ? -->
+                <dt>Categorie</dt>
+                <dd>{linkcategorie}</dd> 
+                <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
+                <dt><a href="templateCerca.html">Cerca</a></dt>
+            </dl>
+        </nav>
+
+        <nav id="breadcrumbs" aria-label="Percorso">
+            <!--come ricordarsi da dove è entrato? dalla home , da letti , da leggere o da eliminati? o da generi?-->
+            <p>Ti trovi in: <a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; {TitoloLibro}</p>
+        </nav>
+        <main id="content">
+            <img> <!--immagine con alt specifico-->
+            <section id="modificaLibro">
+                <h2>Inserisci i nuovi dati del libro</h2>
+                <form method="post" action="php"> 
+                    {messaggiForm}
+                    <fieldset>
+                        <legend>Informazioni genere: </legend>
+                        <label for="titolo">Autore: </label>
+                        <input type="text" id="autore" name="autore" min="1" max="30" placeholder="{autoreold}" value="{autoreold}">
+                        <br/>
+                        <label for="titolo">Titolo: </label>
+                        <input type="text" name="titolo" id="titolo" max="100"placeholder="{titoloold}" value="{titoloold}"/><br/>
+                        <!--controllo che sia diverso da quelli già inseriti! In caso messaggio: il libro inserito è già presente nel data base
+                        meglio non lasciare il completamente di altri campi -->
+                    </fieldset>
+                    <fieldset>
+                        <legend>Informazioni specifiche:</legend>
+                        <label for="Lingua">Lingua originale : </label>
+                        <input list="lingua" id="selezionalingua" name="lingua"placeholder="{linguaold}" value="{linguaold}">
+                        <datalist id="lingua" name="lingua">
+                            {listaLingue}
+                            <!--option between todos los idiomas del mundo-->
+                        </datalist><br/>
+                        <label for="casa editrice">Casa editrice: </label>
+                        <input type="text" name="editore" id="editore" placeholder="{editoreold}" value="{editoreold}"/><br/>
+                        <label for="durata">Nunero capitoli: </label>
+                        <input type="number" name="capitoli" id="capitoli" max="1000" required placeholder="{capitoliold}" value="{capitoliold}" />
+                    </fieldset>
+                    <fieldset>
+                        <legend>Storia :</legend>
+                        <legend for="trama">Trama del libro:</legend>
+                        <textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}">"{tramaold}"</textarea>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Genere</legend>
+                        <label for="genere">Seleziona : </label>
+                        <input list="genere" id="genereInput" name="genere">
+                        <datalist id="genere" name="genere" placeholder="{genereold}" value="{genereold}">
+                            {listaGeneri}
+                        </datalist><br/>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Concludi l'inserimento:</legend>
+                        <button type="submit">Modifica</button>
+                        <button type="reset">Annulla</button>
+                        <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
+                    </fieldset>
+                </form>
+            </section>
+            <h3>La tua Recensione:</h3>{recensione}
+            <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
+            <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+        </main>
+        <footer id="footer">
+            <ul>
+                <li><a href="contatti.html">Contatti</a></li>
+                <li><a href="chisiamo.html">Chi siamo</a></li>
+                <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
+            </ul>
+            <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
+        </footer>
+    </body>
+</html>

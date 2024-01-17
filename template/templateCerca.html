@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cerca - BookClub</title>
+        <meta name="keywords" content="cerca nuovi libri, esplora libri, cerca generi, cerca autori ">
+        <meta name="description" content="Questa pagina è dedicata alla ricerca nel sito di libri specifici o per l'esplorazione di generi e autori.">
+        <meta name="author" content="">
+        <!--<link rel="stylesheet" href="css/style.css">-->
+    </head>
+    <body>
+        <header id="header">
+            <nav aria-label="Aiuti alla navigazione">
+            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+            </nav> 
+            <img src="logo" alt="">
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
+            
+        </header>
+        <nav id="menu">
+            <!--il menù dipende dall'account in cui sono !! se sono admin le suo voci, se sono utente normale le mie voci o se sono non registrato -->
+        </nav>
+        <nav id="breadcrumbs" aria-label="Percorso">
+            <!--la home a cui devo tornare è dinamica PHP-->
+            <p>Ti trovi in: :<a href="{cercaHome}"><span lang="en">Home</span></a>&gt; &gt; Cerca </p>
+        </nav>
+        <main id="content">
+            <section id="cerca">
+                <h2>Cerca un libro:</h2>
+                <form method="post" action="PHP"> 
+                    <!--aggiungi pagina php-->
+                    {messaggiForm}
+                    <fieldset>
+                        <!--da css bisognerebbe far venire o uno o l'altro come formo i filtri che si possano aggiungere sotto-->
+                    <label for="search">Ricerca generale:</label>
+                    <input type="text" id="search" name="search">
+                    <button type="submit">Cerca</button>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Filtri: </legend>
+                        <label for="title">Titolo:</label>
+                        <input type="text" id="title" name="title" maxlength="100">
+                        <!--controllare coerenze con lunghezze
+                        in css diminuire lo spazio x la scrittura -->
+
+                        <label for="author">Autore:</label>
+                        <input type="text" id="author" name="author" maxlength="50">
+
+                        <label for="genere">Seleziona : </label>
+                        <input list="genere" id="genereInput" name="genere">
+                        <datalist id="genere" name="genere">
+                            {listaGeneri}
+                            <!--php solo tra i generi che ho -->
+                        </datalist><br/>
+
+                        <label for="casa editrice">Casa editrice: </label>
+                        <input type="text" name="editore" id="editore" /><br/>
+                        <!-- anche qua si può mettere un datalist tra quelle che ho nel db come generi-->
+
+                        <label for="language">Lingua:</label>
+                        <input list="lingua" id="selezionalingua" name="lingua">
+                        <datalist id="lingua" name="lingua">
+                            {listaLingue}
+                            <!--option between todos los idiomas del mundo-->
+                        </datalist><br/>
+                        <!--oppure un select semplice senza php?-->
+                    </fieldset>
+        </form>
+    </section>
+<footer id="footer">
+    <ul>
+        <li><a href="contatti.html">Contatti</a></li>
+        <li><a href="chisiamo.html">Chi siamo</a></li>
+        <li><a href="privacy.html"><span lang="en">Privacy</span></a></li>
+    </ul>
+    <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
+</footer>
+</body>
+</html>

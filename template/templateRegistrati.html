@@ -18,70 +18,60 @@
             <h1 class="titolo">BookClub</h1>
         </header>
         <nav id="menu">
-            <ul>
-                <li>Accedi</li>
-                <li>Registrati</li>
-                <li><a href="cerca.html">Cerca</a></li>
-            </ul>
+            <dl>
+                <dt><a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a></dt>
+                <dt>Categorie</dt>
+                <dd>{linkcategorie}</dd> 
+                <!--php x menu con categorie-->
+                <dt><a href="templateAccedi.html">Accedi</a></dt>
+                <dt>Registrati</dt>
+                <dt><a href="templateCerca.html">Cerca</a></dt>
+            </dl>
         </nav>
 
         <nav id="breadcrumbs">
-            <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt;  Registrati</p>
+            <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a>&gt; &gt; Accedi</p>
         </nav>
-
-        <span class="separatore"></span>
-
         <main>
-            <h2>Registrati:</h2>
-            <form id="registrationForm" action="registrati.php" method="post"> <!-- mi sa che gli id sui textbox del form non servono -->
-                <ul class="messaggiErrore">
-                    {messaggi}
-                </ul>
-
-                <p>Inserisci il tuo nome:</p>
-                <label for="firstName">Nome:</label>
-                <input type="text" id="firstName" name="firstName" required>
-                <span class="separatore"></span>
-
-                <p>Inserisci il tuo cognome:</p>
-                <label for="lastName">Cognome:</label>
-                <input type="text" id="lastName" name="lastName" required>
-                <span class="separatore"></span>
-
-                <p>Crea uno username (deve essere unico):</p>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-                <span class="separatore"></span>
-
-                <p>Inserisci la tua email:</p>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <span class="separatore"></span>
-
-                <div id="registrationForm">
-                    <p>La password deve contenere:</p>
-                    <ul id="registrationForm">
-                        <li>Almeno una lettera maiuscola</li>
-                        <li>Almeno un numero</li>
-                        <li>Almeno un carattere speciale, per esempio: { ! ? # * }</li>
-                        <li>Deve essere lunga almeno 8 caratteri</li>
-                    </ul>
-                </div>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password1" name="password1" required>
-                <span class="separatore"></span>
-
-                <p>Ripetere la stessa password:</p>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password2" name="password2" required>
-
-                <span class="separatore"></span>
-                <input type="submit" id="registrati" name="registrati" value="Registrati">
-                <input type="reset" value="Cancella tutto"/>
-                </form>
-        
+        <section id="section_registrazione">
+            <form id="registrationForm" action="registrati.php" method="post">
+                <!--aggiungi pagina php-->
+                {messaggi}
+                <fieldset>
+                    <legend>Dati personali:</legend>
+                    <label for="name">Inserisci il tuo nome : </label>
+                    <input type="text" id="name" name="name" maxlength="15" required><br>
+                    <p>L'username deve contenere 10 caratteri con:
+                        <ul>
+                            <li>una lettera maiuscola</li>
+                            <li>una lettera minuscola</li>
+                        </ul>
+                        <!--controlli con php-->
+                    </p>
+                    <label for="titolo">Inserisci uno username : </label>
+                    <input type="text" id="username" name="username" maxlength="10" required><br>
+                    <!--controllo che non sia già in uso-->
+                    <!--altri dati come data di nascita , genere, regione-->
+                    <label for="email">Indirizzo Email:</label>
+                    <input type="email" id="email" name="email" maxlength="30" required>
+                    <!--allargare il rettangolo standard xke minore della lunghezza da mettere-->
+                </fieldset>
+                <fieldset>
+                    <legend>Password :</legend>
+                    <p>La password deve contenere almeno:
+                        <ul>
+                            <li>un numero</li>
+                            <li>una lettera maiuscola</li>
+                            <li>una lettera minuscola</li>
+                        </ul>
+                    </p>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password1" name="password1" required></br>
+                    <label for="passwordnew1"> Ripeti la stessa password:</label>
+                    <input type="password" id="passwordnew1" name="passwordnew1" required>
+                </fieldset>
+            </form>
+        </section>
         </main>
         <footer id="footer">
             <ul>

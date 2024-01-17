@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
+        <!--come risolvere i link tutti uguali?-->
         <meta charset="UTF-8">
-        <title>Home - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <!--si può mettere il nome del genere come titolo con php o non fa bene il ranking?-->
+        <title>{nomegenere} - BookClub</title>
+        <meta name="keywords" content="{nomegenerekeyword}">
+        <meta name="description" content="{nomegeneredescription}">
         <meta name="author" content="">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
@@ -19,20 +21,16 @@
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
         </header>
         <nav id="menu">
-            <ul>
-                <li><a href="templateAccedi.html">Accedi</a></li>
-                <li><a href="templateRegistrati.html">Registrati</a></li>
-                <li><a href="cerca.html">Cerca</a></li>
-            </ul>
-
+            {Menuphp}
+            <!--il menù dipende dall'account in cui sono !! se sono admin le suo voci, se sono utente normale le mie voci o se sono non registrato -->
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in:<a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt;  {NomeGenere}</p>
-        <span class="separatore"></span>
+            <p>Ti trovi in:<a href="{homegenere}"><span lang="en">Home</span></a>&gt; &gt; Generi &gt; &gt; {NomeGenere}</p>
         </nav>
         <main  id="content">
             <h2>{NomeGenere}</h2>
-            {Lista_tutti_libri}
+            <!--dati tabellari ? o lista ? qui vanno in ordine alfabetico? e ci sono tutti i libri del genere-->
+            {tabellaLibriGenere}
 
         </main>
         <footer id="footer">
