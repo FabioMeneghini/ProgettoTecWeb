@@ -11,9 +11,10 @@
         <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
+        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
         <header id="header">
             <nav aria-label="Aiuti alla navigazione">
-            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+                <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
             <img src="logo" alt="">
@@ -22,20 +23,19 @@
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="templateHome.html"><span lang="en">Home</span></a>&gt; &gt; Cerca</p>
-        <span class="separatore"></span>
+            <span class="separatore"></span>
         </nav>
         <main  id="content">
             <h2>Ricerca Libri</h2>
-
-        <form method="post" action="ricerca.php">
-        <label for="ricercalibro">Inserisci il titolo del libro:</label>
-        <input type="text" id="cercalibro" name="cercalibro" ></br>
-        <label for="ricercaautore">Inserisci l'autore del libro:</label>
-        <input type="text" id="cercaautore" name="cercautore" ></br>
-        <label for="ricercagenere">Inserisci il genere del libro:</label>
-        <input type="text" id="cercagenere" name="cercagenere" >
-        <button type="submit">Cerca</button>
-        </form>
+            <form method="post" action="ricerca.php">
+                <label for="ricercalibro">Inserisci il titolo del libro:</label>
+                <input type="text" id="cercalibro" name="cercalibro" ></br>
+                <label for="ricercaautore">Inserisci l'autore del libro:</label>
+                <input type="text" id="cercaautore" name="cercautore" ></br>
+                <label for="ricercagenere">Inserisci il genere del libro:</label>
+                <input type="text" id="cercagenere" name="cercagenere" >
+                <button type="submit">Cerca</button>
+            </form>
         </main>
         <footer id="footer">
             <ul>
