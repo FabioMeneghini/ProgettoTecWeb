@@ -172,7 +172,10 @@ class DBAccess {
     }
 
     public function getListaSalvati($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, da_leggere WHERE da_leggere.username = '$username' AND da_leggere.id_libro = libri.id";
+        $query = "SELECT libri.id, libri.titolo, libri.autore, libri.genere
+                  FROM libri, da_leggere
+                  WHERE da_leggere.username = '$username'
+                  AND da_leggere.id_libro = libri.id";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -211,6 +214,41 @@ class DBAccess {
         }
         else {
             return null;
+        }
+    }
+
+    public function staLeggendo($username, $id_libro) {
+        $query = "SELECT * FROM sta_leggendo WHERE username = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function aggiungiStaLeggendo($username, $id_libro) {
+        $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("si", $username, $id_libro);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+            }
+            $stmt->close();
+        }
+    }
+
+    public function rimuoviDaLeggere($username, $id_libro) {
+        $query = "DELETE FROM da_leggere WHERE username = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
         }
     }
 }
