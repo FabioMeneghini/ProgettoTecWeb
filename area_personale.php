@@ -4,9 +4,9 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-if(!isset($_SESSION['username'])) {
+/*if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
-}
+}*/
 
 $paginaHTML = file_get_contents("template/templateAreaPersonale.html");
 
