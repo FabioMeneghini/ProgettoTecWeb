@@ -10,11 +10,11 @@
         <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
+        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
         <header>
             <nav aria-label="Aiuti alla navigazione">
-            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+                <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav>
-            <img src="logo" alt="">
             <h1 class="titolo">BookClub</h1>
         </header>
         <nav id="menu">
@@ -28,11 +28,9 @@
                 <dt><a href="templateCerca.html">Cerca</a></dt>
             </dl>
         </nav>
-
         <nav id="breadcrumbs">
             <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a>&gt; &gt; Accedi</p>
         </nav>
-
         <main>
             <section id="accediform">
                 <h2>Inserisci i dati per l'accesso:</h2>
@@ -42,13 +40,12 @@
                         <!--con js non lasciare submit se i campi dati non sono compilati correttamente-->
                     </ul>
                     <fieldset>
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" maxlength="10" required required>
+                        <label for="username">Username:</label><br>
+                        <input type="text" id="username" name="username" maxlength="10" required required><br>
                         <label for="password">Password:</label><br>
-                        <input type="password" id="password" name="password" maxlength="10" required required>
+                        <input type="password" id="password" name="password" maxlength="10" required required><br>
                         <input type="submit" id="accedi" name="accedi" value="Accedi">
                         <input type="reset" id="reset" name="reset" value="Cancella"/>
-                        
                     </fieldset>
                 </form>
             </section>
@@ -56,11 +53,9 @@
                 <p>Non hai ancora un account?</p>
                 <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
                 <a href="templateRegistrati.html">Registrati</a>
-                
                 <!--css immagine-->
             </div> 
         </main>
-
         <footer id="footer">
             <ul>
                 <li><a href="contatti.html">Contatti</a></li>

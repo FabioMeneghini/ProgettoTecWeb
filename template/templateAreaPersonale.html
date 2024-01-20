@@ -11,13 +11,12 @@
         <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
+        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
         <header id="header">
             <nav aria-label="Aiuti alla navigazione">
-            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+                <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
-            <img src="logo" alt="">
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
-            
         </header>
         <!--deve poter modificare nome e passsword e dati-->
         <!--manca disconnessione e eliminazione profilo -->
@@ -36,7 +35,6 @@
                 <dt>Area Personale</dt>
                 <dt><a href="templateCerca.html">Cerca</a></dt>
             </dl>
-
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt; Area Personale</p>
@@ -87,7 +85,6 @@
                         <label for="passwordold">  Inserisci la password attuale:</label>
                         <input type="password" id="passwordold" name="passwordold" required>
                         <!--value={passwordattuale} , con php deve controllare sia la sua password di ora-->
-                        
                         <!-- se non è giusta non lascia completare questi sotto : -->
                         <p>La password deve contenere almeno :
                             <ul>
