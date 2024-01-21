@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Area Personale- BookClub</title>
-        <meta name="keywords" content="area personale, cambia password,disconnetti, cambia nome utente">
+        <meta name="keywords" content="area personale, cambia password, disconnetti, cambia nome utente, cambia username">
         <meta name="description" content="Questa pagina è l'area personale degli utenti di BookClub in cui possono cambiare il nome utente, la password, disconnettersi ed eliminare il profilo.">
         <meta name="author" content="">
         <link rel="stylesheet" href="css/style.css" media="screen">
@@ -41,37 +41,37 @@
         </nav>
         <main  id="content">
             <div id="profile">
-                <h2>Benvenuto, <span id="username"> {NomeUtente} </span> !</h2>
+                <h2>Benvenuto, <span id="username">{NomeUtente}</span>!</h2>
             </div>
             <!--mettere nella relazione per il ranking che era troppo pesante e lo abbiamo tolto -->
             <!-- NON sono sicura sia una form-->
 
             <!--sarebbe meglio che avesse a disposizione il suo username e che se volesse potesse modificarlo-->
             <div id="datiattuali" >
-                <h2>Il tuo username attuale: {usernameattuale}</h2>
+                <h2>Il tuo <span lang="en">username</span> attuale: {usernameattuale}</h2>
                 <!--php-->
-                <h2>La tua mail attuale: {mailattuale}</h2>
-                <p>Non ricordi la tua password? contatta il : 0444 3940394 un/a nostro/a operatore/trice sarà a tua disposizione</p>
+                <h2>La tua <span lang="en">email</span> attuale: {mailattuale}</h2>
+                <p>Non ricordi la tua <span lang="en">password</span>? Contatta il 0444 3940394, un/a nostro/a operatore/trice sarà a tua disposizione</p>
             </div>
-            <h3>Modifica I dati di accesso :</h3>
+            <h3>Modifica I dati di accesso:</h3>
             <section id="sectionModificaUsername">
-                <form method="post" action=".php"> 
+                <form method="post" action="area_personale.php"> 
                     <!--aggiungi pagina php-->
                     {messaggiForm}
                     <fieldset>
-                        <legend>Username :</legend>
-                        <p>L'username deve contenere 10 caratteri con:
+                        <legend><span lang="en">Username</span>:</legend>
+                        <p>Lo <span lang="en">username</span> deve contenere al massimo 10 caratteri, includendo almeno:
                             <ul>
                                 <li>una lettera maiuscola</li>
                                 <li>una lettera minuscola</li>
                             </ul>
                             <!--controlli con php sul nome-->
                         </p>
-                        <label for="username">Inserisci un nuovo username : </label>
+                        <label for="username">Inserisci un nuovo <span lang="en">username</span>: </label>
                         <input type="text" id="username" name="username" maxlength="10" required>
                         <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
                         <legend>Concludi l'inserimento:</legend>
-                        <button type="submit">Modifica Username</button>
+                        <button type="submit">Modifica <span lang="en">Username</span></button>
                         <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
                 </form>
@@ -81,25 +81,25 @@
                     <!--aggiungi pagina php-->
                     {messaggiForm}
                     <fieldset>
-                        <legend>Password :</legend>
-                        <label for="passwordold">  Inserisci la password attuale:</label>
+                        <legend><span lang="en">Password</span>:</legend>
+                        <label for="passwordold">Inserisci la <span lang="en">password</span> attuale:</label>
                         <input type="password" id="passwordold" name="passwordold" required>
                         <!--value={passwordattuale} , con php deve controllare sia la sua password di ora-->
                         <!-- se non è giusta non lascia completare questi sotto : -->
-                        <p>La password deve contenere almeno :
+                        <p>La <span lang="en">password</span> deve contenere almeno:
                             <ul>
                                 <li>un numero</li>
                                 <li>una lettera maiuscola</li>
                                 <li>una lettera minuscola</li>
                             </ul>
                         </p>
-                        <label for="passwordnew">  Inserisci una nuova password:</label>
+                        <label for="passwordnew">Inserisci una nuova <span lang="en">password</span>:</label>
                         <input type="password" id="passwordnew" name="passwordnew" required></br>
-                        <label for="passwordnew1"> Ripeti la stessa password:</label>
+                        <label for="passwordnew1">Ripeti la stessa <span lang="en">password</span>:</label>
                         <input type="password" id="passwordnew1" name="passwordnew1" required>
                         <!--Messaggio di errore se la password è diversa da quella sopra forse value={passwordnew} -->
                         <legend>Concludi l'inserimento:</legend>
-                        <button type="submit">Cambia Password</button>
+                        <button type="submit">Cambia <span lang="en">Password</span></button>
                         <!-- non so se si possa togliere ma non credo abbia senso qua :<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
@@ -110,12 +110,12 @@
                     <!--aggiungi pagina php-->
                     {messaggiForm}
                     <fieldset>
-                        <legend>Mail :</legend>
-                        <label for="email">Nuovo indirizzo Email:</label>
+                        <legend><span lang="en">Email</span>:</legend>
+                        <label for="email">Nuovo indirizzo <span lang="en">email</span>:</label>
                         <input type="email" id="email" name="email" maxlength="30" required>
                         <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
                         <legend>Concludi l'inserimento:</legend>
-                        <button type="submit">Modifica Email</button>
+                        <button type="submit">Modifica <span lang="en">email</span></button>
                         <!--controllo anche da php che sia una mail con controllo di caratteri -->
                         <!--<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
@@ -124,11 +124,11 @@
             </section>
             <!--forse sarebbe meglio 2 pagine a parte per disconnetti ed elimina account -->
             <div id="exitaccount">
-                <h4>Disconnessione dell'account:</h4>
-                <button id="disconnessione">Disconnetti account</button>
+                <h4>Disconnessione dell'<span lang="en">account</span>:</h4>
+                <button id="disconnessione">Disconnetti <span lang="en">account</span></button>
                 <!--mex che se si disconnette dal dispositivo può rientare in qualsiasi momento con username e password e conferma-->
-                <h4>Eliminazione dell'account:</h4>
-                <button id="eliminazione">Elimina account</button>
+                <h4>Eliminazione dell'<span lang="en">account</span>:</h4>
+                <button id="eliminazione">Elimina <span lang="en">account</span></button>
                 <!--emiminare utente db-->
             </div> 
         </main>
