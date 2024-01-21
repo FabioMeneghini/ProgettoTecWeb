@@ -251,6 +251,14 @@ class DBAccess {
             echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
         }
     }
+
+    public function modificaUsername($old, $new) {
+        $query = "UPDATE utenti SET username = '$new' WHERE username = '$old'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la modifica dello username: " . $this -> connection -> error . "</li>";
+        }
+    }
 }
 
 ?>
