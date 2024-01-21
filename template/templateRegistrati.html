@@ -10,11 +10,11 @@
         <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
+        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
         <header>
             <nav aria-label="Aiuti alla navigazione">
-            <a class="navigationHelp" href="#content">Vai al contenuto</a>
+                <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav>
-            <img src="logo" alt="">
             <h1 class="titolo">BookClub</h1>
         </header>
         <nav id="menu">
@@ -28,7 +28,6 @@
                 <dt><a href="templateCerca.html">Cerca</a></dt>
             </dl>
         </nav>
-
         <nav id="breadcrumbs">
             <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a>&gt; &gt; Accedi</p>
         </nav>
@@ -39,7 +38,7 @@
                 {messaggi}
                 <fieldset>
                     <legend>Dati personali:</legend>
-                    <label for="name">Inserisci il tuo nome : </label>
+                    <label for="name">Inserisci il tuo nome : </label><br>
                     <input type="text" id="name" name="name" maxlength="15" required><br>
                     <p>L'username deve contenere 10 caratteri con:
                         <ul>
@@ -48,11 +47,11 @@
                         </ul>
                         <!--controlli con php-->
                     </p>
-                    <label for="titolo">Inserisci uno username : </label>
+                    <label for="titolo">Inserisci uno username : </label><br>
                     <input type="text" id="username" name="username" maxlength="10" required><br>
                     <!--controllo che non sia già in uso-->
                     <!--altri dati come data di nascita , genere, regione-->
-                    <label for="email">Indirizzo Email:</label>
+                    <label for="email">Indirizzo Email:</label><br>
                     <input type="email" id="email" name="email" maxlength="30" required>
                     <!--allargare il rettangolo standard xke minore della lunghezza da mettere-->
                 </fieldset>
@@ -65,9 +64,9 @@
                             <li>una lettera minuscola</li>
                         </ul>
                     </p>
-                    <label for="password">Password:</label>
+                    <label for="password">Password:</label><br>
                     <input type="password" id="password1" name="password1" required></br>
-                    <label for="passwordnew1"> Ripeti la stessa password:</label>
+                    <label for="passwordnew1"> Ripeti la stessa password:</label><br>
                     <input type="password" id="passwordnew1" name="passwordnew1" required>
                 </fieldset>
             </form>
