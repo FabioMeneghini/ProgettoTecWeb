@@ -29,8 +29,9 @@ try {
         else {
             $listaLibri .= '<p id="descr">
                                 La tabella contiene l\'elenco dei tuoi libri da leggere.
-                                Ogni riga descrive un libro con tre colonne: titolo, autore e genere.
-                                È anche presente una quarta colonna che contiene un link che permette di iniziare a leggere il libro.
+                                Ogni riga descrive un libro con tre colonne: "titolo", "autore" e "genere".
+                                È anche presente una quarta colonna che contiene un link che permette di iniziare a leggere il libro,
+                                chiamata "Inizia a leggere".
                             </p>
                             <table aria-describedby="descr">
                             <caption>Lista dei libri salvati</caption>
@@ -45,7 +46,7 @@ try {
                                     <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td>'.$libro["genere"].'</td>
-                                    <td><a href="stai_leggendo.php?id='.$libro["id"].'">Inizia</a></td>
+                                    <td><a href="stai_leggendo.php?id_add='.$libro["id"].'">Inizia</a></td>
                                 </tr>';
             }
             $listaLibri .= "</table>";
