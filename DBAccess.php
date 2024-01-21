@@ -24,7 +24,7 @@ class DBAccess {
     }
 
     public function getListaBestSeller() {
-        $query = "SELECT titolo, autore, genere FROM libri LIMIT 10";
+        $query = "SELECT titolo, autore, genere, trama FROM libri LIMIT 10";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
