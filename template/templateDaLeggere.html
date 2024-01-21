@@ -28,7 +28,7 @@
                 <dt><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></dt>
                 <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
                 <dt>Lista Generi:</dt>
-                <dd>{linkcategorie}</dd> 
+                {listaGeneri}
                 <!--php x menu con categorie link a templategenere-->
                 <dt><a href="templateStatisticheUtente.html">Statistiche</a></dt>
                 <dt><a href="templateAreaPersonale.html">Area Personale</a></dt>
@@ -40,7 +40,7 @@
         </nav>
         <main  id="content">
             <h2>Libri che hai salvato da leggere:</h2>
-            {listaLibriDaLeggere}
+            {listaLibri}
             <!-- link a template scheda libro-->
             <!--dati tabellari ordinati x data + recente string img(? xo da css togliere la lettura della 1 colonna ), titolo , autore , genere
                 oppure img non passata ma sempre img replace con alt x invogliare alla lettura
