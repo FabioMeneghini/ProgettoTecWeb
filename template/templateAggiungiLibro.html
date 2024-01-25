@@ -24,16 +24,16 @@
                 <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
                 <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
                 <dt>Aggiungi un libro</dt>
-                <dt><a href="">Aggiungi Genere</a></dt>
                 <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
-                <dt><a href="">Recensioni</a></dt>
                 <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-                <dt><a href="aggiungi_libro.php">Modifica Libro</a></dt>
+                <dt><a href="modifica_libro.php">Modifica Libro</a></dt>
                 <!--non direttemante da qua o si ? -->
                 <dt>Categorie</dt>
                 {listaGeneri}
+                <dt><a href="area_personale.php">Area Personale</a></dt>
+                <!--vale anche per l'admin può cambiare credenziali -->
                 <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
-                <dt><a href="templateCerca.html">Cerca</a></dt>
+                <dt><a href="tcerca.php">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
@@ -56,15 +56,15 @@
                     </fieldset>
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
-                        <label for="Lingua">Lingua originale : </label>
+                        <label for="Lingua">Lingua originale: </label>
                         <input list="lingua" id="selezionalingua" name="lingua">
                         <datalist id="lingua" name="lingua">
                             {listaLingue}
                             <!--option between todos los idiomas del mundo-->
                         </datalist><br/>
-                        <label for="casa editrice">Casa editrice: </label>
-                        <input type="text" name="editore" id="editore" /><br/>
-                        <label for="durata">Nunero capitoli: </label>
+                        <!-- <label for="casa editrice">Casa editrice: </label>
+                        <input type="text" name="editore" id="editore" /><br/>-->
+                        <label for="durata">Numero capitoli: </label>
                         <input type="number" name="capitoli" id="capitoli" max="1000" required />
                     </fieldset>
                     <fieldset>
