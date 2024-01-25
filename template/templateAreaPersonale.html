@@ -62,15 +62,11 @@
                     <fieldset>
                         <legend><span lang="en">Username</span>:</legend>
                         <ul class="messaggiErrore">{messaggiUsername}</ul>
-                        <p>Lo <span lang="en">username</span> deve contenere al massimo 10 caratteri, includendo almeno:
-                            <ul>
-                                <li>una lettera maiuscola</li>
-                                <li>una lettera minuscola</li>
-                            </ul>
-                            <!--controlli con php sul nome-->
+                        <p>
+                            Lo <span lang="en">username</span> deve contenere tra i 3 e i 10 caratteri:
                         </p>
                         <label for="username">Inserisci un nuovo <span lang="en">username</span>: </label>
-                        <input type="text" id="username" name="username" maxlength="10" required>
+                        <input type="text" id="username" name="username" maxlength="10" minlength="3" required>
                         <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
                         <legend>Concludi l'inserimento:</legend>
                         <button type="submit" id="cambia_username" name="cambia_username">Modifica <span lang="en">Username</span></button>
@@ -80,7 +76,7 @@
             </section>
 
             <section id="sectionModificaPassword">
-                <form method="post" action=".php"> 
+                <form method="post" action="area_personale.php"> 
                     <!--aggiungi pagina php-->
                     <fieldset>
                         <legend><span lang="en">Password</span>:</legend>
@@ -89,7 +85,8 @@
                         <input type="password" id="passwordold" name="passwordold" required>
                         <!--value={passwordattuale} , con php deve controllare sia la sua password di ora-->
                         <!-- se non è giusta non lascia completare questi sotto : -->
-                        <p>La <span lang="en">password</span> deve contenere almeno:
+                        <p>
+                            La <span lang="en">password</span> deve contenere almeno:
                             <ul>
                                 <li>un numero</li>
                                 <li>una lettera maiuscola</li>
@@ -97,12 +94,12 @@
                             </ul>
                         </p>
                         <label for="passwordnew">Inserisci una nuova <span lang="en">password</span>:</label>
-                        <input type="password" id="passwordnew" name="passwordnew" required></br>
+                        <input type="password" id="passwordnew1" name="passwordnew1" required></br>
                         <label for="passwordnew1">Ripeti la stessa <span lang="en">password</span>:</label>
-                        <input type="password" id="passwordnew1" name="passwordnew1" required>
+                        <input type="password" id="passwordnew2" name="passwordnew2" required>
                         <!--Messaggio di errore se la password è diversa da quella sopra forse value={passwordnew} -->
                         <legend>Concludi l'inserimento:</legend>
-                        <button type="submit">Cambia <span lang="en">Password</span></button>
+                        <button type="submit" id="cambia_password" name="cambia_password">Cambia <span lang="en">Password</span></button>
                         <!-- non so se si possa togliere ma non credo abbia senso qua :<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
@@ -110,7 +107,7 @@
             </section>
 
             <section id="sectionModificaEmail">
-                <form method="post" action=".php"> 
+                <form method="post" action="xxx.php"> 
                     <!--aggiungi pagina php-->
                     <fieldset>
                         <legend><span lang="en">Email</span>:</legend>

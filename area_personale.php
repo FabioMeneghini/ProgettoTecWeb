@@ -10,11 +10,37 @@ use DB\DBAccess;
 
 function controllaUsername($username) { //da inserire eventualmente altri controlli su username e password
     $messaggi = "";
+    if($username == $_SESSION["username"]) {
+        $messaggi .= "<li>Lo username è uguale a quello precedente</li>";
+    }
     if($username == "") {
         $messaggi .= "<li>Lo username non può essere vuoto</li>";
     }
-    if(strlen($username) <= 2) {
+    if(strlen($username) < 3) {
         $messaggi .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
+    }
+    else if(strlen($username) > 10) {
+        $messaggi .= "<li>Lo username non può essere più lungo di 10 caratteri</li>";
+    }
+    return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
+}
+
+function controllaPassword($password_old, $password1, $password2) { //da inserire eventualmente altri controlli su username e password
+    $messaggi = "";
+    if($password_old == $password1) {
+        $messaggi .= "<li>La nuova password non può essere uguale a quella vecchia</li>";
+    }
+    else if($password1 == "") {
+        $messaggi .= "<li>La nuova password non può essere vuota</li>";
+    }
+    else if(strlen($password1) < 8) {
+        $messaggi .= "<li>La password deve contenere almeno 8 caratteri</li>";
+    }
+    else {
+        $regexOk=preg_match('/[0-9]/', $password1) && preg_match('/[A-Z]/', $password1) && preg_match('/[a-z]/', $password1);
+        if(!$regexOk) {
+            $messaggi .= "<li>La password deve contenere almeno un numero, una lettera maiuscola e una minuscola</li>";
+        }
     }
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
@@ -31,6 +57,7 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        //username
         if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
             $username = trim($_POST['username']);
             $tmp = controllaUsername($username);
@@ -40,6 +67,26 @@ try {
             }
             else {
                 $messaggiUsername .= $tmp['messaggi'];
+            }
+        }
+
+        //password
+        if(isset($_POST['cambia_password'])) { //se è stato premuto il pulsante per cambiare la password
+            $password_old = trim($_POST['passwordold']);
+            $password_new1 = trim($_POST['passwordnew1']);
+            $password_new2 = trim($_POST['passwordnew2']);
+
+            if($connection -> verificaPassword($_SESSION['username'], $password_old)) { //se la password vecchia è corretta
+                $tmp = controllaPassword($password_old, $password_new1, $password_new2);
+                if($tmp['ok']) {
+                    $connection -> modificaPassword($_SESSION['username'], $password);
+                }
+                else {
+                    $messaggiPassword .= $tmp['messaggi'];
+                }
+            }
+            else {
+                $messaggiPassword .= "<li>La password vecchia non è corretta</li>";
             }
         }
 
