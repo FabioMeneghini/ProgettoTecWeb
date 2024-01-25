@@ -25,7 +25,7 @@ function controllaUsername($username) { //da inserire eventualmente altri contro
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
-function controllaPassword($password_old, $password1, $password2) { //da inserire eventualmente altri controlli su username e password
+function controllaPassword($password_old, $password1, $password2) {
     $messaggi = "";
     if($password_old == $password1) {
         $messaggi .= "<li>La nuova password non può essere uguale a quella vecchia</li>";
@@ -41,6 +41,15 @@ function controllaPassword($password_old, $password1, $password2) { //da inserir
         if(!$regexOk) {
             $messaggi .= "<li>La password deve contenere almeno un numero, una lettera maiuscola e una minuscola</li>";
         }
+    }
+    return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
+}
+
+function controllaEmail($email) {
+    $messaggi = "";
+    $regexOk = preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email); //da testare
+    if(!$regexOk) {
+        $messaggi .= "<li>L'email non è valida</li>";
     }
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
@@ -61,6 +70,7 @@ try {
         if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
             $username = trim($_POST['username']);
             $tmp = controllaUsername($username);
+
             if($tmp['ok']) {
                 $connection -> modificaUsername($_SESSION['username'], $username);
                 $_SESSION['username'] = $username;
@@ -87,6 +97,19 @@ try {
             }
             else {
                 $messaggiPassword .= "<li>La password vecchia non è corretta</li>";
+            }
+        }
+
+        //mail
+        if(isset($_POST['cambia_email'])) {
+            $email = trim($_POST['email']);
+            $tmp = controllaEmail($email);
+            if($tmp['ok']) {
+                $connection -> modificaEmail($_SESSION['username'], $email);
+                $_SESSION['email'] = $email;
+            }
+            else {
+                $messaggiEmail .= $tmp['messaggi'];
             }
         }
 

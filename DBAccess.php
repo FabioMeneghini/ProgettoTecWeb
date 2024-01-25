@@ -268,6 +268,14 @@ class DBAccess {
         }
     }
 
+    public function modificaEmail($username, $new) {
+        $query = "UPDATE utenti SET email = '$new' WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la modifica dell'email: " . $this -> connection -> error . "</li>";
+        }
+    }
+
     public function verificaPassword($username, $password) {
         $query = "SELECT * FROM utenti WHERE username = '$username' AND password = '$password'";
         $queryResult = mysqli_query($this -> connection, $query);
