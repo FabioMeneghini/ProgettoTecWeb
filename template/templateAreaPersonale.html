@@ -5,7 +5,7 @@
         <title>Area Personale - BookClub</title>
         <meta name="keywords" content="area personale, cambia password, disconnetti, cambia nome utente, cambia username">
         <meta name="description" content="Questa pagina è l'area personale degli utenti di BookClub in cui possono cambiare il nome utente, la password, disconnettersi ed eliminare il profilo.">
-        <meta name="author" content="">
+        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
@@ -22,22 +22,23 @@
         <!--manca disconnessione e eliminazione profilo -->
         <nav id="menu">
             <dl>
-                <dt><a href="templateHomeUtente.html"><span lang="en">Home</span></a></dt>
-                <dt><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></dt>
-                <dt><a href="templateTerminati.html">Libri terminati</a></dt>
-                <dt><a href="templateDaLeggere.html">Libri da leggere</a></dt>
-                <dt><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></dt>
+                {menu}<!--se admin un menu se no un altro -->
+                <dt><a href="utente.php"><span lang="en">Home</span></a></dt>
+                <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
+                <dt><a href="terminati.php">Libri terminati</a></dt>
+                <dt><a href="da_leggere.php">Libri da leggere</a></dt>
+                <dt><a href="recensione.php">Aggiungi Recensione</a></dt>
                 <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
                 <dt>Lista Generi:</dt>
                 {listaGeneri}
                 <!--php x menu con categorie link a templategenere-->
-                <dt><a href="templateStatisticheUtente.html">Statistiche</a></dt>
+                <dt><a href="statistiche.php">Statistiche</a></dt>
                 <dt>Area Personale</dt>
-                <dt><a href="templateCerca.html">Cerca</a></dt>
+                <dt><a href="cerca.php">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt; Area Personale</p>
+            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; Area Personale</p>
         </nav>
         <main  id="content">
             <div id="profile">

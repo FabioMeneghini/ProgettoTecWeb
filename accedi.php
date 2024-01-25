@@ -51,7 +51,7 @@ if(isset($_POST['accedi'])) {
                 $resultListaGeneri = $connection -> getListaGeneri();
                 $connection -> closeConnection();
                 foreach($resultListaGeneri as $genere) {
-                    $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
                 }
             } else {
                 $messaggiPerForm .= "<li>Errore di connessione al database</li>";
