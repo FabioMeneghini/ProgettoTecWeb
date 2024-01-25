@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Accedi-BookClub</title>
+        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <meta name="keywords" content="accedi, accesso BookClub,account, login BookClub">
         <meta name="description" content="Questa pagina consente l'accesso all'account nel sito BookClub.">
         <link rel="stylesheet" href="css/style.css" media="screen">
@@ -11,27 +12,26 @@
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
-        <header>
+        <header id="header">
             <nav aria-label="Aiuti alla navigazione">
                 <a class="navigationHelp" href="#content">Vai al contenuto</a>
-            </nav>
-            <h1 class="titolo">BookClub</h1>
+            </nav> 
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
         </header>
         <nav id="menu">
             <dl>
-                <dt><a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a></dt>
+                <dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt>Categorie</dt>
                 {listaGeneri}
-                <!--php x menu con categorie-->
                 <dt>Accedi</dt>
-                <dt><a href="templateRegistrati.html">Registrati</a></dt>
+                <dt><a href="registrati.php">Registrati</a></dt>
                 <dt><a href="templateCerca.html">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs">
             <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a>&gt; &gt; Accedi</p>
         </nav>
-        <main>
+        <main id="content">
             <section id="accediform">
                 <h2>Inserisci i dati per l'accesso:</h2>
                 <form id="loginForm" action="accedi.php" method="post"> 
@@ -52,7 +52,7 @@
             <div> 
                 <p>Non hai ancora un account?</p>
                 <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
-                <a href="templateRegistrati.html">Registrati</a>
+                <a href="tregistrati.php">Registrati</a>
                 <!--css immagine-->
             </div> 
         </main>

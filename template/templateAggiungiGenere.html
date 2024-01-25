@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Aggiungi Genere -BookClub</title>
-        <meta name="keywords" content=""><!--hanno senso le keyword qua?-->
+        <meta name="keywords" content="aggiungi genere, nuovo genere">
         <meta name="description" content="Questa pagina dell'admin è per aggiungere un genere">
-        <meta name="author" content="">
+        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
@@ -20,16 +20,13 @@
         </header>
         <nav id="menu">
             <dl>
-                <!--link di admin-->
-                <dt><a href="templateHomeAdmin.html"><span lang="en">Home</span></a></dt>
-                <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
-                <dt><a href="templateAggiungiLibro.html">Aggiungi un libro</a></dt>
+                <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
+                <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
                 <dt>Aggiungi Genere</dt>
-                <dt><a href="templateTuttiLibri.html">Catalogo libri</a></dt>
+                <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
                 <dt><a href="templatetutteRecensioni.html">Recensioni</a></dt>
-                <dt><a href="templateTuttiUtenti.html">Archivio utenti</a></dt>
-                <dt><a href="templateModificaLibro.html">Modifica Libro</a></dt>
-                <!--non direttemante da qua o si ? -->
+                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
+                <dt><a href="aggiungi_libro.php">Modifica Libro</a></dt>
                 <dt>Categorie</dt>
                 <dd>{linkcategorie}</dd> 
                 <!--mettere php x menu con link alla pagina: <dd>templategenere.html-->
@@ -37,7 +34,7 @@
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Genere</p>
+            <p>Ti trovi in: <a href="admin.php"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Genere</p>
         </nav>
         <main id="content">
             <section id="sectionAggiungiGenere">
