@@ -5,7 +5,7 @@
         <title>Catalogo Libri -BookClub</title>
         <meta name="keywords" content=""><!--hanno senso le keyword qua?-->
         <meta name="description" content="Questa pagina dell'admin è per aggiungere un genere">
-        <meta name="author" content="">
+        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <!--<link rel="stylesheet" href="css/style.css">-->
     </head>
     <body>
@@ -19,22 +19,20 @@
         <nav id="menu">
             <dl>
                 <!--link di admin-->
-                <dt><a href="templateHomeAdmin.html"><span lang="en">Home</span></a></dt>
-                <dt><a href="templateAggiungiLibro.html">Aggiungi un libro</a></dt>
-                <dt><a href="templateAggiungiGenere.html">Aggiungi Genere</a></dt>
+                <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
+                <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
                 <dt>Catalogo Libri</dt>
-                <dt><a href="templatetutteRecensioni.html">Recensioni</a></dt>
-                <dt><a href="templateTuttiUtenti.html">Archivio utenti</a></dt>
-                <dt><a href="templateModificaLibro.html">Modifica Libro</a></dt>
+                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
+                <dt><a href="modifica_libro.php">Modifica Libro</a></dt>
                 <!--non direttemante da qua o si ? -->
                 <dt>Categorie</dt>
                 {listaGeneri} 
                 <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
-                <dt><a href="templateCerca.html">Cerca</a></dt>
+                <dt><a href="cerca.php">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: :<a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; Recensioni</p>
+            <p>Ti trovi in: :<a href="admin.php"><span lang="en">Home</span></a>&gt; &gt; Recensioni</p>
         </nav>
         <main id="content">
             <h2>Tutti i libri:</h2>

@@ -6,7 +6,7 @@
         <meta name="keywords" content="libri da leggere, lista libri, futuri libri">
         <meta name="description" content="Questa pagina è per gli utenti che vogliono salvare dei libri da leggere in futuro creando la loro lista di letture.">
         <!--questa non può essere indicizzata !?-->
-        <meta name="author" content="">
+        <<meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
@@ -21,22 +21,22 @@
         </header>
         <nav id="menu">
             <dl>
-                <dt><a href="templateHomeUtente.html"><span lang="en">Home</span></a></dt>
-                <dt><a href="templateStaiLeggendo.html">Libri che stai leggendo</a></dt>
-                <dt><a href="templateTerminati.html">Libri terminati</a></dt>
+                <dt><a href="utente.php"><span lang="en">Home</span></a></dt>
+                <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
+                <dt><a href="terminati.php">Libri terminati</a></dt>
                 <dt>Libri da leggere</dt>
-                <dt><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></dt>
+                <dt><a href="recensione.php">Aggiungi Recensione</a></dt>
                 <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
                 <dt>Lista Generi:</dt>
                 {listaGeneri}
                 <!--php x menu con categorie link a templategenere-->
-                <dt><a href="templateStatisticheUtente.html">Statistiche</a></dt>
-                <dt><a href="templateAreaPersonale.html">Area Personale</a></dt>
-                <dt><a href="templateCerca.html">Cerca</a></dt>
+                <dt><a href="statistiche.php">Statistiche</a></dt>
+                <dt><a href="area_personale.php">Area Personale</a></dt>
+                <dt><a href="cerca.php">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a>&gt; &gt;Libri Terminati</p>
+            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt;Libri Terminati</p>
         </nav>
         <main  id="content">
             <h2>Libri che hai salvato da leggere:</h2>
