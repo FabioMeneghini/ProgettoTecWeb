@@ -287,6 +287,14 @@ class DBAccess {
             return false;
         }
     }
+
+    public function eliminaUtente($username) {
+        $query = "DELETE FROM utenti WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la cancellazione dell'utente: " . $this -> connection -> error . "</li>";
+        }
+    }
 }
 
 ?>

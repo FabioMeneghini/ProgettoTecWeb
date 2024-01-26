@@ -119,6 +119,19 @@ try {
             }
         }
 
+        //disconnetti
+        if(isset($_POST['disconnetti'])) {
+            session_destroy();
+            header("Location: index.php");
+        }
+
+        //elimina
+        if(isset($_POST['elimina'])) {
+            $connection -> eliminaUtente($_SESSION['username']);
+            session_destroy();
+            header("Location: index.php");
+        }
+
         $resultGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
