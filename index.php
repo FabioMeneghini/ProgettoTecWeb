@@ -23,7 +23,7 @@ try {
     if($connectionOk) {
         $resultListaBestSeller = $connection -> getListaBestSeller();
         $resultListaGeneri = $connection -> getListaGeneri();
-        $risultatiLibri = $connection ->getListaLibriGenere($genere);
+        //$risultatiLibri = $connection ->getListaLibriGenere($genere);
         $connection -> closeConnection();
         foreach($resultListaBestSeller as $libro) {
             $titolo=$libro["titolo"];

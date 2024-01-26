@@ -31,20 +31,29 @@
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; {genereLibro} &gt; &gt; {TitoloLibro}</p>
         </nav>
         <main id="content">
-            <img src="copertina" alt=""> <!--immagine con alt specifico-->
-            <h2>{Titolo Libro}</h2>
-            <h3>Autore :{AutoreLibro}</h3>
-            <h3>Genere :{AutoreLibro}</h3>
-            <h3>Lingua :{AutoreLibro}</h3>
-            <h3>Numero capitoli :{AutoreLibro}</h3>
-            <h3>Casa editrice :{AutoreLibro}</h3>
-            <h3>Trama :{AutoreLibro}</h3>
-            <h3>La tua Recensione:</h3>
-            {recensione}
-            <!--se non è un utente registrato mettere accedi 
-                se ha un account allora mettere la sua recensione 
-                se no mettere il link all'accesso -->
-            <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+            <!--titoli centrati grandi -->
+            <div id="arealibro">
+                <img src="copertina" alt=""> <!--immagine con alt specifico-->
+                <h2>{Titolo Libro}</h2>
+                <h3>Autore :{AutoreLibro}</h3>
+                <h3>Genere :{AutoreLibro}</h3>
+                <h3>Lingua :{AutoreLibro}</h3>
+                <h3>Numero capitoli :{AutoreLibro}</h3>
+                <h3>Casa editrice :{AutoreLibro}</h3>
+                <ul>
+                    <dd>Vai alla trama </dd>
+                    <dd>Vai alla tua recensione </dd>
+                    <dd>Vai alle recensioni della <span lang="en">community</span> </dd>
+                </ul>
+                <h3>Trama :{AutoreLibro}</h3>
+                <h3>La tua Recensione:</h3>
+                {recensione}
+                <!--se non è un utente registrato mettere accedi 
+                    se ha un account allora mettere la sua recensione 
+                    se no mettere il link all'accesso -->
+                <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+            </div>
+            
         </main>
         <footer id="footer">
             <ul>
