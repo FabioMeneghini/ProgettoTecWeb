@@ -17,7 +17,7 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
     <dt>Area Personale</dt>
-    <dt><a href="cerca.php">Cerca</a></dt>'
+    <dt><a href="cerca.php">Cerca</a></dt>';
 
 //admin
 $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
@@ -28,14 +28,14 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt>Categorie</dt>
     {listaGeneri}
     <dt>Area Personale</dt>
-    <dt><a href="tcerca.php">Cerca</a></dt>'
+    <dt><a href="tcerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt>Categorie</dt>
                 {listaGeneri}
                 <dt><a href="accedi.php">Accedi</a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>'
+                <dt><a href="cerca.php">Cerca</a></dt>';
 
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {

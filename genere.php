@@ -5,7 +5,7 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-$paginaHTML = file_get_contents("template/templateGenere.html.html");
+$paginaHTML = file_get_contents("template/templateGenere.html");
 $menu ="";
 //utenti
 $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
@@ -17,7 +17,7 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
     <dt>Area Personale</dt>
-    <dt><a href="cerca.php">Cerca</a></dt>'
+    <dt><a href="cerca.php">Cerca</a></dt>';
 
 //admin
 $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
@@ -28,14 +28,14 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt>Categorie</dt>
     {listaGeneri}
     <dt>Area Personale</dt>
-    <dt><a href="tcerca.php">Cerca</a></dt>'
+    <dt><a href="tcerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt>Categorie</dt>
                 {listaGeneri}
                 <dt><a href="accedi.php">Accedi</a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>'
+                <dt><a href="cerca.php">Cerca</a></dt>';
 
 
 if(isset($_SESSION['admin'])) {
@@ -62,7 +62,7 @@ if(isset($_GET['genere'])) {
             $connection -> closeConnection();
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
                 if($_GET["genere"]==$genere["genere"])
-                $listaGeneri .=.$genere["genere"]. ;//okz???
+                $listaGeneri .=$genere["genere"];
                 else
                     $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
             }
