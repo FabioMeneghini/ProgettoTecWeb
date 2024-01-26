@@ -1,13 +1,11 @@
 <?php
 
 include "config.php";
-
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-$paginaHTML = file_get_contents("template/templateGenere.html");
+$paginaHTML = file_get_contents("template/templatecerca.html");
 $menu ="";
-$genereSelezionato="";
 //utenti
 $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
@@ -38,7 +36,6 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>';
 
-
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         $menu = $adminMenu;
@@ -50,47 +47,27 @@ if(isset($_SESSION['admin'])) {
 
     }
 }
-
 $listaGeneri = "";
-if(isset($_GET['genere'])) {
-    $genereSelezionato = $_GET['genere'];
-    try {
-        $connection = new DBAccess();
-        $connectionOk = $connection -> openDBConnection();
-        if($connectionOk) {
-            $resultGeneri = $connection -> getListaGeneri();
-            $risultatiLibri = $connection ->getListaLibriGenere($genere);
-            $resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
-            $connection -> closeConnection();
-            foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-                if($_GET["genere"]==$genere["genere"])
-                $listaGeneri .=$genere["genere"];
-                else
-                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
-            }
-            //DONE
-            if(!empty($resultKeyword)) {
-                foreach($resultKeyword as $keyword) {
-                    $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
-                }
-            } else {
-                $listaKeyword = "Miglior genere";
-            }
-        } 
 
-        else {
-            echo "Connessione fallita";
+try {
+    $connection = new DBAccess();
+    $connectionOk = $connection -> openDBConnection();
+    if($connectionOk) {
+        $resultGeneri = $connection -> getListaGeneri();
+        foreach($resultGeneri as $genere) {
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
+        $connection -> closeConnection();
     }
-    catch(Throwable $e) {
-        echo "Errore: ".$e -> getMessage();
+    else {
+        echo "Connessione fallita";
     }
 }
-$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
+catch(Throwable $e) {
+    echo "Errore: ".$e -> getMessage();
+}
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
-$paginaHTML = str_replace("{libriGenere}", $risultatiLibri, $paginaHTML);
-$paginaHTML = str_replace("{NomeGenere}", $genereSelezionato, $paginaHTML);
 echo $paginaHTML;
 
 ?>

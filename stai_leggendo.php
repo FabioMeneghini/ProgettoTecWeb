@@ -28,7 +28,7 @@ try {
         $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
         if(empty($lista)) {
             $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati

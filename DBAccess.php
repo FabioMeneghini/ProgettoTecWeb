@@ -112,7 +112,51 @@ class DBAccess {
             return null;
         }
     }
+    //DONE ma genere deve avere una tabella? 
+    /*public function getKeywordByGenere($genereSelezionato) {
+        $query = "SELECT keyword FROM genere WHERE genere = '$genereSelezionato'";
+        $queryResult = mysqli_query($this->connection, $query);
+    
+        if ($queryResult) {
+            if (mysqli_num_rows($queryResult) != 0) {
+                $result = array();
+                while ($row = mysqli_fetch_assoc($queryResult)) {
+                    $result[] = $row['keyword'];
+                }
+                mysqli_free_result($queryResult);
+                return $result;
+            } else {
+                return null;
+            }
+        } else {
+            //se è nulla? 
+            ;
+        }
+    }
 
+    // 
+    public function getKeywordLibro($LibroSelezionato) {
+        $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this->connection, $query);
+    
+        if ($queryResult) {
+            if (mysqli_num_rows($queryResult) != 0) {
+                $result = array();
+                while ($row = mysqli_fetch_assoc($queryResult)) {
+                    $result[] = $row['keyword'];
+                }
+                mysqli_free_result($queryResult);
+                return $result;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+*/
+    
+    
     public function getUtentiRegistratiCount() {
         $query = "SELECT COUNT(*) AS numeroUtenti FROM utenti";
         $queryResult = mysqli_query($this -> connection, $query);
@@ -126,8 +170,8 @@ class DBAccess {
         }
     }
 
-    public function getRecensioniCount() {
-        $query = "SELECT COUNT(*) AS numeroRecensioni FROM recensioni";
+    public function getRecensioniUtente($username) {
+        $query = "SELECT COUNT(*) AS numeroRecensioni FROM recensioni WHERE username_autore = '$username' ";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $row = mysqli_fetch_assoc($queryResult);
@@ -135,6 +179,31 @@ class DBAccess {
             return $row['numeroRecensioni'];
         }
         else {
+            return null;
+        }
+    }
+
+
+    public function getRecensioniCount() {
+        $query = "SELECT COUNT(*) AS numeroRecensioni FROM recensioni";
+        $queryResult = mysqli_query($this->connection, $query);
+        if (mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            mysqli_free_result($queryResult);
+            return $row['numeroRecensioni'];
+        } else {
+            return null;
+        }
+    }
+
+    public function getLibriUtente($username) {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto WHERE username = '$username' ";
+        $queryResult = mysqli_query($this->connection, $query);
+        if (mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            mysqli_free_result($queryResult);
+            return $row['numeroLibri'];
+        } else {
             return null;
         }
     }
@@ -285,6 +354,14 @@ class DBAccess {
         }
         else {
             return false;
+        }
+    }
+
+    public function eliminaUtente($username) {
+        $query = "DELETE FROM utenti WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la cancellazione dell'utente: " . $this -> connection -> error . "</li>";
         }
     }
 }

@@ -21,7 +21,7 @@ try {
         $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
         if(empty($lista)) {
             $listaLibri = "Non hai terminato nessun libro."; //aggiungere link alla pagina di ricerca?
@@ -58,6 +58,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 
 ?>

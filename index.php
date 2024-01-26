@@ -23,6 +23,7 @@ try {
     if($connectionOk) {
         $resultListaBestSeller = $connection -> getListaBestSeller();
         $resultListaGeneri = $connection -> getListaGeneri();
+        //$risultatiLibri = $connection ->getListaLibriGenere($genere);
         $connection -> closeConnection();
         foreach($resultListaBestSeller as $libro) {
             $titolo=$libro["titolo"];
@@ -44,7 +45,7 @@ try {
                                 </li>';
         }
         foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
     }
     else {
@@ -56,6 +57,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);
+$paginaHTML = str_replace("{libriGenere}", $risultatiLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 

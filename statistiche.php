@@ -1,6 +1,7 @@
 <?php
 
 include "config.php";
+
 require_once "DBAccess.php";
 use DB\DBAccess;
 
@@ -13,19 +14,22 @@ else {
     header("Location: index.php");
 }*/
 
-$paginaHTML = file_get_contents("template/templateTuttiLibri.html");
-
+$paginaHTML = file_get_contents("template/templateStatisticheUtente.html");
 $listaGeneri = "";
 
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
+    
     if($connectionOk) {
-        $resultGeneri = $connection -> getListaGeneri();
-        $connection -> closeConnection();
-        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+        $n_recensioni= $connection -> getRecensioniUtente($_SESSION['username']);
+        $n_libri= $connection ->  getLibriUtente($_SESSION['username']);
+        $resultListaGeneri = $connection -> getListaGeneri();
+
+        foreach($resultListaGeneri as $genere) {
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
+        $connection -> closeConnection();
     }
     else {
         echo "Connessione fallita";
@@ -34,7 +38,9 @@ try {
 catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
-
+$paginaHTML = str_replace("{listaLibri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{NumeroRecensioni}", $n_recensioni, $paginaHTML);
+$paginaHTML = str_replace("{LibriLetti}", $n_libri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 

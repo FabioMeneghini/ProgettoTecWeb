@@ -7,8 +7,11 @@
     --flagColor: #008280;
     --background: white;
     --textColor: black;
-    --linkColor: #fffdd6; /*660030*/
-    --visitedLinkColor: #fffdd6;
+    --linkMenuColor: #fffdd6; 
+    --visitedLinkMenuColor: black;
+    --linkColor:#0B2114 ;
+    --LinkVisitedColor:#947425;
+
 }
 
 a:link{
