@@ -42,30 +42,43 @@ if(isset($_SESSION['admin'])) {
         $menu = $adminMenu;
     } else {
         if(isset($_SESSION['username']))
-            $menu =$userMenu;
+            $menu = $userMenu;
         else
-            $menu =$NonRegistrato;
-
+            $menu = $NonRegistrato;
     }
 }
 
 $listaGeneri = "";
+$listaKeyword = "";
+$titolo = "";
+$autore = "";
+$genere = "";
+$lingua = "";
+$trama = "";
+$n_capitoli = "";
+$tua_recensione = "";
+$media_voti = "";
+$altre_recensioni = "";
+
 
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $resultGeneri = $connection -> getListaGeneri();
-        $resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
+        //$resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
+        $resultInfo
         $connection -> closeConnection();
+        
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
 
         if(!empty($resultKeyword)) {
-            foreach($resultKeyword as $keyword) {
-                $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
+            for ($i=0; $i<count($resultKeyword)-1; $i++) {
+                $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
             }
+            $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
         } else {
             $listaKeyword = "Miglior libro";
         }
