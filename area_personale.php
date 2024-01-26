@@ -6,7 +6,37 @@ use DB\DBAccess;
 
 /*if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
-}*/
+}if($_SESSION['admin'] != 1) {
+        header("Location: utente.php");
+    }
+*/
+$isAdmin = true; 
+if($_SESSION['admin'] != 1) 
+    $isAdmin = false;
+//utenti
+$userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
+    <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
+    <dt><a href="terminati.php">Libri terminati</a></dt>
+    <dt><a href="da_leggere.php">Libri da leggere</a></dt>
+    <dt><a href="recensione.php">Aggiungi Recensione</a></dt>
+    <dt>Lista Generi:</dt>
+    {listaGeneri}
+    <dt><a href="statistiche.php">Statistiche</a></dt>
+    <dt>Area Personale</dt>
+    <dt><a href="cerca.php">Cerca</a></dt>'
+
+//admin
+$adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
+    <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
+    <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
+    <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
+    <dt><a href="modifica_libro.php">Modifica Libro</a></dt>
+    <dt>Categorie</dt>
+    {listaGeneri}
+    <dt>Area Personale</dt>
+    <dt><a href="tcerca.php">Cerca</a></dt>'
+
+$menu = $isAdmin ? $adminMenu : $userMenu;
 
 function controllaUsername($username) { //da inserire eventualmente altri controlli su username e password
     $messaggi = "";
@@ -122,7 +152,7 @@ try {
         $resultGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
     }
     else {
@@ -133,6 +163,7 @@ catch(Throwable $e) {
     $messaggi.="<li>Errore: ".$e -> getMessage()."</li>";
 }
 
+$paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{nome}", $_SESSION["nome"], $paginaHTML);
 $paginaHTML = str_replace("{usernameattuale}", $_SESSION["username"], $paginaHTML);
@@ -144,6 +175,8 @@ $paginaHTML = str_replace("{messaggiPassword}", $messaggiPassword, $paginaHTML);
 $paginaHTML = str_replace("{successoUsername}", $successoUsername, $paginaHTML);
 $paginaHTML = str_replace("{successoEmail}", $successoEmail, $paginaHTML);
 $paginaHTML = str_replace("{successoPassword}", $successoPassword, $paginaHTML);
+
+
 
 echo $paginaHTML;
 

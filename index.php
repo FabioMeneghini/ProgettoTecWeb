@@ -44,7 +44,7 @@ try {
                                 </li>';
         }
         foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
     }
     else {
