@@ -31,6 +31,55 @@ function controllaInput($username, $password) { //da inserire eventualmente altr
 $messaggiPerForm = "";
 $listaGeneri = "";
 
+try {
+    $connection = new DBAccess();
+    $connectionOk = $connection -> openDBConnection();
+    if($connectionOk) {
+        //username
+        if(isset($_POST['accedi'])) {
+            $username = trim($_POST['username']);
+            //$password = md5($_POST['password']); //calcola l'hash md5 della password
+            $password = $_POST['password'];
+        
+            $tmp = controllaInput($username, $password);
+            $ok = $tmp['ok'];
+            $messaggiPerForm .= $tmp['messaggi'];
+            if($ok) {
+                $user = $connection -> login($username, $password);
+                if($user!=null) {
+                    $_SESSION['username'] = $user['username']; //salva lo username in una variabile di sessione
+                    $_SESSION['nome'] = $user['nome'];
+                    $_SESSION['cognome'] = $user['cognome'];
+                    $_SESSION['email'] = $user['email'];
+                    if($user['admin']==1) {
+                        $_SESSION['admin'] = true;
+                        header("Location: admin.php");
+                    }
+                    else {
+                        $_SESSION['admin'] = false;
+                        header("Location: utente.php");
+                    }
+                } else {
+                    $messaggiPerForm .= "<li>Credenziali errate. Riprova.</li>";
+                }
+            }
+        }
+        $resultListaGeneri = $connection -> getListaGeneri();
+        $connection -> closeConnection();
+        foreach($resultListaGeneri as $genere) {
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+        }
+    } else {
+        $messaggiPerForm .= "<li>Errore di connessione al database</li>";
+    }
+}
+catch(Throwable $e) {
+    $messaggiPerForm .= "<li>Errore: ".$e -> getMessage()."</li>";
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
 $ok = true;
 if(isset($_POST['accedi'])) {
     $username = trim($_POST['username']);
@@ -51,7 +100,8 @@ if(isset($_POST['accedi'])) {
                 $resultListaGeneri = $connection -> getListaGeneri();
                 $connection -> closeConnection();
                 foreach($resultListaGeneri as $genere) {
-                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+                    //$listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+                    $listaGeneri .= "<dd>PROVA</dd>";
                 }
             } else {
                 $messaggiPerForm .= "<li>Errore di connessione al database</li>";
@@ -79,6 +129,7 @@ if(isset($_POST['accedi'])) {
         }
     }
 }
+*/
 
 $paginaHTML = str_replace("{messaggi}", $messaggiPerForm, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
