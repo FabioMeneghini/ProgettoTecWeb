@@ -5,7 +5,7 @@
         <title>AdminHome - BookClub</title>
         <meta name="keywords" content="libri ,migliori, generi, bestseller">
         <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
-        <meta name="author" content="">
+        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
@@ -23,18 +23,16 @@
                 <!--link di admin-->
                 <dt><span lang="en">Home</span></dt>
                 <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
-                <dt><a href="templateAggiungiLibro.html">Aggiungi un libro</a></dt>
-                <dt><a href="templateAggiungiGenere.html">Aggiungi Genere</a></dt>
-                <dt><a href="templateTuttiLibri.html">Catalogo libri</a></dt>
-                <dt><a href="templatetutteRecensioni.html">Recensioni</a></dt>
-                <dt><a href="templateTuttiUtenti.html">Archivio utenti</a></dt>
-                <dt><a href="templateModificaLibro.html">Modifica Libro</a></dt>                <!--rimuovi da dove ci arriva? che pagine sono?
+                <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
+                <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
+                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
+                <dt><a href="modifica_libro.php">Modifica Libro</a></dt>                <!--rimuovi da dove ci arriva? che pagine sono?
                 forse è visualizza tutti i libri e visualizza tutti i generi? 
                 da dentro il libro gestisce le recensioni ecc-->
                 <dt>Categorie</dt>
-                <dd>{linkcategorie}</dd> 
+                {listaGeneri}
                 <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
-                <dt><a href="templateCerca.html">Cerca</a></dt>
+                <dt><a href="cerca.php">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">

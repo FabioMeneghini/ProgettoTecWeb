@@ -5,7 +5,7 @@
         <title>Aggiungi Libro -BookClub</title>
         <meta name="keywords" content="nuovi libri, inserimento">
         <meta name="description" content="Questa pagina dell'admin è per inserire nuovi libri.">
-        <meta name="author" content="">
+        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
@@ -21,29 +21,28 @@
         <nav id="menu">
             <dl>
                 <!--link di admin-->
-                <dt><a href="templateHomeAdmin.html"><span lang="en">Home</span></a></dt>
+                <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
                 <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
                 <dt>Aggiungi un libro</dt>
-                <dt><a href="templateAggiungiGenere.html">Aggiungi Genere</a></dt>
-                <dt><a href="templateTuttiLibri.html">Catalogo libri</a></dt>
-                <dt><a href="templatetutteRecensioni.html">Recensioni</a></dt>
-                <dt><a href="templateTuttiUtenti.html">Archivio utenti</a></dt>
-                <dt><a href="templateModificaLibro.html">Modifica Libro</a></dt>
+                <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
+                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
+                <dt><a href="modifica_libro.php">Modifica Libro</a></dt>
                 <!--non direttemante da qua o si ? -->
                 <dt>Categorie</dt>
-                <dd>{linkcategorie}</dd> 
+                {listaGeneri}
+                <dt><a href="area_personale.php">Area Personale</a></dt>
+                <!--vale anche per l'admin può cambiare credenziali -->
                 <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
-                <dt><a href="templateCerca.html">Cerca</a></dt>
+                <dt><a href="tcerca.php">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: :<a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Libro</p>
+            <p>Ti trovi in: :<a href="admin.php"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Libro</p>
         </nav>
         <main id="content">
-            <!--su tutti i field mettere lunghezza massima -->
             <section id="sectionAggiungiLibro">
                 <h2>Inserisci una nuovo Libro</h2>
-                <form method="post" action="aggiungiLibroAdmin.php"> 
+                <form method="post" action="aggiungi_libro.php"> 
                     {messaggiForm}
                     <fieldset>
                         <legend>Informazioni genere: </legend>
@@ -57,15 +56,15 @@
                     </fieldset>
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
-                        <label for="Lingua">Lingua originale : </label>
+                        <label for="Lingua">Lingua originale: </label>
                         <input list="lingua" id="selezionalingua" name="lingua">
                         <datalist id="lingua" name="lingua">
                             {listaLingue}
                             <!--option between todos los idiomas del mundo-->
                         </datalist><br/>
-                        <label for="casa editrice">Casa editrice: </label>
-                        <input type="text" name="editore" id="editore" /><br/>
-                        <label for="durata">Nunero capitoli: </label>
+                        <!-- <label for="casa editrice">Casa editrice: </label>
+                        <input type="text" name="editore" id="editore" /><br/>-->
+                        <label for="durata">Numero capitoli: </label>
                         <input type="number" name="capitoli" id="capitoli" max="1000" required />
                     </fieldset>
                     <fieldset>

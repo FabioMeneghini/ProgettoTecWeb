@@ -15,15 +15,36 @@ use DB\DBAccess;
 $paginaHTML = file_get_contents("template/templateHomeNonRegistrato.html");
 
 $listaBestSeller = "";
+$listaGeneri = "";
 
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $resultListaBestSeller = $connection -> getListaBestSeller();
+        $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultListaBestSeller as $libro) {
-            $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
+            $titolo=$libro["titolo"];
+            $titolo=strtolower($titolo);
+            $titolo=str_replace(' ', '_',$titolo);
+            $titolo=str_replace('\'', '',$titolo);
+            if (ctype_digit($titolo)) {
+                $titolo = '_'.$titolo;
+            }
+           // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
+           $listaBestSeller .='<li>
+                                <figure>
+                                    <img src="copertine_libri/'.$titolo.'.jpg">
+                                    <div class="dati">
+                                    <div>'.$libro["autore"].' - '.$libro["titolo"].'</div>
+                                    <div>'.$libro["trama"].'</div>
+                                    </div>
+                                </figure>
+                                </li>';
+        }
+        foreach($resultListaGeneri as $genere) {
+            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
         }
     }
     else {
@@ -35,6 +56,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 
 ?>

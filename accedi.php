@@ -29,6 +29,7 @@ function controllaInput($username, $password) { //da inserire eventualmente altr
 }
 
 $messaggiPerForm = "";
+$listaGeneri = "";
 
 $ok = true;
 if(isset($_POST['accedi'])) {
@@ -47,7 +48,11 @@ if(isset($_POST['accedi'])) {
 
             if($connectionOk) {
                 $user = $connection -> login($username, $password);
+                $resultListaGeneri = $connection -> getListaGeneri();
                 $connection -> closeConnection();
+                foreach($resultListaGeneri as $genere) {
+                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+                }
             } else {
                 $messaggiPerForm .= "<li>Errore di connessione al database</li>";
             }
@@ -76,5 +81,6 @@ if(isset($_POST['accedi'])) {
 }
 
 $paginaHTML = str_replace("{messaggi}", $messaggiPerForm, $paginaHTML);
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 ?>

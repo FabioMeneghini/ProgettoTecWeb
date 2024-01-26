@@ -5,7 +5,7 @@
         <title>Cerca - BookClub</title>
         <meta name="keywords" content="cerca nuovi libri, esplora libri, cerca generi, cerca autori ">
         <meta name="description" content="Questa pagina è dedicata alla ricerca nel sito di libri specifici o per l'esplorazione di generi e autori.">
-        <meta name="author" content="">
+        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <!--<link rel="stylesheet" href="css/style.css">-->
     </head>
     <body>
@@ -17,16 +17,15 @@
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
         </header>
         <nav id="menu">
-            <!--il menù dipende dall'account in cui sono !! se sono admin le suo voci, se sono utente normale le mie voci o se sono non registrato -->
+            {menu}
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <!--la home a cui devo tornare è dinamica PHP-->
-            <p>Ti trovi in: :<a href="{cercaHome}"><span lang="en">Home</span></a>&gt; &gt; Cerca </p>
+            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a>&gt; &gt; Cerca </p>
         </nav>
         <main id="content">
             <section id="cerca">
                 <h2>Cerca un libro:</h2>
-                <form method="post" action="PHP"> 
+                <form method="post" action="cerca.php"> 
                     <!--aggiungi pagina php-->
                     {messaggiForm}
                     <fieldset>

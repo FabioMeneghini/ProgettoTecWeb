@@ -24,7 +24,7 @@ class DBAccess {
     }
 
     public function getListaBestSeller() {
-        $query = "SELECT titolo, autore, genere FROM libri LIMIT 10";
+        $query = "SELECT titolo, autore, genere, trama FROM libri LIMIT 10";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -172,7 +172,10 @@ class DBAccess {
     }
 
     public function getListaSalvati($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.genere FROM libri, da_leggere WHERE da_leggere.username = '$username' AND da_leggere.id_libro = libri.id";
+        $query = "SELECT libri.id, libri.titolo, libri.autore, libri.genere
+                  FROM libri, da_leggere
+                  WHERE da_leggere.username = '$username'
+                  AND da_leggere.id_libro = libri.id";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -211,6 +214,77 @@ class DBAccess {
         }
         else {
             return null;
+        }
+    }
+
+    public function staLeggendo($username, $id_libro) {
+        $query = "SELECT * FROM sta_leggendo WHERE username = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function aggiungiStaLeggendo($username, $id_libro) {
+        $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("si", $username, $id_libro);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+            }
+            $stmt->close();
+        }
+    }
+
+    public function rimuoviDaLeggere($username, $id_libro) {
+        $query = "DELETE FROM da_leggere WHERE username = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
+        }
+    }
+
+    public function modificaUsername($old, $new) {
+        $query = "UPDATE utenti SET username = '$new' WHERE username = '$old'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la modifica dello username: " . $this -> connection -> error . "</li>";
+        }
+    }
+
+    public function modificaPassword($username, $new) {
+        $query = "UPDATE utenti SET password = '$new' WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la modifica della password: " . $this -> connection -> error . "</li>";
+        }
+    }
+
+    public function modificaEmail($username, $new) {
+        $query = "UPDATE utenti SET email = '$new' WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la modifica dell'email: " . $this -> connection -> error . "</li>";
+        }
+    }
+
+    public function verificaPassword($username, $password) {
+        $query = "SELECT * FROM utenti WHERE username = '$username' AND password = '$password'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

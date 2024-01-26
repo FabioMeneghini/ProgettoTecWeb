@@ -6,7 +6,7 @@
         <meta name="keywords" content="libri da leggere,libri in corso, libri che stai leggendo,avanzamento capitoli">
         <meta name="description" content="Questa pagina è per tenere traccia dei libri che stai leggendo e il loro avanzamento nei capitoli.">
         <!--questa non può essere indicizzata !?-->
-        <meta name="author" content="">
+        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
@@ -21,18 +21,18 @@
         </header>
         <nav id="menu">
             <dl>
-                <dt><a href="templateHomeUtente.html"><span lang="en">Home</span></a></dt>
+                <dt><a href="utente.php"><span lang="en">Home</span></a></dt>
                 <dt>Libri che stai leggendo</dt>
-                <dt><a href="templateTerminati.html">Libri terminati</a></dt>
-                <dt>Libri da leggere</dt>
-                <dt><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a></dt>
+                <dt><a href="terminati.php">Libri terminati</a></dt>
+                <dt><a href="da_leggere.php">Libri da leggere</a></dt>
+                <dt><a href="recensione.php">Aggiungi Recensione</a></dt>
                 <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
                 <dt>Lista Generi:</dt>
-                <dd>{linkcategorie}</dd> 
+                {listaGeneri}
                 <!--php x menu con categorie link a templategenere-->
-                <dt><a href="templateStatisticheUtente.html">Statistiche</a></dt>
-                <dt><a href="templateAreaPersonale.html">Area Personale</a></dt>
-                <dt><a href="templateCerca.html">Cerca</a></dt>
+                <dt><a href="statistiche.php">Statistiche</a></dt>
+                <dt><a href="area_personale.php">Area Personale</a></dt>
+                <dt><a href="cerca.php">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">

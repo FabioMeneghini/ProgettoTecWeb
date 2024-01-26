@@ -22,30 +22,28 @@
         <nav id="menu">
             <dl>
                 <!--link di admin-->
-                <dt><a href="templateHomeAdmin.html"><span lang="en">Home</span></a></dt>
+                <dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
-                <dt><a href="templateAggiungiLibro.html">Aggiungi un libro</a></dt>
-                <dt><a href="templateAggiungiGenere.html">Aggiungi Genere</a></dt>
-                <dt><a href="templateTuttiLibri.html">Catalogo Libri</a></dt>
-                <dt><a href="templatetutteRecensioni.html">Recensioni</a></dt>
-                <dt><a href="templateTuttiUtenti.html">Archivio utenti</a></dt>
+                <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
+                <dt><a href="tutti_libri.php">Catalogo Libri</a></dt>
+                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
                 <dt>Modifica Libro</dt>
                 <!--non direttemante da qua o si ? -->
                 <dt>Categorie</dt>
-                <dd>{linkcategorie}</dd> 
+                {listaGeneri}
                 <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
-                <dt><a href="templateCerca.html">Cerca</a></dt>
+                <dt><a href="cerca.php">Cerca</a></dt>
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <!--come ricordarsi da dove è entrato? dalla home , da letti , da leggere o da eliminati? o da generi?-->
-            <p>Ti trovi in: <a href="templateHomeAdmin.html"><span lang="en">Home</span></a>&gt; &gt; {TitoloLibro}</p>
+            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a>&gt; &gt; {TitoloLibro}</p>
         </nav>
         <main id="content">
             <img> <!--immagine con alt specifico-->
             <section id="modificaLibro">
                 <h2>Inserisci i nuovi dati del libro</h2>
-                <form method="post" action="php"> 
+                <form method="post" action="modifica_libro.php"> 
                     {messaggiForm}
                     <fieldset>
                         <legend>Informazioni genere: </legend>
