@@ -21,9 +21,13 @@
         <!--deve poter modificare nome e passsword e dati-->
         <!--manca disconnessione e eliminazione profilo -->
         <nav id="menu">
-            <dl>
+            <label for="hamburger" tabindex="0">
+                <img src="menu.png">
+            </label>
+            <input id="hamburger" type="checkbox">
+            <ul>
                 {menu}
-            </dl>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; Area Personale</p>

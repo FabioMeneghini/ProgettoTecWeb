@@ -20,10 +20,24 @@ h1{
 }
 
 #menu{
-    width: 100%;
-    text-align: center;
     font-size: 1.2em;
-    padding: 0.5em 0em;
+}
+
+input[type="checkbox"]:not(:checked) + ul, input[type="checkbox"]:not(:checked) + dl{
+    display: none;
+}
+
+#menu label{
+    text-align: left;
+    display: block;
+}
+
+#menu label img{
+    width: 10%;
+}
+
+#menu ul li:first-child, #menu dl dt:first-child{
+    padding-top: 1em;
 }
 
 #breadcrumbs{
@@ -61,4 +75,8 @@ footer{
 footer ul li{
     display: inline-block;
     padding: 0em 1em;
+}
+
+.slider{
+    display: none;
 }

@@ -81,12 +81,25 @@ body{
     height: 100vh;
 }
 
+/* MENU */
+
 #menu{
     grid-area: m;
-    /*width:5em;*/
     padding: 1em;
     background-color: var(--flagColor);
     color: var(--textColor);
+}
+
+#menu input[type="checkbox"], #menu label{
+    display: none;
+}
+
+#menu li, #menu dt{
+    padding: 0.2em 0em;
+}
+
+#menu dd{
+    padding: 0.2em 1em;
 }
 
 main{
