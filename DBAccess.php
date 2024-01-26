@@ -97,8 +97,8 @@ class DBAccess {
         }
     }
 
-    public function getListaLibriGenere($genere) {
-        $query = "SELECT titolo, autore FROM libri WHERE genere = '$genere'";
+    public function getListaLibriGenere($genere, $n=1000) {
+        $query = "SELECT titolo, autore FROM libri WHERE genere = '$genere' LIMIT $n";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -112,50 +112,37 @@ class DBAccess {
             return null;
         }
     }
-    //DONE ma genere deve avere una tabella? 
-    /*public function getKeywordByGenere($genereSelezionato) {
+    public function getKeywordByGenere($genereSelezionato) {
         $query = "SELECT keyword FROM genere WHERE genere = '$genereSelezionato'";
         $queryResult = mysqli_query($this->connection, $query);
     
-        if ($queryResult) {
-            if (mysqli_num_rows($queryResult) != 0) {
-                $result = array();
-                while ($row = mysqli_fetch_assoc($queryResult)) {
-                    $result[] = $row['keyword'];
-                }
-                mysqli_free_result($queryResult);
-                return $result;
-            } else {
-                return null;
+        if (mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while ($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row['keyword'];
             }
-        } else {
-            //se è nulla? 
-            ;
-        }
-    }
-
-    // 
-    public function getKeywordLibro($LibroSelezionato) {
-        $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this->connection, $query);
-    
-        if ($queryResult) {
-            if (mysqli_num_rows($queryResult) != 0) {
-                $result = array();
-                while ($row = mysqli_fetch_assoc($queryResult)) {
-                    $result[] = $row['keyword'];
-                }
-                mysqli_free_result($queryResult);
-                return $result;
-            } else {
-                return null;
-            }
+            mysqli_free_result($queryResult);
+            return $result;
         } else {
             return null;
         }
     }
-*/
+
+    public function getKeywordLibro($LibroSelezionato) {
+        $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this->connection, $query);
     
+        if (mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while ($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row['keyword'];
+            }
+            mysqli_free_result($queryResult);
+            return $result;
+        } else {
+            return null;
+        }
+    }
     
     public function getUtentiRegistratiCount() {
         $query = "SELECT COUNT(*) AS numeroUtenti FROM utenti";

@@ -29,7 +29,7 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt>Categorie</dt>
     {listaGeneri}
     <dt>Area Personale</dt>
-    <dt><a href="tcerca.php">Cerca</a></dt>';
+    <dt><a href="cerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt>Categorie</dt>
