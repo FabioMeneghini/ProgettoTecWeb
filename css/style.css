@@ -4,11 +4,11 @@
 }
 
 :root{
-    --flagColor: #36502A;
+    --flagColor: #008280;
     --background: white;
     --textColor: black;
-    --linkColor: #438448;
-    --visitedLinkColor: #660030;
+    --linkColor: #fffdd6; /*660030*/
+    --visitedLinkColor: #fffdd6;
 }
 
 a:link{
