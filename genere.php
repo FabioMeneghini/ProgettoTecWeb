@@ -70,7 +70,7 @@ if(isset($_GET['genere'])) {
                     $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
             }
             foreach ($risultatiLibri as $libro) {
-                $listaLibri .= '<li><a href="scheda_libro.php?libro='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
+                $listaLibri .= '<li><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
             }
             //DONE
             if(!empty($resultKeyword)) {
