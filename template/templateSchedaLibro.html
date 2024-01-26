@@ -31,6 +31,7 @@
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; {genereLibro} &gt; &gt; {TitoloLibro}</p>
         </nav>
         <main id="content">
+            <div id="arealibro">
             <img src="copertina" alt=""> <!--immagine con alt specifico-->
             <h2 id="titolo">Titolo</h2>
             <p>{Titolo Libro}</p>
@@ -42,12 +43,18 @@
             <p>{LinguaLibro}</p>
             <h3>Numero capitoli:</h3>
             <p>{CapitoliLibro}</p>
+            <ul>
+                <dd>Vai alla trama </dd>
+                <dd>Vai alla tua recensione </dd>
+                <dd>Vai alle recensioni della <span lang="en">community</span> </dd>
+            </ul>
             <h3 id="trama">Trama:</h3>
             <p>{TramaLibro}</p>
             <h3 d="recensione">La tua Recensione:</h3>
             {recensione}
             <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
             <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+        </div>
         </main>
         <footer id="footer">
             <ul>
