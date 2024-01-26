@@ -23,7 +23,7 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
     <dt>Area Personale</dt>
-    <dt><a href="cerca.php">Cerca</a></dt>'
+    <dt><a href="cerca.php">Cerca</a></dt>';
 
 //admin
 $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
@@ -34,7 +34,7 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt>Categorie</dt>
     {listaGeneri}
     <dt>Area Personale</dt>
-    <dt><a href="tcerca.php">Cerca</a></dt>'
+    <dt><a href="tcerca.php">Cerca</a></dt>';
 
 $menu = $isAdmin ? $adminMenu : $userMenu;
 
@@ -147,6 +147,19 @@ try {
             else {
                 $messaggiEmail .= $tmp['messaggi'];
             }
+        }
+
+        //disconnetti
+        if(isset($_POST['disconnetti'])) {
+            session_destroy();
+            header("Location: index.php");
+        }
+
+        //elimina
+        if(isset($_POST['elimina'])) {
+            $connection -> eliminaUtente($_SESSION['username']);
+            session_destroy();
+            header("Location: index.php");
         }
 
         $resultGeneri = $connection -> getListaGeneri();

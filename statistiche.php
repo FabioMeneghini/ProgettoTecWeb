@@ -12,28 +12,18 @@ use DB\DBAccess;
 }
 else {
     header("Location: index.php");
-}<dl class="Statistiche">
-                    <dt>Numero capitoli letti Oggi:</dt>
-                    <dd>{NumeroCapitoliLettiUtente}</dd>
-                    <dt>Numero Recensioni totali:</dt>
-                    <dd>{NumeroRecensioniUtente}</dd>
-                    <dt>Libri Letti quest'anno:</dt>
-                    <dd>{LibriLettiAnnoUtente}</dd>
-                    <!--si può mettere link alle recensioni? -->
-                    <!--si possono mettere delle canvas per fare i grafici-->
-                </dl>*/
+}*/
 
 $paginaHTML = file_get_contents("template/templateStatisticheUtente.html");
 $listaGeneri = "";
 
 try {
     $connection = new DBAccess();
-    $utente = $_GET['utente'];//prende l'utente
     $connectionOk = $connection -> openDBConnection();
     
     if($connectionOk) {
-        $n_recensioni= $connection -> getRecensioniUtente($utente);
-        $n_libri= $connection ->  getLibriUtente($utente);
+        $n_recensioni= $connection -> getRecensioniUtente($_SESSION['username']);
+        $n_libri= $connection ->  getLibriUtente($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
 
         foreach($resultListaGeneri as $genere) {
@@ -51,6 +41,7 @@ catch(Throwable $e) {
 $paginaHTML = str_replace("{listaLibri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{NumeroRecensioni}", $n_recensioni, $paginaHTML);
 $paginaHTML = str_replace("{LibriLetti}", $n_libri, $paginaHTML);
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 
 ?>
