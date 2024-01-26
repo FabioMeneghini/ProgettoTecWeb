@@ -63,6 +63,7 @@
                     <fieldset>
                         <legend><span lang="en">Username</span>:</legend>
                         <ul class="messaggiErrore">{messaggiUsername}</ul>
+                        <div class="messaggiSuccesso">{successoUsername}</div>
                         <p>
                             Lo <span lang="en">username</span> deve contenere tra i 3 e i 10 caratteri:
                         </p>
@@ -82,6 +83,7 @@
                     <fieldset>
                         <legend><span lang="en">Password</span>:</legend>
                         <ul class="messaggiErrore">{messaggiPassword}</ul>
+                        <div class="messaggiSuccesso">{successoPassword}</div>
                         <label for="passwordold">Inserisci la <span lang="en">password</span> attuale:</label>
                         <input type="password" id="passwordold" name="passwordold" required>
                         <!--value={passwordattuale} , con php deve controllare sia la sua password di ora-->
@@ -113,6 +115,7 @@
                     <fieldset>
                         <legend><span lang="en">Email</span>:</legend>
                         <ul class="messaggiErrore">{messaggiEmail}</ul>
+                        <div class="messaggiSuccesso">{successoEmail}</div>
                         <label for="email">Nuovo indirizzo <span lang="en">email</span>:</label>
                         <input type="email" id="email" name="email" maxlength="30" required>
                         <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->

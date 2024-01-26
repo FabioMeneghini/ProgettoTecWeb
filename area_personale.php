@@ -61,6 +61,9 @@ $listaGeneri = "";
 $messaggiUsername = "";
 $messaggiEmail = "";
 $messaggiPassword = "";
+$successoUsername = "";
+$successoEmail = "";
+$successoPassword = "";
 
 try {
     $connection = new DBAccess();
@@ -74,6 +77,7 @@ try {
             if($tmp['ok']) {
                 $connection -> modificaUsername($_SESSION['username'], $username);
                 $_SESSION['username'] = $username;
+                $successoUsername = '<span lang="en">Username</span> modificato con successo';
             }
             else {
                 $messaggiUsername .= $tmp['messaggi'];
@@ -90,6 +94,7 @@ try {
                 $tmp = controllaPassword($password_old, $password_new1, $password_new2);
                 if($tmp['ok']) {
                     $connection -> modificaPassword($_SESSION['username'], $password);
+                    $successoPassword = '<span lang="en">Password</span> modificata con successo';
                 }
                 else {
                     $messaggiPassword .= $tmp['messaggi'];
@@ -107,6 +112,7 @@ try {
             if($tmp['ok']) {
                 $connection -> modificaEmail($_SESSION['username'], $email);
                 $_SESSION['email'] = $email;
+                $successoEmail = '<span lang="en">Email</span> modificata con successo';
             }
             else {
                 $messaggiEmail .= $tmp['messaggi'];
@@ -135,6 +141,9 @@ $paginaHTML = str_replace("{messaggi}", $messaggi, $paginaHTML);
 $paginaHTML = str_replace("{messaggiUsername}", $messaggiUsername, $paginaHTML);
 $paginaHTML = str_replace("{messaggiEmail}", $messaggiEmail, $paginaHTML);
 $paginaHTML = str_replace("{messaggiPassword}", $messaggiPassword, $paginaHTML);
+$paginaHTML = str_replace("{successoUsername}", $successoUsername, $paginaHTML);
+$paginaHTML = str_replace("{successoEmail}", $successoEmail, $paginaHTML);
+$paginaHTML = str_replace("{successoPassword}", $successoPassword, $paginaHTML);
 
 echo $paginaHTML;
 
