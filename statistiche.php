@@ -32,10 +32,8 @@ try {
     $connectionOk = $connection -> openDBConnection();
     
     if($connectionOk) {
-        $n_capitoli= $connection -> getCapitoliUtenteOggi($utente);
-        $n_recensioni= $connection -> getRecensioniUtenteOggi($utente);
-        $n_librianno= $connection ->  getLibriUtenteAnno($utente);
-        $n_librimese= $connection -> getLibriUtenteMese($utente);
+        $n_recensioni= $connection -> getRecensioniUtente($utente);
+        $n_libri= $connection ->  getLibriUtente($utente);
         $resultListaGeneri = $connection -> getListaGeneri();
 
         foreach($resultListaGeneri as $genere) {
@@ -50,11 +48,9 @@ try {
 catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
-$paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
-$paginaHTML = str_replace("{NumeroCapitoliLettiOggi}", $n_registrati, $paginaHTML);
+$paginaHTML = str_replace("{listaLibri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{NumeroRecensioni}", $n_recensioni, $paginaHTML);
-$paginaHTML = str_replace("{LibriLettiAnno}", $n_utenti, $paginaHTML);
-$paginaHTML = str_replace("{libriLettiMese}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{LibriLetti}", $n_libri, $paginaHTML);
 echo $paginaHTML;
 
 ?>

@@ -154,28 +154,32 @@ class DBAccess {
             return null;
         }
     }
-    //??????????
 
-    public function getCapitoliUtenteOggi($utente) {
-        
-    }
-    
-
-    //?????????
+    //
     public function getRecensioniUtente($utente) {
-       
+        $query = "SELECT COUNT(*) AS numeroRecensioni FROM recensioni WHERE username = '$username' ";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['numeroRecensioni'];
+        }
+        else {
+            return null;
+        }
     }
     
-
-    //?????
-    public function getLibriUtenteAnno($utente) {
-        
-    }
-    
-    
-    //??????
-    public function getLibriUtenteMese($utente) {
-        
+    public function getLibriUtente($utente) {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto ";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['numeroRecensioni'];
+        }
+        else {
+            return null;
+        }
     }
     
     
