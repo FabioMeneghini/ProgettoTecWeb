@@ -134,7 +134,7 @@ class DBAccess {
         }
     }
 
-    // done 
+    // 
     public function getKeywordLibro($LibroSelezionato) {
         $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
         $queryResult = mysqli_query($this->connection, $query);
@@ -154,7 +154,31 @@ class DBAccess {
             return null;
         }
     }
+    //??????????
 
+    public function getCapitoliUtenteOggi($utente) {
+        
+    }
+    
+
+    //?????????
+    public function getRecensioniUtente($utente) {
+       
+    }
+    
+
+    //?????
+    public function getLibriUtenteAnno($utente) {
+        
+    }
+    
+    
+    //??????
+    public function getLibriUtenteMese($utente) {
+        
+    }
+    
+    
     public function getUtentiRegistratiCount() {
         $query = "SELECT COUNT(*) AS numeroUtenti FROM utenti";
         $queryResult = mysqli_query($this -> connection, $query);
