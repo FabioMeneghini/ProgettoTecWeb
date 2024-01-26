@@ -112,6 +112,48 @@ class DBAccess {
             return null;
         }
     }
+    //DONE ma genere deve avere una tabella? 
+    public function getKeywordByGenere($genereSelezionato) {
+        $query = "SELECT keyword FROM genere WHERE genere = '$genereSelezionato'";
+        $queryResult = mysqli_query($this->connection, $query);
+    
+        if ($queryResult) {
+            if (mysqli_num_rows($queryResult) != 0) {
+                $result = array();
+                while ($row = mysqli_fetch_assoc($queryResult)) {
+                    $result[] = $row['keyword'];
+                }
+                mysqli_free_result($queryResult);
+                return $result;
+            } else {
+                return null;
+            }
+        } else {
+            //se è nulla? 
+            ;
+        }
+    }
+
+    // done 
+    public function getKeywordLibro($LibroSelezionato) {
+        $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this->connection, $query);
+    
+        if ($queryResult) {
+            if (mysqli_num_rows($queryResult) != 0) {
+                $result = array();
+                while ($row = mysqli_fetch_assoc($queryResult)) {
+                    $result[] = $row['keyword'];
+                }
+                mysqli_free_result($queryResult);
+                return $result;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 
     public function getUtentiRegistratiCount() {
         $query = "SELECT COUNT(*) AS numeroUtenti FROM utenti";
