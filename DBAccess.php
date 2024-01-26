@@ -98,7 +98,7 @@ class DBAccess {
     }
 
     public function getListaLibriGenere($genere) {
-        $query = "SELECT titolo, autore FROM libri WHERE genere = '$genere'";
+        $query = "SELECT titolo, autore, id FROM libri WHERE genere = '$genere'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -113,24 +113,18 @@ class DBAccess {
         }
     }
     //DONE ma genere deve avere una tabella? 
-    /*public function getKeywordByGenere($genereSelezionato) {
+    public function getKeywordByGenere($genereSelezionato) {
         $query = "SELECT keyword FROM genere WHERE genere = '$genereSelezionato'";
         $queryResult = mysqli_query($this->connection, $query);
-    
-        if ($queryResult) {
-            if (mysqli_num_rows($queryResult) != 0) {
-                $result = array();
-                while ($row = mysqli_fetch_assoc($queryResult)) {
-                    $result[] = $row['keyword'];
-                }
-                mysqli_free_result($queryResult);
-                return $result;
-            } else {
-                return null;
+        if (mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while ($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row['keyword'];
             }
+            mysqli_free_result($queryResult);
+            return $result;
         } else {
-            //se è nulla? 
-            ;
+            return null;
         }
     }
 
@@ -138,24 +132,17 @@ class DBAccess {
     public function getKeywordLibro($LibroSelezionato) {
         $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
         $queryResult = mysqli_query($this->connection, $query);
-    
-        if ($queryResult) {
-            if (mysqli_num_rows($queryResult) != 0) {
-                $result = array();
-                while ($row = mysqli_fetch_assoc($queryResult)) {
-                    $result[] = $row['keyword'];
-                }
-                mysqli_free_result($queryResult);
-                return $result;
-            } else {
-                return null;
+        if (mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while ($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row['keyword'];
             }
+            mysqli_free_result($queryResult);
+            return $result;
         } else {
             return null;
         }
     }
-*/
-    
     
     public function getUtentiRegistratiCount() {
         $query = "SELECT COUNT(*) AS numeroUtenti FROM utenti";
@@ -362,6 +349,99 @@ class DBAccess {
         $queryResult = mysqli_query($this -> connection, $query);
         if($queryResult === false) {
             echo "<li>Errore durante la cancellazione dell'utente: " . $this -> connection -> error . "</li>";
+        }
+    }
+
+    public function getInfoLibro($id_libro) {
+        $query = "SELECT * FROM libri WHERE id = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row;
+        }
+        else {
+            return null;
+        }
+    }
+
+    //questa funzione preleva dal database i 5 generi che hanno più libri
+    public function getGeneriPiuPopolari() {
+        $query = "SELECT genere, COUNT(*) AS numeroLibri
+                  FROM libri
+                  GROUP BY genere
+                  ORDER BY numeroLibri DESC LIMIT 5";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+    //questa funzione preleva dal database i 5 generi che l'utente con username $username ha letto di più
+    public function getGeneriPiuLetti($username) {
+        $query = "SELECT libri.genere, COUNT(*) AS numeroLibri
+                  FROM libri, ha_letto
+                  WHERE ha_letto.username = '$username'
+                  AND ha_letto.id_libro = libri.id
+                  GROUP BY libri.genere
+                  ORDER BY numeroLibri DESC LIMIT 5";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function cercaLibro($stringa, $autore, $genere, $lingua) {
+        $query = "SELECT id
+                  FROM libri
+                  WHERE (titolo LIKE '%$stringa%'
+                  OR trama LIKE '%$stringa%)'
+                  AND autore LIKE '%$autore%'
+                  AND genere LIKE '%$genere%'
+                  AND lingua = '$lingua'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getLingueLibri() {
+        $query = "SELECT DISTINCT lingua FROM libri";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row['lingua'];
+            }
+            $queryResult -> free();
+            return $result;
+        }
+        else {
+            return null;
         }
     }
 }
