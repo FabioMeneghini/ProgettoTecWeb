@@ -42,10 +42,9 @@ if(isset($_SESSION['admin'])) {
         $menu = $adminMenu;
     } else {
         if(isset($_SESSION['username']))
-            $menu =$userMenu;
+            $menu = $userMenu;
         else
-            $menu =$NonRegistrato;
-
+            $menu = $NonRegistrato;
     }
 }
 
@@ -56,7 +55,7 @@ try {
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $resultGeneri = $connection -> getListaGeneri();
-        $resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
+        //$resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';

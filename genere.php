@@ -58,7 +58,7 @@ if(isset($_GET['genere'])) {
         $connectionOk = $connection -> openDBConnection();
         if($connectionOk) {
             $resultGeneri = $connection -> getListaGeneri();
-            $resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
+            //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
             $connection -> closeConnection();
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
                 if($_GET["genere"]==$genere["genere"])
@@ -84,7 +84,7 @@ if(isset($_GET['genere'])) {
         echo "Errore: ".$e -> getMessage();
     }
 }
-$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
+//$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
