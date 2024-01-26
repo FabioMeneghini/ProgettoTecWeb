@@ -16,7 +16,7 @@ try {
         $resultGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $listaGeneri .= "<dd>".$genere["genere"]."</dd>";
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
     }
     else {

@@ -14,7 +14,7 @@ try {
     if($connectionOk) {
         $resultGeneri = $connection -> getListaGeneri();
         foreach($resultGeneri as $genere) {
-            $listaGeneri .= '<option value="'.$genere['genere'].'">'.$genere['genere'].'</option>';
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
         $connection -> closeConnection();
     }
