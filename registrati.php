@@ -92,7 +92,7 @@ if(isset($_POST['registrati'])) {
         }
     }
 }
-
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{messaggi}", $messaggiPerForm, $paginaHTML);
 echo $paginaHTML;
 ?>

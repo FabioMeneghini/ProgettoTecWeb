@@ -23,6 +23,7 @@ try {
     if($connectionOk) {
         $resultListaBestSeller = $connection -> getListaBestSeller();
         $resultListaGeneri = $connection -> getListaGeneri();
+        $risultatiLibri = $connection ->getListaLibriGenere($genere);
         $connection -> closeConnection();
         foreach($resultListaBestSeller as $libro) {
             $titolo=$libro["titolo"];
@@ -56,6 +57,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);
+$paginaHTML = str_replace("{libriGenere}", $risultatiLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 
