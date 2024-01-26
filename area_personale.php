@@ -123,7 +123,7 @@ try {
             if($connection -> verificaPassword($_SESSION['username'], $password_old)) { //se la password vecchia è corretta
                 $tmp = controllaPassword($password_old, $password_new1, $password_new2);
                 if($tmp['ok']) {
-                    $connection -> modificaPassword($_SESSION['username'], $password);
+                    $connection -> modificaPassword($_SESSION['username'], $password_new1);
                     $successoPassword = '<span lang="en">Password</span> modificata con successo';
                 }
                 else {

@@ -116,15 +116,13 @@
                 </form>
             </section>
 
-            <!--forse sarebbe meglio 2 pagine a parte per disconnetti ed elimina account -->
-            <section id="exitAccount">
-                <form method="post" action="area_personale.php"></form>
-                    <h4>Disconnessione dell'<span lang="en">account</span>:</h4>
+            <section id="sectionDisconnetti">
+                <form method="post" action="area_personale.php">
+                    <label for="disconnetti">Disconnessione dell'<span lang="en">account</span>:</label>
                     <button type="submit" id="disconnetti" name="disconnetti">Disconnetti <span lang="en">account</span></button>
-                    <!--mex che se si disconnette dal dispositivo può rientare in qualsiasi momento con username e password e conferma-->
-                    <h4>Eliminazione dell'<span lang="en">account</span>:</h4>
+                    <br>
+                    <label for="elimina">Disconnessione dell'<span lang="en">account</span>:</label>
                     <button type="submit" id="elimina" name="elimina">Elimina <span lang="en">account</span></button>
-                    <!--emiminare utente db-->
                 </form>
             </section>
         </main>
