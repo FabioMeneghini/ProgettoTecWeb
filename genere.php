@@ -52,6 +52,7 @@ if(isset($_SESSION['admin'])) {
 }
 
 $listaGeneri = "";
+$listaLibri = "";
 if(isset($_GET['genere'])) {
     $genereSelezionato = $_GET['genere'];
     try {
@@ -59,14 +60,17 @@ if(isset($_GET['genere'])) {
         $connectionOk = $connection -> openDBConnection();
         if($connectionOk) {
             $resultGeneri = $connection -> getListaGeneri();
-            $risultatiLibri = $connection ->getListaLibriGenere($genere);
+            $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
             //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
             $connection -> closeConnection();
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
                 if($_GET["genere"]==$genere["genere"])
-                $listaGeneri .=$genere["genere"];
+                    $listaGeneri .=$genere["genere"];
                 else
                     $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+            }
+            foreach ($risultatiLibri as $libro) {
+                $listaLibri .= '<li><a href="scheda_libro.php?libro='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
             }
             //DONE
             if(!empty($resultKeyword)) {
@@ -89,7 +93,7 @@ if(isset($_GET['genere'])) {
 //$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
-$paginaHTML = str_replace("{libriGenere}", $risultatiLibri, $paginaHTML);
+$paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{NomeGenere}", $genereSelezionato, $paginaHTML);
 echo $paginaHTML;
 
