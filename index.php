@@ -16,7 +16,7 @@ $paginaHTML = file_get_contents("template/templateHomeNonRegistrato.html");
 
 $listaBestSeller = "";
 $listaGeneri = "";
-$listaLibri = "<div class=ok >";
+$listaLibri = "<div class=listepergenere >";
 
 try {
     $connection = new DBAccess();
@@ -32,7 +32,7 @@ try {
             <ul class="lista genere">';
             $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
             foreach($risultatiLibri as $libro) {
-                $listaLibri.="<li></li>";
+                $listaLibri.='<li>.$libro["libro"].</li>';
             }
             $listaLibri.='</ul>';
         }

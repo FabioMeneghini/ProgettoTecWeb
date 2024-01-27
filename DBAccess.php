@@ -445,6 +445,26 @@ class DBAccess {
             return null;
         }
     }
+    /*TO DOOOOOOOOOO
+
+    controllagenere($genereSelezionato);
+    controllareIdLibro($LibroSelezionato);
+    getimmagine($LibroSelezionato);
+    //IMMAGINE CON ALT no ImgReplace qua
+    gettitololibro($LibroSelezionato);
+    getLibriUtente($LibroSelezionato);
+    getgenereLibro($LibroSelezionato);
+    getlinguaLibro($LibroSelezionato);
+    gettramaLibro($LibroSelezionato);
+    getncapitoliLibro($LibroSelezionato);
+    getmediavoti($LibroSelezionato);
+            //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
+            //secondo me è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro 
+    getaltrerecensioni($LibroSelezionato);
+    getrecensionetua($LibroSelezionato,$_SESSION['username']);
+    getvototuo($LibroSelezionato,$_SESSION['username']);
+            
+    */
 }
 
 ?>
