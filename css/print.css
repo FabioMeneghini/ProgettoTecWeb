@@ -8,6 +8,14 @@ html, body{
     margin: auto;
 }
 
+#logo{
+    text-align: center;
+}
+
+#logo img{
+    width: 200px;
+}
+
 header{
     text-align: center;
     padding: 1em 0em;
@@ -43,10 +51,25 @@ main dt{
     padding: 1em 0em 0.5em 0em;
 }
 
-main img{
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+.listabestseller{
+    list-style-type: none;
+}
+
+.listabestseller figure{
+    display: flex;
+    padding: 1em 0em;
+}
+
+.listabestseller div{
+    padding: 1em;
+}
+
+.listabestseller div:first-child{
+    font-size: 1.3em;
+}
+
+.listabestseller img{
+    width: 200px;
 }
 
 footer{
