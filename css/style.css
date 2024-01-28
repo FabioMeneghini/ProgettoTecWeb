@@ -4,22 +4,24 @@
 }
 
 :root{
+    --formColor: #ccecec;
     --flagColor: #008280;
     --background: white;
     --textColor: black;
     --linkMenuColor: #fffdd6; 
     --visitedLinkMenuColor: black;
+    --menuTextColor: #ccecec;
     --linkColor:#0B2114 ;
     --LinkVisitedColor:#947425;
 
 }
 
 a:link{
-    color: var(--linkColor);
+    color: var(--linkMenuColor);
 }
 
 a:visited{
-    color: var(--visitedLinkColor);
+    color: var(--visitedLinkMenuColor);
 }
 
 #logo{
@@ -28,24 +30,27 @@ a:visited{
 }
 
 #logo img{
-    width: 40%;
+    width: 70px;
     padding: 0.5em;
 }
 
 #breadcrumbs{
     grid-area: b;
     padding: 0.5em;
+    border-bottom: 3px solid var(--flagColor);
 }
 
 html, body{
     margin-left: auto;
     margin-right: auto;
+    background-color: var(--background);
 }
 
 html{
     font-size: 100%;
     line-height: 1.5em;
-    background-color: var(--background);
+    background-image: url("../background.jpg");
+    background-size: contain; 
 }
 
 /* HEADER */
@@ -72,13 +77,14 @@ header h1{
 body{
     max-width: 1280px;
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr 6fr;
     grid-template-rows: auto auto 1fr auto;
     grid-template-areas: "l h"
                          "m b"
                          "m c"
                          "f f";
     height: 100vh;
+    background-color: var(--background);
 }
 
 /* MENU */
@@ -98,13 +104,18 @@ body{
     padding: 0.2em 0em;
 }
 
+#menu dt{
+    color: var(--menuTextColor);
+}
+
 #menu dd{
     padding: 0.2em 1em;
 }
 
 main{
     grid-area: c;
-    max-width: 1024px;
+    max-width: 1280px;
+    background-color: var(--background);
 }
 
 .genere{
@@ -136,8 +147,9 @@ h2{
     /*display: flex;
     flex-direction: column;
     align-items: center;*/
+    font-size: 2em;
     text-align: center;
-    padding: 0.5em 1em;
+    padding: 1em;
 }
 
 h3:first-of-type::before{
@@ -164,16 +176,15 @@ ol.listabestseller{
     list-style: none;
    
 }
-ol li {
+ol li{
     display: inline-block; 
-    margin-right: 10px; 
-  }
+    margin-right: 10px;
+}
 
 nav.login{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     position: relative;
     right: 0pt;
 }
@@ -184,17 +195,31 @@ nav.login{
     align-items: center;
     position: relative;
     right: 50pt;
- 
 }
 
-input[type=text], input[type=password],input[type=mail] {
+fieldset{
+    border-color: var(--flagColor);
+    border-radius: 5px;
+    background-color: var(--formColor);
+}
+
+fieldset legend{
+    color: var(--flagColor);
+    font-size: 1.2em;
+}
+
+input[type=text], input[type=password], input[type=email]{
     outline: none;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid var(--flagColor);
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
+    border: 3px solid var(--flagColor);
 }
 
 input[type=submit], input[type=reset] {
@@ -207,12 +232,17 @@ input[type=submit], input[type=reset] {
     cursor: pointer;
 }
 
-input[type=text]:focus,input[type=password]:focus,input[type=email]:focus{
-    border: 3px solid var(--flagColor);
+/*da finire*/
+table tr.lista_libri{
+    transition: width 2s, height 4s;
+}
+
+table tr.lista_libri td:hover{
+    transform: scale(1.3);
 }
 
 main > div{
-text-align: center;
+    text-align: center;
 }
 
 /* FOOTER */

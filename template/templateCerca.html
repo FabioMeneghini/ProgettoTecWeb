@@ -28,7 +28,7 @@
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a>&gt; &gt; Cerca </p>
+            <p><img src="prova.png" alt="" style="width: 20px;">Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt; &gt; Cerca </p>
         </nav>
         <main id="content">
             <section id="cerca">
@@ -43,19 +43,19 @@
                     <button type="submit">Cerca</button>
                     </fieldset>
                     <fieldset>
-                        <legend>Filtri: </legend>
+                        <legend>Filtri:</legend>
                         <!--controllare coerenze con lunghezze
                         in css diminuire lo spazio x la scrittura -->
                         <label for="author">Autore:</label>
                         <input type="text" id="author" name="author" maxlength="50">
                         <label for="genere">Seleziona : </label>
-                        <input list="genere" id="genereInput" name="genere">
+                        <input type="text" list="genere" id="genereInput" name="genere">
                         <datalist id="genere" name="genere">
                             {listaGeneri}
                             <!--php solo tra i generi che ho -->
                         </datalist><br/>
                         <label for="language">Lingua:</label>
-                        <input list="lingua" id="selezionalingua" name="lingua">
+                        <input type="text" list="lingua" id="selezionalingua" name="lingua">
                         <datalist id="lingua" name="lingua">
                             {listaLingue}
                             <!--option between todos los idiomas del mundo-->
@@ -64,7 +64,8 @@
                     </fieldset>
                 </form>
             </section>
-    <footer id="footer">
+        </main>
+        <footer id="footer">
         <ul>
             <li><a href="contatti.html">Contatti</a></li>
             <li><a href="chisiamo.html">Chi siamo</a></li>

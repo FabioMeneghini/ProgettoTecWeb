@@ -36,7 +36,7 @@ try {
             }
             $listaLibri.='</ul>';
         }
-        $listaLibri.="</div>"
+        $listaLibri.="</div>";
         //$risultatiLibri = $connection ->getListaLibriGenere($genere);
         
         foreach($resultListaBestSeller as $libro) {
