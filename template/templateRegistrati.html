@@ -19,7 +19,7 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png">
+                <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
             <dl>
@@ -30,13 +30,13 @@
                 <dt><a href="accedi.php">Accedi</a></dt>
                 <dt>Registrati</dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            </dl><!--ERRORE DL-->
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a>&gt; &gt; Accedi</p>
         </nav>
         <main id="content">
-        <section id="section_registrazione">
+        <section id="section_registrazione"><!--WARNING Section lacks heading. Consider using h2-h6 elements to add identifying headings to all sections, or else use a div element instead for any cases where no heading is needed. /-->
             <form id="registrationForm" action="registrati.php" method="post">
                 <!--aggiungi pagina php-->
                 {messaggi}
@@ -50,8 +50,8 @@
                             <li>una lettera minuscola</li>
                         </ul>
                         <!--controlli con php-->
-                    </p>
-                    <label for="titolo">Inserisci uno <span lang="en">username</span> : </label><br>
+                    </p><!--ERRORE No p element in scope but a p end tag seen.-->
+                    <label id="titolo">Inserisci uno <span lang="en">username</span> : </label><br><!--ERRORE FOR SOSTITUITO CON ID-->
                     <input type="text" id="username" name="username" maxlength="10" required><br>
                     <!--controllo che non sia già in uso-->
                     <!--altri dati come data di nascita , genere, regione-->
@@ -67,9 +67,9 @@
                             <li>una lettera maiuscola</li>
                             <li>una lettera minuscola</li>
                         </ul>
-                    </p>
-                    <label for="password"><span lang="en">password</span>:</label><br>
-                    <input type="password" id="password1" name="password1" required></br>
+                    </p><!--ERRORE No p element in scope but a p end tag seen.-->
+                    <label id="password"><span lang="en">password</span>:</label><br><!--ERRORE FOR SOSTITUIT CON ID-->
+                    <input type="password" id="password1" name="password1" required><br><!--ERRORE CORRETTO RIMOSSO /-->
                     <label for="passwordnew1"> Ripeti la stessa <span lang="en">password</span>:</label><br>
                     <input type="password" id="passwordnew1" name="passwordnew1" required>
                 </fieldset>

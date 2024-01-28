@@ -22,11 +22,11 @@
         <!--manca disconnessione e eliminazione profilo -->
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png">
+                <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
-                {menu}
+                {menu}<!--ERRORE ANCHE SE CREDO VADA BENE COMUNQUE-->
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
@@ -34,7 +34,7 @@
         </nav>
         <main  id="content">
             <div id="profile">
-                <h2>Benvenuto, <span id="username">{nome}</span>!</h2>
+                <h2>Benvenuto, <span id="username">{nome}</span>!</h2><!--WARNING ID USERNAME-->
             </div>
             <!--mettere nella relazione per il ranking che era troppo pesante e lo abbiamo tolto -->
             <!-- NON sono sicura sia una form-->
@@ -49,32 +49,32 @@
             {messaggi}
             <h3>Modifica I dati di accesso:</h3>
 
-            <section id="sectionModificaUsername">
+            <section id="sectionModificaUsername"><!--Section lacks heading. Consider using h2-h6 elements to add identifying headings to all sections, or else use a div element instead for any cases where no heading is needed.-->
                 <form method="post" action="area_personale.php"> 
                     <!--aggiungi pagina php-->
                     <fieldset>
                         <legend><span lang="en">Username</span>:</legend>
-                        <ul class="messaggiErrore">{messaggiUsername}</ul>
+                        <ul class="messaggiErrore">{messaggiUsername}</ul><!--ERRORE ANCHE SE CREDO VADA BENE COMUNQUE-->
                         <div class="messaggiSuccesso">{successoUsername}</div>
                         <p>
                             Lo <span lang="en">username</span> deve contenere tra i 3 e i 10 caratteri:
                         </p>
                         <label for="username">Inserisci un nuovo <span lang="en">username</span>: </label>
-                        <input type="text" id="username" name="username" maxlength="10" minlength="3" required>
+                        <input type="text" id="username" name="username" maxlength="10" minlength="3" required><!--ERRORE DUPLICATE ID USERNAME-->
                         <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
-                        <legend>Concludi l'inserimento:</legend>
+                        <legend>Concludi l'inserimento:</legend><!--ERRORE Element legend not allowed as child of element fieldset in this context. (Suppressing further errors from this subtree.)-->
                         <button type="submit" id="cambia_username" name="cambia_username">Modifica <span lang="en">Username</span></button>
                         <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
                 </form>
             </section>
 
-            <section id="sectionModificaPassword">
+            <section id="sectionModificaPassword"><!--WARNING Section lacks heading-->
                 <form method="post" action="area_personale.php"> 
                     <!--aggiungi pagina php-->
                     <fieldset>
                         <legend><span lang="en">Password</span>:</legend>
-                        <ul class="messaggiErrore">{messaggiPassword}</ul>
+                        <ul class="messaggiErrore">{messaggiPassword}</ul><!--ERRORE ANCHE SE CREDO VADA BENE COMUNQUE-->
                         <div class="messaggiSuccesso">{successoPassword}</div>
                         <label for="passwordold">Inserisci la <span lang="en">password</span> attuale:</label>
                         <input type="password" id="passwordold" name="passwordold" required>
@@ -87,13 +87,13 @@
                                 <li>una lettera maiuscola</li>
                                 <li>una lettera minuscola</li>
                             </ul>
-                        </p>
-                        <label for="passwordnew">Inserisci una nuova <span lang="en">password</span>:</label>
-                        <input type="password" id="passwordnew1" name="passwordnew1" required></br>
+                        </p><!--ERRORE No p element in scope but a p end tag seen-->
+                        <label id="passwordnew">Inserisci una nuova <span lang="en">password</span>:</label><!--ERRORE CORRETTO SOSTITUITO FOR CON ID-->
+                        <input type="password" id="passwordnew1" name="passwordnew1" required><br><!--ERRORE CORRETTO TOLTO /-->
                         <label for="passwordnew1">Ripeti la stessa <span lang="en">password</span>:</label>
                         <input type="password" id="passwordnew2" name="passwordnew2" required>
                         <!--Messaggio di errore se la password è diversa da quella sopra forse value={passwordnew} -->
-                        <legend>Concludi l'inserimento:</legend>
+                        <legend>Concludi l'inserimento:</legend><!--ERRORE Element legend not allowed as child of element fieldset in this context. (Suppressing further errors from this subtree.) -->
                         <button type="submit" id="cambia_password" name="cambia_password">Cambia <span lang="en">Password</span></button>
                         <!-- non so se si possa togliere ma non credo abbia senso qua :<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
@@ -101,12 +101,12 @@
                 </form>
             </section>
 
-            <section id="sectionModificaEmail">
+            <section id="sectionModificaEmail"><!--WARNING Section lacks heading-->
                 <form method="post" action="area_personale.php"> 
                     <!--aggiungi pagina php-->
                     <fieldset>
                         <legend><span lang="en">Email</span>:</legend>
-                        <ul class="messaggiErrore">{messaggiEmail}</ul>
+                        <ul class="messaggiErrore">{messaggiEmail}</ul><!--ERRORE ANCHE SE CREDO VADA BENE COMUNQUE-->
                         <div class="messaggiSuccesso">{successoEmail}</div>
                         <label for="email">Nuovo indirizzo <span lang="en">email</span>:</label>
                         <input type="email" id="email" name="email" maxlength="30" required>
@@ -120,7 +120,7 @@
                 </form>
             </section>
 
-            <section id="sectionDisconnetti">
+            <section id="sectionDisconnetti"><!--WARNING Section lacks heading-->
                 <form method="post" action="area_personale.php">
                     <label for="disconnetti">Disconnessione dell'<span lang="en">account</span>:</label>
                     <button type="submit" id="disconnetti" name="disconnetti">Disconnetti <span lang="en">account</span></button>

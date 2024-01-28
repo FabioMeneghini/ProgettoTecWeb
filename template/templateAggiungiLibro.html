@@ -20,7 +20,7 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png">
+                <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
             <dl>
@@ -38,7 +38,7 @@
                 <!--vale anche per l'admin può cambiare credenziali -->
                 <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            </dl><!--ERRORE dl-->
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: :<a href="admin.php"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Libro</p>
@@ -51,40 +51,40 @@
                     <fieldset>
                         <legend>Informazioni genere: </legend>
                         <label for="titolo">Autore: </label>
-                        <input type="text" id="autore" name="autore" min="1" max="30" required>
-                        <br/>
+                        <input type="text" id="autore" name="autore"  required><!--ERRORE CORRETTO MIN NON DISPONIBILE PER TEXT--><!--ERRORE CORRETTO MAX NON DISPONIBILE PER TEXT-->
+                        <br><!--ERRORE CORRETTO TOLTO LO SLASH-->
                         <label for="titolo">Titolo: </label>
-                        <input type="text" name="titolo" id="titolo" max="100"/><br/>
+                        <input type="text" name="titolo" id="titolo" ><br><!--ERRORE CORRETTO MAX NON DISPONIBILE PER TEXT--><!--ERRORE CORRETTO MIN TOLTI SLASH-->
                         <!--controllo che sia diverso da quelli già inseriti! In caso messaggio: il libro inserito è già presente nel data base
                         meglio non lasciare il completamente di altri campi -->
                     </fieldset>
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
-                        <label for="Lingua">Lingua originale: </label>
+                        <label id="Lingua">Lingua originale: </label><!--ERRORE CORRETTO FOR SOSTITUITO DA ID-->
                         <input list="lingua" id="selezionalingua" name="lingua">
-                        <datalist id="lingua" name="lingua">
+                        <datalist id="lingua" ><!--ERRORE CORRETTO RIMOSSO NAME-->
                             {listaLingue}
                             <!--option between todos los idiomas del mundo-->
-                        </datalist><br/>
+                        </datalist><br><!--ERRORE CORRETTO TOLTO SLASH-->
                         <!-- <label for="casa editrice">Casa editrice: </label>
                         <input type="text" name="editore" id="editore" /><br/>-->
-                        <label for="durata">Numero capitoli: </label>
-                        <input type="number" name="capitoli" id="capitoli" max="1000" required />
+                        <label id="durata">Numero capitoli: </label><!--ERRORE CORRETTO FOR SOSTITUITO DA ID-->
+                        <input type="number" name="capitoli" id="capitoli" max="1000" required ><!--ERRORE CORRETTO TOLTO SLASH-->
                     </fieldset>
                     <fieldset>
                         <legend>Storia :</legend>
-                        <legend for="trama">Trama del libro:</legend>
+                        <legend for="trama">Trama del libro:</legend><!--Element legend not allowed as child of element fieldset in this context. (Suppressing further errors from this subtree.)-->
                         <textarea id="trama" name="trama" rows="20" cols="70"></textarea>
                     </fieldset>
                     <fieldset>
                         <legend>Genere</legend>
-                        <label for="genere">Seleziona : </label>
+                        <label id="genere">Seleziona : </label><!--ERRORE CORRETTO FOR SOSTITUITO DA ID-->
                         <input list="genere" id="genereInput" name="genere">
-                        <datalist id="genere" name="genere">
+                        <datalist id="genere" ><!--ERRORE CORRETTO RIMOSSO NAME-->
                             {listaGeneri}
                             <!--php solo tra i generi che ho o lascio mettere genere nuovo? 
                             oppure compilazione che se non c'è aggiunge un genere ?-->
-                        </datalist><br/>
+                        </datalist><br><!--ERRORE CORRETTO RIMOSSO SLASH-->
                     </fieldset>
                     <fieldset>
                         <legend>Concludi l'inserimento:</legend>

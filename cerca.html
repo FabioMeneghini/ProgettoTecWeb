@@ -19,7 +19,7 @@
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
             <img src="logo" alt="">
         </header>
-        <nav id="menu">
+        <nav id="menu"><!--ERRORE MANCA ALT-->
             <label for="hamburger" tabindex="0">
                 <img src="menu.png">
             </label>
@@ -35,11 +35,11 @@
         <main  id="content">
             <h2>Ricerca Libri</h2>
             <form method="post" action="ricerca.php">
-                <label for="ricercalibro">Inserisci il titolo del libro:</label>
-                <input type="text" id="cercalibro" name="cercalibro" ></br>
-                <label for="ricercaautore">Inserisci l'autore del libro:</label>
-                <input type="text" id="cercaautore" name="cercautore" ></br>
-                <label for="ricercagenere">Inserisci il genere del libro:</label>
+                <label id="ricercalibro">Inserisci il titolo del libro:</label><!--ERRORE CORRETTO FOR SOSTITUITO DA ID-->
+                <input type="text" id="cercalibro" name="cercalibro" ><br><!--ERRORE CORRETTO BR-->
+                <label id="ricercaautore">Inserisci l'autore del libro:</label><!--ERRORE CORRETTO FOR SOSTITUITO DA ID-->
+                <input type="text" id="cercaautore" name="cercautore" ><br><!--ERRORE CORRETTO BR-->
+                <label id="ricercagenere">Inserisci il genere del libro:</label><!--ERRORE CORRETTO FOR SOSTITUITO DA ID-->
                 <input type="text" id="cercagenere" name="cercagenere" >
                 <button type="submit">Cerca</button>
             </form>
