@@ -114,8 +114,16 @@ body{
 
 main{
     grid-area: c;
-    max-width: 1280px;
+    max-width: 1024px;
     background-color: var(--background);
+    padding: 1em;
+}
+
+hr{
+    color: var(--flagColor);
+    background-color: var(--flagColor);
+    height: 1px;
+    margin: 1em 0em;
 }
 
 .genere{
@@ -201,11 +209,16 @@ fieldset{
     border-color: var(--flagColor);
     border-radius: 5px;
     background-color: var(--formColor);
+    padding: 1em;
 }
 
 fieldset legend{
     color: var(--flagColor);
     font-size: 1.2em;
+}
+
+fieldset ul{
+    list-style: inside;
 }
 
 input[type=text], input[type=password], input[type=email]{
