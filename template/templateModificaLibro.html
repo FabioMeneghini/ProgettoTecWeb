@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <title>{TitoloLibro} - BookClub</title>
         <!--nome libro PHP-->
-        <meta name="keywords" content="{parolechiavelibro}">
+        <meta name="keywords" content="{keywords}">
         <!--come trovare le parole chiave?-->
         <meta name="description" content="">
         <meta name="author" content="">
@@ -40,7 +40,7 @@
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <!--come ricordarsi da dove è entrato? dalla home , da letti , da leggere o da eliminati? o da generi?-->
-            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a>&gt; &gt; {TitoloLibro}</p>
+            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a>&gt; &gt; {titoloold}</p>
         </nav>
         <main id="content">
             <img> <!--immagine con alt specifico-->
@@ -49,25 +49,22 @@
                 <form method="post" action="modifica_libro.php"> 
                     {messaggiForm}
                     <fieldset>
-                        <legend>Informazioni genere: </legend>
-                        <label for="titolo">Autore: </label>
-                        <input type="text" id="autore" name="autore" min="1" max="30" placeholder="{autoreold}" value="{autoreold}">
-                        <br/>
+                        <legend>Informazioni generali: </legend>
                         <label for="titolo">Titolo: </label>
                         <input type="text" name="titolo" id="titolo" max="100"placeholder="{titoloold}" value="{titoloold}"/><br/>
+                        <label for="titolo">Autore: </label>
+                        <input type="text" id="autore" name="autore" min="1" max="30" placeholder="{autoreold}" value="{autoreold}">
                         <!--controllo che sia diverso da quelli già inseriti! In caso messaggio: il libro inserito è già presente nel data base
                         meglio non lasciare il completamente di altri campi -->
                     </fieldset>
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
                         <label for="Lingua">Lingua originale : </label>
-                        <input list="lingua" id="selezionalingua" name="lingua"placeholder="{linguaold}" value="{linguaold}">
+                        <input list="lingua" id="selezionalingua" name="lingua"placeholder="{linguaold}" value="{linguaold}"><!--TOCHECK NON SON OSICURA SI SCRVIVA COSI -->
                         <datalist id="lingua" name="lingua">
                             {listaLingue}
                             <!--option between todos los idiomas del mundo-->
                         </datalist><br/>
-                        <label for="casa editrice">Casa editrice: </label>
-                        <input type="text" name="editore" id="editore" placeholder="{editoreold}" value="{editoreold}"/><br/>
                         <label for="durata">Nunero capitoli: </label>
                         <input type="number" name="capitoli" id="capitoli" max="1000" required placeholder="{capitoliold}" value="{capitoliold}" />
                     </fieldset>
@@ -92,9 +89,8 @@
                     </fieldset>
                 </form>
             </section>
-            <h3>La tua Recensione:</h3>{recensione}
-            <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
             <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+            <h4>Voto medio: </h4>{mediavoti}
         </main>
         <footer id="footer">
             <ul>
