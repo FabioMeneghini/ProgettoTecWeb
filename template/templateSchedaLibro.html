@@ -1,11 +1,11 @@
-<!--IN QUESTA PAGINA è IMPORTANTE!!!!!!!!!!!!! IL RANKING-->
+
 <!DOCTYPE html>
 <html lang="it">
     <head>
         <meta charset="UTF-8">
         <title>{TitoloLibro} - BookClub</title>
         <!--nome libro PHP-->
-        <meta name="keywords" content="{parolechiavelibro}">
+        <meta name="keywords" content="{keywords}">
         <!--come trovare le parole chiave?-->
         <meta name="description" content="">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
@@ -36,28 +36,37 @@
         </nav>
         <main id="content">
             <div id="arealibro">
-            <img src="copertina" alt=""> <!--immagine con alt specifico-->
-            <h2 id="titolo">Titolo</h2>
-            <p>{Titolo Libro}</p>
-            <h3>Autore:</h3>
-            <p>{AutoreLibro}</p>
-            <h3>Genere:</h3>
-            <p>{GenereLibro}</p>
-            <h3>Lingua:</h3>
-            <p>{LinguaLibro}</p>
-            <h3>Numero capitoli:</h3>
-            <p>{CapitoliLibro}</p>
-            <ul>
-                <dd>Vai alla trama </dd>
-                <dd>Vai alla tua recensione </dd>
-                <dd>Vai alle recensioni della <span lang="en">community</span> </dd>
-            </ul>
-            <h3 id="trama">Trama:</h3>
-            <p>{TramaLibro}</p>
-            <h3 d="recensione">La tua Recensione:</h3>
-            {recensione}
-            <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
-            <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+                <div id="datilibro">
+                <img src="copertina" alt=""> 
+                {ImmagineLibro}
+                <!--immagine con alt specifico-->
+                <h2 id="titolo">Titolo</h2>
+                <p>{TitoloLibro}</p>
+                <h3>Autore:</h3>
+                <p>{AutoreLibro}</p>
+                <h3>Genere:</h3>
+                <p>{GenereLibro}</p>
+                <h3>Lingua:</h3>
+                <p>{LinguaLibro}</p>
+                <h3>Numero capitoli:</h3>
+                <p>{CapitoliLibro}</p>
+                </div>
+                <!--TO CHECK giuste le aree? -->
+                <h3>Voto medio della nostra <span lang="en">community</span>:{mediavoti}</h3>
+                
+                <ul class="menulibro">
+                    <dd><a class="menulibro" href="#trama">Vai alla trama</a> </dd>
+                    <dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>
+                    <dd><a class="menulibro" href="#comunity">Vai alle recensioni della <span lang="en">community</span></a></dd>
+                </ul>
+                <div id="datilibro">
+                    
+                    <h3 id="trama">Trama:</h3>
+                    <p>{tramaLibro}</p>
+                    {arecensionevotoform}
+                    <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
+                    <h4 d="community">Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+                </div>
         </div>
         </main>
         <footer id="footer">

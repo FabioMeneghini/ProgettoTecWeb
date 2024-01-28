@@ -97,8 +97,8 @@ class DBAccess {
         }
     }
 
-    public function getListaLibriGenere($genere) {
-        $query = "SELECT titolo, autore, id FROM libri WHERE genere = '$genere'";
+    public function getListaLibriGenere($genere, $n=1000) {
+        $query = "SELECT titolo, autore FROM libri WHERE genere = '$genere' LIMIT $n";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -116,6 +116,7 @@ class DBAccess {
     public function getKeywordByGenere($genereSelezionato) {
         $query = "SELECT keyword FROM genere WHERE genere = '$genereSelezionato'";
         $queryResult = mysqli_query($this->connection, $query);
+    
         if (mysqli_num_rows($queryResult) != 0) {
             $result = array();
             while ($row = mysqli_fetch_assoc($queryResult)) {
@@ -128,10 +129,10 @@ class DBAccess {
         }
     }
 
-    // 
     public function getKeywordLibro($LibroSelezionato) {
         $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
         $queryResult = mysqli_query($this->connection, $query);
+    
         if (mysqli_num_rows($queryResult) != 0) {
             $result = array();
             while ($row = mysqli_fetch_assoc($queryResult)) {
@@ -444,6 +445,27 @@ class DBAccess {
             return null;
         }
     }
+    /*TO DOOOOOOOOOO
+
+    controllagenere($genereSelezionato);
+    controllareIdLibro($LibroSelezionato);
+    getimmagine($LibroSelezionato);
+    //IMMAGINE CON ALT no ImgReplace qua
+    gettitololibro($LibroSelezionato);
+    getLibriUtente($LibroSelezionato);
+    getgenereLibro($LibroSelezionato);
+    getlinguaLibro($LibroSelezionato);
+    gettramaLibro($LibroSelezionato);
+    getncapitoliLibro($LibroSelezionato);
+    getmediavoti($LibroSelezionato);
+            //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
+            //secondo me è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro 
+    getaltrerecensioni($LibroSelezionato);
+    getrecensionetua($LibroSelezionato,$_SESSION['username']);
+    getvototuo($LibroSelezionato,$_SESSION['username']);
+     $flagletto= $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
+            
+    */
 }
 
 ?>

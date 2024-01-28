@@ -16,6 +16,7 @@ $paginaHTML = file_get_contents("template/templateHomeNonRegistrato.html");
 
 $listaBestSeller = "";
 $listaGeneri = "";
+$listaLibri = "<div class=listepergenere >";
 
 try {
     $connection = new DBAccess();
@@ -23,8 +24,21 @@ try {
     if($connectionOk) {
         $resultListaBestSeller = $connection -> getListaBestSeller();
         $resultListaGeneri = $connection -> getListaGeneri();
-        //$risultatiLibri = $connection ->getListaLibriGenere($genere);
+        $resultGeneri = $connection -> getGeneriPiuPopolari();
         $connection -> closeConnection();
+
+        foreach($resultGeneri as $genere) {
+            $listaLibri.='
+            <ul class="lista genere">';
+            $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
+            foreach($risultatiLibri as $libro) {
+                $listaLibri.='<li>.$libro["libro"].</li>';
+            }
+            $listaLibri.='</ul>';
+        }
+        $listaLibri.="</div>"
+        //$risultatiLibri = $connection ->getListaLibriGenere($genere);
+        
         foreach($resultListaBestSeller as $libro) {
             $titolo=$libro["titolo"];
             $titolo=strtolower($titolo);
@@ -33,7 +47,8 @@ try {
             if (ctype_digit($titolo)) {
                 $titolo = '_'.$titolo;
             }
-           // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
+           // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
+           //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
            $listaBestSeller .='<li>
                                 <figure>
                                     <img src="copertine_libri/'.$titolo.'.jpg">
@@ -44,6 +59,7 @@ try {
                                 </figure>
                                 </li>';
         }
+        
         foreach($resultListaGeneri as $genere) {
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
