@@ -22,7 +22,7 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png">
+                <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
             <dl>
@@ -37,7 +37,7 @@
                 <dt><a href="statisticheutente.php">Statistiche</a></dt><!--manca statistiche utente.php -->
                 <dt><a href="area_personale.php">Area Personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            </dl><!--ERRORE DL-->
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: :<a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; Aggiungi Recensione</p>
@@ -51,22 +51,22 @@
                     {messaggiForm}
                     <fieldset>
                         <legend>Informazioni sul libro:</legend>
-                        <label for="titolo">Inserisci il titolo del libro letto che vuoi recensire: </label>
+                        <label id="titolo">Inserisci il titolo del libro letto che vuoi recensire: </label><!--ERRORE CORRETTO RIMOSSO /-->
                         <!--Messaggio se uno vuole recensire un libro che non ha nella lista dei letti  js controllo-->
                         <input list="titolo" id="titoloInput" name="titolo">
-                        <datalist id="titolo" name="titolo">
+                        <datalist id="titolo" ><!--ERRORE CORRETTO RIMOSSO NAME-->
                             <!--valure e passaggio parametro -->
                             {listalibriletti}
                             <!--opzioni tra i libri letti php-->
-                        </datalist><br/>
+                        </datalist><br><!--ERRORE CORRETTO RIMOSSO /-->
                     </fieldset>
                     <fieldset>
                         <legend>La tua Recensione:</legend>
-                        <label for="Commento">Inserisci un commento: </label>
+                        <label for="Commento">Inserisci un commento: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
                         <textarea id="commento" name="commento" rows="15" cols="60"></textarea>
                         <!--come far si che non ci sia lo scorrimento orizzonate per il numero di colonne e righe?-->
-                        <label for="voto">Inserisci il tuo voto (da 1 a 10):</label>
-                        <!--graficamente da telefono diverso magari asse in cui postare -1-2-3-4-5--   -->
+                        <label id="voto">Inserisci il tuo voto (da 1 a 10):</label>
+                        <!--graficamente da telefono diverso magari asse in cui postare -1-2-3-4-5---->
                         <input type="number" id="voto" name="voto" min="1" max="10" required>
                         <!--messaggio di errore se il campo voto non viene compilato -->
                     </fieldset>

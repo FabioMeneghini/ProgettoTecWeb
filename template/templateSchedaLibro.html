@@ -1,4 +1,4 @@
-<!--IN QUESTA PAGINA è IMPORTANTE!!!!!!!!!!!!! IL RANKING-->
+<!--IN QUESTA PAGINA è IMPORTANTE IL RANKING!!!!!!!!!!!!!-->
 <!DOCTYPE html>
 <html lang="it">
     <head>
@@ -23,11 +23,11 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png">
+                <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
-                {menu}
+                {menu}<!--ERRORE MA CREDO VADA BENE -->
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
@@ -48,13 +48,13 @@
             <h3>Numero capitoli:</h3>
             <p>{CapitoliLibro}</p>
             <ul>
-                <dd>Vai alla trama </dd>
-                <dd>Vai alla tua recensione </dd>
-                <dd>Vai alle recensioni della <span lang="en">community</span> </dd>
+                <dd>Vai alla trama </dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                <dd>Vai alla tua recensione </dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                <dd>Vai alle recensioni della <span lang="en">community</span> </dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
             </ul>
             <h3 id="trama">Trama:</h3>
             <p>{TramaLibro}</p>
-            <h3 d="recensione">La tua Recensione:</h3>
+            <h3 d="recensione">La tua Recensione:</h3><!--ERRORE  Attribute d not allowed on element h3 at this point.-->
             {recensione}
             <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
             <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}

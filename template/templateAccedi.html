@@ -20,7 +20,7 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png">
+                <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
             <dl>
@@ -30,7 +30,7 @@
                 <dt>Accedi</dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            </dl><!--ERRORE Either: Zero or more groups each consisting of one or more dt elements followed by one or more dd elements, optionally intermixed with script-supporting elements.-->
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a>&gt; &gt; Accedi</p>
@@ -45,11 +45,11 @@
                     </ul>
                     <fieldset>
                         <label for="username"><span lang="en">Username</span>:</label><br>
-                        <input type="text" id="username" name="username" maxlength="10" required required><br>
+                        <input type="text" id="username" name="username" maxlength="10"  required><br><!--RISOLTO ERRORE DOPPIO REQUIRED-->
                         <label for="password"><span lang="en">password</span>:</label><br>
-                        <input type="password" id="password" name="password" maxlength="10" required required><br>
+                        <input type="password" id="password" name="password" maxlength="10"  required><br><!--RISOLTO ERRORE DOPPIO REQUIRED-->
                         <input type="submit" id="accedi" name="accedi" value="Accedi">
-                        <input type="reset" id="reset" name="reset" value="Cancella"/>
+                        <input type="reset" id="reset" name="reset" value="Cancella"/><!-- NON SEGNALATO COME ERROR MA COME INFO Trailing slash on void elements has no effect and interacts badly with unquoted attribute values.-->
                     </fieldset>
                 </form>
             </section>
