@@ -77,6 +77,6 @@ footer ul li{
     padding: 0em 1em;
 }
 
-.slider{
-    display: none;
+textarea{
+    width: 50%;
 }
