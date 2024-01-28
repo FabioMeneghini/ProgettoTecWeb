@@ -463,6 +463,7 @@ class DBAccess {
     getaltrerecensioni($LibroSelezionato);
     getrecensionetua($LibroSelezionato,$_SESSION['username']);
     getvototuo($LibroSelezionato,$_SESSION['username']);
+     $flagletto= $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
             
     */
 }
