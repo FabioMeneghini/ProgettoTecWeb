@@ -128,7 +128,7 @@ if(isset($_GET['id_libro'])) {
                 <a href="accedi.php">Accedi</a>
                 <p>Non hai ancora un <span lang="en">account</span>?</p>
                 <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
-                <a href="tregistrati.php">Registrati</a><div>'
+                <a href="registrati.php">Registrati</a><div>'
                 //voto vuoto ok non serve ACCESSIBILE O LO LEGGE ? 
             }
             $media_voti = $connection -> getmediavoti($LibroSelezionato);
