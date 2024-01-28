@@ -29,7 +29,7 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt>Categorie</dt>
     {listaGeneri}
     <dt>Area Personale</dt>
-    <dt><a href="tcerca.php">Cerca</a></dt>';
+    <dt><a href="cerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt>Categorie</dt>
@@ -53,8 +53,15 @@ if(isset($_SESSION['admin'])) {
 
 $listaGeneri = "";
 $listaLibri = "";
+$resultKeyword ="";
 if(isset($_GET['genere'])) {
     $genereSelezionato = $_GET['genere'];
+            $tmp = controllagenere($genereSelezionato);
+            if(! $tmp['ok']) {
+                //DOVE VANNO VISUALIZZATI / Gestit QUESTI MESSAGGI? 
+                //TO DO
+                $messaggigenereselezionato.= $tmp['messaggi'];
+            }
     try {
         $connection = new DBAccess();
         $connectionOk = $connection -> openDBConnection();
@@ -62,6 +69,7 @@ if(isset($_GET['genere'])) {
             $resultGeneri = $connection -> getListaGeneri();
             $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
             //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
+            //TO DO DB
             $connection -> closeConnection();
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
                 if($_GET["genere"]==$genere["genere"])
@@ -72,7 +80,6 @@ if(isset($_GET['genere'])) {
             foreach ($risultatiLibri as $libro) {
                 $listaLibri .= '<li><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
             }
-            //DONE
             if(!empty($resultKeyword)) {
                 foreach($resultKeyword as $keyword) {
                     $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
