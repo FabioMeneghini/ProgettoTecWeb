@@ -6,8 +6,8 @@
     <meta name="keyword" content="BookClub, libri, libri dal leggere, consigli libri">
     <meta name="description" content="Sito ufficiale di BookClub, gruppo fondato da Leonardo">
     <link rel="stylesheet" href="css/style.css" media="screen">
-    <link rel="stylesheet" href="mobile.css" media="screen and (max-width:600px)">
-    <link rel="stylesheet" href="print.css" media="print">
+    <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
+    <link rel="stylesheet" href="css/print.css" media="print">
 </head>
 <body>
     <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -15,14 +15,18 @@
         <h1>BookClub</h1>
     </header>
     <nav id="menu">
+        <label for="hamburger" tabindex="0">
+            <img src="menu.png">
+        </label>
+        <input id="hamburger" type="checkbox">
         <ul>
             <li lang="en"><a href="index.html">Home</a></li>
             <li><a href="biografia.html">Biografia</a></li>
             <li>Componenti</li>
-            <li><a href="discografia.html">Discografia</a></li>
+            
         </ul>
     </nav>
-    <nav id="breadcrumb">
+    <nav id="breadcrumbs">
         <p>Ti trovi in: <span lang="en">Home &gt;&gt; Componenti</span></p>
     </nav>
     <main>
@@ -30,56 +34,47 @@
         <dl id="componenti">
             <dt>Baldo Leonardo</dt>
             <dd>
-                <img src="images/RiccardoZanotti.jpg" alt="">
+                <!--<img src="" alt="">-->
                 <dl class="componente">
                     <dt>Data di nascita:</dt>
                     <dd><time datetime="2001-12-31">31 Dicembre 2001</time></dd>
                     <dt>Luogo:</dt>
                     <dd>Verona (<abbr title="Verona">VR</abbr>)</dd>
-                    <dt>Instagram:</dt>
-                    <dd><a href="/">@leoanrdo_baldo</a></dd>
                     <dt>Biografia:</dt>
-                    <dd><strong>Leonardo Baldo</strong> è nato a Verona nel 2001 e fin da bambino ha avuto una predisposizione e passione per i cubi.Dopo aver perfezionato il suo inglese, torna in Italia e fonda assieme ai suoi compagni  <span lang="en">BookClub</span> </dd>
+                    <dd><strong>Leonardo Baldo</strong> è nato a Verona nel 2001 e fin da bambino ha avuto una predisposizione e passione per i cubi.  <span lang="en">BookClub</span> </dd>
                 </dl>
             </dd>
             <dt>Dall'Amico Martina</dt>
             <dd>
-                <img src="images/ElioBiffi.jpg" alt="">
+                
                 <dl class="componente">
                     <dt>Data di nascita:</dt>
                     <dd><time datetime="1994-05-08">08 Maggio 1994</time></dd>
                     <dt>Luogo:</dt>
                     <dd>Seriate (<abbr title="Bergamo">BG</abbr>)</dd>
-                    <dt>Instagram:</dt>
-                    <dd><a href="/">@eliobiffi</a></dd>
                     <dt>Biografia:</dt>
                     <dd><strong>Martina Dall'Amico</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</dd>
                 </dl>
             </dd>
             <dt>Lazzarin Nicola</dt>
             <dd>
-                <img src="images/MatteoLocati.jpg" alt="">
                 <dl class="componente">
                     <dt>Data di nascita:</dt>
                     <dd><time datetime="2002-03-07">7 Marzo 2002</time></dd>
                     <dt>Luogo:</dt>
                     <dd>Abano Terme (<abbr title="Abano Terme">PD</abbr>)</dd>
-                    <dt>Instagram:</dt>
-                    <dd><a href="/">@fallimentiu</a></dd>
                     <dt>Biografia:</dt>
-                    <dd><strong>Lazzarin Nicola</strong> è nato (purtroppo), in provincia di Padova. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</dd>
+                    <dd><strong>Lazzarin Nicola</strong> è nato in provincia di Padova. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</dd>
                 </dl>
             </dd>
             <dt>Fabio Meneghini</dt>
             <dd>
-                <img src="images/SimonePagani.jpg" alt="">
+                
                 <dl class="componente">
                     <dt>Data di nascita:</dt>
                     <dd><time datetime="2002-04-08">08 Aprile 2002</time></dd>
                     <dt>Luogo:</dt>
                     <dd>Pegolotte (<abbr title="Pegolotte">PG</abbr>)</dd>
-                    <dt>Instagram:</dt>
-                    <dd><a href="/">@himu_pagani</a></dd>
                     <dt>Biografia:</dt>
                     <dd>Nato nel 2002, <strong>Fabio Meneghini</strong> fa il tutor da tutta la vita.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</dd>
                 </dl>

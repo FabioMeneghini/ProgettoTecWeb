@@ -1,25 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 html{
     font-size: 120%;
 }
 
-header{
-    padding: 1em;
+#logo{
+    text-align: center;
+}
+
+#logo img{
+    width: 20%;
+}
+
+h1{
+    padding: 0em;
 }
 
 #menu{
-    width: 100%;
-    text-align: center;
-    padding: 0.5em 0em;
+    font-size: 1.2em;
 }
 
-#menu ul li{
-    font-size: 1.5em;
-    display: inline-block;
-    padding: 0em 0.8em;
+input[type="checkbox"]:not(:checked) + ul, input[type="checkbox"]:not(:checked) + dl{
+    display: none;
+}
+
+#menu label{
+    text-align: left;
+    display: block;
+}
+
+#menu label img{
+    width: 10%;
+}
+
+#menu ul li:first-child, #menu dl dt:first-child{
+    padding-top: 1em;
 }
 
 #breadcrumbs{
     display: none;
+}
+
+body{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto 1fr auto;
+    grid-template-areas: "l"
+                         "h"
+                         "m"
+                         "b"
+                         "c"
+                         "f";
+}
+
+article{
+    padding: 0em 0.5em;
+}
+
+h3{
+    padding: 0em 0.5em;
+}
+
+hr{
+    margin: 1em 0em;
 }
 
 footer{
@@ -30,4 +75,8 @@ footer{
 footer ul li{
     display: inline-block;
     padding: 0em 1em;
+}
+
+.slider{
+    display: none;
 }
