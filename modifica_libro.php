@@ -24,28 +24,35 @@ $listaGeneri = "";
 
 //Dentro ad un form non l'ho gestito 
 //TO DO 
-if(isset($_GET['id_libro'])) {
-    $LibroSelezionato = $_GET['id_libro'];
-    $tmp = controllareIdLibro($LibroSelezionato);
-            if(! $tmp['ok']) {
-                //DOVE VANNO VISUALIZZATI / Gestit QUESTI MESSAGGI? 
-                //TO DO
-                $messaggigenereselezionato.= $tmp['messaggi'];
-            }
+/*if(isset($_GET['id'])) {
+    $LibroSelezionato = $_GET['id'];
+    $tmp =$connection ->  controllareIdLibro($LibroSelezionato);
+    if(!$tmp) {
+        //DOVE VANNO VISUALIZZATI / Gestit QUESTI MESSAGGI? 
+        //TO DO
+        //$messaggigenereselezionato.= $tmp['messaggi'];
+    }*/
     //TO DO 
-    try {
-        $connection = new DBAccess();
-        $connectionOk = $connection -> openDBConnection();
-        if($connectionOk) {
-            $resultGeneri = $connection -> getListaGeneri();
-            //$resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
-            $immagine $connection ->  getimmagine($LibroSelezionato);
+try {
+    $connection = new DBAccess();
+    $connectionOk = $connection -> openDBConnection();
+    if($connectionOk) {
+        $resultGeneri = $connection -> getListaGeneri();
+        //$resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
+        //$immagine= $connection ->  getimmagine($LibroSelezionato);
 
-            //TO DO METTERE UN IMG E RESTITUIRE ALT CON UN ALTRA QUARY 
+        //TO DO METTERE UN IMG E RESTITUIRE ALT CON UN ALTRA QUARY 
 
 
-            //IMMAGINE CON ALT no ImgReplace qua
-            //TO DO NEL DB METTERE ALT 
+        //IMMAGINE CON ALT no ImgReplace qua
+        //TO DO NEL DB METTERE ALT
+
+        $ok=false;
+        if(isset($_GET['id'])) {
+            $LibroSelezionato = $_GET['id'];
+            $ok = $connection -> controllareIdLibro($LibroSelezionato);
+        }
+        if($ok) {
             $titolo = $connection ->  gettitololibro($LibroSelezionato);
             $autore = $connection ->  getLibriUtente($LibroSelezionato);
             $genere = $connection ->  getgenereLibro($LibroSelezionato);
@@ -61,9 +68,9 @@ if(isset($_GET['id_libro'])) {
             $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
             //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
             foreach($altre_recensioni as $recensione) {
-                $listaRecensioni.='<dd>.$recensionie["recensione"].</dd>'
+                $listaRecensioni.='<dd>'.$recensione["commento"].'</dd>';
             }
-            $listaRecensioni.="</ul></div>"
+            $listaRecensioni.="</ul></div>";
 
             $connection -> closeConnection();
             
@@ -71,29 +78,33 @@ if(isset($_GET['id_libro'])) {
                 $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
             }
 
-            if(!empty($resultKeyword)) {
+            /*if(!empty($resultKeyword)) {
                 for ($i=0; $i<count($resultKeyword)-1; $i++) {
                     $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
                 }
                 $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
             } else {
                 $listaKeyword = "Miglior libro";
-            }
+            }*/
         }
         else {
-            echo "Connessione fallita";
+            $messaggigenereselezionato.="Libro non trovato";
         }
+    }
+    else {
+        echo "Connessione fallita";
     }
 }
 catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
-$paginaHTML = str_replace("{keywords}", $menu , $paginaHTML);
+
+$paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
-$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri."blabla", $paginaHTML);
 
 //prima sostituisce l'area della recensione con un form poi lo precompila 
-$paginaHTML = str_replace("{arecensionevotoform}", $arearecensionevoto , $paginaHTML);
+//<paginaHTML = str_replace("{arecensionevotoform}", $arearecensionevoto , $paginaHTML);
 
 $paginaHTML = str_replace("{ImmagineLibro}", $immagine , $paginaHTML);
 $paginaHTML = str_replace("{titoloold}", $titolo , $paginaHTML);

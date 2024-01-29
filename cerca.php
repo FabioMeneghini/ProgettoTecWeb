@@ -5,7 +5,7 @@ require_once "DBAccess.php";
 use DB\DBAccess;
 
 $paginaHTML = file_get_contents("template/templatecerca.html");
-$menu ="";
+$menu ="ciaoooooo";
 //utenti
 $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>

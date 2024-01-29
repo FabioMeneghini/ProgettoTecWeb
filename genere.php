@@ -56,8 +56,8 @@ $listaLibri = "";
 $resultKeyword ="";
 if(isset($_GET['genere'])) {
     $genereSelezionato = $_GET['genere'];
-            $tmp = controllagenere($genereSelezionato);
-            if(! $tmp['ok']) {
+            $tmp =$connection ->  controllagenere($genereSelezionato);
+            if(! $tmp== 0) {
                 //DOVE VANNO VISUALIZZATI / Gestit QUESTI MESSAGGI? 
                 //TO DO
                 $messaggigenereselezionato.= $tmp['messaggi'];

@@ -98,7 +98,7 @@ class DBAccess {
     }
 
     public function getListaLibriGenere($genere, $n=1000) {
-        $query = "SELECT titolo, autore FROM libri WHERE genere = '$genere' LIMIT $n";
+        $query = "SELECT titolo, id FROM libri WHERE genere = '$genere' LIMIT $n";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -112,6 +112,7 @@ class DBAccess {
             return null;
         }
     }
+    
     //DONE ma genere deve avere una tabella? 
     public function getKeywordByGenere($genereSelezionato) {
         $query = "SELECT keyword FROM genere WHERE genere = '$genereSelezionato'";
@@ -445,27 +446,206 @@ class DBAccess {
             return null;
         }
     }
-    /*TO DOOOOOOOOOO
+    // controllare presenza di un genere
+    public function controllagenere($genereSelezionato) {
+        $query = "SELECT genere FROM genere WHERE id = '$genereSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+    //DONE 
+    //controllare presenza di un libro 
+    public function controllareIdLibro($LibroSelezionato) {
+        $query = "SELECT id FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    //DONE 
+    //restituire dal data base il campo dati immagine della tabella libri
+    public function getimmagine($LibroSelezionato) {
+        $query = "SELECT immagine FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['immagine'];
+        }
+        else {
+            return null;
+        }
+        //TODO 
+        //da qui dovrebbe partire img replace
+    }
+    //fai una fuznione che restituisce il titolo di un libro dato il suo id
 
-    controllagenere($genereSelezionato);
-    controllareIdLibro($LibroSelezionato);
-    getimmagine($LibroSelezionato);
-    //IMMAGINE CON ALT no ImgReplace qua
-    gettitololibro($LibroSelezionato);
-    getLibriUtente($LibroSelezionato);
-    getgenereLibro($LibroSelezionato);
-    getlinguaLibro($LibroSelezionato);
-    gettramaLibro($LibroSelezionato);
-    getncapitoliLibro($LibroSelezionato);
-    getmediavoti($LibroSelezionato);
-            //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
-            //secondo me è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro 
-    getaltrerecensioni($LibroSelezionato);
-    getrecensionetua($LibroSelezionato,$_SESSION['username']);
-    getvototuo($LibroSelezionato,$_SESSION['username']);
-     $flagletto= $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
-            
-    */
+    public function gettitololibro($LibroSelezionato) {
+        $query = "SELECT titolo FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['titolo'];
+        }
+        else {
+            return null;
+        }
+    }
+    //TO CHECK
+    //a cosa serviva ? public function getLibriUtente($LibroSelezionato) 
+    
+    public function getgenereLibro($LibroSelezionato) {
+        $query = "SELECT genere FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['genere'];
+        }
+        else {
+            return null;
+        }
+    } 
+
+    public function getlinguaLibro($LibroSelezionato) {
+        $query = "SELECT lingua FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['lingua'];
+        }
+        else {
+            return null;
+        }
+    }
+    public function gettramaLibro($LibroSelezionato) {
+        $query = "SELECT trama FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['trama'];
+        }
+        else {
+            return null;
+        }
+    }
+
+
+    public function getncapitoliLibro($LibroSelezionato) {
+        $query = "SELECT n_capitoli FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['n_capitoli'];
+        }
+        else {
+            return null;
+        }
+    }
+    
+    //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
+    //secondo me è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro 
+    //questa funzione deve restituire il parametro media voti di un libro ipotizzando di avere il campo dati media_voti nella tabella dei libri del database
+    //la il libro non ha un parametro media voti ma la quary vanella tabella dei libri terminati di tutti gli utenti e vede se è stato assegnato un voto al libro selezionato 
+    //se è stato assegnato un voto calcola la media voti altrimenti restituisce null
+    /*public function getmediavoti($LibroSelezionato) {
+        $query = "SELECT media_voti FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['media_voti'];
+        }
+        else {
+            return null;
+        }
+    }*/
+    public function getmediavoti($LibroSelezionato) {
+        $query = "SELECT AVG(voto) AS media_voti FROM recensioni WHERE id_libro = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['media_voti'];
+        }
+        else {
+            return null;
+        }
+    }
+    //aggiungere che toni il nome dell'utente che ha lasciato la recensione
+    public function getaltrerecensioni($LibroSelezionato) {
+        $query = "SELECT * FROM recensioni WHERE id_libro = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result; 
+        }
+        else {
+            return null;
+        }
+    }
+    
+    public function getrecensionetua($LibroSelezionato,$utente) {
+        $query = "SELECT * FROM recensioni WHERE id_libro = '$LibroSelezionato' AND username_autore = '$utente'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            if($result != null){
+                return $result; 
+            }
+            else{
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getvototuo($LibroSelezionato,$utente) {
+        $query = "SELECT voto FROM recensioni WHERE id_libro = '$LibroSelezionato' AND username_autore = '$utente'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['voto'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function is_terminato($LibroSelezionato,$utente){
+        $query = "SELECT * FROM ha_letto WHERE id_libro = '$LibroSelezionato' AND username = '$utente'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
-
-?>
+?> 
