@@ -67,10 +67,10 @@ try {
             // è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro ? 
             $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
             //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
-            foreach($altre_recensioni as $recensione) {
+            /*foreach($altre_recensioni as $recensione) {
                 $listaRecensioni.='<dd>'.$recensione["commento"].'</dd>';
-            }
-            $listaRecensioni.="</ul></div>";
+            }//TODOTABELLA
+            $listaRecensioni.="</ul></div>";*/
 
             $connection -> closeConnection();
             

@@ -448,14 +448,15 @@ class DBAccess {
     }
     // controllare presenza di un genere
     public function controllagenere($genereSelezionato) {
-        $query = "SELECT genere FROM genere WHERE id = '$genereSelezionato'";
+        //$query = "SELECT genere FROM genere WHERE id = '$genereSelezionato'";
+        $query = "SELECT genere FROM libri WHERE genere = '$genereSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $queryResult -> free();
-            return 1;
+            return true;
         }
         else {
-            return 0;
+            return false;
         }
     }
     //DONE 
@@ -587,7 +588,7 @@ class DBAccess {
     }
     //aggiungere che toni il nome dell'utente che ha lasciato la recensione
     public function getaltrerecensioni($LibroSelezionato) {
-        $query = "SELECT * FROM recensioni WHERE id_libro = '$LibroSelezionato'";
+        $query = "SELECT username_autore, commento, voto FROM recensioni WHERE id_libro = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();

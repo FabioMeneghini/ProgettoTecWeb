@@ -38,7 +38,6 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>';
 
-
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         $menu = $adminMenu;
@@ -54,18 +53,17 @@ if(isset($_SESSION['admin'])) {
 $listaGeneri = "";
 $listaLibri = "";
 $resultKeyword ="";
-if(isset($_GET['genere'])) {
-    $genereSelezionato = $_GET['genere'];
-            $tmp =$connection ->  controllagenere($genereSelezionato);
-            if(! $tmp== 0) {
-                //DOVE VANNO VISUALIZZATI / Gestit QUESTI MESSAGGI? 
-                //TO DO
-                $messaggigenereselezionato.= $tmp['messaggi'];
-            }
-    try {
-        $connection = new DBAccess();
-        $connectionOk = $connection -> openDBConnection();
-        if($connectionOk) {
+
+try {
+    $connection = new DBAccess();
+    $connectionOk = $connection -> openDBConnection();
+    if($connectionOk) {
+        $ok=false;
+        if(isset($_GET['genere'])) {
+            $genereSelezionato = $_GET['genere'];
+            $ok = $connection -> controllagenere($genereSelezionato);
+        }
+        if($ok) {
             $resultGeneri = $connection -> getListaGeneri();
             $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
             //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
@@ -77,26 +75,40 @@ if(isset($_GET['genere'])) {
                 else
                     $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
             }
-            foreach ($risultatiLibri as $libro) {
-                $listaLibri .= '<li><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
+            if(empty($risultatiLibri)) {
+                $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
             }
-            if(!empty($resultKeyword)) {
+            else {
+                $listaLibri.='<ul class="listagenere">';
+                foreach($risultatiLibri as $libro) {
+                    //$listaLibri.='<li><a href="scehda_libro.php?id='.$libro["id"].'" id="'.$libro["titolo_IR"].'">'.$libro["titolo"].'</a></li>';
+                    $listaLibri.='<li><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
+                    //torna il titolo che deve fare img replace 
+                }
+                $listaLibri.='</ul></div>';
+            }
+        
+            /*if(!empty($resultKeyword)) {
                 foreach($resultKeyword as $keyword) {
                     $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
                 }
             } else {
                 $listaKeyword = "Miglior genere";
-            }
-        } 
-
-        else {
-            echo "Connessione fallita";
+            }*/
         }
-    }
-    catch(Throwable $e) {
-        echo "Errore: ".$e -> getMessage();
+        else {
+            header("Location: 404.html");
+
+        }
+    } 
+    else {
+        echo "Connessione fallita";
     }
 }
+catch(Throwable $e) {
+    echo "Errore: ".$e -> getMessage();
+}
+
 //$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
