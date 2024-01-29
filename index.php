@@ -16,7 +16,7 @@ $paginaHTML = file_get_contents("template/templateHomeNonRegistrato.html");
 
 $listaBestSeller = "";
 $listaGeneri = "";
-$listaLibri = "<div class=listepergenere >";
+$listaLibri = '<hr class="linea"><div class=listepergenere >';
 
 try {
     $connection = new DBAccess();
@@ -33,10 +33,11 @@ try {
             $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
             foreach($risultatiLibri as $libro) {
                 $listaLibri.='<li>.$libro["libro"].</li>';
+                //torna il titolo che deve fare img replace 
             }
             $listaLibri.='</ul>';
         }
-        $listaLibri.="</div>"
+        $listaLibri.="</div>";
         //$risultatiLibri = $connection ->getListaLibriGenere($genere);
         
         foreach($resultListaBestSeller as $libro) {
@@ -73,7 +74,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);
-$paginaHTML = str_replace("{libriGenere}", $risultatiLibri, $paginaHTML);
+$paginaHTML = str_replace("{libriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 
