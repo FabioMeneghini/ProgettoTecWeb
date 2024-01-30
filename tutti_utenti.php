@@ -35,20 +35,20 @@ try {
                                Ogni riga descrive un utente con 4 colonne nell&apos; ordine: nome, cognome, username, email.
                            </p>
                            <table aria-describedby="descr">
-                           <caption>RTutti gli utenti del sito</caption>
-                           <th>
+                           <caption>Tutti gli utenti del sito</caption>
+                           <tr>
                                <th scope="col">Nome</th>
                                <th scope="col">Cognome</th>
                                <th scope="col">Username</th>
                                <th scope="col">Email</th>
 
-                           </th>';
-           foreach($resultUtenti as $libro) {
+                           </tr>';
+           foreach($resultUtenti as $utente) {
             $utenti .= '<tr>
-                        <td scope="row">'.$libro["nome"].'</td>
-                        <td>'.$libro["cognome"].'</td>
-                        <td>'.$libro["username"].'</td>
-                        <td>'.$libro["email"].'</td>
+                        <td scope="row">'.$utente["nome"].'</td>
+                        <td>'.$utente["cognome"].'</td>
+                        <td>'.$utente["username"].'</td>
+                        <td>'.$utente["email"].'</td>
                         </tr>';
            }
            $utenti .= "</table>";
