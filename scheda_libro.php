@@ -117,6 +117,8 @@ try {
             }
             else {
                 $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
+                $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
+                $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
                 if($terminato) {  
                     $tua_recensione = $connection -> getrecensionetua($LibroSelezionato,$_SESSION['username']);
                     $voto = $connection -> getvototuo($LibroSelezionato,$_SESSION['username']);
@@ -141,15 +143,32 @@ try {
                         </section>';
                         //Modifica e annulla attivi su js solo se ha modificato qualcosa
                 }
-                else {
+                else if( $salvato) {
+                    //se inizia a leggerlo deve settare il numero di capitoli letti a 0
+                    $arearecensionevoto='<section id="accediform">
+                        <form action="scheda_libro.php" method="post"> 
+                        <fieldset>
+                            <legend>Inizia a leggere:</legend>
+                            <label for="username">Questo libro è nei tuoi libri salvati .&Egrave; il momento di iniziare a leggerlo?</label><br>
+                            <input type="button" id="inizia" name="inizia" value="inizia">
+                        </fieldset>
+                    </form>
+                    </section>';
+                }
+                else if( $iniziato) {
+                    $arearecensionevoto='<p> Questo libro si trova nella lista di libri che stai leggendo. Per vedere il suo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a> </p>';
+                    //manca id del utente che sta leggendo il libro
+                    
+                }
+                else  {
                     $arearecensionevoto='<section id="accediform">
                         <form action="scheda_libro.php" method="post"> 
                         <fieldset>
                             <legend>Prima di recensire questo libro devi averlo terminato</legend>
                             <label for="username">Salva per leggerlo più tardi:</label>
-                            <input type="button" id="aggiungi" name="aggiungi" value="Aggiungi"><br>
+                            <input type="button" id="salva" name="salva" value="Salva"><br>
                             <label for="username">Inizia a leggere:</label>
-                            <input type="button" id="inizia" name="inizia" value="inizia">
+                            <input type="button" id="inizia" name="inizia" value="Inizia">
                         </fieldset>
                     </form>
                     </section>';

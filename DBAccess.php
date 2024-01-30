@@ -668,8 +668,29 @@ class DBAccess {
             return false;
         }
     }
-    //funzione che torna tuttti gli
 
+    public function is_salvato($LibroSelezionato,$utente){
+        $query = "SELECT * FROM da_leggere WHERE id_libro = '$LibroSelezionato' AND username = '$utente'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public function is_iniziato($LibroSelezionato,$utente){
+        $query = "SELECT * FROM sta_leggendo WHERE id_libro = '$LibroSelezionato' AND username = '$utente'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     public function modificaRecensione($LibroSelezionato, $utente, $commento, $voto) {
         $query = "UPDATE recensioni SET commento = '$commento', voto = '$voto' WHERE id_libro = '$LibroSelezionato' AND username_autore = '$utente'";
         $queryResult = mysqli_query($this -> connection, $query);
