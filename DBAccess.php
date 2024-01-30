@@ -420,23 +420,27 @@ class DBAccess {
     }
 
     public function cercaLibro($stringa, $autore, $genere, $lingua) {
-        $query = "SELECT id,titolo,titolo_ir,descrizione,genere,autore,lingua,
+        $query = "SELECT libri.id, libri.titolo, libri.titolo_ir,
+                         libri.descrizione, libri.autore, libri.lingua, generi.nome AS genere
                   FROM libri
-                  WHERE (titolo LIKE '%$stringa%'
-                  OR trama LIKE '%$stringa%)'
-                  AND autore LIKE '%$autore%'
-                  AND genere LIKE '%$genere%'
-                  AND lingua = '$lingua'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
+                  INNER JOIN generi ON libri.id_genere = generi.id
+                  WHERE libri.titolo LIKE '%$stringa%'
+                  OR libri.autore LIKE '%$autore%'
+                  OR generi.nome LIKE '%$genere%'
+                  OR libri.lingua = '$lingua'";
+        $queryResult = mysqli_query($this->connection, $query);
+        if ($queryResult === false) {
+            echo "<li>Errore durante l'esecuzione della query: " . mysqli_error($this->connection) . "</li>";
+            return null;
+        }
+        if (mysqli_num_rows($queryResult) != 0) {
             $result = array();
-            while($row = mysqli_fetch_assoc($queryResult)) {
+            while ($row = mysqli_fetch_assoc($queryResult)) {
                 $result[] = $row;
             }
-            $queryResult -> free();
+            mysqli_free_result($queryResult);
             return $result;
-        }
-        else {
+        } else {
             return null;
         }
     }

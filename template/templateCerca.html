@@ -39,28 +39,24 @@
                     <fieldset>
                         <legend>Ricerca</legend>
                         <!--da css bisognerebbe far venire o uno o l'altro come formo i filtri che si possano aggiungere sotto-->
-                        <label for="search">Ricerca generale:</label>
-                        <input type="text" id="search" name="search">
-                        <button type="submit">Cerca</button>
+                        <label for="stringa">Ricerca generale:</label>
+                        <input type="text" id="stringa" name="stringa">
+                        <button type="submit" id="cerca_generale" name="cerca_generale">Cerca</button>
                     </fieldset>
                     <fieldset>
                         <legend>Filtri</legend>
                         <!--controllare coerenze con lunghezze
                         in css diminuire lo spazio x la scrittura -->
-                        <label for="author">Autore:</label>
-                        <input type="text" id="author" name="author" maxlength="50">
-                        <label for="genere">Seleziona : </label>
+                        <label for="autore">Autore:</label>
+                        <input type="text" id="autore" name="autore" maxlength="50"><br>
+                        <label for="genere">Genere: </label>
                         <input type="text" list="genere" id="genereInput" name="genere">
                         <datalist id="genere" name="genere">
                             {opzioneGeneri}
                             <!--php solo tra i generi che ho -->
                         </datalist><br/>
-                        <label for="language">Lingua:</label>
-                        <input type="text" list="lingua" id="selezionalingua" name="lingua">
-                        <datalist id="lingua" name="lingua">
-                            {opzioneLingue}
-                            <!--option between todos los idiomas del mundo-->
-                        </datalist><br/>
+                        <label for="lingua">Lingua:</label>
+                        <input type="text" id="lingua" name="lingua">
                         <!--oppure un select semplice senza php?-->
                     </fieldset>
                 </form>
