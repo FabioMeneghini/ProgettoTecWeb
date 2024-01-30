@@ -463,7 +463,7 @@ class DBAccess {
     // controllare presenza di un genere
     public function controllagenere($genereSelezionato) {
         //$query = "SELECT genere FROM genere WHERE id = '$genereSelezionato'";
-        $query = "SELECT genere FROM libri WHERE genere = '$genereSelezionato'";
+        $query = "SELECT nome FROM generi WHERE nome = '$genereSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $queryResult -> free();
@@ -521,12 +521,12 @@ class DBAccess {
     //a cosa serviva ? public function getLibriUtente($LibroSelezionato) 
     
     public function getgenereLibro($LibroSelezionato) {
-        $query = "SELECT genere FROM libri WHERE id = '$LibroSelezionato'";
+        $query = "SELECT generi.nome FROM libri, generi WHERE libri.id_genere=generi.id AND libri.id = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $row = mysqli_fetch_assoc($queryResult);
             $queryResult -> free();
-            return $row['genere'];
+            return $row['nome'];
         }
         else {
             return null;
@@ -589,6 +589,19 @@ class DBAccess {
             return null;
         }
     }*/
+
+    public function getautoreLibro($LibroSelezionato) {
+        $query = "SELECT autore FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['autore'];
+        }
+        else {
+            return null;
+        }
+    }
     public function getmediavoti($LibroSelezionato) {
         $query = "SELECT AVG(voto) AS media_voti FROM recensioni WHERE id_libro = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
@@ -603,7 +616,7 @@ class DBAccess {
     }
     //aggiungere che toni il nome dell'utente che ha lasciato la recensione
     public function getaltrerecensioni($LibroSelezionato) {
-        $query = "SELECT username_autore, commento, voto FROM recensioni WHERE id_libro = '$LibroSelezionato'";
+        $query = "SELECT commento FROM recensioni WHERE id_libro = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();
@@ -619,20 +632,12 @@ class DBAccess {
     }
     
     public function getrecensionetua($LibroSelezionato,$utente) {
-        $query = "SELECT * FROM recensioni WHERE id_libro = '$LibroSelezionato' AND username_autore = '$utente'";
+        $query = "SELECT commento FROM recensioni WHERE id_libro = '$LibroSelezionato' AND username_autore = '$utente'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
-            $result = array();
-            while($row = mysqli_fetch_assoc($queryResult)) {
-                $result[] = $row;
-            }
+            $row = mysqli_fetch_assoc($queryResult);
             $queryResult -> free();
-            if($result != null){
-                return $result; 
-            }
-            else{
-                return null;
-            }
+            return $row['commento'];
         }
         else {
             return null;
@@ -663,8 +668,45 @@ class DBAccess {
             return false;
         }
     }
-    //funzione che torna tuttti gli utenti 
-    //funzione che torna tutti i libri 
+    //funzione che torna tuttti gli
+
+    public function modificaRecensione($LibroSelezionato, $utente, $commento, $voto) {
+        $query = "UPDATE recensioni SET commento = '$commento', voto = '$voto' WHERE id_libro = '$LibroSelezionato' AND username_autore = '$utente'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        return $queryResult;
+    }
+
+    public function getTuttiUtenti() {
+        $query = "SELECT nome, cognome, username, email FROM utenti";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result; 
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getTuttiLibri() {
+        $query = "SELECT titolo, autore, lingua FROM libri";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result; 
+        }
+        else {
+            return null;
+        }
+    }
 
 }
 ?> 

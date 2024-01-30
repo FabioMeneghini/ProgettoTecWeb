@@ -34,16 +34,16 @@
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <!--come ricordarsi da dove è entrato? dalla home , da letti , da leggere o da eliminati? o da generi?-->
-            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; {genereLibro} &gt; &gt; {TitoloLibro}</p>
+            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; <a href="genere.php?genere={GenereLibro}">{GenereLibro}</a> &gt; &gt; {TitoloLibro}</p>
         </nav>
         <main id="content">
             <div id="arealibro">
 
 
                 <div id="datilibro">
-                <img src="copertina" alt=""> 
+               <!-- <img src="copertina" alt=""> 
                 {ImmagineLibro}
-                <!--immagine con alt specifico-->
+                immagine con alt specifico-->
                 <h2 id="titolo">Titolo</h2>
                 <p>{TitoloLibro}</p>
                 <h3>Autore:</h3>
@@ -56,7 +56,7 @@
                 <p>{CapitoliLibro}</p>
                 </div>
                 <!--TO CHECK giuste le aree? -->
-                <h3>Voto medio della nostra <span lang="en">community</span>:{mediavoti}</h3>
+                <h3>Voto medio della nostra <span lang="en">community</span>: {mediavoti}</h3>
                 
                 <ul class="menulibro">
                     <dd><a class="menulibro" href="#trama">Vai alla trama</a> </dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
@@ -71,8 +71,7 @@
                     <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
                     <h4 d="community">Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
                 </div>
-
-        </div>
+            </div>
         </main>
         <footer id="footer">
             <ul>

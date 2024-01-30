@@ -17,7 +17,7 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt>Lista Generi:</dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
-    <dt>Area Personale</dt>
+    <dt><a href="area_personale.php">Area Personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
 //admin
@@ -28,7 +28,7 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt><a href="modifica_libro.php">Modifica Libro</a></dt>
     <dt>Categorie</dt>
     {listaGeneri}
-    <dt>Area Personale</dt>
+    <dt><a href="area_personale.php">Area Personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
@@ -41,14 +41,14 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         $menu = $adminMenu;
-    } else {
-        if(isset($_SESSION['username']))
-            $menu =$userMenu;
-        else
-            $menu =$NonRegistrato;
-
-    }
+    } 
+    else
+        $menu =$userMenu;
 }
+else {
+    $menu =$NonRegistrato;
+}
+
 
 $listaGeneri = "";
 $listaLibri = "";
@@ -70,10 +70,10 @@ try {
             //TO DO DB
             $connection -> closeConnection();
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-                if($_GET["genere"]==$genere["genere"])
-                    $listaGeneri .=$genere["genere"];
+                if($_GET["genere"]==$genere["nome"])
+                    $listaGeneri .=$genere["nome"];
                 else
-                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
             }
             if(empty($risultatiLibri)) {
                 $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';

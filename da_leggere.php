@@ -21,7 +21,7 @@ try {
         $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
         if(empty($lista)) {
             $listaLibri = "Non hai nessun libro da leggere."; //aggiungere link alla pagina di ricerca?
