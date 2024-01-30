@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+        <script src="../slider.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -43,10 +44,13 @@
         </nav>
         <main id="content">
             <h2 class="titologenere"><span lang="en">Best seller:</span></h2>
-            <ol class="listabestseller slider">
-                <!--sono in realtà link a libri !-->{listaBestSeller}<!--ERRORE ACNHE SE CREDO SIA GIUSTO-->
-                <!--da css si deve poter fermare libro che gira-->
-            </ol>
+            <div class="slider-wrapper" data-items="2">
+                <div class="slider">
+                    {listaBestSeller}
+                </div>
+                <button class="prev" type="button">&lt;</button>
+                <button class="next" type="button">&gt;</button>
+            </div>
             {LibriGenere}
         </main>
         <footer id="footer">
@@ -57,5 +61,25 @@
             </ul>
             <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
         </footer>
+        <script>
+            const ELS = (sel, par) => (par || document).querySelectorAll(sel);
+            const EL = (sel, par) => (par || document).querySelector(sel);
+            const mod = (n, m) => (n % m + m) % m;
+
+            ELS(".slider-wrapper").forEach(EL_par => {
+            const EL_slider = EL(".slider", EL_par);
+            const ELS_items = ELS(".item", EL_par);
+            const sub = +EL_par.dataset.items ?? 1;
+            const tot = Math.ceil(ELS_items.length / sub);
+            let c = 0;
+            
+            const anim = () => EL_slider.style.transform = `translateX(-${c*100}%)`;
+            const prev = () => (c = mod(c-1, tot), anim());
+            const next = () => (c = mod(c+1, tot), anim());
+            
+            EL(".prev", EL_par).addEventListener("click", prev);
+            EL(".next", EL_par).addEventListener("click", next);
+            });
+        </script>
     </body>
 </html>

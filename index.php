@@ -63,18 +63,14 @@ try {
             }
            // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
            //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
-           $listaBestSeller .='<li>
-                                <figure>
+            $listaBestSeller .=  '<div class="item">
                                     <img src="copertine_libri/'.$titolo.'.jpg">
-                                    <div class="dati">
                                     <div>'.$libro["autore"].' - '.$libro["titolo"].'</div>
                                     <div>'.$libro["trama"].'</div>
-                                    </div>
-                                </figure>
-                                </li>';
+                                  </div>';
         }
         
-        foreach($resultListaGeneri as $genere) {
+        foreach($resultListaGeneri as $genere){
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
     }
