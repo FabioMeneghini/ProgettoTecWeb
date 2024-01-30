@@ -427,7 +427,7 @@ insert  into `recensioni`(`username_autore`,`id_libro`,`commento`,`voto`) values
 insert  into `recensioni`(`username_autore`,`id_libro`,`commento`,`voto`) values 
 ('mgialli',43,'Mi aspettavo un giallo avvincente, ma sono rimasto deluso. La soluzione del mistero era ovvia e poco originale. Voto basso per la mancanza di suspense.',4);
 insert  into `recensioni`(`username_autore`,`id_libro`,`commento`,`voto`) values 
-('mgialli',44,'Un giallo avvincente con una trama ben intrecciata. Mi ha tenuto sulle spine fino all\'ultima pagina.',8);
+('mgialli',44,'Un giallo avvincente con una trama ben intrecciata. Mi ha tenuto sulle spine fino all ultima pagina.',8);
 insert  into `recensioni`(`username_autore`,`id_libro`,`commento`,`voto`) values 
 ('mrossi',1,'Il peggior libro che abbia mai letto. La trama era assurda e i personaggi erano insopportabili. Evitate questo libro a tutti i costi.',1);
 insert  into `recensioni`(`username_autore`,`id_libro`,`commento`,`voto`) values 
@@ -531,7 +531,7 @@ CREATE TABLE `utenti` (
 insert  into `utenti`(`nome`,`cognome`,`username`,`email`,`password`,`admin`) values 
 ('Anna','Bianchi','abianchi','anna.bianchi@email.com','myp@ssword','\0');
 insert  into `utenti`(`nome`,`cognome`,`username`,`email`,`password`,`admin`) values 
-('Fabio','Mene','admin','admin@email.com','admin','');
+('Fabio','Mene','admin','admin@email.com','admin','');/*TODO cosa vuol dire ?  */;
 insert  into `utenti`(`nome`,`cognome`,`username`,`email`,`password`,`admin`) values 
 ('Alessio','Marrone','amarrone','alessio.marrone@email.com','12345678','\0');
 insert  into `utenti`(`nome`,`cognome`,`username`,`email`,`password`,`admin`) values 

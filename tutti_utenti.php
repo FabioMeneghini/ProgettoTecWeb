@@ -26,6 +26,7 @@ try {
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
         }
+        
     }
     else {
         echo "Connessione fallita";

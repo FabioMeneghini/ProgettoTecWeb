@@ -6,8 +6,7 @@ require_once "DBAccess.php";
 use DB\DBAccess;
 
 if($_SESSION['admin'] == 1) {
-    header("Location: modifca_libro.php"); 
-    //TO DO
+    header("Location: modifica_libro.php"); 
 }
 $paginaHTML = file_get_contents("template/templateSchedaLibro.html");
 $menu ="";
@@ -43,11 +42,11 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>';
 
-if(isset($_SESSION['username'])) {
-            $menu = $userMenu;
-        else
-            $menu = $NonRegistrato;
-}
+if(isset($_SESSION['username']))
+    $menu = $userMenu;
+else
+    $menu = $NonRegistrato;
+
 
 $listaGeneri = "";
 $listaKeyword = "";
@@ -82,28 +81,26 @@ if(isset($_SESSION['username'])) {
     </form>
     </section>';
     //Modifica e annulla attivi su js solo se ha modificato qualcosa
-    else
+}
+else {
     $arearecensionevoto='<h3 d="recensionetua">La tua Recensione e il tuo Voto:</h3>{recensione}{voto}';
 }
-
-if(isset($_GET['id_libro'])) {
-    //E' ID LIBRO NEL DB VERO ? 
-    // TO CHECK
-    $LibroSelezionato = $_GET['id_libro'];
-    $tmp = controllareIdLibro($LibroSelezionato);
-            if(! $tmp['ok']) {
-                //DOVE VANNO VISUALIZZATI / Gestit QUESTI MESSAGGI? 
-                //TO DO
-                $messaggigenereselezionato.= $tmp['messaggi'];
-            }
-    //TO DO 
-    try {
-        $connection = new DBAccess();
-        $connectionOk = $connection -> openDBConnection();
-        if($connectionOk) {
+//TO DO 
+try {
+    $connection = new DBAccess();
+    $connectionOk = $connection -> openDBConnection();
+    if($connectionOk) {
+        $ok=false;
+        if(isset($_GET['id'])) {
+            //E' ID LIBRO NEL DB VERO ? 
+            // TO CHECK
+            $LibroSelezionato = $_GET['id'];
+            $ok = $connessione -> controllareIdLibro($LibroSelezionato);
+        }
+        if($ok) {
             $resultGeneri = $connection -> getListaGeneri();
             //$resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
-            $immagine $connection ->  getimmagine($LibroSelezionato);
+            //$immagine=$connection ->  getimmagine($LibroSelezionato);
             //IMMAGINE CON ALT no ImgReplace qua
             //TO DO NEL DB METTERE ALT 
             $titolo = $connection ->  gettitololibro($LibroSelezionato);
@@ -115,55 +112,76 @@ if(isset($_GET['id_libro'])) {
             //admin reindirizzato non ha la , non registrato ha link accedi, se registrato con rec la ha in textarea
             //se non è un libro che ha terminato ha aggiungi ai salvati 
             // se è un libro terminato ha una text area con lascia una recensione 
-                if(isset($_SESSION['username'])) {
-                    $tua_recensione = $connection -> getrecensionetua($LibroSelezionato,$_SESSION['username']);
-                    $voto = $connection -> getvototuo($LibroSelezionato,$_SESSION['username']);
-                    //se la recensione è vuota
-                    if($tua_recensione==' '){
-                        $tua_recensione='Scrivi qui una recensione';
-                        //il voto rimane vuoto ok place holder vuoto
-                    }
-                else
-                $tua_recensione ='<div><p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
-                <a href="accedi.php">Accedi</a>
-                <p>Non hai ancora un <span lang="en">account</span>?</p>
-                <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
-                <a href="registrati.php">Registrati</a><div>'
-                //voto vuoto ok non serve ACCESSIBILE O LO LEGGE ? 
-            }
-            $media_voti = $connection -> getmediavoti($LibroSelezionato);
-            //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
-            // è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro ? 
-            $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
-            //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
-            foreach($altre_recensioni as $recensione) {
-                $listaRecensioni.='<dd>.$recensionie["recensione"].</dd>'
-            }
-            $listaRecensioni.="</ul></div>"
-
-            $connection -> closeConnection();
-            
-            foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-                $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
-            }
-
-            if(!empty($resultKeyword)) {
-                for ($i=0; $i<count($resultKeyword)-1; $i++) {
-                    $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
+            $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
+            if(isset($_SESSION['username'])&& $terminato) {
+                $tua_recensione = $connection -> getrecensionetua($LibroSelezionato,$_SESSION['username']);
+                $voto = $connection -> getvototuo($LibroSelezionato,$_SESSION['username']);
+                //se la recensione è vuota
+                if($tua_recensione==''){
+                    $tua_recensione='Scrivi qui una recensione';
+                    //il voto rimane vuoto ok place holder vuoto
                 }
-                $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
-            } else {
-                $listaKeyword = "Miglior libro";
+                else if(isset($_SESSION['username'])&& !$terminato) {
+                    $tua_recensione ='<section id="accediform"><h2>Prima di recensire questo libro devi averlo terminato :</h2>
+                    <form action=".php" method="post"> 
+                        <ul class="messaggiErrore">
+                            {messaggi}
+                            <!--con js non lasciare submit se i campi dati non sono compilati correttamente-->
+                        </ul>
+                        <fieldset>
+                            <legend></legend>
+                            <label for="username">Salva per leggerlo più tardi:</label><br>
+                            <input type="button" id="aggiungi" name="aggiungi" value="Aggiungi">
+                            <label for="username">Inizia a leggere:</label><br>
+                            <input type="button" id="inizia" name="inizia" value="inizia">
+                        </fieldset>
+                    </form>
+                    </section>';
+                }
+                else {
+                    $tua_recensione ='<div><p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
+                    <a href="accedi.php">Accedi</a>
+                    <p>Non hai ancora un <span lang="en">account</span>?</p>
+                    <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
+                    <a href="registrati.php">Registrati</a><div>';
+                    //voto vuoto ok non serve ACCESSIBILE O LO LEGGE ?
+                }
+        
+                $media_voti = $connection -> getmediavoti($LibroSelezionato);
+                //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
+                // è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro ? 
+                $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
+                //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
+                foreach($altre_recensioni as $recensione) {
+                    $listaRecensioni.='<dd>'.$recensione["commento"].'</dd>';
+                }
+                $listaRecensioni.="</ul></div>";
+
+                $connection -> closeConnection();
+                
+                foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+                }
+
+                if(!empty($resultKeyword)) {
+                    for ($i=0; $i<count($resultKeyword)-1; $i++) {
+                        $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
+                    }
+                    $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
+                } else {
+                    $listaKeyword = "Miglior libro";
+                }
             }
         }
-        else {
-            echo "Connessione fallita";
-        }
+    }
+    else {
+        echo "Connessione fallita";
     }
 }
 catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
+
 $paginaHTML = str_replace("{keywords}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
