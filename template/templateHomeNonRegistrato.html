@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+        <script src="./slider.js"></script> 
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -43,8 +44,12 @@
         </nav>
         <main  id="content">
             <h2 class="titologenere"><span lang="en">Best seller:</span></h2>
-            <div class="slider">
-                {listaBestSeller}
+            <div class="slider-wrapper" data-items="2">
+                <div class="slider">
+                    {listaBestSeller}
+                </div>
+                <button class="prev" type="button">&larr;</button>
+                <button class="next" type="button">&rarr;</button>
             </div>
             <hr>
             {LibriGenere}
