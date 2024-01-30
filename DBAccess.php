@@ -714,7 +714,7 @@ class DBAccess {
     }
 
     public function getTuttiLibri() {
-        $query = "SELECT titolo, autore, lingua FROM libri";
+        $query = "SELECT id, titolo_ir,titolo, autore, lingua FROM libri";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();

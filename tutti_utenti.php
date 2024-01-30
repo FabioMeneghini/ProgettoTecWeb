@@ -23,10 +23,39 @@ try {
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $resultGeneri = $connection -> getListaGeneri();
+        $resultUtenti=  $connection -> getTuttiUtenti();
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
              $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
+        
+        if(!empty($resultUtenti)){
+            $utenti.= '<p id="descr">
+                               La tabella contiene l&apos; elenco di tutti gli utenti registrati al sito .
+                               Ogni riga descrive un utente con 4 colonne nell&apos; ordine: nome, cognome, username, email.
+                           </p>
+                           <table aria-describedby="descr">
+                           <caption>RTutti gli utenti del sito</caption>
+                           <th>
+                               <th scope="col">Nome</th>
+                               <th scope="col">Cognome</th>
+                               <th scope="col">Username</th>
+                               <th scope="col">Email</th>
+
+                           </th>';
+           foreach($resultUtenti as $libro) {
+            $utenti .= '<tr>
+                        <td scope="row">'.$libro["nome"].'</td>
+                        <td>'.$libro["cognome"].'</td>
+                        <td>'.$libro["username"].'</td>
+                        <td>'.$libro["email"].'</td>
+                        </tr>';
+           }
+           $utenti .= "</table>";
+       }
+       else{
+           $utenti= '<p>Al momento non ci sono utenti registrati al tuo servizio.</p>';
+       }
         
     }
     else {

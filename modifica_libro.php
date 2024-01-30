@@ -1,5 +1,5 @@
 <?php
-
+//dovrebbe eliminarlo e modificare anche la copertina 
 include "config.php";
 
 require_once "DBAccess.php";
