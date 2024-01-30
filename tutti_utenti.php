@@ -16,6 +16,7 @@ else {
 $paginaHTML = file_get_contents("template/templateTuttiUtenti.html");
 
 $listaGeneri = "";
+$utenti="";
 
 try {
     $connection = new DBAccess();
@@ -37,6 +38,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{ListaUtenti}", $utenti, $paginaHTML);
 echo $paginaHTML;
 
 ?>
