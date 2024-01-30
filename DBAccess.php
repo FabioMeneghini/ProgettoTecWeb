@@ -410,7 +410,7 @@ class DBAccess {
     }
 
     public function cercaLibro($stringa, $autore, $genere, $lingua) {
-        $query = "SELECT id
+        $query = "SELECT id,titolo,titolo_ir,descrizione,genere,autore,lingua,
                   FROM libri
                   WHERE (titolo LIKE '%$stringa%'
                   OR trama LIKE '%$stringa%)'
@@ -474,6 +474,7 @@ class DBAccess {
     }
     //DONE 
     //restituire dal data base il campo dati immagine della tabella libri
+    //questo del libro si poteva condenzare in 1 sola con un array ummm in futuro :(
     public function getimmagine($LibroSelezionato) {
         $query = "SELECT immagine FROM libri WHERE id = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
@@ -648,5 +649,8 @@ class DBAccess {
             return false;
         }
     }
+    //funzione che torna tuttti gli utenti 
+    //funzione che torna tutti i libri 
+
 }
 ?> 
