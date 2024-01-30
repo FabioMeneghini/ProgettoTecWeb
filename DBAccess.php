@@ -24,7 +24,10 @@ class DBAccess {
     }
 
     public function getListaBestSeller() {
-        $query = "SELECT titolo, autore, genere, trama FROM libri LIMIT 10";
+        $query = "SELECT libri.titolo, libri.autore, libri.trama, generi.nome
+                  FROM libri, generi
+                  WHERE libri.id_genere=generi.id
+                  LIMIT 10";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -82,7 +85,7 @@ class DBAccess {
     }
 
     public function getListaGeneri() {
-        $query = "SELECT genere FROM libri GROUP BY genere";
+        $query = "SELECT nome FROM generi";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -98,7 +101,7 @@ class DBAccess {
     }
 
     public function getListaLibriGenere($genere, $n=1000) {
-        $query = "SELECT titolo, id FROM libri WHERE genere = '$genere' LIMIT $n";
+        $query="SELECT libri.titolo, libri.id FROM libri, generi WHERE libri.id_genere=generi.id AND generi.nome='$genere' LIMIT $n";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -369,9 +372,10 @@ class DBAccess {
 
     //questa funzione preleva dal database i 5 generi che hanno più libri
     public function getGeneriPiuPopolari() {
-        $query = "SELECT genere, COUNT(*) AS numeroLibri
+        $query = "SELECT generi.nome AS genere, COUNT(*) AS numeroLibri
                   FROM libri
-                  GROUP BY genere
+                  INNER JOIN generi ON libri.id_genere = generi.id
+                  GROUP BY generi.nome
                   ORDER BY numeroLibri DESC LIMIT 5";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
@@ -389,12 +393,18 @@ class DBAccess {
 
     //questa funzione preleva dal database i 5 generi che l'utente con username $username ha letto di più
     public function getGeneriPiuLetti($username) {
-        $query = "SELECT libri.genere, COUNT(*) AS numeroLibri
-                  FROM libri, ha_letto
-                  WHERE ha_letto.username = '$username'
-                  AND ha_letto.id_libro = libri.id
-                  GROUP BY libri.genere
-                  ORDER BY numeroLibri DESC LIMIT 5";
+        $query = "SELECT generi.nome AS genere, COUNT(*) AS numeroLibri
+                  FROM libri
+                  INNER JOIN generi ON libri.id_genere = generi.id
+                  WHERE EXISTS (
+                      SELECT 1
+                      FROM ha_letto
+                      WHERE ha_letto.username = '$username'
+                      AND ha_letto.id_libro = libri.id
+                  )
+                  GROUP BY generi.nome
+                  ORDER BY numeroLibri DESC
+                  LIMIT 5";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();

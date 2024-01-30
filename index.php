@@ -75,7 +75,7 @@ try {
         }
         
         foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
     }
     else {
