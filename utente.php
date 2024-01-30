@@ -16,23 +16,38 @@ else {
 
 $paginaHTML = file_get_contents("template/templateHomeUtente.html");
 
-$liste = "";
-$listaGeneri = "";
 
+$listaGeneri = "";
+$listaLibri = '<div class="libri_genere">';
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        $resultNEW = $connection -> getGeneriPiuLetti($_SESSION['username']);
+        if (is_array($resultNEW)) {
+            foreach ($resultNEW as $genere) {
+                $listaLibri.='<hr><h3><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
+                $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
+                if(empty($risultatiLibri)) {
+                    $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
+                }
+                else {
+                    $listaLibri.='<ul class="listagenere">';
+                    foreach($risultatiLibri as $libro) {
+                        //$listaLibri.='<li><a href="scehda_libro.php?id='.$libro["id"].'" id="'.$libro["titolo_IR"].'">'.$libro["titolo"].'</a></li>';
+                        $listaLibri.='<li><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
+                        //torna il titolo che deve fare img replace 
+                    }
+                    $listaLibri.='</ul>';
+                }
+            }
+            $listaLibri.="</div>";
+        }
+        //$risultatiLibri = $connection ->getListaLibriGenere($genere);
+        
         $resultGeneri = $connection -> getListaGeneri();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
-            $liste .= '<h2 class="titologenere"><a href="templateGenere.html">'.$genere['genere'].'</a></h2>
-                       <ul class="listageneri">';
-            $listaLibri = $connection -> getListaLibriGenere($genere['genere']);
-            foreach($listaLibri as $libro) {
-                $liste .= "<li>".$libro["titolo"]."</li>"; //$libro["autore"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
-            }
-            $liste .= "</ul>";
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
         $connection -> closeConnection();
     }
@@ -44,7 +59,7 @@ catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
 
-$paginaHTML = str_replace("{listeLibri}", $liste, $paginaHTML);
+$paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 

@@ -67,9 +67,10 @@
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
 
-                        <label id="Lingua">Lingua originale : </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID->
+                        <label id="Lingua">Lingua originale : </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
                         <input list="lingua" id="selezionalingua" name="lingua" placeholder="{linguaold}" value="{linguaold}">
-                        <datalist id="lingua" ><!--ERRORE CORRETTO RIMOSSO NAME-->
+                        <datalist id="lingua" >
+                            <!--ERRORE CORRETTO RIMOSSO NAME-->
                             {listaLingue}
                             <!--option between todos los idiomas del mundo-->
                         </datalist><br><!--ERRORE CORRETTO RIMOSSO /-->
@@ -80,17 +81,26 @@
                        
                     </fieldset>
                     <fieldset>
-                        <legend>Storia :</legend>
+                        <legend>Storia:</legend>
                         <legend for="trama">Trama del libro:</legend><!--ERRORE  Element legend not allowed as child of element fieldset in this context. (Suppressing further errors from this subtree.)-->
                         <textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}">"{tramaold}"</textarea>
                     </fieldset>
                     <fieldset>
                         <legend>Genere</legend>
-                        <label id="genere">Seleziona : </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
+                        <label id="genere">Seleziona: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
                         <input list="genere" id="genereInput" name="genere">
                         <datalist id="genere"  placeholder="{genereold}" value="{genereold}"> <!--ERRORE CORRETTO RIMOSSO NAME--><!--ERRORE Attribute value not allowed on element datalist at this point. /-->
-                            {listaGeneri}
+                            <option value="Mela">
+                            <option value="Banana">
+                            <option value="Arancia">
+                            <option value="Pera">
+                            <option value="Kiwi">
                         </datalist><br><!--ERRORE CORRETTO RIMOSSO /-->
+                    </fieldset>
+                    <fieldset>
+                        <legend>Recensioni</legend>
+                        <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+                        <h4>Voto medio: </h4>{mediavoti}
                     </fieldset>
                     <fieldset>
                         <legend>Concludi l'inserimento:</legend>
@@ -100,8 +110,6 @@
                     </fieldset>
                 </form>
             </section>
-            <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
-            <h4>Voto medio: </h4>{mediavoti}
         </main>
         <footer id="footer">
             <ul>

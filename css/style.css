@@ -8,7 +8,7 @@
     --flagColor: #008280;
     --background: white;
     --textColor: black;
-    --linkMenuColor: #fffdd6; 
+    --linkMenuColor: black; /*#fffdd6*/
     --visitedLinkMenuColor: black;
     --menuTextColor: #ccecec;
     --linkColor:#0B2114 ;

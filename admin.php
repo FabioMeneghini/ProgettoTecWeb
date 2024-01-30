@@ -26,7 +26,7 @@ try {
         $n_utenti= $connection -> getUtentiCheStannoLeggendoCount();
         $resultListaGeneri = $connection -> getListaGeneri();
         foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
         $connection -> closeConnection();
     }
