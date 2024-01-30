@@ -42,20 +42,20 @@ try {
                             </p>
                             <table aria-describedby="descr">
                             <caption>Lista dei libri che stai leggendo</caption>
-                            <tr>
+                            <th>
                                 <th scope="col">Titolo</th>
                                 <th scope="col">Autore</th>
                                 <th scope="col">Genere</th>
                                 <th scope="col">Numero capitoli letti</th>
                                 <th scope="col">Leggi capitolo</th>
-                            </tr>';
+                            </th>';
             foreach($lista as $libro) {
                 $listaLibri .= '<tr>
                                     <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td>'.$libro["genere"].'</td>
                                     <td>'.$libro["n_capitoli_letti"].'/'.$libro["n_capitoli"].'</td>
-                                    <td>?????</td>
+                                    <td></td>
                                 </tr>';
             }
             $listaLibri .= "</table>";
