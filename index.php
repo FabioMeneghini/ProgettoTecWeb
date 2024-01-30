@@ -70,7 +70,7 @@ try {
                                   </div>';
         }
         
-        foreach($resultListaGeneri as $genere) {
+        foreach($resultListaGeneri as $genere){
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
     }
