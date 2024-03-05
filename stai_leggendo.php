@@ -28,7 +28,7 @@ try {
         $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
         if(empty($lista)) {
             $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati
@@ -42,13 +42,13 @@ try {
                             </p>
                             <table aria-describedby="descr">
                             <caption>Lista dei libri che stai leggendo</caption>
-                            <th>
+                            <tr>
                                 <th scope="col">Titolo</th>
                                 <th scope="col">Autore</th>
                                 <th scope="col">Genere</th>
                                 <th scope="col">Numero capitoli letti</th>
                                 <th scope="col">Leggi capitolo</th>
-                            </th>';
+                            </tr>';
             foreach($lista as $libro) {
                 $listaLibri .= '<tr>
                                     <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>

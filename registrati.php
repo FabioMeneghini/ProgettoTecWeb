@@ -72,7 +72,7 @@ if(isset($_POST['registrati'])) {
                     $connection -> closeConnection();
 
                     foreach($resultListaGeneri as $genere) {
-                        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+                         $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
                     }
                     if($erroriRegistrazione == "") {
                         //$messaggiPerForm .= "<li>Registrazione avvenuta con successo</li>";

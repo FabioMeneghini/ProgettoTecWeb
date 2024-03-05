@@ -82,7 +82,7 @@ if(isset($_GET['genere'])) {
                 if($_GET["genere"]==$genere["genere"])
                 $listaGeneri .=$genere["genere"];
                 else
-                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></dd>';
+                     $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
             }
             //DONE
             if(!empty($resultKeyword)) {

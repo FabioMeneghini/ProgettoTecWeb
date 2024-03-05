@@ -88,14 +88,14 @@ try {
                             </p>
                             <table aria-describedby="descr">
                             <caption>Risultati della tua ricerca</caption>
-                            <th>
+                            <tr>
                                 <th scope="col">Titolo</th>
                                 <th scope="col">Copertina</th>
                                 <th scope="col">Autore</th>
                                 <th scope="col">Genere</th>
                                 <th scope="col">lingua </th>
 
-                            </th>';
+                            </tr>';
                             //"copertine_libri/'..$libro["titolo_ir"].jpg"
             foreach($libri_ricercati as $libro) {
                 $rislutati_ricerca .= '<tr>
