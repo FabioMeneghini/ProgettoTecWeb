@@ -5,11 +5,11 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-if(isset($_SESSION['admin'])) {
+/*if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         header("Location: modifica_libro.php");
     }
-}
+}*/
 $paginaHTML = file_get_contents("template/templateSchedaLibro.html");
 $menu ="";
 //utenti
@@ -24,8 +24,6 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="area_personale.php">Area Personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
-/*admin
-L'Admin non entra qua quando entra in una scheda libro la può modificare quindi entra direttamente in modifica libro 
 $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
     <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
@@ -35,7 +33,6 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     {listaGeneri}
     <dt>Area Personale</dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
-*/
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt>Categorie</dt>
@@ -44,10 +41,20 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>';
 
-if(isset($_SESSION['username']))
+$menupersonale = "";
+
+if(isset($_SESSION['username'])){
     $menu = $userMenu;
-else
+    $menupersonale = '<dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>';
+}
+else if(isset($_SESSION['admin'])) {
+    if($_SESSION['admin'] == 1) 
+    $menu = $adminMenu;
+}
+else {
     $menu = $NonRegistrato;
+    $menupersonale = '<dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>';
+}
 
 
 $messaggiForm = "";
@@ -105,7 +112,6 @@ try {
             //admin reindirizzato non ha la , non registrato ha link accedi, se registrato con rec la ha in textarea
             //se non è un libro che ha terminato ha aggiungi ai salvati 
             // se è un libro terminato ha una text area con lascia una recensione 
-
 
             if(!isset($_SESSION['username'])) {
                 $arearecensionevoto='<h3 id="recensionetua">La tua Recensione e il tuo Voto:</h3>{recensione}';
@@ -217,6 +223,7 @@ catch(Throwable $e) {
 //$paginaHTML = str_replace("{keywords}", $keyword ,$paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{menupersonale}", $menupersonale, $paginaHTML);
 
 //prima sostituisce l'area della recensione con un form poi lo compila 
 $paginaHTML = str_replace("{arecensionevotoform}", $arearecensionevoto , $paginaHTML);

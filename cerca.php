@@ -6,6 +6,7 @@ use DB\DBAccess;
 
 $paginaHTML = file_get_contents("template/templatecerca.html");
 $menu ="";
+$breadcrumbs = "";
 //utenti
 $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
@@ -36,17 +37,33 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt>Cerca</dt>';
 
-if(isset($_SESSION['admin'])) {
+/*if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         $menu = $adminMenu;
+        $breadcrumbs = "admin.php";
     } else {
+        $breadcrumbs = "index.php";
         if(isset($_SESSION['username']))
             $menu =$userMenu;
         else
             $menu =$NonRegistrato;
 
     }
+}*/
+if(isset($_SESSION['username'])){
+    $menu = $userMenu;
+    $breadcrumbs = "index.php";
 }
+else if(isset($_SESSION['admin'])) {
+    if($_SESSION['admin'] == 1) 
+    $menu = $adminMenu;
+    $breadcrumbs = "admin.php";
+}
+else {
+    $menu = $NonRegistrato;
+    $breadcrumbs = "index.php";
+}
+
 $listaGeneri = "";
 $risultatoRicerca="";
 $opzioneGeneri="";
@@ -100,16 +117,17 @@ try {
             foreach($libri_ricercati as $libro) {
                 $rislutati_ricerca .= '<tr>
                                     <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                    <td><img src="copertine_libri/_1984.jpg" alt="'.$libro["descrizione"].'"></td>
+                                    <td><img src="copertine_libri/..$libro["titolo_ir"].jpg" alt="'.$libro["descrizione"].'"></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td>'.$libro["genere"].'</td>
                                     <td>'.$libro["lingua"].'</td>
                                 </tr>';
             }
             $rislutati_ricerca .= "</table>";
-        }
-        else{
-            if($messaggi_form=="")
+        } else if (empty($libri_ricercati) && $messaggi_form=="") {
+
+        } else {
+            if($messaggi_form=="" && $libri_ricercati==null)
             $rislutati_ricerca= '<p>Ci scusiamo ma al momento non abbiamo libri che corrispondono alla tua ricerca</p>';
         }
         foreach($resultGeneri as $genere) {
@@ -128,10 +146,13 @@ catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
+$paginaHTML = str_replace("{breadcrumbs}", $breadcrumbs, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{opzioneGeneri}", $opzioneGeneri, $paginaHTML);
 $paginaHTML = str_replace("{rislutati}", $rislutati_ricerca, $paginaHTML);
 $paginaHTML = str_replace("{messaggiForm}", $messaggi_form, $paginaHTML);
+
+
 
 echo $paginaHTML;
 
