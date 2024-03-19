@@ -37,6 +37,7 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt>Cerca</dt>';
 
+
 /*if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         $menu = $adminMenu;
@@ -50,14 +51,15 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
 
     }
 }*/
-if(isset($_SESSION['username'])){
+if(isset($_SESSION['admin'])) {
+    if($_SESSION['admin'] == 1) {
+        $menu = $adminMenu;
+        $breadcrumbs = "admin.php";
+    }
+}
+else if(isset($_SESSION['username'])){
     $menu = $userMenu;
     $breadcrumbs = "index.php";
-}
-else if(isset($_SESSION['admin'])) {
-    if($_SESSION['admin'] == 1) 
-    $menu = $adminMenu;
-    $breadcrumbs = "admin.php";
 }
 else {
     $menu = $NonRegistrato;
@@ -124,10 +126,10 @@ try {
                                 </tr>';
             }
             $rislutati_ricerca .= "</table>";
-        } else if (empty($libri_ricercati) && $messaggi_form=="") {
-
-        } else {
-            if($messaggi_form=="" && $libri_ricercati==null)
+        }
+        else 
+          {
+            if($messaggi_form=="")
             $rislutati_ricerca= '<p>Ci scusiamo ma al momento non abbiamo libri che corrispondono alla tua ricerca</p>';
         }
         foreach($resultGeneri as $genere) {
@@ -151,8 +153,6 @@ $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{opzioneGeneri}", $opzioneGeneri, $paginaHTML);
 $paginaHTML = str_replace("{rislutati}", $rislutati_ricerca, $paginaHTML);
 $paginaHTML = str_replace("{messaggiForm}", $messaggi_form, $paginaHTML);
-
-
 
 echo $paginaHTML;
 

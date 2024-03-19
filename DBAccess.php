@@ -729,5 +729,22 @@ class DBAccess {
         }
     }
 
+    public function aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere) {
+        $query = "INSERT INTO libri (titolo, autore, lingua, n_capitoli, trama, id_genere) 
+                  VALUES (?, ?, ?, ?, ?, (SELECT id FROM generi WHERE nome = ?))";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("sssiss", $titolo, $autore, $lingua, $capitoli, $trama, $genere);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+            }
+            $stmt->close();
+        }
+    }
+
+
 }
 ?> 
