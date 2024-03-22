@@ -132,22 +132,6 @@ class DBAccess {
             return null;
         }
     }
-
-    public function getKeywordLibro($LibroSelezionato) {
-        $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this->connection, $query);
-    
-        if (mysqli_num_rows($queryResult) != 0) {
-            $result = array();
-            while ($row = mysqli_fetch_assoc($queryResult)) {
-                $result[] = $row['keyword'];
-            }
-            mysqli_free_result($queryResult);
-            return $result;
-        } else {
-            return null;
-        }
-    }
     
     public function getUtentiRegistratiCount() {
         $query = "SELECT COUNT(*) AS numeroUtenti FROM utenti";
@@ -489,13 +473,13 @@ class DBAccess {
     //DONE 
     //restituire dal data base il campo dati immagine della tabella libri
     //questo del libro si poteva condenzare in 1 sola con un array ummm in futuro :(
-    public function getimmagine($LibroSelezionato) {
-        $query = "SELECT immagine FROM libri WHERE id = '$LibroSelezionato'";
+    public function getcopertina($LibroSelezionato) {
+        $query = "SELECT titolo_ir FROM libri WHERE id = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $row = mysqli_fetch_assoc($queryResult);
             $queryResult -> free();
-            return $row['immagine'];
+            return $row['titolo_ir'];
         }
         else {
             return null;
@@ -504,6 +488,36 @@ class DBAccess {
         //da qui dovrebbe partire img replace
     }
     //fai una fuznione che restituisce il titolo di un libro dato il suo id
+
+    public function getkeywords($LibroSelezionato) {
+        $query = "SELECT keywords FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['keywords'];
+        }
+        else {
+            return null;
+        }
+        //TODO 
+        //da qui dovrebbe partire img replace
+    }
+
+    public function getalt($LibroSelezionato) {
+        $query = "SELECT descrizione FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['descrizione'];
+        }
+        else {
+            return null;
+        }
+        //TODO 
+        //da qui dovrebbe partire img replace
+    }
 
     public function gettitololibro($LibroSelezionato) {
         $query = "SELECT titolo FROM libri WHERE id = '$LibroSelezionato'";
@@ -572,24 +586,6 @@ class DBAccess {
         }
     }
     
-    //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
-    //secondo me è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro 
-    //questa funzione deve restituire il parametro media voti di un libro ipotizzando di avere il campo dati media_voti nella tabella dei libri del database
-    //la il libro non ha un parametro media voti ma la quary vanella tabella dei libri terminati di tutti gli utenti e vede se è stato assegnato un voto al libro selezionato 
-    //se è stato assegnato un voto calcola la media voti altrimenti restituisce null
-    /*public function getmediavoti($LibroSelezionato) {
-        $query = "SELECT media_voti FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['media_voti'];
-        }
-        else {
-            return null;
-        }
-    }*/
-
     public function getautoreLibro($LibroSelezionato) {
         $query = "SELECT autore FROM libri WHERE id = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
@@ -745,6 +741,14 @@ class DBAccess {
         }
     }
 
+    public function eliminaLibro($id_libro) {
+        $query = "DELETE FROM libri WHERE id = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la cancellazione del libro: " . $this -> connection -> error . "</li>";
+        }
+        return $queryResult;
+    }
 
 }
 ?> 

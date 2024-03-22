@@ -46,7 +46,7 @@ try {
            foreach($risultLibri as $libro) {
             $catalogo .= '<tr>
                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                   <td><img src="copertine_libri/_1984.jpg" alt="'.$libro["descrizione"].'"></td>
+                                   <td><img src="copertine_libri/_1984.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
                                    <td>'.$libro["autore"].'</td>
                                    <td>'.$libro["lingua"].'</td>
                                </tr>';
