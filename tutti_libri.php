@@ -17,13 +17,29 @@ $paginaHTML = file_get_contents("template/templateTuttiLibri.html");
 
 $listaGeneri = "";
 $catalogo="";
+$opzione="";
+$selezionato_alfabetico="";
+$selezionato_popolarita="";
+$selezionato_piu_recente="";
+$selezionato_meno_recente="";
 
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $resultGeneri = $connection -> getListaGeneri();
-        $risultLibri= $connection ->getTuttiLibri();
+        if(isset($_POST['ordina'])) {
+            if(isset($_POST['opzione'])) {
+                $opzione=$_POST['opzione'];
+                $risultLibri= $connection ->getTuttiLibriOrdinati($_POST['opzione']);
+            }
+            else {
+                $risultLibri= $connection ->getTuttiLibriOrdinati("alfabetico");
+            }
+        }
+        else {
+            $risultLibri= $connection ->getTuttiLibri();
+        }
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
@@ -46,7 +62,7 @@ try {
            foreach($risultLibri as $libro) {
             $catalogo .= '<tr>
                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                   <td><img src="copertine_libri/_1984.jpg" alt="'.$libro["descrizione"].'"></td>
+                                   <td><img src="copertine_libri/'.$libro['titolo_ir'].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
                                    <td>'.$libro["autore"].'</td>
                                    <td>'.$libro["lingua"].'</td>
                                </tr>';
@@ -65,6 +81,22 @@ catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
 
+if($opzione=="alfabetico"){
+    $selezionato_alfabetico="selected";
+}
+else if($opzione=="popolarita"){
+    $selezionato_popolarita="selected";
+}
+else if($opzione=="piu_recente"){
+    $selezionato_piu_recente="selected";
+}
+else if($opzione=="meno_recente"){
+    $selezionato_meno_recente="selected";
+}
+$paginaHTML = str_replace("{selected_alfabetico}", $selezionato_alfabetico, $paginaHTML);
+$paginaHTML = str_replace("{selected_popolarita}", $selezionato_popolarita, $paginaHTML);
+$paginaHTML = str_replace("{selected_piu_recente}", $selezionato_piu_recente, $paginaHTML);
+$paginaHTML = str_replace("{selected_meno_recente}", $selezionato_meno_recente, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{CatalogoLibri}", $catalogo, $paginaHTML);
 echo $paginaHTML;

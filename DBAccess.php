@@ -132,22 +132,6 @@ class DBAccess {
             return null;
         }
     }
-
-    public function getKeywordLibro($LibroSelezionato) {
-        $query = "SELECT keyword FROM libro WHERE titolo = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this->connection, $query);
-    
-        if (mysqli_num_rows($queryResult) != 0) {
-            $result = array();
-            while ($row = mysqli_fetch_assoc($queryResult)) {
-                $result[] = $row['keyword'];
-            }
-            mysqli_free_result($queryResult);
-            return $result;
-        } else {
-            return null;
-        }
-    }
     
     public function getUtentiRegistratiCount() {
         $query = "SELECT COUNT(*) AS numeroUtenti FROM utenti";
@@ -489,13 +473,13 @@ class DBAccess {
     //DONE 
     //restituire dal data base il campo dati immagine della tabella libri
     //questo del libro si poteva condenzare in 1 sola con un array ummm in futuro :(
-    public function getimmagine($LibroSelezionato) {
-        $query = "SELECT immagine FROM libri WHERE id = '$LibroSelezionato'";
+    public function getcopertina($LibroSelezionato) {
+        $query = "SELECT titolo_ir FROM libri WHERE id = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $row = mysqli_fetch_assoc($queryResult);
             $queryResult -> free();
-            return $row['immagine'];
+            return $row['titolo_ir'];
         }
         else {
             return null;
@@ -504,6 +488,36 @@ class DBAccess {
         //da qui dovrebbe partire img replace
     }
     //fai una fuznione che restituisce il titolo di un libro dato il suo id
+
+    public function getkeywords($LibroSelezionato) {
+        $query = "SELECT keywords FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['keywords'];
+        }
+        else {
+            return null;
+        }
+        //TODO 
+        //da qui dovrebbe partire img replace
+    }
+
+    public function getalt($LibroSelezionato) {
+        $query = "SELECT descrizione FROM libri WHERE id = '$LibroSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['descrizione'];
+        }
+        else {
+            return null;
+        }
+        //TODO 
+        //da qui dovrebbe partire img replace
+    }
 
     public function gettitololibro($LibroSelezionato) {
         $query = "SELECT titolo FROM libri WHERE id = '$LibroSelezionato'";
@@ -572,24 +586,6 @@ class DBAccess {
         }
     }
     
-    //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
-    //secondo me è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro 
-    //questa funzione deve restituire il parametro media voti di un libro ipotizzando di avere il campo dati media_voti nella tabella dei libri del database
-    //la il libro non ha un parametro media voti ma la quary vanella tabella dei libri terminati di tutti gli utenti e vede se è stato assegnato un voto al libro selezionato 
-    //se è stato assegnato un voto calcola la media voti altrimenti restituisce null
-    /*public function getmediavoti($LibroSelezionato) {
-        $query = "SELECT media_voti FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['media_voti'];
-        }
-        else {
-            return null;
-        }
-    }*/
-
     public function getautoreLibro($LibroSelezionato) {
         $query = "SELECT autore FROM libri WHERE id = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
@@ -714,7 +710,92 @@ class DBAccess {
     }
 
     public function getTuttiLibri() {
-        $query = "SELECT id, titolo_ir,titolo,descrizione, autore, lingua FROM libri";
+        $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result; 
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere) {
+        $query = "INSERT INTO libri (titolo, autore, lingua, n_capitoli, trama, id_genere) 
+                  VALUES (?, ?, ?, ?, ?, (SELECT id FROM generi WHERE nome = ?))";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("sssiss", $titolo, $autore, $lingua, $capitoli, $trama, $genere);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+            }
+            $stmt->close();
+        }
+    }
+
+    public function eliminaLibro($id_libro) {
+        $query = "DELETE FROM libri WHERE id = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la cancellazione del libro: " . $this -> connection -> error . "</li>";
+        }
+        return $queryResult;
+    }
+
+    public function getTuttiLibriOrdinati($opzione) {
+        if($opzione=="alfabetico")
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+        else if($opzione=="piu_recente")
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+        else if($opzione=="meno_recente")
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+        else if($opzione=="popolarita")
+            $query = "SELECT l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua, COUNT(hl.id_libro) + COUNT(sl.id_libro) AS conteggio
+                      FROM libri l
+                      LEFT JOIN ha_letto hl ON l.id = hl.id_libro
+                      LEFT JOIN sta_leggendo sl ON l.id = sl.id_libro
+                      GROUP BY l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua
+                      ORDER BY conteggio DESC";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result; 
+        }
+        else {
+            return null;
+        }
+    }
+    public function getTuttiUtentiOrdinati($opzione) {
+        if($opzione=="alfabetico_username")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+        else if($opzione=="alfabetico_nome")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY nome ASC";
+        else if($opzione=="alfabetico_cognome")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY cognome ASC";
+        else if($opzione=="data_piu_recente")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+        else if($opzione=="data_meno_recente")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+        else// ($opzione=="attivi")
+            $query = "SELECT utenti.nome, utenti.cognome, utenti.username, utenti.email, COUNT(sta_leggendo.username) AS numeroLibri
+                      FROM utenti
+                      LEFT JOIN sta_leggendo ON utenti.username = sta_leggendo.username
+                      GROUP BY utenti.username
+                      ORDER BY numeroLibri DESC";
+        
+
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();

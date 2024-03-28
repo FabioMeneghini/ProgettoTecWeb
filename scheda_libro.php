@@ -43,13 +43,15 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
 
 $menupersonale = "";
 
-if(isset($_SESSION['username'])){
+
+if(isset($_SESSION['admin'])) {
+    if($_SESSION['admin'] == 1) {
+        $menu = $adminMenu;
+    }
+}
+else if(isset($_SESSION['username'])){
     $menu = $userMenu;
     $menupersonale = '<dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>';
-}
-else if(isset($_SESSION['admin'])) {
-    if($_SESSION['admin'] == 1) 
-    $menu = $adminMenu;
 }
 else {
     $menu = $NonRegistrato;
@@ -60,7 +62,6 @@ else {
 $messaggiForm = "";
 $listaGeneri = "";
 $listaKeyword = "";
-$immagine ="";//IMMAGINE CON ALT no ImgReplace qua
 //TO DO NEL DB METTERE ALT 
 $titolo = "";
 $autore = "";
@@ -75,6 +76,9 @@ $media_voti = "";
 $listaRecensioni = '<div class="recensioni"><ul>';
 //chiama se stessa come pagina nel form
 $arearecensionevoto="";
+$copertina="";
+$alt="";
+$bottoni_admin="";
 
 //TO DO 
 try {
@@ -99,9 +103,7 @@ try {
         }
         if($ok) {
             $resultGeneri = $connection -> getListaGeneri();
-            //$resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
-            //$immagine=$connection ->  getimmagine($LibroSelezionato);
-            //IMMAGINE CON ALT no ImgReplace qua
+            $listaKeyword = $connection->getkeywords($LibroSelezionato);
             //TO DO NEL DB METTERE ALT 
             $titolo = $connection ->  gettitololibro($LibroSelezionato);
             $autore = $connection ->  getautoreLibro($LibroSelezionato);
@@ -109,6 +111,9 @@ try {
             $lingua = $connection ->  getlinguaLibro($LibroSelezionato);
             $trama = $connection ->  gettramaLibro($LibroSelezionato);
             $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
+            $copertina = $connection -> getcopertina($LibroSelezionato);
+            $alt = $connection -> getalt($LibroSelezionato);
+
             //admin reindirizzato non ha la , non registrato ha link accedi, se registrato con rec la ha in textarea
             //se non è un libro che ha terminato ha aggiungi ai salvati 
             // se è un libro terminato ha una text area con lascia una recensione 
@@ -121,7 +126,7 @@ try {
                                 <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
                                 <a href="registrati.php">Registrati</a><div>';
             }
-            else {
+            else if(!isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
                 $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
                 $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
                 $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
@@ -149,7 +154,7 @@ try {
                         </section>';
                         //Modifica e annulla attivi su js solo se ha modificato qualcosa
                 }
-                else if( $salvato) {
+                else if($salvato) {
                     //se inizia a leggerlo deve settare il numero di capitoli letti a 0
                     $arearecensionevoto='<section id="accediform">
                         <form action="scheda_libro.php" method="post"> 
@@ -161,7 +166,7 @@ try {
                     </form>
                     </section>';
                 }
-                else if( $iniziato) {
+                else if($iniziato) {
                     $arearecensionevoto='<p> Questo libro si trova nella lista di libri che stai leggendo. Per vedere il suo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a> </p>';
                     //manca id del utente che sta leggendo il libro
                     
@@ -179,6 +184,21 @@ try {
                     </form>
                     </section>';
                 }
+            }
+            else {
+                $bottoni_admin='<section id="bottoni_admin">
+                    <form action="modifica_libro.php" method="get"> 
+                        <fieldset>
+                            <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                            <input type="submit" id="modifica" name="modifica" value="Modifica">
+                        </fieldset>
+                    </form>
+                    <form action="elimina_libro.php" method="get">
+                        <fieldset>
+                            <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                            <input type="submit" id="elimina" name="elimina" value="Elimina">
+                        </fieldset>
+                    </form>';
             }
             $media_voti = $connection -> getmediavoti($LibroSelezionato);
             //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
@@ -211,6 +231,11 @@ try {
             }
     
         }
+        else {
+            header("Location: index.php");
+            //header("Location: index.php?success=0??????"); //MOSTRARE MESSAGE DI ERRORE (libro non trovato)
+            exit();
+        }
     }
     else {
         echo "Connessione fallita";
@@ -220,7 +245,7 @@ catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
 
-//$paginaHTML = str_replace("{keywords}", $keyword ,$paginaHTML);
+$paginaHTML = str_replace("{keywords}", $listaKeyword ,$paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{menupersonale}", $menupersonale, $paginaHTML);
@@ -228,7 +253,8 @@ $paginaHTML = str_replace("{menupersonale}", $menupersonale, $paginaHTML);
 //prima sostituisce l'area della recensione con un form poi lo compila 
 $paginaHTML = str_replace("{arecensionevotoform}", $arearecensionevoto , $paginaHTML);
 
-$paginaHTML = str_replace("{ImmagineLibro}", $immagine , $paginaHTML);
+$paginaHTML = str_replace("{ImmagineLibro}", "copertine_libri/".$copertina.".jpg", $paginaHTML);
+$paginaHTML = str_replace("{altlibro}", $alt , $paginaHTML);
 $paginaHTML = str_replace("{TitoloLibro}", $titolo , $paginaHTML);
 $paginaHTML = str_replace("{AutoreLibro}", $autore, $paginaHTML);
 $paginaHTML = str_replace("{GenereLibro}", $genere["nome"], $paginaHTML);
@@ -236,6 +262,7 @@ $paginaHTML = str_replace("{LinguaLibro}", $lingua , $paginaHTML);
 $paginaHTML = str_replace("{mediavoti}", number_format(doubleval($media_voti), 1), $paginaHTML);
 $paginaHTML = str_replace("{CapitoliLibro}", $n_capitoli , $paginaHTML);
 $paginaHTML = str_replace("{tramaLibro}", $trama , $paginaHTML);
+$paginaHTML = str_replace("{bottoniAdmin}", $bottoni_admin , $paginaHTML);
 $paginaHTML = str_replace("{recensione}", $tua_recensione , $paginaHTML);
 $paginaHTML = str_replace("{voto}", $voto, $paginaHTML);
 $paginaHTML = str_replace("{recensioniComunity}", $listaRecensioni, $paginaHTML);

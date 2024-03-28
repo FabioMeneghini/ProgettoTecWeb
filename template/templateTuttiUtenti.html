@@ -45,6 +45,19 @@
         </nav>
         <main id="content">
             <h2>Tutti gli utenti:</h2>
+            <form method="post" action="tutti_utenti.php">
+                <label for="opzioni_ordinamento">Ordina per:</label>
+                <select id="opzioni_ordinamento" name="opzione">
+                    <option value="alfabetico_nome" {selected_alfabetico_nome}>Alfabetico per nome</option>
+                    <option value="alfabetico_cognome" {selected_alfabetico_cognome}>Alfabetico per cognome</option>
+                    <option value="alfabetico_username" {selected_alfabetico_username}>Alfabetico per username</option>
+                    <option value="data_iscrizione_piu_recente" {selected_data_piu_recente}>Data iscrizione più recente</option>
+                    <option value="data_iscrizione_meno_recente" {selected_data_meno_recente}>Data iscrizione meno recente</option>
+                    <option value="attivi" {selected_attivi}>Più attivi</option>
+                </select>
+                <input type="submit" value="Ordina" name="ordina" id="ordina">
+            </form>
+
             {ListaUtenti}
             <!--trona la lista con tutti gli utenti con button x eliminarli (modifica anche?) 
             può decidere l'ordine di visualizzazione?-->

@@ -101,7 +101,7 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
-$paginaHTML = str_replace("{listaGeneri}", $listaGeneri."blabla", $paginaHTML);
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 
 //prima sostituisce l'area della recensione con un form poi lo precompila 
 //<paginaHTML = str_replace("{arecensionevotoform}", $arearecensionevoto , $paginaHTML);
