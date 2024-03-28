@@ -127,10 +127,9 @@ try {
             }
             $rislutati_ricerca .= "</table>";
         }
-        else 
-          {
+        else {
             if($messaggi_form=="")
-            $rislutati_ricerca= '<p>Ci scusiamo ma al momento non abbiamo libri che corrispondono alla tua ricerca</p>';
+                $rislutati_ricerca= '<p>Ci scusiamo ma al momento non abbiamo libri che corrispondono alla tua ricerca</p>';
         }
         foreach($resultGeneri as $genere) {
             $opzioneGeneri .= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';

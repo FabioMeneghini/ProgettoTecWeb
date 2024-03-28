@@ -17,13 +17,30 @@ $paginaHTML = file_get_contents("template/templateTuttiUtenti.html");
 
 $listaGeneri = "";
 $utenti="";
+$alfabetico_nome="";
+$alfabetico_cognome="";
+$alfabetico_username="";
+$data_iscrizione_piu_recente="";
+$data_iscrizione_meno_recente="";
+$attivi="";
 
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
         $resultGeneri = $connection -> getListaGeneri();
-        $resultUtenti=  $connection -> getTuttiUtenti();
+        if(isset($_POST['ordina'])) {
+            if(isset($_POST['opzione'])) {
+                $opzione=$_POST['opzione'];
+                $resultUtenti= $connection ->getTuttiUtentiOrdinati($_POST['opzione']);
+            }
+            else {
+                $resultUtenti= $connection ->getTuttiUtentiOrdinati("alfabetico_nome");
+            }
+        }
+        else {
+            $resultUtenti=  $connection -> getTuttiUtenti();
+        }
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
              $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
@@ -65,6 +82,30 @@ try {
 catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
+if($opzione=="alfabetico_nome"){
+    $alfabetico_nome="selected";
+}
+else if($opzione=="alfabetico_cognome"){
+    $alfabetico_cognome="selected";
+}
+else if($opzione=="alfabetico_username"){
+    $alfabetico_username="selected";
+}
+else if($opzione=="data_iscrizione_piu_recente"){
+    $data_iscrizione_piu_recente="selected";
+}
+else if($opzione=="data_iscrizione_meno_recente"){
+    $data_iscrizione_meno_recente="selected";
+}
+else if($opzione=="attivi"){
+    $attivi="selected";
+}
+$paginaHTML = str_replace("{selected_alfabetico_nome}", $alfabetico_nome, $paginaHTML);
+$paginaHTML = str_replace("{selected_alfabetico_cognome}", $alfabetico_cognome, $paginaHTML);
+$paginaHTML = str_replace("{selected_alfabetico_username}", $alfabetico_username, $paginaHTML);
+$paginaHTML = str_replace("{selected_data_iscrizione_piu_recente}", $data_iscrizione_piu_recente, $paginaHTML);
+$paginaHTML = str_replace("{selected_data_iscrizione_meno_recente}", $data_iscrizione_meno_recente, $paginaHTML);
+$paginaHTML = str_replace("{selected_attivi}", $attivi, $paginaHTML);
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{ListaUtenti}", $utenti, $paginaHTML);
