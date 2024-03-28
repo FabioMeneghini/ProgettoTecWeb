@@ -67,15 +67,14 @@
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
 
-                        <label id="Lingua">Lingua originale : </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
+                        <label id="Lingua">Lingua originale: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
                         <input list="lingua" id="selezionalingua" name="lingua" placeholder="{linguaold}" value="{linguaold}">
                         <datalist id="lingua" >
                             <!--ERRORE CORRETTO RIMOSSO NAME-->
                             {listaLingue}
-                            <!--option between todos los idiomas del mundo-->
                         </datalist><br><!--ERRORE CORRETTO RIMOSSO /-->
                         
-                        <label id="durata">Nunero capitoli: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
+                        <label id="durata">Numero capitoli: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
                         <input type="number" name="capitoli" id="capitoli" max="1000" required placeholder="{capitoliold}" value="{capitoliold}" ><!--ERRORE Bad value {capitoliold} for attribute value on element input: Expected a minus sign or a digit but saw { instead./--><!--ERRORE CORRETTO RIMOSSO /-->
 
                        
@@ -88,14 +87,10 @@
                     <fieldset>
                         <legend>Genere</legend>
                         <label id="genere">Seleziona: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
-                        <input list="genere" id="genereInput" name="genere">
-                        <datalist id="genere"  placeholder="{genereold}" value="{genereold}"> <!--ERRORE CORRETTO RIMOSSO NAME--><!--ERRORE Attribute value not allowed on element datalist at this point. /-->
-                            <option value="Mela">
-                            <option value="Banana">
-                            <option value="Arancia">
-                            <option value="Pera">
-                            <option value="Kiwi">
-                        </datalist><br><!--ERRORE CORRETTO RIMOSSO /-->
+                        <select id="genere"  placeholder="{genereold}" value="{genereold}"> <!--ERRORE CORRETTO RIMOSSO NAME--><!--ERRORE Attribute value not allowed on element datalist at this point. /-->
+                            {selectGeneri}
+                            <!--option between todos los generos del mundo-->
+                        </select><br><!--ERRORE CORRETTO RIMOSSO /-->
                     </fieldset>
                     <fieldset>
                         <legend>Recensioni</legend>

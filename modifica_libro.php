@@ -17,10 +17,11 @@ $lingua = "";
 $trama = "";
 $n_capitoli = "";
 $media_voti = "";
+$lista_lingue="";
+$data_list_generi="";
 $listaRecensioni = "<div class=recensioni ><ul>";
 //chiama se stessa come pagina nel form
 //TO DO deve avere un bottone per eliminarle una ad una è una tabella ? 
-$listaGeneri = "";
 
 //Dentro ad un form non l'ho gestito 
 //TO DO 
@@ -54,7 +55,7 @@ try {
         }
         if($ok) {
             $titolo = $connection ->  gettitololibro($LibroSelezionato);
-            $autore = $connection ->  getLibriUtente($LibroSelezionato);
+            $autore = $connection ->  getautoreLibro($LibroSelezionato);
             $genere = $connection ->  getgenereLibro($LibroSelezionato);
             $lingua = $connection ->  getlinguaLibro($LibroSelezionato);
             $trama = $connection ->  gettramaLibro($LibroSelezionato);
@@ -71,12 +72,18 @@ try {
                 $listaRecensioni.='<dd>'.$recensione["commento"].'</dd>';
             }//TODOTABELLA
             $listaRecensioni.="</ul></div>";*/
-
+            $resultGeneri = $connection -> getListaGeneri();
+            $resultLingue= $connection -> getLingueLibri();
             $connection -> closeConnection();
             
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
                  $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+                 $data_list_generi .= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
             }
+            foreach($resultLingue as $lingue) { //per ogni genere, creo una lista di libri di quel genere
+                $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
+            }
+
 
             /*if(!empty($resultKeyword)) {
                 for ($i=0; $i<count($resultKeyword)-1; $i++) {
@@ -102,7 +109,8 @@ catch(Throwable $e) {
 $paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
-
+$paginaHTML = str_replace("{selectGeneri}", $data_list_generi, $paginaHTML);
+$paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);
 //prima sostituisce l'area della recensione con un form poi lo precompila 
 //<paginaHTML = str_replace("{arecensionevotoform}", $arearecensionevoto , $paginaHTML);
 
