@@ -710,7 +710,7 @@ class DBAccess {
     }
 
     public function getTuttiLibri() {
-        $query = "SELECT id, titolo_ir,titolo,descrizione, autore, lingua FROM libri";
+        $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();
@@ -748,6 +748,66 @@ class DBAccess {
             echo "<li>Errore durante la cancellazione del libro: " . $this -> connection -> error . "</li>";
         }
         return $queryResult;
+    }
+
+    public function getTuttiLibriOrdinati($opzione) {
+        if($opzione=="alfabetico")
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+        else if($opzione=="piu_recente")
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+        else if($opzione=="meno_recente")
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+        else if($opzione=="popolarita")
+            $query = "SELECT l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua, COUNT(hl.id_libro) + COUNT(sl.id_libro) AS conteggio
+                      FROM libri l
+                      LEFT JOIN ha_letto hl ON l.id = hl.id_libro
+                      LEFT JOIN sta_leggendo sl ON l.id = sl.id_libro
+                      GROUP BY l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua
+                      ORDER BY conteggio DESC";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result; 
+        }
+        else {
+            return null;
+        }
+    }
+    public function getTuttiUtentiOrdinati($opzione) {
+        if($opzione=="alfabetico_username")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+        else if($opzione=="alfabetico_nome")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY nome ASC";
+        else if($opzione=="alfabetico_cognome")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY cognome ASC";
+        else if($opzione=="data_piu_recente")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+        else if($opzione=="data_meno_recente")
+            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+        else// ($opzione=="attivi")
+            $query = "SELECT utenti.nome, utenti.cognome, utenti.username, utenti.email, COUNT(sta_leggendo.username) AS numeroLibri
+                      FROM utenti
+                      LEFT JOIN sta_leggendo ON utenti.username = sta_leggendo.username
+                      GROUP BY utenti.username
+                      ORDER BY numeroLibri DESC";
+        
+
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                $result[] = $row;
+            }
+            $queryResult -> free();
+            return $result; 
+        }
+        else {
+            return null;
+        }
     }
 
 }

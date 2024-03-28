@@ -43,6 +43,17 @@
         </nav>
         <main id="content">
             <h2>Tutti i libri:</h2>
+            <form method="post" action="tutti_libri.php">
+                <label for="opzioni_ordinamento">Ordina per:</label>
+                <select id="opzioni_ordinamento" name="opzione">
+                    <option value="alfabetico" {selected_alfabetico}>Alfabetico</option>
+                    <option value="popolarita" {selected_popolarita}>Popolarità</option>
+                    <option value="piu_recente" {selected_piu_recente}>Più recente</option>
+                    <option value="meno_recente" {selected_meno_recente}>Meno recente</option>
+                </select>
+                <input type="submit" value="Ordina" name="ordina" id="ordina">
+            </form>
+
             <!--scelta ordinamento-->
             {CatalogoLibri} 
             <!--trona la lista/tabella delle recensioni con button x eliminarle e button x like e senza immagini-->
