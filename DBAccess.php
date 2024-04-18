@@ -435,7 +435,7 @@ class DBAccess {
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();
             while($row = mysqli_fetch_assoc($queryResult)) {
-                $result[] = $row['lingua'];
+                $result[] = $row;
             }
             $queryResult -> free();
             return $result;
@@ -744,9 +744,9 @@ class DBAccess {
     public function eliminaLibro($id_libro) {
         $query = "DELETE FROM libri WHERE id = '$id_libro'";
         $queryResult = mysqli_query($this -> connection, $query);
-        if($queryResult === false) {
+        /*if($queryResult === false) {
             echo "<li>Errore durante la cancellazione del libro: " . $this -> connection -> error . "</li>";
-        }
+        }*/
         return $queryResult;
     }
 
@@ -794,8 +794,6 @@ class DBAccess {
                       LEFT JOIN sta_leggendo ON utenti.username = sta_leggendo.username
                       GROUP BY utenti.username
                       ORDER BY numeroLibri DESC";
-        
-
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();
@@ -809,6 +807,37 @@ class DBAccess {
             return null;
         }
     }
+
+    /*public function modificaLibro($id_libro, $titolo, $autore, $lingua, $capitoli, $trama, $genere) {
+        $query = "UPDATE libri SET titolo = '$titolo', autore = '$autore', lingua = '$lingua', n_capitoli = '$capitoli', trama = '$trama', id_genere = (SELECT id FROM generi WHERE nome = '$genere') 
+        WHERE id = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        return $queryResult;
+    }*/
+
+    public function modificaLibro($id_libro=45, $titolo='ciaooooooooo', $autore='ciao', $lingua ='ciao', $capitoli=3, $trama='ciao', $genere=2) {
+        $query='UPDATE libri SET titolo=?, autore=?, lingua=?, n_capitoli=?, trama=?, id_genere=(SELECT id FROM generi WHERE nome = ?) WHERE id = ?';
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt===false)
+            return false;
+        else {
+            $stmt->bind_param('sssissi', $titolo, $autore, $lingua, $capitoli, $trama, $genere, $id_libro);
+            $result = $stmt->execute();
+            $stmt->close();
+            return $result;
+        }
+    }
+
+    /*public function modificaLibro($id_libro, $titolo, $autore, $lingua, $capitoli, $trama, $genere) {
+        if(eliminaLibro($id_libro)) {
+            if(aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere))
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
+    }*/
 
 }
 ?> 

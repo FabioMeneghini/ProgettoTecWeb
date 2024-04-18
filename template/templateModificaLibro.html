@@ -33,7 +33,6 @@
                 <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
                 <dt><a href="tutti_libri.php">Catalogo Libri</a></dt>
                 <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-                <dt>Modifica Libro</dt>
                 <!--non direttemante da qua o si ? -->
                 <dt>Categorie</dt>
                 {listaGeneri}
@@ -50,12 +49,12 @@
             <img> <!--ERRORE immagine con alt specifico--><!--ERRORE MANCA src-->
             <section id="modificaLibro">
                 <h2>Inserisci i nuovi dati del libro</h2>
-                <form method="post" action="modifica_libro.php"> 
+                <form method="post" action="modifica.php"> 
                     {messaggiForm}
                     <fieldset>
 
-                        <legend>Informazioni genere: </legend>
-                        <label for="titolo">Autore: </label>
+                        <legend>Informazioni generali: </legend>
+                        <label for="autore">Autore: </label>
                         <input type="text" id="autore" name="autore"  placeholder="{autoreold}" value="{autoreold}"><!--ERRORE CORRETTO MIN MAX-->
                         <br><!--ERRORE CORRETTO TOLTO /-->
                         <label for="titolo">Titolo: </label>
@@ -70,9 +69,8 @@
                         <label id="Lingua">Lingua originale: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
                         <input list="lingua" id="selezionalingua" name="lingua" placeholder="{linguaold}" value="{linguaold}">
                         <datalist id="lingua" >
-                            <!--ERRORE CORRETTO RIMOSSO NAME-->
                             {listaLingue}
-                        </datalist><br><!--ERRORE CORRETTO RIMOSSO /-->
+                        </datalist>
                         
                         <label id="durata">Numero capitoli: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
                         <input type="number" name="capitoli" id="capitoli" max="1000" required placeholder="{capitoliold}" value="{capitoliold}" ><!--ERRORE Bad value {capitoliold} for attribute value on element input: Expected a minus sign or a digit but saw { instead./--><!--ERRORE CORRETTO RIMOSSO /-->
@@ -87,10 +85,10 @@
                     <fieldset>
                         <legend>Genere</legend>
                         <label id="genere">Seleziona: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
-                        <select id="genere"  placeholder="{genereold}" value="{genereold}"> <!--ERRORE CORRETTO RIMOSSO NAME--><!--ERRORE Attribute value not allowed on element datalist at this point. /-->
+                        <select name="genere" id="genere" placeholder="{genereold}" value="{genereold}"> <!--ERRORE CORRETTO RIMOSSO NAME--><!--ERRORE Attribute value not allowed on element datalist at this point. /-->
                             {selectGeneri}
                             <!--option between todos los generos del mundo-->
-                        </select><br><!--ERRORE CORRETTO RIMOSSO /-->
+                        </select><!--ERRORE CORRETTO RIMOSSO /-->
                     </fieldset>
                     <fieldset>
                         <legend>Recensioni</legend>
@@ -98,12 +96,25 @@
                         <h4>Voto medio: </h4>{mediavoti}
                     </fieldset>
                     <fieldset>
-                        <legend>Concludi l'inserimento:</legend>
-                        <button type="submit">Modifica</button>
+                        <input type="hidden" id="id" name="id" value="{id_libro}">
+                        <input type="submit" id="modifica" name="modifica" value="modifica">
                         <button type="reset">Annulla</button>
-                        <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
                 </form>
+                <!--
+                <section><legend>Concludi l'inserimento:</legend></section>
+                <form method="get" action="modifica.php" >
+                    <fieldset>
+                        <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                        <input type="submit" id="modifica" name="modifica" value="modifica">
+                    </fieldset>
+                </form>
+                
+                <form method="get" action="modifica_libro.php" >
+                    <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                    <button type="reset">Annulla</button>
+                </form>
+                -->
             </section>
         </main>
         <footer id="footer">

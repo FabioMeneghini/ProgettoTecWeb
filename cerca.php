@@ -24,7 +24,6 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
     <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
     <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-    <dt><a href="modifica_libro.php">Modifica Libro</a></dt>
     <dt>Categorie</dt>
     {listaGeneri}
     <dt><a href="area_personale.php">Area Personale</a></dt>

@@ -41,6 +41,9 @@ else {
 $paginaHTML = file_get_contents("template/templateAggiungiLibro.html");
 
 $listaGeneri = "";
+$messaggi = "";
+$lista_lingue="";
+$data_list_generi="";
 
 try {
     $connection = new DBAccess();
@@ -49,6 +52,15 @@ try {
         $resultGeneri = $connection -> getListaGeneri();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        }
+        $resultLingue= $connection -> getLingueLibri();
+        
+        foreach($resultGeneri as $genere1) { //per ogni genere, creo una lista di libri di quel genere
+            $data_list_generi.= '<option value="'.$genere1["nome"].'">'.$genere1["nome"].'</option>';
+
+        }
+        foreach($resultLingue as $lingue) { //lista di tutte le lingue
+            $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>'; ////////////////////////////////
         }
 
         if(isset($_POST['inserisci'])) {
@@ -66,7 +78,8 @@ try {
                 $connection -> closeConnection();
             }
             else {
-                $paginaHTML = str_replace("{messaggi}", $ok["messaggi"], $paginaHTML);
+                //$paginaHTML = str_replace("{messaggiForm}", $ok["messaggi"], $paginaHTML);
+                $messaggi = $ok["messaggi"];
             }
         }
     }
@@ -79,6 +92,10 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{messaggiForm}", $messaggi, $paginaHTML);
+$paginaHTML = str_replace("{selectGeneri}", $data_list_generi, $paginaHTML);
+$paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);
+
 echo $paginaHTML;
 
 ?>
