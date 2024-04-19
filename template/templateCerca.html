@@ -40,7 +40,7 @@
                         <legend>Ricerca</legend>
                         <!--da css bisognerebbe far venire o uno o l'altro come formo i filtri che si possano aggiungere sotto-->
                         <label for="stringa">Ricerca generale:</label>
-                        <input type="text" id="stringa" name="stringa">
+                        <input type="text" id="stringa" name="stringa" maxlength="50" value="{stringa}">
                         <button type="submit" id="cerca_generale" name="cerca_generale">Cerca</button>
                     </fieldset>
                     <fieldset>
@@ -48,23 +48,22 @@
                         <!--controllare coerenze con lunghezze
                         in css diminuire lo spazio x la scrittura -->
                         <label for="autore">Autore:</label>
-                        <input type="text" id="autore" name="autore" maxlength="50"><br>
+                        <input type="text" id="autore" name="autore" maxlength="50" value="{autore}"><br>
                         <label for="genere">Genere: </label>
-                        <input type="text" list="genere" id="genereInput" name="genere">
-                        <datalist id="genere" name="genere">
-                           <!--{opzioneGeneri}--> 
-                            <!--php solo tra i generi che ho -->
-                        </datalist><br/>
+                        <select name="genere" id="genere" required> <!--ERRORE CORRETTO RIMOSSO NAME--><!--ERRORE Attribute value not allowed on element datalist at this point. /-->
+                            {opzioneGeneri}
+                            <!--option between todos los generos del mundo-->
+                        </select>
                         <label for="lingua">Lingua:</label>
-                        <input type="text" id="lingua" name="lingua">
-                        <!--oppure un select semplice senza php?-->
+                        <input list="lingua" id="selezionalingua" name="lingua" maxlength="15" value="{lingua}">
+                        <datalist id="lingua" ><!--ERRORE CORRETTO RIMOSSO NAME-->
+                            {listaLingue}
+                        </datalist>
                     </fieldset>
                 </form>
             </section>
             {rislutati}
-            <nav aria-label="Torna al form di ricerca">
-                <a class="torna_su" href="#content">Torna su</a>
-            </nav> 
+            {torna_su} 
         </main>
         <footer id="footer">
         <ul>

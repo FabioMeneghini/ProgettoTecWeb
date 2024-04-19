@@ -409,9 +409,9 @@ class DBAccess {
                   FROM libri
                   INNER JOIN generi ON libri.id_genere = generi.id
                   WHERE libri.titolo LIKE '%$stringa%'
-                  OR libri.autore LIKE '%$autore%'
-                  OR generi.nome LIKE '%$genere%'
-                  OR libri.lingua = '$lingua'";
+                  AND libri.autore LIKE '%$autore%'
+                  AND generi.nome LIKE '%$genere%'
+                  AND libri.lingua LIKE '%$lingua%'";
         $queryResult = mysqli_query($this->connection, $query);
         if ($queryResult === false) {
             echo "<li>Errore durante l'esecuzione della query: " . mysqli_error($this->connection) . "</li>";
