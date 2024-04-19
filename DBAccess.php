@@ -808,13 +808,6 @@ class DBAccess {
         }
     }
 
-    /*public function modificaLibro($id_libro, $titolo, $autore, $lingua, $capitoli, $trama, $genere) {
-        $query = "UPDATE libri SET titolo = '$titolo', autore = '$autore', lingua = '$lingua', n_capitoli = '$capitoli', trama = '$trama', id_genere = (SELECT id FROM generi WHERE nome = '$genere') 
-        WHERE id = '$id_libro'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
-    }*/
-
     public function modificaLibro($id_libro=45, $titolo='ciaooooooooo', $autore='ciao', $lingua ='ciao', $capitoli=3, $trama='ciao', $genere=2) {
         $query='UPDATE libri SET titolo=?, autore=?, lingua=?, n_capitoli=?, trama=?, id_genere=(SELECT id FROM generi WHERE nome = ?) WHERE id = ?';
         $stmt = $this -> connection -> prepare($query);
@@ -828,16 +821,17 @@ class DBAccess {
         }
     }
 
-    /*public function modificaLibro($id_libro, $titolo, $autore, $lingua, $capitoli, $trama, $genere) {
-        if(eliminaLibro($id_libro)) {
-            if(aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere))
-                return true;
-            else
-                return false;
+    public function verificaUsername($username) {
+        $query = "SELECT * FROM utenti WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
         }
-        else
+        else {
             return false;
-    }*/
+        }
+    }
 
 }
 ?> 

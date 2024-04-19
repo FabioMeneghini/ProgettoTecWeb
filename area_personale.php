@@ -104,9 +104,14 @@ try {
             $tmp = controllaUsername($username);
 
             if($tmp['ok']) {
-                $connection -> modificaUsername($_SESSION['username'], $username);
-                $_SESSION['username'] = $username;
-                $successoUsername = '<span lang="en">Username</span> modificato con successo';
+                if($connection -> verificaUsername($username)) {
+                    $messaggiUsername .= "<li>Lo username '".$username."' è già in uso</li>";
+                }
+                else {
+                    $connection -> modificaUsername($_SESSION['username'], $username);
+                    $_SESSION['username'] = $username;
+                    $successoUsername = '<span lang="en">Username</span> modificato con successo';
+                }
             }
             else {
                 $messaggiUsername .= $tmp['messaggi'];
