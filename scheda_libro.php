@@ -28,10 +28,9 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
     <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
     <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-    <dt><a href="modifica_libro.php">Modifica Libro</a></dt>
     <dt>Categorie</dt>
     {listaGeneri}
-    <dt>Area Personale</dt>
+    <dt><a href="area_personale.php">Area Personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
@@ -187,12 +186,7 @@ try {
             }
             else {
                 $bottoni_admin='<section id="bottoni_admin">
-                    <form action="modifica_libro.php" method="get"> 
-                        <fieldset>
-                            <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
-                            <input type="submit" id="modifica" name="modifica" value="Modifica">
-                        </fieldset>
-                    </form>
+                    <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a>
                     <form action="elimina_libro.php" method="get">
                         <fieldset>
                             <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
