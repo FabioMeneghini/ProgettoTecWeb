@@ -66,14 +66,14 @@ if(isset($_POST['registrati'])) {
             $connectionOk = $connection -> openDBConnection();
 
             if($connectionOk) {
+                $resultListaGeneri = $connection -> getListaGeneri();
+                foreach($resultListaGeneri as $genere) {
+                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+                }
                 if($connection -> usernameUnico($username)) {
                     $erroriRegistrazione = $connection -> registraUtente($nome, $cognome, $username, $email, $password1);
-                    $resultListaGeneri = $connection -> getListaGeneri();
+                    
                     $connection -> closeConnection();
-
-                    foreach($resultListaGeneri as $genere) {
-                         $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-                    }
                     if($erroriRegistrazione == "") {
                         //$messaggiPerForm .= "<li>Registrazione avvenuta con successo</li>";
                         header("Location: accedi.php"); //dovrebbe mostrare un messaggio di successo dopo aver mandato alla pagina di login
@@ -92,7 +92,8 @@ if(isset($_POST['registrati'])) {
         }
     }
 }
-$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{messaggi}", $messaggiPerForm, $paginaHTML);
+$paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+
 echo $paginaHTML;
 ?>

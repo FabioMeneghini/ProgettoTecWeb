@@ -198,7 +198,7 @@ class DBAccess {
     }
 
     public function getListaStaLeggendo($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.genere, sta_leggendo.n_capitoli_letti, libri.n_capitoli
+        $query = "SELECT libri.titolo, libri.autore, libri.id_genere, sta_leggendo.n_capitoli_letti, libri.n_capitoli
                   FROM libri, sta_leggendo
                   WHERE sta_leggendo.username = '$username'
                   AND sta_leggendo.id_libro = libri.id";
