@@ -198,7 +198,7 @@ class DBAccess {
     }
 
     public function getListaStaLeggendo($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.id_genere, sta_leggendo.n_capitoli_letti, libri.n_capitoli
+        $query = "SELECT libri.id, libri.titolo, libri.autore, libri.id_genere, sta_leggendo.n_capitoli_letti, libri.n_capitoli
                   FROM libri, sta_leggendo
                   WHERE sta_leggendo.username = '$username'
                   AND sta_leggendo.id_libro = libri.id";
@@ -236,7 +236,7 @@ class DBAccess {
     }
 
     public function getListaTerminati($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, recensioni.voto
+        $query = "SELECT libri.titolo, libri.autore, libri.id_genere, ha_letto.data_fine_lettura, recensioni.voto
                   FROM libri, ha_letto, recensioni
                   WHERE ha_letto.username = '$username'
                   AND ha_letto.id_libro = libri.id
