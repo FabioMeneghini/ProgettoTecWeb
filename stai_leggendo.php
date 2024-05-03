@@ -17,6 +17,12 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        if(isset($_POST['aggiorna'])){
+            $capitoli=$_POST["capitoli"];
+            $id_libri=$_POST["id_libri"];
+            $username=$_SESSION["username"];
+            //$connection -> aggiornaStaiLeggendo(); AGGIORNARE LIBRI CHE STA LEGGENDO L'UTENTE CON QUELLI PRESI DA POST, SE HA MESSO MASSIMO DEVE ANDARE IN TERMINATI E TOGLIERLO DA DA LEGGERE
+        }
         if(isset($_GET['id_add'])) { // !!!!! da giustificare nella relazione il perché ho usato il metodo GET invece del POST: !!!!!
                                      // in pratica se avessi usato il post avrei dovuto fare un form per ogni riga della tabella,
                                      // mentre così la tabella è più accessibile (credo)
@@ -47,20 +53,27 @@ try {
                                     <th scope="col">Autore</th>
                                     <th scope="col">Numero capitoli letti</th>
                                 </tr>';
+            $i=0;
             foreach($lista as $libro) {
+                $i++;
                 $listaLibri .= '<fieldset>
                                     <tr>
                                         <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
                                         <td>'.$libro["autore"].'</td>
-                                        <td><input type="number" name="capitoli" id="capitoli" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'"></td>
+                                        <td>
+                                            <input type="number" name="capitoli[]" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
+                                            <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
+                                        </td>
                                     </tr>
                                 </fieldset>';
+                $i+=1;
             }
-            $listaLibri .= "</table>
+            $listaLibri .= '</table>
             <filedset>
-                <input type='submit' id='aggiorna' name='aggiorna' value='Aggiorna capitoli'>
+                <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna capitoli">
+                <input type="hidden" id="lunghezza" name="lunghezza" value="n">
             </filedset>
-            </form>";
+            </form>';
         }
     }
     else {
