@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
+        <script type="text/javascript" src="form.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -38,7 +39,7 @@
         <main id="content">
             <section id="accediform">
                 <h2>Inserisci i dati per l'accesso:</h2>
-                <form id="loginForm" action="accedi.php" method="post"> 
+                <form id="loginForm" action="accedi.php" method="post" onsubmit="controllaAccedi()"> 
                     <ul class="messaggiErrore">
                         {messaggi}
                         <!--con js non lasciare submit se i campi dati non sono compilati correttamente-->
@@ -48,7 +49,7 @@
                         <legend>Credenziali</legend>
                         <label for="username"><span lang="en">Username</span>:</label><br>
                         <input type="text" id="username" name="username" maxlength="10"  required><br><!--RISOLTO ERRORE DOPPIO REQUIRED-->
-                        <label for="password"><span lang="en">password</span>:</label><br>
+                        <label for="password"><span lang="en">Password</span>:</label><br>
                         <input type="password" id="password" name="password" maxlength="10"  required><br><!--RISOLTO ERRORE DOPPIO REQUIRED-->
                         <input type="submit" id="accedi" name="accedi" value="Accedi">
                         <input type="reset" id="reset" name="reset" value="Cancella"/><!-- NON SEGNALATO COME ERROR MA COME INFO Trailing slash on void elements has no effect and interacts badly with unquoted attribute values.-->
