@@ -21,7 +21,7 @@ try {
             $capitoli=$_POST["capitoli"];
             $id_libri=$_POST["id_libri"];
             $username=$_SESSION["username"];
-            //$connection -> aggiornaStaiLeggendo(); AGGIORNARE LIBRI CHE STA LEGGENDO L'UTENTE CON QUELLI PRESI DA POST, SE HA MESSO MASSIMO DEVE ANDARE IN TERMINATI E TOGLIERLO DA DA LEGGERE
+            $connection -> aggiornaStaLeggendo($username, $id_libri, $capitoli); //AGGIORNARE LIBRI CHE STA LEGGENDO L'UTENTE CON QUELLI PRESI DA POST, SE HA MESSO MASSIMO DEVE ANDARE IN TERMINATI E TOGLIERLO DA DA LEGGERE
         }
         if(isset($_GET['id_add'])) { // !!!!! da giustificare nella relazione il perché ho usato il metodo GET invece del POST: !!!!!
                                      // in pratica se avessi usato il post avrei dovuto fare un form per ogni riga della tabella,

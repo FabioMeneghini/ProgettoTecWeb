@@ -833,5 +833,52 @@ class DBAccess {
         }
     }
 
+    public function aggiungiHaLetto($username, $id_libro) {
+        $query = "INSERT INTO ha_letto (username, id_libro, data_fine_lettura) VALUES (?, ?, NOW())";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("si", $username, $id_libro);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+            }
+            $stmt->close();
+        }
+    }
+
+    public function rimuoviStaLeggendo($username, $id_libro) {
+        $query = "DELETE FROM sta_leggendo WHERE username = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
+        }
+    }
+
+    public function aggiornaStaLeggendo($username, $id_libri, $capitoli) {
+        $n = count($capitoli);
+        $query = "UPDATE sta_leggendo SET n_capitoli_letti = ? WHERE username = ? AND id_libro = ?";
+        $stmt = mysqli_prepare($this -> connection, $query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        for($i=0; $i<$n; $i++) {
+            $n_capitoli_totali = $this -> getncapitoliLibro($id_libri[$i]);
+            if($capitoli[$i] >= $n_capitoli_totali) {
+                $this -> aggiungiHaLetto($username, $id_libri[$i]);
+                $this -> rimuoviStaLeggendo($username, $id_libri[$i]);
+            }
+            else {
+                mysqli_stmt_bind_param($stmt, 'isi', $capitoli[$i], $username, $id_libri[$i]);
+                $queryResult = mysqli_stmt_execute($stmt);
+                if (!$queryResult) {
+                    return false; // Se una delle query fallisce, ritorna false
+                }
+            }
+        }
+        return true; // Se tutte le query hanno successo, ritorna true
+    }
+
 }
 ?> 
