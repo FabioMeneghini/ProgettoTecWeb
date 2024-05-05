@@ -26,9 +26,9 @@ try {
         if(isset($_GET['id_add'])) { // !!!!! da giustificare nella relazione il perché ho usato il metodo GET invece del POST: !!!!!
                                      // in pratica se avessi usato il post avrei dovuto fare un form per ogni riga della tabella,
                                      // mentre così la tabella è più accessibile (credo)
-            $connection -> rimuoviDaLeggere($_SESSION['username'], $_GET['id']);
-            if(!$connection -> staLeggendo($_SESSION['username'], $_GET['id']))
-                $connection -> aggiungiStaLeggendo($_SESSION['username'], $_GET['id']);
+            $connection -> rimuoviDaLeggere($_SESSION['username'], $_GET['id_add']);
+            if(!$connection -> staLeggendo($_SESSION['username'], $_GET['id_add']))
+                $connection -> aggiungiStaLeggendo($_SESSION['username'], $_GET['id_add']);
         }
         $lista = $connection -> getListaStaLeggendo($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();

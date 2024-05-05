@@ -217,10 +217,11 @@ class DBAccess {
     }
 
     public function getListaSalvati($username) {
-        $query = "SELECT libri.id, libri.titolo, libri.autore, libri.genere
-                  FROM libri, da_leggere
-                  WHERE da_leggere.username = '$username'
-                  AND da_leggere.id_libro = libri.id";
+        $query = "SELECT libri.id, libri.titolo, libri.autore, generi.nome AS genere
+        FROM libri
+        JOIN generi ON libri.id_genere = generi.id
+        JOIN da_leggere ON da_leggere.id_libro = libri.id
+        WHERE da_leggere.username = '$username'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
