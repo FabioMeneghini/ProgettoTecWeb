@@ -41,7 +41,7 @@ try {
                 $listaLibri .= '<tr>
                                     <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
-                                    <td>'.$libro["genere"].'</td>
+                                    <td>'.$libro["id_genere"].'</td>
                                     <td>'.$libro["data_fine_lettura"].'</td>
                                     <td>'.$libro["voto"].'</td>
                                 </tr>';

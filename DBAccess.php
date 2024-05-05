@@ -243,7 +243,7 @@ class DBAccess {
                   AND ha_letto.id_libro = recensioni.id_libro
                   AND ha_letto.username = recensioni.username_autore
                   UNION
-                  SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, 'Non assegnato'
+                  SELECT libri.titolo, libri.autore, libri.id_genere, ha_letto.data_fine_lettura, 'Non assegnato'
                   FROM libri, ha_letto
                   WHERE ha_letto.username = '$username'
                   AND ha_letto.id_libro = libri.id
