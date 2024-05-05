@@ -236,7 +236,7 @@ class DBAccess {
     }
 
     public function getListaTerminati($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.id_genere, ha_letto.data_fine_lettura, recensioni.voto
+        /*$query = "SELECT libri.titolo, libri.autore, libri.id_genere, ha_letto.data_fine_lettura, recensioni.voto
                   FROM libri, ha_letto, recensioni
                   WHERE ha_letto.username = '$username'
                   AND ha_letto.id_libro = libri.id
@@ -247,7 +247,20 @@ class DBAccess {
                   FROM libri, ha_letto
                   WHERE ha_letto.username = '$username'
                   AND ha_letto.id_libro = libri.id
-                  AND ha_letto.id_libro NOT IN (SELECT DISTINCT id_libro FROM recensioni WHERE username_autore = '$username')";
+                  AND ha_letto.id_libro NOT IN (SELECT DISTINCT id_libro FROM recensioni WHERE username_autore = '$username')";*/
+        $query="SELECT libri.titolo, libri.autore, generi.nome AS genere, ha_letto.data_fine_lettura, recensioni.voto
+                FROM libri
+                JOIN generi ON libri.id_genere = generi.id
+                JOIN ha_letto ON ha_letto.id_libro = libri.id
+                JOIN recensioni ON ha_letto.id_libro = recensioni.id_libro AND ha_letto.username = recensioni.username_autore
+                WHERE ha_letto.username = '$username'
+                UNION
+                SELECT libri.titolo, libri.autore, generi.nome AS genere, ha_letto.data_fine_lettura, 'Non assegnato'
+                FROM libri
+                JOIN generi ON libri.id_genere = generi.id
+                JOIN ha_letto ON ha_letto.id_libro = libri.id
+                WHERE ha_letto.username = '$username'
+                AND ha_letto.id_libro NOT IN (SELECT DISTINCT id_libro FROM recensioni WHERE username_autore = '$username')";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
