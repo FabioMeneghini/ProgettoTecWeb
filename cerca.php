@@ -50,11 +50,9 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
 
     }
 }*/
-if(isset($_SESSION['admin'])) {
-    if($_SESSION['admin'] == 1) {
-        $menu = $adminMenu;
-        $breadcrumbs = "admin.php";
-    }
+if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+    $menu = $adminMenu;
+    $breadcrumbs = "admin.php";
 }
 else if(isset($_SESSION['username'])){
     $menu = $userMenu;
