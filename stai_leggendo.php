@@ -40,40 +40,39 @@ try {
             $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati
         }
         else {
-            $listaLibri .= '<p id="descr">
-                                La tabella contiene l\'elenco dei libri che stai leggendo.
-                                Ogni riga descrive un libro con tre colonne: "titolo", "autore", "numero capitoli letti".
-                                La terza colonna contiene un input per modificare il numero di capitoli che stai leggendo, con la possibilità di aumentare o diminuire.
-                            </p>
-                            <form method="post" action="stai_leggendo.php">
-                                <table aria-describedby="descr">
-                                <caption>Lista dei libri che stai leggendo</caption>
-                                <tr>
-                                    <th scope="col">Titolo</th>
-                                    <th scope="col">Autore</th>
-                                    <th scope="col">Numero capitoli letti</th>
-                                </tr>';
+            $listaLibri .= '<form method="post" action="stai_leggendo.php">
+                                <p id="descr">
+                                    La tabella contiene l\'elenco dei libri che stai leggendo.
+                                    Ogni riga descrive un libro con tre colonne: "titolo", "autore", "numero capitoli letti".
+                                    La terza colonna contiene un input per modificare il numero di capitoli che stai leggendo, con la possibilità di aumentare o diminuire.
+                                </p>
+                                <fieldset>
+                                    <table aria-describedby="descr">
+                                        <caption>Lista dei libri che stai leggendo</caption>
+                                        <tr>
+                                            <th scope="col">Titolo</th>
+                                            <th scope="col">Autore</th>
+                                            <th scope="col">Numero capitoli letti</th>
+                                        </tr>';
             $i=0;
             foreach($lista as $libro) {
                 $i++;
-                $listaLibri .= '<fieldset>
-                                    <tr>
-                                        <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                        <td>'.$libro["autore"].'</td>
-                                        <td>
-                                            <input type="number" name="capitoli[]" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
-                                            <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
-                                        </td>
-                                    </tr>
-                                </fieldset>';
+                $listaLibri .= '<tr>
+                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
+                                    <td>'.$libro["autore"].'</td>
+                                    <td>
+                                        <input type="number" name="capitoli[]" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
+                                        <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
+                                    </td>
+                                </tr>';
                 $i+=1;
             }
-            $listaLibri .= '</table>
-            <filedset>
-                <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna capitoli">
-                <input type="hidden" id="lunghezza" name="lunghezza" value="n">
-            </filedset>
-            </form>';
+            $listaLibri .= '    </table>
+                            </fieldset>
+                            <fieldset>
+                                <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna capitoli">
+                            </fieldset>
+                            </form>';
         }
     }
     else {
