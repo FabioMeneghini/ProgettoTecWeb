@@ -8,6 +8,7 @@ use DB\DBAccess;
 $paginaHTML = file_get_contents("template/templateGenere.html");
 $menu ="";
 $genereSelezionato="";
+$torna_su="";
 //utenti
 $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
@@ -86,7 +87,12 @@ try {
                 }
                 $listaLibri.='</ul></div>';
             }
-        
+             if(count($risultatiLibri)>=10) {
+
+               $torna_su=' <nav aria-label="Torna al form di ricerca">
+                                <a class="torna_su" href="#content">Torna su</a>
+                           </nav>';
+            }
             /*if(!empty($resultKeyword)) {
                 foreach($resultKeyword as $keyword) {
                     $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
@@ -113,6 +119,7 @@ $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{NomeGenere}", $genereSelezionato, $paginaHTML);
+$paginaHTML = str_replace("{torna_su}", $torna_su , $paginaHTML);
 echo $paginaHTML;
 
 ?>
