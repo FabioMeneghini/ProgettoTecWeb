@@ -17,12 +17,18 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        if(isset($_POST['aggiorna'])){
+            $capitoli=$_POST["capitoli"];
+            $id_libri=$_POST["id_libri"];
+            $username=$_SESSION["username"];
+            $connection -> aggiornaStaLeggendo($username, $id_libri, $capitoli); //AGGIORNARE LIBRI CHE STA LEGGENDO L'UTENTE CON QUELLI PRESI DA POST, SE HA MESSO MASSIMO DEVE ANDARE IN TERMINATI E TOGLIERLO DA DA LEGGERE
+        }
         if(isset($_GET['id_add'])) { // !!!!! da giustificare nella relazione il perché ho usato il metodo GET invece del POST: !!!!!
                                      // in pratica se avessi usato il post avrei dovuto fare un form per ogni riga della tabella,
                                      // mentre così la tabella è più accessibile (credo)
-            $connection -> rimuoviDaLeggere($_SESSION['username'], $_GET['id']);
-            if(!$connection -> staLeggendo($_SESSION['username'], $_GET['id']))
-                $connection -> aggiungiStaLeggendo($_SESSION['username'], $_GET['id']);
+            $connection -> rimuoviDaLeggere($_SESSION['username'], $_GET['id_add']);
+            if(!$connection -> staLeggendo($_SESSION['username'], $_GET['id_add']))
+                $connection -> aggiungiStaLeggendo($_SESSION['username'], $_GET['id_add']);
         }
         $lista = $connection -> getListaStaLeggendo($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
@@ -34,31 +40,39 @@ try {
             $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati
         }
         else {
-            $listaLibri .= '<p id="descr">
-                                La tabella contiene l\'elenco dei libri che stai leggendo.
-                                Ogni riga descrive un libro con quattro colonne: "titolo", "autore", "genere", "numero capitoli letti".
-                                È anche presente una quinta colonna che contiene un pulsante che permette di avanzare la lettura del
-                                libro di un capitolo, chiamata "Leggi capitolo".
-                            </p>
-                            <table aria-describedby="descr">
-                            <caption>Lista dei libri che stai leggendo</caption>
-                            <tr>
-                                <th scope="col">Titolo</th>
-                                <th scope="col">Autore</th>
-                                <th scope="col">Genere</th>
-                                <th scope="col">Numero capitoli letti</th>
-                                <th scope="col">Leggi capitolo</th>
-                            </tr>';
+            $listaLibri .= '<form method="post" action="stai_leggendo.php">
+                                <p id="descr">
+                                    La tabella contiene l\'elenco dei libri che stai leggendo.
+                                    Ogni riga descrive un libro con tre colonne: "titolo", "autore", "numero capitoli letti".
+                                    La terza colonna contiene un input per modificare il numero di capitoli che stai leggendo, con la possibilità di aumentare o diminuire.
+                                </p>
+                                <fieldset>
+                                    <table aria-describedby="descr">
+                                        <caption>Lista dei libri che stai leggendo</caption>
+                                        <tr>
+                                            <th scope="col">Titolo</th>
+                                            <th scope="col">Autore</th>
+                                            <th scope="col">Numero capitoli letti</th>
+                                        </tr>';
+            $i=0;
             foreach($lista as $libro) {
+                $i++;
                 $listaLibri .= '<tr>
-                                    <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
+                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
-                                    <td>'.$libro["genere"].'</td>
-                                    <td>'.$libro["n_capitoli_letti"].'/'.$libro["n_capitoli"].'</td>
-                                    <td></td>
+                                    <td>
+                                        <input type="number" name="capitoli[]" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
+                                        <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
+                                    </td>
                                 </tr>';
+                $i+=1;
             }
-            $listaLibri .= "</table>";
+            $listaLibri .= '    </table>
+                            </fieldset>
+                            <fieldset>
+                                <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna capitoli">
+                            </fieldset>
+                            </form>';
         }
     }
     else {

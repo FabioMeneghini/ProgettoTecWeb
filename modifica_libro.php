@@ -43,7 +43,7 @@ try {
         if(!$tmp) {
             header("Location: template/404.html");
         }
-        $resultGeneri = $connection -> getListaGeneri();
+        //$resultGeneri = $connection -> getListaGeneri();
         //$resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
         //$immagine= $connection ->  getimmagine($LibroSelezionato);
 

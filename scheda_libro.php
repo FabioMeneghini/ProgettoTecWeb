@@ -18,7 +18,7 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="terminati.php">Libri terminati</a></dt>
     <dt><a href="da_leggere.php">Libri da leggere</a></dt>
     <dt><a href="recensione.php">Aggiungi Recensione</a></dt>
-    <dt>Lista Generi:</dt>
+    <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
     <dt><a href="area_personale.php">Area Personale</a></dt>
@@ -28,13 +28,13 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
     <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
     <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-    <dt>Categorie</dt>
+    <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
     <dt><a href="area_personale.php">Area Personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
-                <dt>Categorie</dt>
+                <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri}
                 <dt><a href="accedi.php">Accedi</a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
@@ -43,10 +43,8 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
 $menupersonale = "";
 
 
-if(isset($_SESSION['admin'])) {
-    if($_SESSION['admin'] == 1) {
-        $menu = $adminMenu;
-    }
+if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+    $menu = $adminMenu;
 }
 else if(isset($_SESSION['username'])){
     $menu = $userMenu;
@@ -112,6 +110,10 @@ try {
             $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
             $copertina = $connection -> getcopertina($LibroSelezionato);
             $alt = $connection -> getalt($LibroSelezionato);
+
+            foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+                $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            }
 
             //admin reindirizzato non ha la , non registrato ha link accedi, se registrato con rec la ha in textarea
             //se non è un libro che ha terminato ha aggiungi ai salvati 
@@ -209,10 +211,6 @@ try {
                     $listaRecensioni.='<li class="recensione_singola"><p>'.$recensione["commento"].'</p></li>';
                 }
                 $listaRecensioni.="</ul></div>";
-            }
-            
-            foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-                $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
             }
 
             if(!empty($resultKeyword)) {

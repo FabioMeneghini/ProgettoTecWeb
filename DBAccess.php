@@ -198,7 +198,7 @@ class DBAccess {
     }
 
     public function getListaStaLeggendo($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.genere, sta_leggendo.n_capitoli_letti, libri.n_capitoli
+        $query = "SELECT libri.id, libri.titolo, libri.autore, libri.id_genere, sta_leggendo.n_capitoli_letti, libri.n_capitoli
                   FROM libri, sta_leggendo
                   WHERE sta_leggendo.username = '$username'
                   AND sta_leggendo.id_libro = libri.id";
@@ -217,10 +217,11 @@ class DBAccess {
     }
 
     public function getListaSalvati($username) {
-        $query = "SELECT libri.id, libri.titolo, libri.autore, libri.genere
-                  FROM libri, da_leggere
-                  WHERE da_leggere.username = '$username'
-                  AND da_leggere.id_libro = libri.id";
+        $query = "SELECT libri.id, libri.titolo, libri.autore, generi.nome AS genere
+        FROM libri
+        JOIN generi ON libri.id_genere = generi.id
+        JOIN da_leggere ON da_leggere.id_libro = libri.id
+        WHERE da_leggere.username = '$username'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -236,18 +237,31 @@ class DBAccess {
     }
 
     public function getListaTerminati($username) {
-        $query = "SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, recensioni.voto
+        /*$query = "SELECT libri.titolo, libri.autore, libri.id_genere, ha_letto.data_fine_lettura, recensioni.voto
                   FROM libri, ha_letto, recensioni
                   WHERE ha_letto.username = '$username'
                   AND ha_letto.id_libro = libri.id
                   AND ha_letto.id_libro = recensioni.id_libro
                   AND ha_letto.username = recensioni.username_autore
                   UNION
-                  SELECT libri.titolo, libri.autore, libri.genere, ha_letto.data_fine_lettura, 'Non assegnato'
+                  SELECT libri.titolo, libri.autore, libri.id_genere, ha_letto.data_fine_lettura, 'Non assegnato'
                   FROM libri, ha_letto
                   WHERE ha_letto.username = '$username'
                   AND ha_letto.id_libro = libri.id
-                  AND ha_letto.id_libro NOT IN (SELECT DISTINCT id_libro FROM recensioni WHERE username_autore = '$username')";
+                  AND ha_letto.id_libro NOT IN (SELECT DISTINCT id_libro FROM recensioni WHERE username_autore = '$username')";*/
+        $query="SELECT libri.id, libri.titolo, libri.autore, generi.nome AS genere, ha_letto.data_fine_lettura, recensioni.voto
+                FROM libri
+                JOIN generi ON libri.id_genere = generi.id
+                JOIN ha_letto ON ha_letto.id_libro = libri.id
+                JOIN recensioni ON ha_letto.id_libro = recensioni.id_libro AND ha_letto.username = recensioni.username_autore
+                WHERE ha_letto.username = '$username'
+                UNION
+                SELECT libri.id, libri.titolo, libri.autore, generi.nome AS genere, ha_letto.data_fine_lettura, 'Non assegnato'
+                FROM libri
+                JOIN generi ON libri.id_genere = generi.id
+                JOIN ha_letto ON ha_letto.id_libro = libri.id
+                WHERE ha_letto.username = '$username'
+                AND ha_letto.id_libro NOT IN (SELECT DISTINCT id_libro FROM recensioni WHERE username_autore = '$username')";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -831,6 +845,53 @@ class DBAccess {
         else {
             return false;
         }
+    }
+
+    public function aggiungiHaLetto($username, $id_libro) {
+        $query = "INSERT INTO ha_letto (username, id_libro, data_fine_lettura) VALUES (?, ?, NOW())";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("si", $username, $id_libro);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+            }
+            $stmt->close();
+        }
+    }
+
+    public function rimuoviStaLeggendo($username, $id_libro) {
+        $query = "DELETE FROM sta_leggendo WHERE username = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
+        }
+    }
+
+    public function aggiornaStaLeggendo($username, $id_libri, $capitoli) {
+        $n = count($capitoli);
+        $query = "UPDATE sta_leggendo SET n_capitoli_letti = ? WHERE username = ? AND id_libro = ?";
+        $stmt = mysqli_prepare($this -> connection, $query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        for($i=0; $i<$n; $i++) {
+            $n_capitoli_totali = $this -> getncapitoliLibro($id_libri[$i]);
+            if($capitoli[$i] >= $n_capitoli_totali) {
+                $this -> aggiungiHaLetto($username, $id_libri[$i]);
+                $this -> rimuoviStaLeggendo($username, $id_libri[$i]);
+            }
+            else {
+                mysqli_stmt_bind_param($stmt, 'isi', $capitoli[$i], $username, $id_libri[$i]);
+                $queryResult = mysqli_stmt_execute($stmt);
+                if (!$queryResult) {
+                    return false; // Se una delle query fallisce, ritorna false
+                }
+            }
+        }
+        return true; // Se tutte le query hanno successo, ritorna true
     }
 
 }

@@ -27,29 +27,36 @@ try {
             $listaLibri = "Non hai nessun libro da leggere."; //aggiungere link alla pagina di ricerca?
         }
         else {
-            $listaLibri .= '<p id="descr">
-                                La tabella contiene l\'elenco dei tuoi libri da leggere.
-                                Ogni riga descrive un libro con tre colonne: "titolo", "autore" e "genere".
-                                È anche presente una quarta colonna che contiene un link che permette di iniziare a leggere il libro,
-                                chiamata "Inizia a leggere".
-                            </p>
-                            <table aria-describedby="descr">
-                            <caption>Lista dei libri salvati</caption>
-                            <tr>
-                                <th scope="col">Titolo</th>
-                                <th scope="col">Autore</th>
-                                <th scope="col">Genere</th>
-                                <th scope="col">Inizia a leggere</th>
-                            </tr>';
+            $listaLibri .= '<form method="post" action="da_leggere.php">
+                                <p id="descr">
+                                    La tabella contiene l\'elenco dei tuoi libri da leggere.
+                                    Ogni riga descrive un libro con tre colonne: "titolo", "autore" e un checkbox per iniziare o eliminare il libro.
+                                </p>
+                                <fieldset>
+                                    <table aria-describedby="descr">
+                                        <caption>Lista dei libri salvati</caption>
+                                        <tr>
+                                            <th scope="col">Titolo</th>
+                                            <th scope="col">Autore</th>
+                                            <th>Inizia</th>
+                                            <th>Elimina</th>
+                                        </tr>';
             foreach($lista as $libro) {
                 $listaLibri .= '<tr>
                                     <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
-                                    <td>'.$libro["genere"].'</td>
-                                    <td><a href="stai_leggendo.php?id_add='.$libro["id"].'">Inizia</a></td>
+                                    <td><input type="checkbox" id="myCheckbox" name="myCheckbox"></td>
+                                    <td><input type="checkbox" id="myCheckbox" name="myCheckbox"></td>
                                 </tr>';
             }
-            $listaLibri .= "</table>";
+            $listaLibri .= '    </table>
+                            </fieldset>
+                            <fieldset>
+                                <input type="submit" id="inizia" name="inizia" value="Inizia">
+                                <input type="submit" id="elimina" name="elimina" value="Elimina">
+                            </fieldset>
+                            </form>';
+            /*<td><a href="stai_leggendo.php?id_add='.$libro["id"].'">Inizia</a></td>*/
         }
     }
     else {
