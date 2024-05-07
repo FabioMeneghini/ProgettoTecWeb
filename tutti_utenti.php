@@ -33,13 +33,32 @@ try {
             if(isset($_POST['opzione'])) {
                 $opzione=$_POST['opzione'];
                 $resultUtenti= $connection ->getTuttiUtentiOrdinati($_POST['opzione']);
+                
+                if($opzione=="alfabetico_nome"){
+                    $alfabetico_nome="selected";
+                }
+                else if($opzione=="alfabetico_cognome"){
+                    $alfabetico_cognome="selected";
+                }
+                else if($opzione=="alfabetico_username"){
+                    $alfabetico_username="selected";
+                }
+                else if($opzione=="data_iscrizione_piu_recente"){
+                    $data_iscrizione_piu_recente="selected";
+                }
+                else if($opzione=="data_iscrizione_meno_recente"){
+                    $data_iscrizione_meno_recente="selected";
+                }
+                else if($opzione=="attivi"){
+                    $attivi="selected";
+                }
             }
             else {
                 $resultUtenti= $connection ->getTuttiUtentiOrdinati("alfabetico_nome");
             }
         }
         else {
-            $resultUtenti=  $connection -> getTuttiUtenti();
+            $resultUtenti= $connection ->getTuttiUtentiOrdinati("alfabetico_nome");
         }
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
@@ -82,24 +101,7 @@ try {
 catch(Throwable $e) {
     echo "Errore: ".$e -> getMessage();
 }
-if($opzione=="alfabetico_nome"){
-    $alfabetico_nome="selected";
-}
-else if($opzione=="alfabetico_cognome"){
-    $alfabetico_cognome="selected";
-}
-else if($opzione=="alfabetico_username"){
-    $alfabetico_username="selected";
-}
-else if($opzione=="data_iscrizione_piu_recente"){
-    $data_iscrizione_piu_recente="selected";
-}
-else if($opzione=="data_iscrizione_meno_recente"){
-    $data_iscrizione_meno_recente="selected";
-}
-else if($opzione=="attivi"){
-    $attivi="selected";
-}
+
 $paginaHTML = str_replace("{selected_alfabetico_nome}", $alfabetico_nome, $paginaHTML);
 $paginaHTML = str_replace("{selected_alfabetico_cognome}", $alfabetico_cognome, $paginaHTML);
 $paginaHTML = str_replace("{selected_alfabetico_username}", $alfabetico_username, $paginaHTML);

@@ -243,7 +243,7 @@ $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{menupersonale}", $menupersonale, $paginaHTML);
 
 //prima sostituisce l'area della recensione con un form poi lo compila 
-$paginaHTML = str_replace("{arecensionevotoform}", $arearecensionevoto , $paginaHTML);
+$paginaHTML = str_replace("{arearecensionevotoform}", $arearecensionevoto , $paginaHTML);
 
 $paginaHTML = str_replace("{ImmagineLibro}", "copertine_libri/".$copertina.".jpg", $paginaHTML);
 $paginaHTML = str_replace("{altlibro}", $alt , $paginaHTML);

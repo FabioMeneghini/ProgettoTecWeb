@@ -38,7 +38,7 @@ try {
             }
         }
         else {
-            $risultLibri= $connection ->getTuttiLibri();
+            $risultLibri= $connection ->getTuttiLibriOrdinati("alfabetico");
         }
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
