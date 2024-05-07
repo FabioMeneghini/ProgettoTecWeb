@@ -17,6 +17,10 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        if(isset($_POST['elimina']) && !empty($_POST['checkbox'])) {
+            $id_libri=$_POST["checkbox"];
+            $connection -> aggiornaHaLetto($_SESSION['username'], $id_libri);
+        }
         $lista = $connection -> getListaTerminati($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
@@ -45,7 +49,7 @@ try {
                                     <td>'.$libro["autore"].'</td>
                                     <td>'.$libro["data_fine_lettura"].'</td>
                                     <td>'.$libro["voto"].'</td>
-                                    <td><input type="checkbox" id="myCheckbox" name="myCheckbox"></td>
+                                    <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                                 </tr>';
             }
             $listaLibri .= '    </table>

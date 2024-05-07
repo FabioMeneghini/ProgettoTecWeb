@@ -876,7 +876,7 @@ class DBAccess {
         $stmt = mysqli_prepare($this -> connection, $query);
         if($stmt === false) {
             echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
-        }
+        } //ELSE??
         for($i=0; $i<$n; $i++) {
             $n_capitoli_totali = $this -> getncapitoliLibro($id_libri[$i]);
             if($capitoli[$i] >= $n_capitoli_totali) {
@@ -892,6 +892,61 @@ class DBAccess {
             }
         }
         return true; // Se tutte le query hanno successo, ritorna true
+    }
+
+    public function rimuoviHaLetto($username, $id_libro) {
+        $query = "DELETE FROM ha_letto WHERE username = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if($queryResult === false) {
+            echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
+        }
+    }
+
+    public function eliminaLibriHaLetto($username, $id_libri) {
+        $n = count($id_libri);
+        for($i=0; $i<$n; $i++) {
+            $this -> rimuoviHaLetto($username, $id_libri[$i]);
+        }
+    }
+
+    public function iniziaALeggere($username, $id_libri) {
+        $n = count($id_libri);
+        $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            for($i=0; $i<$n; $i++) {
+                $stmt->bind_param("si", $username, $id_libri[$i]);
+                $stmt->execute();
+                $stmt->close();
+            }
+            $this -> eliminaLibriDaLeggere($username, $id_libri);
+        }
+        /*
+        for($i=0; $i<$n; $i++) {
+            $n_capitoli_totali = $this -> getncapitoliLibro($id_libri[$i]);
+            if($capitoli[$i] >= $n_capitoli_totali) {
+                $this -> aggiungiHaLetto($username, $id_libri[$i]);
+                $this -> rimuoviStaLeggendo($username, $id_libri[$i]);
+            }
+            else {
+                mysqli_stmt_bind_param($stmt, 'isi', $capitoli[$i], $username, $id_libri[$i]);
+                $queryResult = mysqli_stmt_execute($stmt);
+                if (!$queryResult) {
+                    return false; // Se una delle query fallisce, ritorna false
+                }
+            }
+        }
+        */
+    }
+
+    public function eliminaLibriDaLeggere($username, $id_libri) {
+        $n = count($id_libri);
+        for($i=0; $i<$n; $i++) {
+            $this -> rimuoviDaLeggere($username, $id_libri[$i]);
+        }
     }
 
 }

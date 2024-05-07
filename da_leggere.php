@@ -17,6 +17,15 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        if(isset($_POST['elimina']) && !empty($_POST['checkbox'])) {
+            $id_libri=$_POST["checkbox"];
+            $connection -> eliminaLibriDaLeggere($_SESSION['username'], $id_libri);
+        }
+        if(isset($_POST['inizia']) && !empty($_POST['checkbox'])) {
+            $id_libri=$_POST["checkbox"];
+            $connection -> iniziaALeggere($_SESSION['username'], $id_libri);
+            header("Location: stai_leggendo.php");
+        }
         $lista = $connection -> getListaSalvati($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
@@ -38,15 +47,13 @@ try {
                                         <tr>
                                             <th scope="col">Titolo</th>
                                             <th scope="col">Autore</th>
-                                            <th>Inizia</th>
-                                            <th>Elimina</th>
+                                            <th>Seleziona</th>
                                         </tr>';
             foreach($lista as $libro) {
                 $listaLibri .= '<tr>
                                     <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
-                                    <td><input type="checkbox" id="myCheckbox" name="myCheckbox"></td>
-                                    <td><input type="checkbox" id="myCheckbox" name="myCheckbox"></td>
+                                    <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                                 </tr>';
             }
             $listaLibri .= '    </table>
