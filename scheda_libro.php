@@ -127,7 +127,7 @@ try {
                                 <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
                                 <a href="registrati.php">Registrati</a><div>';
             }
-            else if(!isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
+            else if(isset($_SESSION['username']) && (!isset($_SESSION['admin']) || $_SESSION['admin'] == 0)) {
                 $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
                 $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
                 $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
@@ -172,7 +172,7 @@ try {
                     //manca id del utente che sta leggendo il libro
                     
                 }
-                else  {
+                else {
                     $arearecensionevoto='<section id="accediform">
                         <form action="scheda_libro.php" method="post"> 
                         <fieldset>
@@ -186,7 +186,7 @@ try {
                     </section>';
                 }
             }
-            else {
+            else if(isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
                 $bottoni_admin='<section id="bottoni_admin">
                     <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a>
                     <form action="elimina_libro.php" method="get">
