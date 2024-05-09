@@ -104,7 +104,7 @@ try {
             //TO DO NEL DB METTERE ALT 
             $titolo = $connection ->  gettitololibro($LibroSelezionato);
             $autore = $connection ->  getautoreLibro($LibroSelezionato);
-            $genere = $connection ->  getgenereLibro($LibroSelezionato);
+            $genereLibro = $connection ->  getgenereLibro($LibroSelezionato);
             $lingua = $connection ->  getlinguaLibro($LibroSelezionato);
             $trama = $connection ->  gettramaLibro($LibroSelezionato);
             $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
@@ -249,7 +249,7 @@ $paginaHTML = str_replace("{ImmagineLibro}", "copertine_libri/".$copertina.".jpg
 $paginaHTML = str_replace("{altlibro}", $alt , $paginaHTML);
 $paginaHTML = str_replace("{TitoloLibro}", $titolo , $paginaHTML);
 $paginaHTML = str_replace("{AutoreLibro}", $autore, $paginaHTML);
-$paginaHTML = str_replace("{GenereLibro}", $genere["nome"], $paginaHTML);
+$paginaHTML = str_replace("{GenereLibro}", $genereLibro, $paginaHTML);
 $paginaHTML = str_replace("{LinguaLibro}", $lingua , $paginaHTML);
 $paginaHTML = str_replace("{mediavoti}", number_format(doubleval($media_voti), 1), $paginaHTML);
 $paginaHTML = str_replace("{CapitoliLibro}", $n_capitoli , $paginaHTML);
