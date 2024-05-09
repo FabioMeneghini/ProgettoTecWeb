@@ -81,7 +81,7 @@ body{
     grid-template-columns: 1fr 6fr;
     grid-template-rows: auto auto 1fr auto;
     grid-template-areas: "l h"
-                         "m b"
+                         "l b"
                          "m c"
                          "f f";
     height: 100vh;
@@ -96,6 +96,7 @@ body{
     padding: 1em;
     background-color: var(--flagColor);
     color: var(--textColor);
+    /*overflow-y: auto;*/
 }
 
 #menu input[type="checkbox"], #menu label{
