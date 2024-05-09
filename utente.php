@@ -26,7 +26,7 @@ try {
         $resultNEW = $connection -> getGeneriPiuLetti($_SESSION['username']);
         if (is_array($resultNEW)) {
             foreach ($resultNEW as $genere) {
-                $listaLibri.='<hr><h3><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
+                $listaLibri.='<h3><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
                 $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
                 if(empty($risultatiLibri)) {
                     $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
