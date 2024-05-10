@@ -93,11 +93,13 @@ $messaggiPassword = "";
 $successoUsername = "";
 $successoEmail = "";
 $successoPassword = "";
+$data = "";
 
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        $data = $connection -> getDataIscrione($_SESSION['username']);
         //username
         if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
             $username = trim($_POST['username']);
@@ -185,6 +187,7 @@ $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{nome}", $_SESSION["nome"], $paginaHTML);
 $paginaHTML = str_replace("{usernameattuale}", $_SESSION["username"], $paginaHTML);
 $paginaHTML = str_replace("{emailattuale}", $_SESSION["email"], $paginaHTML);
+$paginaHTML = str_replace("{data_iscrizione}", $data, $paginaHTML);
 $paginaHTML = str_replace("{messaggi}", $messaggi, $paginaHTML);
 $paginaHTML = str_replace("{messaggiUsername}", $messaggiUsername, $paginaHTML);
 $paginaHTML = str_replace("{messaggiEmail}", $messaggiEmail, $paginaHTML);

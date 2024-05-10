@@ -949,5 +949,18 @@ class DBAccess {
         }
     }
 
+    public function getDataIscrione($username) {
+        $query = "SELECT data_iscrizione FROM utenti WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['data_iscrizione'];
+        }
+        else {
+            return null;
+        }
+    }
+
 }
 ?> 
