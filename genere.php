@@ -79,15 +79,13 @@ try {
                 $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
             }
             else {
-                $listaLibri.='<ul class="listagenere">';
+                $listaLibri.='<ul id="listagenere">';
                 foreach($risultatiLibri as $libro) {
-                    //$listaLibri.='<li><a href="scehda_libro.php?id='.$libro["id"].'" id="'.$libro["titolo_IR"].'">'.$libro["titolo"].'</a></li>';
-                    $listaLibri.='<li><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
-                    //torna il titolo che deve fare img replace 
+                    $listaLibri.='<li><a id="'.$libro["titolo_ir"].'" href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
                 }
-                $listaLibri.='</ul></div>';
+                $listaLibri.='</ul>';
             }
-             if(count($risultatiLibri)>=10) {
+             if(count($risultatiLibri)>=15) {
 
                $torna_su=' <nav aria-label="Torna al form di ricerca">
                                 <a class="torna_su" href="#content">Torna su</a>

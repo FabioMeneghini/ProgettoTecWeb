@@ -51,6 +51,8 @@ try {
                     $_SESSION['nome'] = $user['nome'];
                     $_SESSION['cognome'] = $user['cognome'];
                     $_SESSION['email'] = $user['email'];
+                    //$_SESSION['data_nascita'] = $user['data_nascita'];
+                    $_SESSION['data_iscrizione'] = $user['data_iscrizione'];
                     if($user['admin']==1) {
                         $_SESSION['admin'] = true;
                         header("Location: admin.php");

@@ -67,15 +67,15 @@ class DBAccess {
         }
     }
 
-    public function registraUtente($nome, $cognome, $username, $email, $password) {
+    public function registraUtente($nome, $cognome, $username, $email, $password, $data) {
         $messaggio = "";
-        $query = "INSERT INTO utenti (nome, cognome, username, email, password) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO utenti (nome, cognome, username, email, password, data_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $this -> connection -> prepare($query);
         if($stmt === false) {
             $messaggio .= "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
         }
         else {
-            $stmt->bind_param("sssss", $nome, $cognome, $username, $email, $password);
+            $stmt->bind_param("ssssss", $nome, $cognome, $username, $email, $password, $data);
             if (!$stmt->execute()) {
                 $messaggio .= "<li>Errore durante la registrazione: " . $stmt->error . "</li>";
             }
@@ -101,7 +101,7 @@ class DBAccess {
     }
 
     public function getListaLibriGenere($genere, $n=1000) {
-        $query="SELECT libri.titolo, libri.id FROM libri, generi WHERE libri.id_genere=generi.id AND generi.nome='$genere' LIMIT $n";
+        $query="SELECT libri.titolo, libri.id, libri.titolo_ir FROM libri, generi WHERE libri.id_genere=generi.id AND generi.nome='$genere' LIMIT $n";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
