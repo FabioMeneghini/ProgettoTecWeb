@@ -22,6 +22,14 @@ $selezionato_alfabetico="";
 $selezionato_popolarita="";
 $selezionato_piu_recente="";
 $selezionato_meno_recente="";
+$messaggiSuccesso = "";
+
+if(isset($_GET['inserito']) && $_GET['inserito'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Libro inserito con successo!</p>';
+}
+else if(isset($_GET['eliminato']) && $_GET['eliminato'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Libro eliminato con successo!</p>';
+}
 
 try {
     $connection = new DBAccess();
@@ -100,6 +108,7 @@ $paginaHTML = str_replace("{selected_piu_recente}", $selezionato_piu_recente, $p
 $paginaHTML = str_replace("{selected_meno_recente}", $selezionato_meno_recente, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{CatalogoLibri}", $catalogo, $paginaHTML);
+$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 echo $paginaHTML;
 
 ?>

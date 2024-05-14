@@ -22,13 +22,11 @@ try {
                 $modificato = $connection -> modificaLibro($LibroSelezionato, $_POST['titolo'], $_POST['autore'], $_POST['lingua'], $_POST['capitoli'], $_POST['trama'], $_POST['genere']);
                 $connection -> closeConnection();
                 if($modificato) {
-                    header("Location: modifica_libro.php?id=$LibroSelezionato");
-                    //header("Location: index.php?success=1"); //MOSTRARE MESSAGE DI SUCCESSO
+                    header("Location: scheda_libro.php?id=".$LibroSelezionato."&modificato=1");
                     exit();
                 }
-                else { //da sistemare
-                    header("Location: modifica_libro.php?id=$LibroSelezionato");
-                    //header("Location: index.php?success=0"); //MOSTRARE MESSAGE DI ERRORE
+                else {
+                    header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
                     exit();
                 }
             }

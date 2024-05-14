@@ -16,9 +16,14 @@ else {
 
 $paginaHTML = file_get_contents("template/templateHomeUtente.html");
 
-
+$messaggiSuccesso = "";
 $listaGeneri = "";
 $listaLibri = '<div id="libri_genere_home">';
+
+if(isset($_GET['registrato']) && $_GET['registrato'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Registrazione avvenuta con successo. Benvenuto, '.$_SESSION['username'].'!</p>';
+}
+
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
@@ -64,6 +69,7 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 echo $paginaHTML;
 
 ?>

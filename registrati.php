@@ -76,10 +76,7 @@ if($connectionOk) {
         $ok = $tmp['ok'];
         $messaggiPerForm .= $tmp['messaggi'];
 
-        if($ok) { //si connette al database solamente se i dati inseriti sono validi
-            $connection = new DBAccess();
-            $connectionOk = $connection -> openDBConnection();
-
+        if($ok) {
             if($connection -> usernameUnico($username)) {
                 $erroriRegistrazione = $connection -> registraUtente($nome, $cognome, $username, $email, $password1, $data);
                 $connection -> closeConnection();
@@ -91,7 +88,7 @@ if($connectionOk) {
                     $_SESSION['email'] = $email;
                     $_SESSION['admin'] = false;
                     $_SESSION['data'] = $data;
-                    header("Location: index.php"); //dovrebbe mostrare un messaggio di successo dopo aver mandato alla pagina di login
+                    header("Location: index.php?registrato=1");
                 } else {
                     $messaggiPerForm .= "<li>".$erroriRegistrazione."</li>";
                 }

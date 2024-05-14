@@ -47,8 +47,8 @@
             <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a>&gt; &gt; {titoloold}</p>
         </nav>
         <main id="content">
-            <img> <!--ERRORE immagine con alt specifico--><!--ERRORE MANCA src-->
             <section id="modificaLibro">
+                {messaggiErrore}
                 <h2>Inserisci i nuovi dati del libro</h2>
                 <form method="post" action="modifica.php" onsubmit="return conferma('Sei sicuro/sicura di voler modificare il libro?')" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
                     {messaggiForm}
