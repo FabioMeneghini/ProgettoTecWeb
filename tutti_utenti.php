@@ -67,8 +67,8 @@ try {
         
         if(!empty($resultUtenti)){
             $utenti.= '<p id="descr">
-                               La tabella contiene l&apos; elenco di tutti gli utenti registrati al sito .
-                               Ogni riga descrive un utente con 4 colonne nell&apos; ordine: nome, cognome, username, email.
+                               La tabella contiene l&apos; elenco di tutti gli utenti registrati al sito.
+                               Ogni riga descrive un utente con 5 colonne nell&apos; ordine: nome, cognome, username, email, data di iscrizione al sito.
                            </p>
                            <table aria-describedby="descr">
                            <caption>Tutti gli utenti del sito</caption>
@@ -77,7 +77,7 @@ try {
                                <th scope="col">Cognome</th>
                                <th scope="col">Username</th>
                                <th scope="col">Email</th>
-
+                               <th scope="col">Data di iscrizione</th>
                            </tr>';
            foreach($resultUtenti as $utente) {
             $utenti .= '<tr>
@@ -85,6 +85,7 @@ try {
                         <td>'.$utente["cognome"].'</td>
                         <td>'.$utente["username"].'</td>
                         <td>'.$utente["email"].'</td>
+                        <td>'.$utente["data_iscrizione"].'</td>
                         </tr>';
            }
            $utenti .= "</table>";
@@ -105,8 +106,8 @@ catch(Throwable $e) {
 $paginaHTML = str_replace("{selected_alfabetico_nome}", $alfabetico_nome, $paginaHTML);
 $paginaHTML = str_replace("{selected_alfabetico_cognome}", $alfabetico_cognome, $paginaHTML);
 $paginaHTML = str_replace("{selected_alfabetico_username}", $alfabetico_username, $paginaHTML);
-$paginaHTML = str_replace("{selected_data_iscrizione_piu_recente}", $data_iscrizione_piu_recente, $paginaHTML);
-$paginaHTML = str_replace("{selected_data_iscrizione_meno_recente}", $data_iscrizione_meno_recente, $paginaHTML);
+$paginaHTML = str_replace("{selected_data_piu_recente}", $data_iscrizione_piu_recente, $paginaHTML);
+$paginaHTML = str_replace("{selected_data_meno_recente}", $data_iscrizione_meno_recente, $paginaHTML);
 $paginaHTML = str_replace("{selected_attivi}", $attivi, $paginaHTML);
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);

@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
+        <script src="conferme.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -45,7 +46,7 @@
         <main id="content">
             <section id="sectionAggiungiLibro">
                 <h2>Inserisci un nuovo Libro</h2>
-                <form method="post" action="aggiungi_libro.php"> 
+                <form method="post" action="aggiungi_libro.php" onreset="return conferma('Sei sicuro/sicura di voler cancellare i dati inseriti?')"> 
                     {messaggiForm}
                     <fieldset>
                         <legend>Informazioni generali: </legend>
@@ -85,8 +86,8 @@
                     </fieldset>
                     <fieldset>
                         <legend>Concludi l'inserimento:</legend>
-                        <button type="submit" id="inserisci" name="inserisci">Invia</button>
-                        <button type="reset">Reset</button>
+                        <input type="submit" id="inserisci" name="inserisci" value="Inserisci">
+                        <button type="reset" value="Reset">
                         <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
                 </form>

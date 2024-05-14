@@ -618,7 +618,7 @@ class DBAccess {
         if(mysqli_num_rows($queryResult) != 0){
             $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
             $queryResult -> free();
-            return $row['media_voti'];
+            return round($row['media_voti'], 2);
         }
         else {
             return null;
@@ -766,13 +766,13 @@ class DBAccess {
 
     public function getTuttiLibriOrdinati($opzione) {
         if($opzione=="alfabetico")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY titolo ASC";
         else if($opzione=="piu_recente")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY data_inserimento DESC";
         else if($opzione=="meno_recente")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY data_inserimento ASC";
         else if($opzione=="popolarita")
-            $query = "SELECT l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua, COUNT(hl.id_libro) + COUNT(sl.id_libro) AS conteggio
+            $query = "SELECT l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua, data_inserimento, COUNT(hl.id_libro) + COUNT(sl.id_libro) AS conteggio
                       FROM libri l
                       LEFT JOIN ha_letto hl ON l.id = hl.id_libro
                       LEFT JOIN sta_leggendo sl ON l.id = sl.id_libro
@@ -793,17 +793,17 @@ class DBAccess {
     }
     public function getTuttiUtentiOrdinati($opzione) {
         if($opzione=="alfabetico_username")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY username ASC";
         else if($opzione=="alfabetico_nome")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY nome ASC";
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY nome ASC";
         else if($opzione=="alfabetico_cognome")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY cognome ASC";
-        else if($opzione=="data_piu_recente")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
-        else if($opzione=="data_meno_recente")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY cognome ASC";
+        else if($opzione=="data_iscrizione_piu_recente")
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY data_iscrizione DESC";
+        else if($opzione=="data_iscrizione_meno_recente")
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY data_iscrizione ASC";
         else// ($opzione=="attivi")
-            $query = "SELECT utenti.nome, utenti.cognome, utenti.username, utenti.email, COUNT(sta_leggendo.username) AS numeroLibri
+            $query = "SELECT utenti.nome, utenti.cognome, utenti.username, utenti.email, utenti.data_iscrizione, COUNT(sta_leggendo.username) AS numeroLibri
                       FROM utenti
                       LEFT JOIN sta_leggendo ON utenti.username = sta_leggendo.username
                       GROUP BY utenti.username
@@ -956,6 +956,34 @@ class DBAccess {
             $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
             $queryResult -> free();
             return $row['data_iscrizione'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    /* STATISTICHE */
+
+    public function getNumeroLibriSalvati($username) {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM da_leggere WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['numeroLibri'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getNumeroLibriStaLeggendo($username) {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM sta_leggendo WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['numeroLibri'];
         }
         else {
             return null;

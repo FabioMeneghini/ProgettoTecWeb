@@ -22,9 +22,9 @@ function controllaInput($username, $password) { //da inserire eventualmente altr
     if($password == "") {
         $messaggi .= "<li>La password non può essere vuota</li>";
     }
-    if(strlen($username) <= 2) {
+    /*if(strlen($username) <= 2) {
         $messaggi .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
-    }
+    }*/
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 

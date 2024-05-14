@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
+        <script src="conferme.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -49,10 +50,9 @@
             <img> <!--ERRORE immagine con alt specifico--><!--ERRORE MANCA src-->
             <section id="modificaLibro">
                 <h2>Inserisci i nuovi dati del libro</h2>
-                <form method="post" action="modifica.php"> 
+                <form method="post" action="modifica.php" onsubmit="return conferma('Sei sicuro/sicura di voler modificare il libro?')" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
                     {messaggiForm}
                     <fieldset>
-
                         <legend>Informazioni generali: </legend>
                         <label for="autore">Autore: </label>
                         <input type="text" id="autore" name="autore"  placeholder="{autoreold}" value="{autoreold}"><!--ERRORE CORRETTO MIN MAX-->
@@ -74,8 +74,6 @@
                         
                         <label id="durata">Numero capitoli: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
                         <input type="number" name="capitoli" id="capitoli" max="1000" required placeholder="{capitoliold}" value="{capitoliold}"> <!--ERRORE Bad value {capitoliold} for attribute value on element input: Expected a minus sign or a digit but saw { instead./--><!--ERRORE CORRETTO RIMOSSO /-->
-
-                       
                     </fieldset>
                     <fieldset>
                         <legend>Storia:</legend>

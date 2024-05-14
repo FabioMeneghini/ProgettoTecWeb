@@ -17,15 +17,18 @@ else {
 $paginaHTML = file_get_contents("template/templateStatisticheUtente.html");
 $listaGeneri = "";
 
+
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     
     if($connectionOk) {
-        $n_recensioni= $connection -> getRecensioniUtente($_SESSION['username']);
-        $n_libri= $connection ->  getLibriUtente($_SESSION['username']);
+        $n_recensioni = $connection -> getRecensioniUtente($_SESSION['username']);
+        $n_libri_letti = $connection ->  getLibriUtente($_SESSION['username']);
+        $n_libri_stai_leggendo = $connection -> getNumeroLibriStaLeggendo($_SESSION['username']);
+        $n_libri_salvati = $connection -> getNumeroLibriSalvati($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
-
+           
         foreach($resultListaGeneri as $genere) {
              $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
@@ -40,7 +43,9 @@ catch(Throwable $e) {
 }
 $paginaHTML = str_replace("{listaLibri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{NumeroRecensioni}", $n_recensioni, $paginaHTML);
-$paginaHTML = str_replace("{LibriLetti}", $n_libri, $paginaHTML);
+$paginaHTML = str_replace("{LibriLetti}", $n_libri_letti, $paginaHTML);
+$paginaHTML = str_replace("{LibriStaiLeggendo}", $n_libri_stai_leggendo, $paginaHTML);
+$paginaHTML = str_replace("{LibriSalvati}", $n_libri_salvati, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 

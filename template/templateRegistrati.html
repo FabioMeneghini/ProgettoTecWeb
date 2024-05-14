@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
+        <script src="conferme.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -38,7 +39,7 @@
         <main id="content">
             <h2>Registrati:</h2>
         <section id="section_registrazione"><!--WARNING Section lacks heading. Consider using h2-h6 elements to add identifying headings to all sections, or else use a div element instead for any cases where no heading is needed. /-->
-            <form id="registrationForm" action="registrati.php" method="post">
+            <form id="registrationForm" action="registrati.php" method="post" onreset="return conferma('Sei sicuro/sicura di voler resettare tutti i campi inseriti?')">
                 <!--aggiungi pagina php-->
                 {messaggi}
                 <fieldset>
@@ -82,6 +83,7 @@
                     <input type="password" id="password2" name="password2" required>
                 </fieldset>
                 <input type="submit" id="registrati" name="registrati" value="Registrati">
+                <input type="reset" value="Reset">
             </form>
         </section>
         </main>
