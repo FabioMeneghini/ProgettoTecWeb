@@ -426,8 +426,8 @@ transform: scale(1.3);
     background-image: url("../copertine_libri/cime_tempestose.jpg");
 }
 
-#don_chishotte{
-    background-image: url("../copertine_libri/don_chishotte.jpg");
+#don_chisciotte{
+    background-image: url("../copertine_libri/don_chisciotte.jpg");
 }
 
 #dune{
@@ -438,12 +438,12 @@ transform: scale(1.3);
     background-image: url("../copertine_libri/guerra_e_pace.jpg");
 }
 
-#harry_potter_e_la_pietra_filosfale{
-    background-image: url("../copertine_libri/harry_potter_e_la_pietra_filosfale.jpg");
+#harry_potter_e_la_pietra_filosofale{
+    background-image: url("../copertine_libri/harry_potter_e_la_pietra_filosofale.jpg");
 }
 
-#il_caccaitore_di_aquiloni{
-    background-image: url("../copertine_libri/il_caccaitore_di_aquiloni.jpg");
+#il_cacciatore_di_aquiloni{
+    background-image: url("../copertine_libri/il_cacciatore_di_aquiloni.jpg");
 }
 
 #il_codice_da_vinci{
@@ -462,8 +462,8 @@ transform: scale(1.3);
     background-image: url("../copertine_libri/il_corvo.jpg");
 }
 
-#il_dottor_jekill_e_mr_hide{
-    background-image: url("../copertine_libri/il_dottor_jekill_e_mr_hide.jpg");
+#lo_strano_caso_del_dottor_jekyll_e_mr_hide{
+    background-image: url("../copertine_libri/lo_strano_caso_del_dottor_jekyll_e_mr_hide.jpg");
 }
 
 #il_dottor_zivago{
@@ -519,8 +519,8 @@ transform: scale(1.3);
 }
 
 #il_signore_degli_anelli{
-    /*background-image: url("../copertine_libri/il_signore_degli_anelli.jpg");*/
-    background-image: url("../copertine_generi/distopico.jpg");
+    background-image: url("../copertine_libri/il_signore_degli_anelli.jpg");
+   
 }
 
 #il_vecchio_e_il_mare{
@@ -575,7 +575,265 @@ transform: scale(1.3);
     background-image: url("../copertine_libri/piccole_donne.jpg");
 }
 
+#gone_girl_l_amore_bugiardo{
+    background-image: url("../copertine_libri/gone_girl_l_amore_bugiardo.jpg");
+}
 
+#il_mastino_di_baskerville{
+    background-image: url("../copertine_libri/il_mastino_di_baskerville.jpg");
+}
+
+#la_cattedrale_del_mare{
+    background-image: url("../copertine_libri/la_cattedrale_del_mare.jpg");
+}
+
+#la_donna_del_treno{
+    background-image: url("../copertine_libri/la_donna_del_treno.jpg");
+}
+
+#la_fine_dell_eternita{
+    background-image: url("../copertine_libri/la_fine_dell_eternita.jpg");
+}
+
+#la_lettera_scarlatta{
+    background-image: url("../copertine_libri/la_lettera_scarlatta.jpg");
+}
+
+#la_meta_di_un_sole_giallo{
+    background-image: url("../copertine_libri/la_meta_di_un_sole_giallo.jpg");
+}
+
+#mistborn_l_ultimo_impero{
+    background-image: url("../copertine_libri/mistborn_l_ultimo_impero.jpg");
+}
+
+#sherlock_holmes_uno_studio_in_rosso{
+    background-image: url("../copertine_libri/sherlock_holmes_uno_studio_in_rosso.jpg");
+}
+
+#starship_troopers_fanteria_dello_spazio{
+    background-image: url("../copertine_libri/starship_troopers_fanteria_dello_spazio.jpg");
+}
+
+#ventimila_leghe_sotto_i_mari{
+    background-image: url("../copertine_libri/ventimila_leghe_sotto_i_mari.jpg");
+}
+
+#zanna_bianca{
+    background-image: url("../copertine_libri/zanna_bianca.jpg");
+}
+
+#la_storia_infinita{
+    background-image: url("../copertine_libri/la_storia_infinita.jpg");
+}
+
+#la_spada_di_shannara{
+    background-image: url("../copertine_libri/la_spada_di_shannara.jpg");
+}
+
+#il_nome_del_vento{
+    background-image: url("../copertine_libri/il_nome_del_vento.jpg");
+}
+
+#eragon{
+    background-image: url("../copertine_libri/eragon.jpg");
+}
+
+#gli_inganni_di_locke_lamora{
+    background-image: url("../copertine_libri/gli_inganni_di_locke_lamora.jpg");
+}
+
+#la_mano_sinistra_di_dio{
+    background-image: url("../copertine_libri/la_mano_sinistra_di_dio.jpg");
+}
+
+#fahrenheit_451{
+    background-image: url("../copertine_libri/fahrenheit_451.jpg");
+}
+
+#neuromante{
+    background-image: url("../copertine_libri/neuromante.jpg");
+}
+
+#la_guerra_dei_mondi{
+    background-image: url("../copertine_libri/la_guerra_dei_mondi.jpg");
+}
+
+#la_fine_dell_eternita{
+    background-image: url("../copertine_libri/la_fine_dell_eternita.jpg");
+}
+
+#il_cacciatore_di_androidi{
+    background-image: url("../copertine_libri/il_cacciatore_di_androidi.jpg");
+}
+
+#hyperion{
+    background-image: url("../copertine_libri/hyperion.jpg");
+}
+
+#la_macchina_del_tempo{
+    background-image: url("../copertine_libri/la_macchina_del_tempo.jpg");
+}
+
+#il_sole_nudo{
+    background-image: url("../copertine_libri/il_sole_nudo.jpg");
+}
+
+#ubik{
+    background-image: url("../copertine_libri/ubik.jpg");
+}
+
+#i_pilastri_della_terra{
+    background-image: url("../copertine_libri/i_pilastri_della_terra.jpg");
+}
+
+#pompeii{
+    background-image: url("../copertine_libri/pompeii.jpg");
+}
+
+#i_miserabili{
+    background-image: url("../copertine_libri/i_miserabili.jpg");
+}
+
+#la_storia{
+    background-image: url("../copertine_libri/la_storia.jpg");
+}
+
+#la_ragazza_con_l_orecchino_di_perla{
+    background-image: url("../copertine_libri/la_ragazza_con_l_orecchino_di_perla.jpg");
+}
+
+#memorie_di_una_geisha{
+    background-image: url("../copertine_libri/memorie_di_una_geisha.jpg");
+}
+
+#sinuhe_l_egiziano{
+    background-image: url("../copertine_libri/sinuhe_l_egiziano.jpg");
+}
+
+#gli_anelli_di_saturno{
+    background-image: url("../copertine_libri/gli_anelli_di_saturno.jpg");
+}
+
+#robinson_crusoe{
+    background-image: url("../copertine_libri/robinson_crusoe.jpg");
+}
+
+#tre_uomini_in_barca{
+    background-image: url("../copertine_libri/tre_uomini_in_barca.jpg");
+}
+
+#il_richiamo_della_foresta{
+    background-image: url("../copertine_libri/il_richiamo_della_foresta.jpg");
+}
+
+#il_giro_del_mondo_in_80_giorni{
+    background-image: url("../copertine_libri/il_giro_del_mondo_in_80_giorni.jpg");
+}
+
+#cuore_di_tenebra{
+    background-image: url("../copertine_libri/cuore_di_tenebra.jpg");
+}
+
+#il_prigioniero_di_zenda{
+    background-image: url("../copertine_libri/il_prigioniero_di_zenda.jpg");
+}
+
+#l_ultimo_dei_mohicani{
+    background-image: url("../copertine_libri/l_ultimo_dei_mohicani.jpg");
+}
+
+#i_tre_moschettieri{
+    background-image: url("../copertine_libri/i_tre_moschettieri.jpg");
+}
+
+#viaggio_al_centro_della_terra{
+    background-image: url("../copertine_libri/viaggio_al_centro_della_terra.jpg");
+}
+
+#dracula{
+    background-image: url("../copertine_libri/dracula.jpg");
+}
+
+#frankenstein{
+    background-image: url("../copertine_libri/frankenstein.jpg");
+}
+
+#shining{
+    background-image: url("../copertine_libri/shining.jpg");
+}
+
+#il_gatto_nero{
+    background-image: url("../copertine_libri/il_gatto_nero.jpg");
+}
+
+#it{
+    background-image: url("../copertine_libri/it.jpg");
+}
+
+#l_esorcista{
+    background-image: url("../copertine_libri/l_esorcista.jpg");
+}
+
+#l_ombra_su_innsmouth{
+    background-image: url("../copertine_libri/l_ombra_su_innsmouth.jpg");
+}
+
+#la_casa_degli_orrori{
+    background-image: url("../copertine_libri/la_casa_degli_orrori.jpg");
+}
+
+#il_giro_di_vite{
+    background-image: url("../copertine_libri/il_giro_di_vite.jpg");
+}
+
+#la_mummia{
+    background-image: url("../copertine_libri/la_mummia.jpg");
+}
+
+#carrie{
+    background-image: url("../copertine_libri/carrie.jpg");
+}
+
+#i_am_legend{
+    background-image: url("../copertine_libri/i_am_legend.jpg");
+}
+
+#pet_sematary{
+    background-image: url("../copertine_libri/pet_sematary.jpg");
+}
+
+#l_esclusa{
+    background-image: url("../copertine_libri/l_esclusa.jpg");
+}
+
+#il_silenzio_degli_innocenti{
+    background-image: url("../copertine_libri/il_silenzio_degli_innocenti.jpg");
+}
+
+#il_profumo{
+    background-image: url("../copertine_libri/il_profumo.jpg");
+}
+
+#uomini_che_odiano_le_donne{
+    background-image: url("../copertine_libri/uomini_che_odiano_le_donne.jpg");
+}
+
+#shutter_island{
+    background-image: url("../copertine_libri/shutter_island.jpg");
+}
+
+#il_lamento_di_portnoy{
+    background-image: url("../copertine_libri/il_lamento_di_portnoy.jpg");
+}
+
+#il_grande_sonno{
+    background-image: url("../copertine_libri/il_grande_sonno.jpg");
+}
+
+#l_agente_segreto{
+    background-image: url("../copertine_libri/l_agente_segreto.jpg");
+}
 /*SCORRIMENTO IMMAGINI*/
 
 body > *{
