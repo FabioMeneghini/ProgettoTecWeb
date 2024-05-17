@@ -51,7 +51,7 @@ try {
                                         </tr>';
             foreach($lista as $libro) {
                 $listaLibri .= '<tr>
-                                    <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
+                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                                 </tr>';

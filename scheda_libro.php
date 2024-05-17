@@ -78,6 +78,9 @@ if(isset($_GET['eliminato']) && $_GET['eliminato'] == 0) {
 if(isset($_GET['modificato']) && $_GET['modificato'] == 1) {
     $messaggiSuccesso = '<p class="successo">Libro modificato con successo!</p>';
 }
+if(isset($_GET['salvato']) && $_GET['salvato'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Libro salvato con successo!</p>';
+}
 
 try {
     $connection = new DBAccess();
@@ -85,10 +88,16 @@ try {
     if($connectionOk) {
         //controllo se l'utente vuole salvare o iniziare a leggere un libro
         if(isset($_POST["salva"])) {
-
+            $salvato = $connection -> aggiungiDaLeggere($_SESSION['username'], $_POST['id_libro']);
+            //mi sposto con header(Location: ...) perché altrimenti da problemi con il libro che visualizza (mostra sempre il primo in quanto perde il parametro id nel get)
+            header("Location: scheda_libro.php?salvato=1&id=".$_POST['id_libro']);
+            exit();
         }
         if(isset($_POST["inizia"])) {
-            
+            $eliminato = $connection -> rimuoviDaLeggere($_SESSION['username'], $_POST['id_libro']);
+            $iniziato = $connection -> aggiungiStaLeggendo($_SESSION['username'], $_POST['id_libro']);
+            header("Location: stai_leggendo.php?iniziato=1");
+            exit();
         }
 
         $_SESSION['id_libro'] = 1; //libro di default
@@ -170,8 +179,9 @@ try {
                         <form action="scheda_libro.php" method="post"> 
                         <fieldset>
                             <legend>Inizia a leggere:</legend>
+                            <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
                             <label for="username">Questo libro è nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label><br>
-                            <input type="button" id="inizia" name="inizia" value="inizia">
+                            <input type="submit" id="inizia" name="inizia" value="inizia">
                         </fieldset>
                     </form>
                     </section>';
@@ -181,11 +191,12 @@ try {
                     //manca id del utente che sta leggendo il libro
                     
                 }
-                else  {/************************************************************************************************************************/
+                else  {
                     $arearecensionevoto='<section id="accediform">
                         <form action="scheda_libro.php" method="post"> 
                             <fieldset>
                                 <legend>Prima di recensire questo libro devi averlo terminato</legend>
+                                <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
                                 <label for="username">Salva per leggerlo più tardi:</label>
                                 <input type="submit" id="salva" name="salva" value="Salva">
                                 <label for="username">Inizia a leggere:</label>

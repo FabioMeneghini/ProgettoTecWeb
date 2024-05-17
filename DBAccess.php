@@ -341,11 +341,33 @@ class DBAccess {
         }
     }
 
+    public function aggiungiDaLeggere($username, $id_libro) {
+        $query = "INSERT INTO da_leggere (username, id_libro) VALUES (?, ?)";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("si", $username, $id_libro);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+            }
+            $stmt->close();
+        }
+    }
+
     public function rimuoviDaLeggere($username, $id_libro) {
-        $query = "DELETE FROM da_leggere WHERE username = '$username' AND id_libro = '$id_libro'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if($queryResult === false) {
-            echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
+        $query = "DELETE FROM da_leggere WHERE username = ? AND id_libro = ?";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("si", $username, $id_libro);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
+            }
+            $stmt->close();
         }
     }
     /*********************************************************************************************** */

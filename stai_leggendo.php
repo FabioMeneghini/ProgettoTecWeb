@@ -12,6 +12,11 @@ $paginaHTML = file_get_contents("template/templateStaiLeggendo.html");
 
 $listaLibri = "";
 $listaGeneri = "";
+$messaggiSuccesso = "";
+
+if(isset($_GET['iniziato']) && $_GET['iniziato'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Libro iniziato con successo!</p>';
+}
 
 try {
     $connection = new DBAccess();
@@ -85,6 +90,7 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
+$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 echo $paginaHTML;
 
 ?>
