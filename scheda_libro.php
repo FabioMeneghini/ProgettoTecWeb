@@ -83,6 +83,14 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        //controllo se l'utente vuole salvare o iniziare a leggere un libro
+        if(isset($_POST["salva"])) {
+
+        }
+        if(isset($_POST["inizia"])) {
+            
+        }
+
         $_SESSION['id_libro'] = 1; //libro di default
         $ok=false;
         if(isset($_GET['id'])) {
@@ -162,7 +170,7 @@ try {
                         <form action="scheda_libro.php" method="post"> 
                         <fieldset>
                             <legend>Inizia a leggere:</legend>
-                            <label for="username">Questo libro è nei tuoi libri salvati .&Egrave; il momento di iniziare a leggerlo?</label><br>
+                            <label for="username">Questo libro è nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label><br>
                             <input type="button" id="inizia" name="inizia" value="inizia">
                         </fieldset>
                     </form>
@@ -173,17 +181,17 @@ try {
                     //manca id del utente che sta leggendo il libro
                     
                 }
-                else  {
+                else  {/************************************************************************************************************************/
                     $arearecensionevoto='<section id="accediform">
                         <form action="scheda_libro.php" method="post"> 
-                        <fieldset>
-                            <legend>Prima di recensire questo libro devi averlo terminato</legend>
-                            <label for="username">Salva per leggerlo più tardi:</label>
-                            <input type="button" id="salva" name="salva" value="Salva"><br>
-                            <label for="username">Inizia a leggere:</label>
-                            <input type="button" id="inizia" name="inizia" value="Inizia">
-                        </fieldset>
-                    </form>
+                            <fieldset>
+                                <legend>Prima di recensire questo libro devi averlo terminato</legend>
+                                <label for="username">Salva per leggerlo più tardi:</label>
+                                <input type="submit" id="salva" name="salva" value="Salva">
+                                <label for="username">Inizia a leggere:</label>
+                                <input type="submit" id="inizia" name="inizia" value="Inizia">
+                            </fieldset>
+                        </form>
                     </section>';
                 }
             }

@@ -64,9 +64,14 @@ try {
            // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
            //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
             $listaBestSeller .=  '<div class="item">
-                                    <img src="copertine_libri/'.$titolo.'.jpg">
-                                    <div>'.$libro["autore"].' - '.$libro["titolo"].'</div>
-                                    <div>'.$libro["trama"].'</div>
+                                    <img src="copertine_libri/'.$titolo.'.jpg" alt="'.$libro["descrizione"].'">
+                                    <ul>
+                                        <li>Titolo: '.$libro["autore"].'</li>
+                                        <li>Autore: '.$libro["titolo"].'</li>
+                                        <li>Genere: '.$libro["genere"].'</li>
+                                        <li class="commento">'.$libro["migliore_recensione"].'</li>
+                                        <li>Voto medio della <span lang="en">community</span>: <span class="voto_medio">'.$libro["voto_medio"].'</span></li>
+                                        </ul>
                                   </div>';
         }
         

@@ -23,13 +23,49 @@ class DBAccess {
         mysqli_close($this -> connection);
     }
 
+    public function get_migliore_recensione($id_libro){
+        $query= "SELECT recensioni.commento, recensioni.voto
+                FROM recensioni 
+                WHERE recensioni.id_libro='$id_libro'
+                ORDER BY recensioni.voto DESC
+                LIMIT 1";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            mysqli_free_result($queryResult);
+            return $row['commento'];
+        } else {
+            return null; // Ritorna null se non ci sono recensioni
+        }
+    }
+
     public function getListaBestSeller() {
-        $query = "SELECT libri.titolo, libri.autore, libri.trama, generi.nome
+        $query = "SELECT libri.titolo, libri.autore, generi.nome AS genere, libri.descrizione, libri.id
                   FROM libri, generi
                   WHERE libri.id_genere=generi.id
                   LIMIT 10";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                // Chiama get_migliore_recensione per ogni libro
+                $migliore_recensione = $this -> get_migliore_recensione($row["id"]);
+                $voto_medio = $this -> getmediavoti($row["id"]);
+                $row['voto_medio'] = $voto_medio;
+                if ($migliore_recensione) {
+                    // Aggiungi la migliore recensione al risultato del libro
+                    $row['migliore_recensione'] = $migliore_recensione;
+                } else {
+                    // Se non ci sono recensioni, imposta 'migliore_recensione' su null
+                    $row['migliore_recensione'] = null;
+                }
+                $result[] = $row;
+            }
+            mysqli_free_result($queryResult);
+            return $result;
+        } else {
+            return null;
+        }/*if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
             while($row = mysqli_fetch_assoc($queryResult)) {
                 $result[] = $row;
@@ -39,7 +75,8 @@ class DBAccess {
         }
         else {
             return null;
-        }
+        }*/
+        
     }
 
     public function login($username, $password) {
@@ -288,6 +325,7 @@ class DBAccess {
         }
     }
 
+    /********************************************************************************************** */
     public function aggiungiStaLeggendo($username, $id_libro) {
         $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
         $stmt = $this -> connection -> prepare($query);
@@ -310,6 +348,7 @@ class DBAccess {
             echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
         }
     }
+    /*********************************************************************************************** */
 
     public function modificaUsername($old, $new) {
         $query = "UPDATE utenti SET username = '$new' WHERE username = '$old'";
