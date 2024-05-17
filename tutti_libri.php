@@ -22,6 +22,14 @@ $selezionato_alfabetico="";
 $selezionato_popolarita="";
 $selezionato_piu_recente="";
 $selezionato_meno_recente="";
+$messaggiSuccesso = "";
+
+if(isset($_GET['inserito']) && $_GET['inserito'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Libro inserito con successo!</p>';
+}
+else if(isset($_GET['eliminato']) && $_GET['eliminato'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Libro eliminato con successo!</p>';
+}
 
 try {
     $connection = new DBAccess();
@@ -46,26 +54,27 @@ try {
         }
         if(!empty($risultLibri)){
             $catalogo.= '<p id="descr">
-                               La tabella contiene l\'elenco dei libri che assomigliano alla tua ricerca.
-                               Ogni riga descrive un libro con sette colonne nominate:"titolo","copertina", "autore", "genere", "numero capitoli".
-                               È anche presente una quinta e una sesta colonna che contengono rispettivamente un bottone per salvare il libro nella lista dei libri da leggere e uno per iniziarne la lettura.
-                           </p>
+                               La tabella contiene l\'elenco di tutti i libri presenti nel sito.
+                               Ogni riga descrive un libro con 5 colonne nominate: "titolo","copertina", "autore", "lingua", "data inserimento".
+                        </p>
                            <table aria-describedby="descr">
-                           <caption>Risultati della tua ricerca</caption>
+                           <caption>Catalogo di tutti i libri</caption>
                            <tr>
                                <th scope="col">Titolo</th>
                                <th scope="col">Copertina</th>
                                <th scope="col">Autore</th>
-                               <th scope="col">lingua </th>
+                               <th scope="col">Lingua </th>
+                               <th scope="col">Data inserimento</th>
                            </tr>';
                            //"copertine_libri/'..$libro["titolo_ir"].jpg"
            foreach($risultLibri as $libro) {
             $catalogo .= '<tr>
-                                   <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                   <td><img src="copertine_libri/'.$libro['titolo_ir'].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
-                                   <td>'.$libro["autore"].'</td>
-                                   <td>'.$libro["lingua"].'</td>
-                               </tr>';
+                            <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
+                            <td><img src="copertine_libri/'.$libro['titolo_ir'].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
+                            <td>'.$libro["autore"].'</td>
+                            <td>'.$libro["lingua"].'</td>
+                            <td>'.$libro["data_inserimento"].'</td>
+                          </tr>';
            }
            $catalogo .= "</table>";
        }
@@ -99,6 +108,7 @@ $paginaHTML = str_replace("{selected_piu_recente}", $selezionato_piu_recente, $p
 $paginaHTML = str_replace("{selected_meno_recente}", $selezionato_meno_recente, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{CatalogoLibri}", $catalogo, $paginaHTML);
+$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 echo $paginaHTML;
 
 ?>

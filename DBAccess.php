@@ -67,15 +67,15 @@ class DBAccess {
         }
     }
 
-    public function registraUtente($nome, $cognome, $username, $email, $password) {
+    public function registraUtente($nome, $cognome, $username, $email, $password, $data) {
         $messaggio = "";
-        $query = "INSERT INTO utenti (nome, cognome, username, email, password) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO utenti (nome, cognome, username, email, password, data_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $this -> connection -> prepare($query);
         if($stmt === false) {
             $messaggio .= "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
         }
         else {
-            $stmt->bind_param("sssss", $nome, $cognome, $username, $email, $password);
+            $stmt->bind_param("ssssss", $nome, $cognome, $username, $email, $password, $data);
             if (!$stmt->execute()) {
                 $messaggio .= "<li>Errore durante la registrazione: " . $stmt->error . "</li>";
             }
@@ -101,7 +101,7 @@ class DBAccess {
     }
 
     public function getListaLibriGenere($genere, $n=1000) {
-        $query="SELECT libri.titolo, libri.id FROM libri, generi WHERE libri.id_genere=generi.id AND generi.nome='$genere' LIMIT $n";
+        $query="SELECT libri.titolo, libri.id, libri.titolo_ir FROM libri, generi WHERE libri.id_genere=generi.id AND generi.nome='$genere' LIMIT $n";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
@@ -618,7 +618,7 @@ class DBAccess {
         if(mysqli_num_rows($queryResult) != 0){
             $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
             $queryResult -> free();
-            return $row['media_voti'];
+            return round($row['media_voti'], 2);
         }
         else {
             return null;
@@ -740,8 +740,8 @@ class DBAccess {
     }
 
     public function aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere) {
-        $query = "INSERT INTO libri (titolo, autore, lingua, n_capitoli, trama, id_genere) 
-                  VALUES (?, ?, ?, ?, ?, (SELECT id FROM generi WHERE nome = ?))";
+        $query = "INSERT INTO libri (titolo, autore, lingua, n_capitoli, trama, id_genere,data_inserimento) 
+                  VALUES (?, ?, ?, ?, ?, (SELECT id FROM generi WHERE nome = ?), NOW())";
         $stmt = $this -> connection -> prepare($query);
         if($stmt === false) {
             echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
@@ -749,8 +749,10 @@ class DBAccess {
         else {
             $stmt->bind_param("sssiss", $titolo, $autore, $lingua, $capitoli, $trama, $genere);
             if (!$stmt->execute()) {
-                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+                /*echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";*/
+                return false;
             }
+            return true;
             $stmt->close();
         }
     }
@@ -766,13 +768,13 @@ class DBAccess {
 
     public function getTuttiLibriOrdinati($opzione) {
         if($opzione=="alfabetico")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY titolo ASC";
         else if($opzione=="piu_recente")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY data_inserimento DESC";
         else if($opzione=="meno_recente")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri ORDER BY titolo ASC";
+            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY data_inserimento ASC";
         else if($opzione=="popolarita")
-            $query = "SELECT l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua, COUNT(hl.id_libro) + COUNT(sl.id_libro) AS conteggio
+            $query = "SELECT l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua, data_inserimento, COUNT(hl.id_libro) + COUNT(sl.id_libro) AS conteggio
                       FROM libri l
                       LEFT JOIN ha_letto hl ON l.id = hl.id_libro
                       LEFT JOIN sta_leggendo sl ON l.id = sl.id_libro
@@ -793,17 +795,17 @@ class DBAccess {
     }
     public function getTuttiUtentiOrdinati($opzione) {
         if($opzione=="alfabetico_username")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY username ASC";
         else if($opzione=="alfabetico_nome")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY nome ASC";
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY nome ASC";
         else if($opzione=="alfabetico_cognome")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY cognome ASC";
-        else if($opzione=="data_piu_recente")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
-        else if($opzione=="data_meno_recente")
-            $query = "SELECT nome, cognome, username, email FROM utenti ORDER BY username ASC";
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY cognome ASC";
+        else if($opzione=="data_iscrizione_piu_recente")
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY data_iscrizione DESC";
+        else if($opzione=="data_iscrizione_meno_recente")
+            $query = "SELECT nome, cognome, username, email, data_iscrizione FROM utenti ORDER BY data_iscrizione ASC";
         else// ($opzione=="attivi")
-            $query = "SELECT utenti.nome, utenti.cognome, utenti.username, utenti.email, COUNT(sta_leggendo.username) AS numeroLibri
+            $query = "SELECT utenti.nome, utenti.cognome, utenti.username, utenti.email, utenti.data_iscrizione, COUNT(sta_leggendo.username) AS numeroLibri
                       FROM utenti
                       LEFT JOIN sta_leggendo ON utenti.username = sta_leggendo.username
                       GROUP BY utenti.username
@@ -946,6 +948,47 @@ class DBAccess {
         $n = count($id_libri);
         for($i=0; $i<$n; $i++) {
             $this -> rimuoviDaLeggere($username, $id_libri[$i]);
+        }
+    }
+
+    public function getDataIscrione($username) {
+        $query = "SELECT data_iscrizione FROM utenti WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['data_iscrizione'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    /* STATISTICHE */
+
+    public function getNumeroLibriSalvati($username) {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM da_leggere WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['numeroLibri'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getNumeroLibriStaLeggendo($username) {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM sta_leggendo WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['numeroLibri'];
+        }
+        else {
+            return null;
         }
     }
 

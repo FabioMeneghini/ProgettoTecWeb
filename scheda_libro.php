@@ -5,11 +5,6 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-/*if(isset($_SESSION['admin'])) {
-    if($_SESSION['admin'] == 1) {
-        header("Location: modifica_libro.php");
-    }
-}*/
 $paginaHTML = file_get_contents("template/templateSchedaLibro.html");
 $menu ="";
 //utenti
@@ -42,7 +37,6 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
 
 $menupersonale = "";
 
-
 if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
     $menu = $adminMenu;
 }
@@ -55,7 +49,8 @@ else {
     $menupersonale = '<dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>';
 }
 
-
+$messaggiSuccesso = "";
+$messaggiErrore = "";
 $messaggiForm = "";
 $listaGeneri = "";
 $listaKeyword = "";
@@ -77,7 +72,13 @@ $copertina="";
 $alt="";
 $bottoni_admin="";
 
-//TO DO 
+if(isset($_GET['eliminato']) && $_GET['eliminato'] == 0) {
+    $messaggiErrore = '<p class="errore">Ci scusiamo per il disagio ma non è stato possibile eliminare il libro.</p>';
+}
+if(isset($_GET['modificato']) && $_GET['modificato'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Libro modificato con successo!</p>';
+}
+
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
@@ -104,7 +105,7 @@ try {
             //TO DO NEL DB METTERE ALT 
             $titolo = $connection ->  gettitololibro($LibroSelezionato);
             $autore = $connection ->  getautoreLibro($LibroSelezionato);
-            $genere = $connection ->  getgenereLibro($LibroSelezionato);
+            $genereLibro = $connection ->  getgenereLibro($LibroSelezionato);
             $lingua = $connection ->  getlinguaLibro($LibroSelezionato);
             $trama = $connection ->  gettramaLibro($LibroSelezionato);
             $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
@@ -127,7 +128,7 @@ try {
                                 <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
                                 <a href="registrati.php">Registrati</a><div>';
             }
-            else if(!isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
+            else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0/* && isset($_SESSION['username'])*/) {
                 $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
                 $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
                 $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
@@ -189,7 +190,7 @@ try {
             else {
                 $bottoni_admin='<section id="bottoni_admin">
                     <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a>
-                    <form action="elimina_libro.php" method="get">
+                    <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
                         <fieldset>
                             <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
                             <input type="submit" id="elimina" name="elimina" value="Elimina">
@@ -249,7 +250,7 @@ $paginaHTML = str_replace("{ImmagineLibro}", "copertine_libri/".$copertina.".jpg
 $paginaHTML = str_replace("{altlibro}", $alt , $paginaHTML);
 $paginaHTML = str_replace("{TitoloLibro}", $titolo , $paginaHTML);
 $paginaHTML = str_replace("{AutoreLibro}", $autore, $paginaHTML);
-$paginaHTML = str_replace("{GenereLibro}", $genere["nome"], $paginaHTML);
+$paginaHTML = str_replace("{GenereLibro}", $genereLibro, $paginaHTML);
 $paginaHTML = str_replace("{LinguaLibro}", $lingua , $paginaHTML);
 $paginaHTML = str_replace("{mediavoti}", number_format(doubleval($media_voti), 1), $paginaHTML);
 $paginaHTML = str_replace("{CapitoliLibro}", $n_capitoli , $paginaHTML);
@@ -259,6 +260,8 @@ $paginaHTML = str_replace("{recensione}", $tua_recensione , $paginaHTML);
 $paginaHTML = str_replace("{voto}", $voto, $paginaHTML);
 $paginaHTML = str_replace("{recensioniComunity}", $listaRecensioni, $paginaHTML);
 $paginaHTML = str_replace("{messaggiForm}", $messaggiForm ,$paginaHTML);
+$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore ,$paginaHTML);
+$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso ,$paginaHTML);
 echo $paginaHTML;
 
 ?>

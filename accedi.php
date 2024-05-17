@@ -22,9 +22,9 @@ function controllaInput($username, $password) { //da inserire eventualmente altr
     if($password == "") {
         $messaggi .= "<li>La password non può essere vuota</li>";
     }
-    if(strlen($username) <= 2) {
+    /*if(strlen($username) <= 2) {
         $messaggi .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
-    }
+    }*/
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
@@ -51,6 +51,8 @@ try {
                     $_SESSION['nome'] = $user['nome'];
                     $_SESSION['cognome'] = $user['cognome'];
                     $_SESSION['email'] = $user['email'];
+                    //$_SESSION['data_nascita'] = $user['data_nascita'];
+                    $_SESSION['data_iscrizione'] = $user['data_iscrizione'];
                     if($user['admin']==1) {
                         $_SESSION['admin'] = true;
                         header("Location: admin.php");

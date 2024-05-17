@@ -41,14 +41,15 @@
             <p>Ti trovi in: :<a href="admin.php"><span lang="en">Home</span></a>&gt; &gt; Catalogo</p>
         </nav>
         <main id="content">
+            {messaggiSuccesso}
             <h2>Tutti i libri:</h2>
             <form method="post" action="tutti_libri.php">
                 <label for="opzioni_ordinamento">Ordina per:</label>
                 <select id="opzioni_ordinamento" name="opzione">
                     <option value="alfabetico" {selected_alfabetico}>Alfabetico</option>
                     <option value="popolarita" {selected_popolarita}>Popolarità</option>
-                    <option value="piu_recente" {selected_piu_recente}>Più recente</option>
-                    <option value="meno_recente" {selected_meno_recente}>Meno recente</option>
+                    <option value="piu_recente" {selected_piu_recente}>Inserito più di recente</option>
+                    <option value="meno_recente" {selected_meno_recente}>Inserito meno di recente</option>
                 </select>
                 <input type="submit" value="Ordina" name="ordina" id="ordina">
             </form>

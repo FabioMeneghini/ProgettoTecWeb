@@ -76,10 +76,19 @@ try {
             if($ok["ok"]) {
                 $result = $connection -> aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere);
                 $connection -> closeConnection();
+                if($result) {
+                    header("Location: tutti_libri.php?inserito=1");
+                }
+                else {
+                    $messaggi = '<li>Errore durante l\'inserimento del libro</li>';
+                }
             }
             else {
                 //$paginaHTML = str_replace("{messaggiForm}", $ok["messaggi"], $paginaHTML);
                 $messaggi = $ok["messaggi"];
+                if($messaggi != "") {
+                    $messaggi = '<ul>'.$messaggi.'</ul>';
+                }
             }
         }
     }

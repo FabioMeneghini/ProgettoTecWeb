@@ -26,8 +26,13 @@ $lista_lingue="";
 $data_list_generi="";
 $listaRecensioni = "<div class=recensioni ><ul>";
 $messaggiForm = "";
+$messaggiErrore = "";
 //chiama se stessa come pagina nel form
-//TO DO deve avere un bottone per eliminarle una ad una è una tabella ? 
+//TO DO deve avere un bottone per eliminarle una ad una è una tabella ?
+
+if(isset($_GET['modifica']) && $_GET['modifica'] == 0) {
+    $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
+}
 
 try {
     $connection = new DBAccess();
@@ -135,6 +140,7 @@ $paginaHTML = str_replace("{mediavoti}", $media_voti , $paginaHTML);
 $paginaHTML = str_replace("{capitoliold}", $n_capitoli , $paginaHTML);
 $paginaHTML = str_replace("{tramaold}", $trama , $paginaHTML);
 $paginaHTML = str_replace("{recensioniComunity}", $listaRecensioni, $paginaHTML);
+$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore, $paginaHTML);
 echo $paginaHTML;
 
 ?>

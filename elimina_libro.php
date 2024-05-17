@@ -22,13 +22,11 @@ try {
                 $eliminato = $connection -> eliminaLibro($LibroSelezionato);
                 $connection -> closeConnection();
                 if($eliminato) {
-                    header("Location: index.php");
-                    //header("Location: index.php?success=1"); //MOSTRARE MESSAGE DI SUCCESSO
+                    header("Location: tutti_libri.php?eliminato=1.php");
                     exit();
                 }
-                else { //da sistemare
-                    header("Location: scheda_libro.php");
-                    //header("Location: index.php?success=0"); //MOSTRARE MESSAGE DI ERRORE
+                else {
+                    header("Location: scheda_libro.php?id=".$LibroSelezionato."&eliminato=0");
                     exit();
                 }
             }

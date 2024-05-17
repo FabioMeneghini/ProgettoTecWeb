@@ -64,7 +64,7 @@ try {
            // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
            //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
             $listaBestSeller .=  '<div class="item">
-                                    <img src="copertine_libri/'.$titolo.'.jpg">
+                                    <img src="copertine_libri/'.$titolo.'.jpg" alt="'.$libro["descrizione"].'">
                                     <div>'.$libro["autore"].' - '.$libro["titolo"].'</div>
                                     <div>'.$libro["trama"].'</div>
                                   </div>';

@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
+        <script src="conferme.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -38,13 +39,20 @@
         <main id="content">
             <h2>Registrati:</h2>
         <section id="section_registrazione"><!--WARNING Section lacks heading. Consider using h2-h6 elements to add identifying headings to all sections, or else use a div element instead for any cases where no heading is needed. /-->
-            <form id="registrationForm" action="registrati.php" method="post">
+            <form id="registrationForm" action="registrati.php" method="post" onreset="return conferma('Sei sicuro/sicura di voler resettare tutti i campi inseriti?')">
                 <!--aggiungi pagina php-->
                 {messaggi}
                 <fieldset>
                     <legend>Dati personali</legend>
-                    <label for="name">Inserisci il tuo nome : </label><br>
+                    <label for="name">Inserisci il tuo nome: </label><br>
                     <input type="text" id="name" name="name" maxlength="15" required><br>
+
+                    <label for="cognome">Inserisci il tuo cognome: </label><br>
+                    <input type="text" id="cognome" name="cognome" maxlength="15" required><br>
+
+                    <label for="data">Inserisci la tua data di nascita: </label><br>
+                    <input type="date" id="data" name="data" required><br>
+
                     <p>L'<span lang="en">username</span> deve contenere 10 caratteri con:
                         <ul>
                             <li>una lettera maiuscola</li>
@@ -52,7 +60,7 @@
                         </ul>
                         <!--controlli con php-->
                     </p><!--ERRORE No p element in scope but a p end tag seen.-->
-                    <label id="titolo">Inserisci uno <span lang="en">username</span> : </label><br><!--ERRORE FOR SOSTITUITO CON ID-->
+                    <label id="titolo">Inserisci uno <span lang="en">username</span>: </label><br><!--ERRORE FOR SOSTITUITO CON ID-->
                     <input type="text" id="username" name="username" maxlength="10" required><br>
                     <!--controllo che non sia già in uso-->
                     <!--altri dati come data di nascita , genere, regione-->
@@ -71,10 +79,11 @@
                     </p><!--ERRORE No p element in scope but a p end tag seen.-->
                     <label id="password"><span lang="en">password</span>:</label><br><!--ERRORE FOR SOSTITUIT CON ID-->
                     <input type="password" id="password1" name="password1" required><br><!--ERRORE CORRETTO RIMOSSO /-->
-                    <label for="passwordnew1"> Ripeti la stessa <span lang="en">password</span>:</label><br>
-                    <input type="password" id="passwordnew1" name="passwordnew1" required>
+                    <label for="password2"> Ripeti la stessa <span lang="en">password</span>:</label><br>
+                    <input type="password" id="password2" name="password2" required>
                 </fieldset>
                 <input type="submit" id="registrati" name="registrati" value="Registrati">
+                <input type="reset" value="Reset">
             </form>
         </section>
         </main>
