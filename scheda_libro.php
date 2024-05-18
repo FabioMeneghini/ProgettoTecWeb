@@ -148,11 +148,13 @@ try {
 
             if(!isset($_SESSION['username'])) {
                 $arearecensionevoto='<h3 id="recensionetua">La tua Recensione e il tuo Voto:</h3> {recensione}';
-                $tua_recensione ='<div><p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
-                                <a href="accedi.php">Accedi</a>
-                                <p>Non hai ancora un <span lang="en">account</span>?</p>
-                                <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
-                                <a href="registrati.php">Registrati</a><div>';
+                $tua_recensione ='<div>
+                                    <p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
+                                    <a href="accedi.php">Accedi</a>
+                                    <p>Non hai ancora un <span lang="en">account</span>?</p>
+                                    <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
+                                    <a href="registrati.php">Registrati</a>
+                                <div>';
             }
             else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0/* && isset($_SESSION['username'])*/) {
                 $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
@@ -167,6 +169,7 @@ try {
                         //il voto rimane vuoto ok place holder vuoto
                     }
                     $arearecensionevoto='<section id="recensionetua">
+                        <h3>La tua Recensione e il tuo Voto:</h3>
                         <form method="post" action="scheda_libro.php"> 
                             {messaggiForm}
                             <fieldset>
@@ -185,6 +188,7 @@ try {
                 }
                 else if($salvato) {
                     $arearecensionevoto='<section id="recensionetua">
+                        <h3>La tua Recensione e il tuo Voto:</h3>
                         <form action="scheda_libro.php" method="post"> 
                         <fieldset>
                             <legend>Inizia a leggere:</legend>
@@ -196,15 +200,18 @@ try {
                     </section>';
                 }
                 else if($iniziato) {
-                    $arearecensionevoto='<p>Questo libro si trova nella lista di libri che stai leggendo. Per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a> </p>';
+                    $arearecensionevoto='<section id="recensionetua">
+                                            <h3>La tua Recensione e il tuo Voto:</h3>
+                                            <p>Prima di poter recensire questo libro devi averlo terminato. Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>
+                                        </section>';
                     //manca id del utente che sta leggendo il libro
-                    
                 }
                 else  {
-                    $arearecensionevoto='<section id="accediform">
+                    $arearecensionevoto='<section id="recensionetua">
+                        <h3>La tua Recensione e il tuo Voto:</h3>
                         <form action="scheda_libro.php" method="post"> 
                             <fieldset>
-                                <legend>Prima di recensire questo libro devi averlo terminato</legend>
+                                <!-- <legend>Prima di poter recensire questo libro devi averlo terminato</legend> -->
                                 <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
                                 <label for="username">Salva per leggerlo più tardi:</label>
                                 <input type="submit" id="salva" name="salva" value="Salva">
