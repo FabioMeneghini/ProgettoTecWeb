@@ -147,7 +147,7 @@ try {
             // se è un libro terminato ha una text area con lascia una recensione 
 
             if(!isset($_SESSION['username'])) {
-                $arearecensionevoto='<h3 id="recensionetua">La tua Recensione e il tuo Voto:</h3>{recensione}';
+                $arearecensionevoto='<h3 id="recensionetua">La tua Recensione e il tuo Voto:</h3> {recensione}';
                 $tua_recensione ='<div><p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
                                 <a href="accedi.php">Accedi</a>
                                 <p>Non hai ancora un <span lang="en">account</span>?</p>
@@ -166,7 +166,7 @@ try {
                         $tua_recensione='Scrivi qui una recensione';
                         //il voto rimane vuoto ok place holder vuoto
                     }
-                    $arearecensionevoto='<section id="tramavoto">
+                    $arearecensionevoto='<section id="recensionetua">
                         <form method="post" action="scheda_libro.php"> 
                             {messaggiForm}
                             <fieldset>
@@ -184,7 +184,7 @@ try {
                         //Modifica e annulla attivi su js solo se ha modificato qualcosa
                 }
                 else if($salvato) {
-                    $arearecensionevoto='<section id="accediform">
+                    $arearecensionevoto='<section id="recensionetua">
                         <form action="scheda_libro.php" method="post"> 
                         <fieldset>
                             <legend>Inizia a leggere:</legend>
@@ -196,7 +196,7 @@ try {
                     </section>';
                 }
                 else if($iniziato) {
-                    $arearecensionevoto='<p> Questo libro si trova nella lista di libri che stai leggendo. Per vedere il suo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a> </p>';
+                    $arearecensionevoto='<p>Questo libro si trova nella lista di libri che stai leggendo. Per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a> </p>';
                     //manca id del utente che sta leggendo il libro
                     
                 }
@@ -237,7 +237,7 @@ try {
             else {
                 $listaRecensioni.='<ul>';
                 foreach($altre_recensioni as $recensione) {
-                    $listaRecensioni.='<li class="recensione_singola"><p>'.$recensione["commento"].'</p></li>';
+                    $listaRecensioni.='<li><p class="commento">'.$recensione["commento"].'</p></li>';
                 }
                 $listaRecensioni.="</ul></div>";
             }
