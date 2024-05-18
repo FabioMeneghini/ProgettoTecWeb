@@ -40,7 +40,7 @@ class DBAccess {
     }
 
     public function getListaBestSeller() {
-        $query = "SELECT libri.titolo, libri.autore, generi.nome AS genere, libri.descrizione, libri.id
+        $query = "SELECT libri.titolo, libri.titolo_ir, libri.autore, generi.nome AS genere, libri.descrizione, libri.id
                   FROM libri, generi
                   WHERE libri.id_genere=generi.id
                   LIMIT 10";
