@@ -60,10 +60,9 @@ try {
                             </fieldset>
                             <fieldset>
                                 <input type="submit" id="inizia" name="inizia" value="Inizia">
-                                <input type="submit" id="elimina" name="elimina" value="Elimina">
+                                <input type="submit" id="elimina" name="elimina" value="Elimina" onclick="return conferma(\'Sei sicuro/sicura di voler eliminare i libri selezionati dalla lista dei libri da leggere?\')">
                             </fieldset>
                             </form>';
-            /*<td><a href="stai_leggendo.php?id_add='.$libro["id"].'">Inizia</a></td>*/
         }
     }
     else {

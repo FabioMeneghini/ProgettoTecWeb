@@ -1008,7 +1008,7 @@ class DBAccess {
         }
     }
 
-    public function eliminaLibriHaLetto($username, $id_libri) {
+    public function eliminaLibriTerminati($username, $id_libri) {
         $n = count($id_libri);
         for($i=0; $i<$n; $i++) {
             $this -> rimuoviHaLetto($username, $id_libri[$i]);
@@ -1017,18 +1017,23 @@ class DBAccess {
 
     public function iniziaALeggere($username, $id_libri) {
         $n = count($id_libri);
+        for($i=0; $i<$n; $i++) {
+            $this -> aggiungiLibroStaLeggendo($username, $id_libri[$i]);
+        }
+        $this -> eliminaLibriDaLeggere($username, $id_libri);
+    }
+
+    public function aggiungiLibroStaLeggendo($username, $id_libro) {
+        $n = count($id_libri);
         $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
         $stmt = $this -> connection -> prepare($query);
         if($stmt === false) {
             echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
         }
         else {
-            for($i=0; $i<$n; $i++) {
-                $stmt->bind_param("si", $username, $id_libri[$i]);
-                $stmt->execute();
-                $stmt->close();
-            }
-            $this -> eliminaLibriDaLeggere($username, $id_libri);
+            $stmt->bind_param("si", $username, $id_libro);
+            $stmt->execute();
+            $stmt->close();
         }
         /*
         for($i=0; $i<$n; $i++) {
@@ -1052,6 +1057,28 @@ class DBAccess {
         $n = count($id_libri);
         for($i=0; $i<$n; $i++) {
             $this -> rimuoviDaLeggere($username, $id_libri[$i]);
+        }
+    }
+
+    public function eliminaValutazione($username, $id_libro) {
+        $query = "DELETE FROM recensioni WHERE username_autore = ? AND id_libro = ?";
+        $stmt = $this->connection->prepare($query);
+        if ($stmt === false) {
+            echo "<li>Errore durante la preparazione della query: " . $this->connection->error . "</li>";
+            return;
+        }
+        $stmt->bind_param('si', $username, $id_libro);
+        $result = $stmt->execute();
+        if ($result === false) {
+            echo "<li>Errore durante l'esecuzione della query: " . $stmt->error . "</li>";
+        }
+        $stmt->close();
+    }
+
+    public function eliminaValutazioni($username, $id_libri) {
+        $n = count($id_libri);
+        for($i=0; $i<$n; $i++) {
+            $this -> eliminaValutazione($username, $id_libri[$i]);
         }
     }
 

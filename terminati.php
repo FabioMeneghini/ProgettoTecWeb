@@ -19,7 +19,8 @@ try {
     if($connectionOk) {
         if(isset($_POST['elimina']) && !empty($_POST['checkbox'])) {
             $id_libri=$_POST["checkbox"];
-            $connection -> aggiornaHaLetto($_SESSION['username'], $id_libri);
+            $connection -> eliminaLibriTerminati($_SESSION['username'], $id_libri);
+            $connection -> eliminaValutazioni($_SESSION['username'], $id_libri);
         }
         $lista = $connection -> getListaTerminati($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
@@ -31,7 +32,7 @@ try {
             $listaLibri = "Non hai terminato nessun libro."; //aggiungere link alla pagina di ricerca?
         }
         else {
-            $listaLibri .= '<form method="post" action="terminati.php">
+            $listaLibri .= '<form method="post" action="terminati.php" onsubmit="return conferma(\'Sei sicuro di voler eliminare i libri selezionati dalla lista dei tuoi libri terminati? Eventuali valutazioni assegnate ad essi verranno perse definitivamente.\')">
                                 <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: titolo, autore, data di fine lettura, voto assegnato e un checkbox per eliminare il libro.</p>
                                 <fieldset>
                                     <table aria-describedby="descr">
