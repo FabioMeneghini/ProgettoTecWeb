@@ -24,7 +24,9 @@ try {
         if(isset($_POST['inizia']) && !empty($_POST['checkbox'])) {
             $id_libri=$_POST["checkbox"];
             $connection -> iniziaALeggere($_SESSION['username'], $id_libri);
-            header("Location: stai_leggendo.php");
+            $connection -> closeConnection();
+            header("Location: stai_leggendo.php?iniziato=1");
+            exit();
         }
         $lista = $connection -> getListaSalvati($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
