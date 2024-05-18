@@ -61,14 +61,19 @@
                 <ul class="menulibro">
                     <dd><a class="menulibro" href="#trama">Vai alla trama</a> </dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
                     {menupersonale}
-                    <dd><a class="menulibro" href="#comunity">Vai alle recensioni della <span lang="en">community</span></a></dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                    <dd><a class="menulibro" href="#community">Vai alle recensioni della <span lang="en">community</span></a></dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
                 </ul>
                 <div id="datilibro">
-                    <h3 id="trama">Trama:</h3>
-                    <p>{tramaLibro}</p>
-                    {arearecensionevotoform}<!--ERRORE  Attribute d not allowed on element h3 at this point.-->
+                    <section id="trama">
+                        <h3>Trama:</h3>
+                        <p>{tramaLibro}</p>
+                    </section>
+                    {arearecensionevotoform}
                     <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
-                    <h4 d="community">Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
+                    <section id="community">
+                        <h4>Recensioni della <span lang="en">community</span></h4>
+                        {recensioniComunity}
+                    </section>
                 </div>
                 <nav aria-label="Torna al form di ricerca">
                     <a class="torna_su" href="#content">Torna su</a>

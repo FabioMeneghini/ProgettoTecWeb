@@ -24,7 +24,9 @@ try {
         if(isset($_POST['inizia']) && !empty($_POST['checkbox'])) {
             $id_libri=$_POST["checkbox"];
             $connection -> iniziaALeggere($_SESSION['username'], $id_libri);
-            header("Location: stai_leggendo.php");
+            $connection -> closeConnection();
+            header("Location: stai_leggendo.php?iniziato=1");
+            exit();
         }
         $lista = $connection -> getListaSalvati($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
@@ -51,7 +53,7 @@ try {
                                         </tr>';
             foreach($lista as $libro) {
                 $listaLibri .= '<tr>
-                                    <td scope="row"><a href="templateSchedaLibro.html">'.$libro["titolo"].'</a></td>
+                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                                 </tr>';
@@ -60,10 +62,9 @@ try {
                             </fieldset>
                             <fieldset>
                                 <input type="submit" id="inizia" name="inizia" value="Inizia">
-                                <input type="submit" id="elimina" name="elimina" value="Elimina">
+                                <input type="submit" id="elimina" name="elimina" value="Elimina" onclick="return conferma(\'Sei sicuro/sicura di voler eliminare i libri selezionati dalla lista dei libri da leggere?\')">
                             </fieldset>
                             </form>';
-            /*<td><a href="stai_leggendo.php?id_add='.$libro["id"].'">Inizia</a></td>*/
         }
     }
     else {

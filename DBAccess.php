@@ -23,13 +23,49 @@ class DBAccess {
         mysqli_close($this -> connection);
     }
 
+    public function get_migliore_recensione($id_libro){
+        $query= "SELECT recensioni.commento, recensioni.voto
+                FROM recensioni 
+                WHERE recensioni.id_libro='$id_libro'
+                ORDER BY recensioni.voto DESC
+                LIMIT 1";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            mysqli_free_result($queryResult);
+            return $row['commento'];
+        } else {
+            return null; // Ritorna null se non ci sono recensioni
+        }
+    }
+
     public function getListaBestSeller() {
-        $query = "SELECT libri.titolo, libri.autore, libri.trama, generi.nome
+        $query = "SELECT libri.titolo, libri.titolo_ir, libri.autore, generi.nome AS genere, libri.descrizione, libri.id
                   FROM libri, generi
                   WHERE libri.id_genere=generi.id
                   LIMIT 10";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
+            $result = array();
+            while($row = mysqli_fetch_assoc($queryResult)) {
+                // Chiama get_migliore_recensione per ogni libro
+                $migliore_recensione = $this -> get_migliore_recensione($row["id"]);
+                $voto_medio = $this -> getmediavoti($row["id"]);
+                $row['voto_medio'] = $voto_medio;
+                if ($migliore_recensione) {
+                    // Aggiungi la migliore recensione al risultato del libro
+                    $row['migliore_recensione'] = $migliore_recensione;
+                } else {
+                    // Se non ci sono recensioni, imposta 'migliore_recensione' su null
+                    $row['migliore_recensione'] = null;
+                }
+                $result[] = $row;
+            }
+            mysqli_free_result($queryResult);
+            return $result;
+        } else {
+            return null;
+        }/*if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
             while($row = mysqli_fetch_assoc($queryResult)) {
                 $result[] = $row;
@@ -39,7 +75,8 @@ class DBAccess {
         }
         else {
             return null;
-        }
+        }*/
+        
     }
 
     public function login($username, $password) {
@@ -288,6 +325,7 @@ class DBAccess {
         }
     }
 
+    /********************************************************************************************** */
     public function aggiungiStaLeggendo($username, $id_libro) {
         $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
         $stmt = $this -> connection -> prepare($query);
@@ -303,13 +341,36 @@ class DBAccess {
         }
     }
 
-    public function rimuoviDaLeggere($username, $id_libro) {
-        $query = "DELETE FROM da_leggere WHERE username = '$username' AND id_libro = '$id_libro'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if($queryResult === false) {
-            echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
+    public function aggiungiDaLeggere($username, $id_libro) {
+        $query = "INSERT INTO da_leggere (username, id_libro) VALUES (?, ?)";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("si", $username, $id_libro);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+            }
+            $stmt->close();
         }
     }
+
+    public function rimuoviDaLeggere($username, $id_libro) {
+        $query = "DELETE FROM da_leggere WHERE username = ? AND id_libro = ?";
+        $stmt = $this -> connection -> prepare($query);
+        if($stmt === false) {
+            echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+        }
+        else {
+            $stmt->bind_param("si", $username, $id_libro);
+            if (!$stmt->execute()) {
+                echo "<li>Errore durante la rimozione del libro: " . $this -> connection -> error . "</li>";
+            }
+            $stmt->close();
+        }
+    }
+    /*********************************************************************************************** */
 
     public function modificaUsername($old, $new) {
         $query = "UPDATE utenti SET username = '$new' WHERE username = '$old'";
@@ -757,6 +818,49 @@ class DBAccess {
         }
     }
 
+    public function valutazionePresente($username, $id_libro) {
+        $query = "SELECT * FROM recensioni WHERE username_autore = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function aggiungiValutazione($username, $id_libro, $voto, $commento) {
+        if($this -> valutazionePresente($username, $id_libro)) {
+            $query = "UPDATE recensioni SET voto = ?, commento = ? WHERE username_autore = ? AND id_libro = ?";
+            $stmt = $this -> connection -> prepare($query);
+            if($stmt === false) {
+                echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+            }
+            else {
+                $stmt->bind_param("issi", $voto, $commento, $username, $id_libro);
+                if (!$stmt->execute()) {
+                    echo "<li>Errore durante l'aggiornamento della recensione: " . $stmt->error . "</li>";
+                }
+                $stmt->close();
+            }
+        }
+        else {
+            $query = "INSERT INTO recensioni (username_autore, id_libro, voto, commento) VALUES (?, ?, ?, ?)";
+            $stmt = $this -> connection -> prepare($query);
+            if($stmt === false) {
+                echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+            }
+            else {
+                $stmt->bind_param("siis", $username, $id_libro, $voto, $commento);
+                if (!$stmt->execute()) {
+                    echo "<li>Errore durante l'aggiunta della recensione: " . $stmt->error . "</li>";
+                }
+                $stmt->close();
+            }
+        }
+    }
+
     public function eliminaLibro($id_libro) {
         $query = "DELETE FROM libri WHERE id = '$id_libro'";
         $queryResult = mysqli_query($this -> connection, $query);
@@ -904,7 +1008,7 @@ class DBAccess {
         }
     }
 
-    public function eliminaLibriHaLetto($username, $id_libri) {
+    public function eliminaLibriTerminati($username, $id_libri) {
         $n = count($id_libri);
         for($i=0; $i<$n; $i++) {
             $this -> rimuoviHaLetto($username, $id_libri[$i]);
@@ -913,18 +1017,23 @@ class DBAccess {
 
     public function iniziaALeggere($username, $id_libri) {
         $n = count($id_libri);
+        for($i=0; $i<$n; $i++) {
+            $this -> aggiungiLibroStaLeggendo($username, $id_libri[$i]);
+        }
+        $this -> eliminaLibriDaLeggere($username, $id_libri);
+    }
+
+    public function aggiungiLibroStaLeggendo($username, $id_libro) {
+        $n = count($id_libri);
         $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
         $stmt = $this -> connection -> prepare($query);
         if($stmt === false) {
             echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
         }
         else {
-            for($i=0; $i<$n; $i++) {
-                $stmt->bind_param("si", $username, $id_libri[$i]);
-                $stmt->execute();
-                $stmt->close();
-            }
-            $this -> eliminaLibriDaLeggere($username, $id_libri);
+            $stmt->bind_param("si", $username, $id_libro);
+            $stmt->execute();
+            $stmt->close();
         }
         /*
         for($i=0; $i<$n; $i++) {
@@ -948,6 +1057,28 @@ class DBAccess {
         $n = count($id_libri);
         for($i=0; $i<$n; $i++) {
             $this -> rimuoviDaLeggere($username, $id_libri[$i]);
+        }
+    }
+
+    public function eliminaValutazione($username, $id_libro) {
+        $query = "DELETE FROM recensioni WHERE username_autore = ? AND id_libro = ?";
+        $stmt = $this->connection->prepare($query);
+        if ($stmt === false) {
+            echo "<li>Errore durante la preparazione della query: " . $this->connection->error . "</li>";
+            return;
+        }
+        $stmt->bind_param('si', $username, $id_libro);
+        $result = $stmt->execute();
+        if ($result === false) {
+            echo "<li>Errore durante l'esecuzione della query: " . $stmt->error . "</li>";
+        }
+        $stmt->close();
+    }
+
+    public function eliminaValutazioni($username, $id_libri) {
+        $n = count($id_libri);
+        for($i=0; $i<$n; $i++) {
+            $this -> eliminaValutazione($username, $id_libri[$i]);
         }
     }
 

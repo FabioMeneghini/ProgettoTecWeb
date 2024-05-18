@@ -155,6 +155,19 @@ li.listageneri{
     margin-right: 10px; 
 }
 
+.commento{
+    font-style: italic;
+}
+
+.voto_medio {
+    position: center;
+    background: lightblue;
+    font-size: 10em;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+
 h2{
     /*display: flex;
     flex-direction: column;
