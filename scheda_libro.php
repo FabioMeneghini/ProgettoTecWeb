@@ -81,6 +81,9 @@ if(isset($_GET['modificato']) && $_GET['modificato'] == 1) {
 if(isset($_GET['salvato']) && $_GET['salvato'] == 1) {
     $messaggiSuccesso = '<p class="successo">Libro salvato con successo!</p>';
 }
+if(isset($_GET['valutato']) && $_GET['valutato'] == 1) {
+    $messaggiSuccesso = '<p class="successo">Valutazione aggiunta/modificata con successo!</p>';
+}
 
 try {
     $connection = new DBAccess();
@@ -97,6 +100,12 @@ try {
             $eliminato = $connection -> rimuoviDaLeggere($_SESSION['username'], $_POST['id_libro']);
             $iniziato = $connection -> aggiungiStaLeggendo($_SESSION['username'], $_POST['id_libro']);
             header("Location: stai_leggendo.php?iniziato=1");
+            exit();
+        }
+        if(isset($_POST["valuta"])) {
+            $salvato = $connection -> aggiungiValutazione($_SESSION['username'], $_POST['id_libro'], $_POST['voto'], $_POST['recensione']);
+            //mi sposto con header(Location: ...) perché altrimenti da problemi con il libro che visualizza (mostra sempre il primo in quanto perde il parametro id nel get)
+            header("Location: scheda_libro.php?valutato=1&id=".$_POST['id_libro']);
             exit();
         }
 
@@ -160,21 +169,21 @@ try {
                     $arearecensionevoto='<section id="tramavoto">
                         <form method="post" action="scheda_libro.php"> 
                             {messaggiForm}
-                        <fieldset>
-                        <legend>La tua Recensione e il tuo voto:</legend>
-                        <label for="durata">Recensione: </label><br>
-                        <textarea id="recensione" name="recensione" rows="20" cols="70" >'.$tua_recensione.'</textarea><br>
-                        <label for="durata">Voto: </label>
-                        <input type="number" name="voto" id="voto" max="10" min="0" required placeholder="{voto}" value="{voto}"><br>
-                        <button type="submit" id="modifica" name="modifica">Modifica</button><br>
-                        <button type="reset">Annulla</button>
-                        </fieldset>
+                            <fieldset>
+                                <legend>La tua Recensione e il tuo voto:</legend>
+                                <label for="recensione">Recensione: </label><br>
+                                <textarea id="recensione" name="recensione" rows="20" cols="70" >'.$tua_recensione.'</textarea><br>
+                                <label for="voto">Voto: </label>
+                                <input type="number" name="voto" id="voto" max="10" min="0" required placeholder="{voto}" value="{voto}"><br>
+                                <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
+                                <button type="submit" id="valuta" name="valuta">Pubblica valutazione</button><br>
+                                <button type="reset">Annulla</button>
+                            </fieldset>
                         </form>
                         </section>';
                         //Modifica e annulla attivi su js solo se ha modificato qualcosa
                 }
                 else if($salvato) {
-                    //se inizia a leggerlo deve settare il numero di capitoli letti a 0
                     $arearecensionevoto='<section id="accediform">
                         <form action="scheda_libro.php" method="post"> 
                         <fieldset>

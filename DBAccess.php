@@ -818,6 +818,49 @@ class DBAccess {
         }
     }
 
+    public function valutazionePresente($username, $id_libro) {
+        $query = "SELECT * FROM recensioni WHERE username_autore = '$username' AND id_libro = '$id_libro'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $queryResult -> free();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function aggiungiValutazione($username, $id_libro, $voto, $commento) {
+        if($this -> valutazionePresente($username, $id_libro)) {
+            $query = "UPDATE recensioni SET voto = ?, commento = ? WHERE username_autore = ? AND id_libro = ?";
+            $stmt = $this -> connection -> prepare($query);
+            if($stmt === false) {
+                echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+            }
+            else {
+                $stmt->bind_param("issi", $voto, $commento, $username, $id_libro);
+                if (!$stmt->execute()) {
+                    echo "<li>Errore durante l'aggiornamento della recensione: " . $stmt->error . "</li>";
+                }
+                $stmt->close();
+            }
+        }
+        else {
+            $query = "INSERT INTO recensioni (username_autore, id_libro, voto, commento) VALUES (?, ?, ?, ?)";
+            $stmt = $this -> connection -> prepare($query);
+            if($stmt === false) {
+                echo "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
+            }
+            else {
+                $stmt->bind_param("siis", $username, $id_libro, $voto, $commento);
+                if (!$stmt->execute()) {
+                    echo "<li>Errore durante l'aggiunta della recensione: " . $stmt->error . "</li>";
+                }
+                $stmt->close();
+            }
+        }
+    }
+
     public function eliminaLibro($id_libro) {
         $query = "DELETE FROM libri WHERE id = '$id_libro'";
         $queryResult = mysqli_query($this -> connection, $query);
