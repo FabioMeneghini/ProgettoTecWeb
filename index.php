@@ -70,7 +70,8 @@ try {
                                         <li>Autore: '.$libro["titolo"].'</li>
                                         <li>Genere: '.$libro["genere"].'</li>
                                         <li class="commento">'.$libro["migliore_recensione"].'</li>
-                                        <li>Voto medio della <span lang="en">community</span>: <span class="voto_medio">'.$libro["voto_medio"].'</span></li>
+                                        <li>Voto medio:</li>
+                                        <li><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
                                         </ul>
                                   </div>';
         }

@@ -159,15 +159,6 @@ li.listageneri{
     font-style: italic;
 }
 
-.voto_medio {
-    position: center;
-    background: lightblue;
-    font-size: 10em;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-  }
-
 h2{
     /*display: flex;
     flex-direction: column;
@@ -847,6 +838,7 @@ transform: scale(1.3);
 #l_agente_segreto{
     background-image: url("../copertine_libri/l_agente_segreto.jpg");
 }
+
 /*SCORRIMENTO IMMAGINI*/
 
 body > *{
@@ -866,6 +858,26 @@ body > *{
 .item{
     flex: 1 0 50%;
     min-height: 150px;
+}
+
+.item ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.voto_medio{
+    background-color: var(--flagColor);
+    padding: 0.3em;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slider img{
