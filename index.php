@@ -54,17 +54,10 @@ try {
         //$risultatiLibri = $connection ->getListaLibriGenere($genere);
         $connection -> closeConnection();
         foreach($resultListaBestSeller as $libro) {
-            /*$titolo=$libro["titolo"];
-            $titolo=strtolower($titolo);
-            $titolo=str_replace(' ', '_',$titolo);
-            $titolo=str_replace('\'', '',$titolo);
-            if (ctype_digit($titolo)) {
-                $titolo = '_'.$titolo;
-            }*/
            // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
            //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
             $listaBestSeller .=  '<div class="item">
-                                    <img src="copertine_libri/'./*$titolo*/$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'">
+                                    <img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'">
                                     <ul>
                                         <li>Titolo: '.$libro["autore"].'</li>
                                         <li>Autore: '.$libro["titolo"].'</li>

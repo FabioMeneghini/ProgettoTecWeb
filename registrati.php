@@ -4,49 +4,68 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-/*if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
+if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
     if($_SESSION['admin'] == 1) {
         header("Location: admin.php");
+        exit();
     } else {
         header("Location: utente.php");
+        exit();
     }
-}*/
+}
 
 $paginaHTML = file_get_contents("template/templateRegistrati.html");
 
-function controllaInput($nome, $cognome, $username, $email, $password1, $password2, $data) { //da inserire eventualmente altri controlli su username e password
+function controllaInput($nome, $cognome, $username, $email, $password1, $password2, $data) {
     $messaggi = "";
     if($nome == "") {
         $messaggi .= "<li>Il nome non può essere vuoto</li>";
     }
+    else if(strlen($nome) > 25) {
+        $messaggi .= "<li>Il nome non può essere più lungo di 25 caratteri</li>";
+    }
     if($cognome == "") {
         $messaggi .= "<li>Il cognome non può essere vuoto</li>";
+    }
+    else if(strlen($cognome) > 25) {
+        $messaggi .= "<li>Il cognome non può essere più lungo di 25 caratteri</li>";
     }
     if($username == "") {
         $messaggi .= "<li>Lo username non può essere vuoto</li>";
     }
-    if($email == "") {
-        $messaggi .= "<li>L'email non può essere vuota</li>";
-    }
-    if($password1 == "") {
-        $messaggi .= "<li>La password non può essere vuota</li>";
-    }
-    if($password1 != $password2) {
-        $messaggi .= "<li>Le due password non coincidono</li>";
-    }
-    if(strlen($username) <= 2) {
+    else if(strlen($username) <= 2) {
         $messaggi .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
     }
-    if(strlen($password1) <= 7) {
-        $messaggi .= "<li>La password non può essere più corta di 8 caratteri</li>";
+    else if(strlen($username) > 25) {
+        $messaggi .= "<li>Lo username non può essere più lungo di 25 caratteri</li>";
+    }
+    if($email == "") {
+        $messaggi .= "<li>L'<span lang=\"en\">email</span> non può essere vuota</li>";
+    }
+    else if(strlen($email) > 60) {
+        $messaggi .= "<li>L'<span lang=\"en\">email</span> non può essere più lunga di 50 caratteri</li>";
+    }
+    else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $messaggi .= "<li>L'<span lang=\"en\">email</span> inserita non è valida</li>";
+    }
+    if($password1 == "") {
+        $messaggi .= "<li>La <span lang=\"en\">password</span> non può essere vuota</li>";
+    }
+    else if(strlen($password1) < 8) {
+        $messaggi .= "<li>La <span lang=\"en\">password</span> non può essere più corta di 8 caratteri</li>";
+    }
+    else if(!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/', $password1)) {
+        $messaggi .= "<li>La <span lang=\"en\">password</span> deve contenere almeno un numero, una lettera minuscola e una lettera maiuscola</li>";
+    }
+    else if($password1 != $password2) {
+        $messaggi .= "<li>Le due <span lang=\"en\">password</span> non coincidono</li>";
     }
     if($data == "") {
         $messaggi .= "<li>La data di nascita non può essere vuota</li>";
     }
-    if($data > date('Y-m-d')) {
+    else if($data > date('Y-m-d')) {
         $messaggi .= "<li>La data di nascita non può essere futura</li>";
     }
-    //aggiungere controllo regex per email
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
@@ -81,14 +100,13 @@ if($connectionOk) {
                 $erroriRegistrazione = $connection -> registraUtente($nome, $cognome, $username, $email, $password1, $data);
                 $connection -> closeConnection();
                 if($erroriRegistrazione == "") {
-                    //$messaggiPerForm .= "<li>Registrazione avvenuta con successo</li>";
-                    $_SESSION['username'] = $username; //salva lo username in una variabile di sessione
+                    $_SESSION['username'] = $username;
                     $_SESSION['nome'] = $nome;
                     $_SESSION['cognome'] = $cognome;
                     $_SESSION['email'] = $email;
                     $_SESSION['admin'] = false;
                     $_SESSION['data'] = $data;
-                    header("Location: index.php?registrato=1");
+                    header("Location: utente.php?registrato=1");
                 } else {
                     $messaggiPerForm .= "<li>".$erroriRegistrazione."</li>";
                 }
@@ -101,7 +119,7 @@ if($connectionOk) {
 else {
     $messaggiPerForm .= "<li>Errore di connessione al database</li>";
 }
-$paginaHTML = str_replace("{messaggi}", $messaggiPerForm, $paginaHTML);
+$paginaHTML = str_replace("{messaggi}", $messaggiPerForm=="" ? "" : "<ul>".$messaggiPerForm."</ul>", $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 
 echo $paginaHTML;
