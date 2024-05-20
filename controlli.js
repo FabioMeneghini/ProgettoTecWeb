@@ -13,7 +13,7 @@ function showError(tag, stringa){
     padre.appendChild(errore);
 }
 
-/* REGISTRAZIONE */
+/******************************************** REGISTRAZIONE */
 
 function validaNomeRegistrazione(nome){
     removeChildInput(nome);
@@ -120,7 +120,7 @@ function validaRegistrazione() {
                                          && validaPasswordRegistrazione(password1, password2);
 }
 
-/* LOGIN */
+/******************************************** LOGIN */
 
 function validaUsernameLogin(username){
     removeChildInput(username);
@@ -149,4 +149,68 @@ function validaLogin() {
     let password = document.getElementById('password');
     
     return validaUsernameLogin(username) && validaPasswordLogin(password);
+}
+
+/******************************************** CAMBIA USERNAME */
+
+function validaUsernameCambio() {
+    let username = document.getElementById('username');
+    return validaUsernameRegistrazione(username);
+}
+
+/******************************************** CAMBIA PASSWORD */
+
+function validaPasswordCambio() {
+    let passwordold = document.getElementById('passwordold');
+    let passwordnew1 = document.getElementById('passwordnew1');
+    let passwordnew2 = document.getElementById('passwordnew2');
+
+    removeChildInput(passwordold);
+    removeChildInput(passwordnew1);
+    removeChildInput(passwordnew2);
+
+    if(passwordold.value===passwordnew1.value){
+        showError(passwordnew1, "La nuova password non può essere uguale a quella vecchia");
+        passwordnew1.focus();
+        passwordnew1.select();
+        return false;
+    }
+    if(passwordnew1.value.length==0 || passwordnew1.value.length<8){
+        showError(passwordnew1, "La nuova password non può essere vuota o più corta di 8 caratteri");
+        passwordnew1.focus();
+        passwordnew1.select();
+        return false;
+    }
+    else if(passwordnew1.value.search(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/)!=0){
+        showError(passwordnew1, "La nuova password deve contenere almeno un numero, una lettera minuscola e una lettera maiuscola");
+        passwordnew1.focus();
+        passwordnew1.select();
+        return false;
+    }
+    else if(passwordnew1.value !== passwordnew2.value){
+        showError(password2, "Le due password non coincidono");
+        passwordnew2.focus();
+        passwordnew2.select();
+        return false;
+    }
+    return true;
+}
+
+/******************************************** CAMBIA EMAIL */
+
+function validaEmailCambio() {
+    let email = document.getElementById('email');
+    if(email.value.length==0){
+        showError(email, "La nuova email non può essere vuota");
+        email.focus();
+        email.select();
+        return false;
+    }
+    else if(email.value.search(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)!=0){
+        showError(email, "Inserire una mail valida");
+        email.focus();
+        email.select();
+        return false;
+    }
+    return true;
 }
