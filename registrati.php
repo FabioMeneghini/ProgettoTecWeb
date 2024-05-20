@@ -119,7 +119,7 @@ if($connectionOk) {
 else {
     $messaggiPerForm .= "<li>Errore di connessione al database</li>";
 }
-$paginaHTML = str_replace("{messaggi}", $messaggiPerForm=="" ? "" : "<ul>".$messaggiPerForm."</ul>", $paginaHTML);
+$paginaHTML = str_replace("{messaggi}", $messaggiPerForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiPerForm."</ul>", $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 
 echo $paginaHTML;

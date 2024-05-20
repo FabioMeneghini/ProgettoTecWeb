@@ -24,7 +24,7 @@ class DBAccess {
     }
 
     public function get_migliore_recensione($id_libro){
-        $query= "SELECT recensioni.commento, recensioni.voto
+        $query="SELECT recensioni.commento, recensioni.voto
                 FROM recensioni 
                 WHERE recensioni.id_libro='$id_libro'
                 ORDER BY recensioni.voto DESC
