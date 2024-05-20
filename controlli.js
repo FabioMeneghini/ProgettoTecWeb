@@ -214,3 +214,19 @@ function validaEmailCambio() {
     }
     return true;
 }
+
+/******************************************** LIBRI TERMINATI */
+
+function validaLibriCheckbox() {
+    let checkboxes = document.querySelectorAll('input[type="checkbox"][name="checkbox[]"]');
+    let values = Array.from(checkboxes).map((checkbox) => {
+        return {
+            checked: checkbox.checked
+        };
+    });
+    if (values.every((value) => value.checked === false)) {
+        alert("Seleziona almeno un libro");
+        return false;
+    }
+    return true;
+}
