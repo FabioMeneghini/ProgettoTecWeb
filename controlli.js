@@ -215,7 +215,7 @@ function validaEmailCambio() {
     return true;
 }
 
-/******************************************** LIBRI TERMINATI */
+/******************************************** LIBRI TERMINATI E DA LEGGERE */
 
 function validaLibriCheckbox() {
     let checkboxes = document.querySelectorAll('input[type="checkbox"][name="checkbox[]"]');
@@ -229,4 +229,84 @@ function validaLibriCheckbox() {
         return false;
     }
     return true;
+}
+
+/******************************************** MODIFICA LIBRO */
+
+function validaAutore(autore){
+    removeChildInput(autore);
+    if(autore.value.length==0 || autore.value.length>100){
+        showError(autore, "L'autore non può essere vuoto o più lungo di 100 caratteri");
+        autore.focus();
+        autore.select();
+        return false;
+    }
+    return true;
+}
+
+function validaTitolo(titolo){
+    removeChildInput(titolo);
+    if(titolo.value.length==0 || titolo.value.length>100){
+        showError(titolo, "Il titolo non può essere vuoto o più lungo di 100 caratteri");
+        titolo.focus();
+        titolo.select();
+        return false;
+    }
+    return true;
+}
+
+function validaGenere(genere){
+    removeChildInput(genere);
+    if(genere.value.length==0){
+        showError(genere, "Il genere non può essere vuoto");
+        genere.focus();
+        genere.select();
+        return false;
+    }
+    return true;
+}
+
+function validaLingua(lingua){
+    removeChildInput(lingua);
+    if(lingua.value.length==0 || lingua.value.length>25){
+        showError(lingua, "La lingua non può essere vuota o più lunga di 25 caratteri");
+        lingua.focus();
+        lingua.select();
+        return false;
+    }
+    return true;
+}
+
+function validaCapitoli(capitoli){
+    removeChildInput(capitoli);
+    if(capitoli.value==0){
+        showError(capitoli, "Il libro deve avere almeno un capitolo");
+        capitoli.focus();
+        capitoli.select();
+        return false;
+    }
+    return true;
+}
+
+function validaTrama(trama){
+    removeChildInput(trama);
+    if(trama.value.length==0 || trama.value.length>3000){
+        showError(trama, "La trama non può essere vuota o più lunga di 3000 caratteri");
+        trama.focus();
+        trama.select();
+        return false;
+    }
+    return true;
+}
+
+function validaModificaLibro() {
+    let autore = document.getElementById('autore');
+    let titolo = document.getElementById('titolo');
+    let genere = document.getElementById('genere');
+    let lingua = document.getElementById('lingua');
+    let capitoli = document.getElementById('capitoli');
+    let trama = document.getElementById('trama');
+
+    return validaAutore(autore) && validaTitolo(titolo) && validaGenere(genere) && validaLingua(lingua)
+                                && validaCapitoli(capitoli) && validaTrama(trama);
 }

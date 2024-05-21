@@ -36,20 +36,6 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt>Cerca</dt>';
 
-
-/*if(isset($_SESSION['admin'])) {
-    if($_SESSION['admin'] == 1) {
-        $menu = $adminMenu;
-        $breadcrumbs = "admin.php";
-    } else {
-        $breadcrumbs = "index.php";
-        if(isset($_SESSION['username']))
-            $menu =$userMenu;
-        else
-            $menu =$NonRegistrato;
-
-    }
-}*/
 if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
     $menu = $adminMenu;
     $breadcrumbs = "admin.php";
@@ -76,7 +62,6 @@ $autore = "";
 $lingua = "";
 $genereSelezionato = "";
 try {
-    //get della ricerca $stringa, $autore, $genere, $lingua
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
@@ -97,12 +82,10 @@ try {
                 $libri_ricercati = $connection -> cercaLibro($stringa, $autore, $genereSelezionato, $lingua);
         }
         $connection -> closeConnection();
-        //dovrebbe essere una tabella !! 
         if(!empty($libri_ricercati) && $messaggi_form==""){
              $rislutati_ricerca.= '<p id="descr">
-                                La tabella contiene l\'elenco dei libri che assomigliano alla tua ricerca.
-                                Ogni riga descrive un libro con sette colonne nominate:"titolo","copertina", "autore", "genere", "numero capitoli".
-                                È anche presente una quinta e una sesta colonna che contengono rispettivamente un bottone per salvare il libro nella lista dei libri da leggere e uno per iniziarne la lettura.
+                                La tabella contiene l\'elenco dei libri che corrispondono alla tua ricerca.
+                                Ogni riga descrive un libro con cinque colonne nominate:"titolo","copertina", "autore", "genere", "lingua".
                             </p>
                             <table aria-describedby="descr">
                             <caption>Risultati della tua ricerca</caption>
@@ -113,7 +96,6 @@ try {
                                 <th scope="col">Genere</th>
                                 <th scope="col">lingua </th>
                             </tr>';
-                            //"copertine_libri/'..$libro["titolo_ir"].jpg"
             foreach($libri_ricercati as $libro) {
                 $rislutati_ricerca .= '<tr>
                                     <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>

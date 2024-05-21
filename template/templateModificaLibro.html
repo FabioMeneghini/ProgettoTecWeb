@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <script src="conferme.js"></script>
+        <script src="controlli.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -50,69 +51,46 @@
             <section id="modificaLibro">
                 {messaggiErrore}
                 <h2>Inserisci i nuovi dati del libro</h2>
-                <form method="post" action="modifica.php" onsubmit="return conferma('Sei sicuro/sicura di voler modificare il libro?')" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
+                <form method="post" action="modifica.php" onsubmit="return validaModificaLibro()" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
                     {messaggiForm}
                     <fieldset>
                         <legend>Informazioni generali: </legend>
                         <label for="autore">Autore: </label>
-                        <input type="text" id="autore" name="autore"  placeholder="{autoreold}" value="{autoreold}"><!--ERRORE CORRETTO MIN MAX-->
-                        <br><!--ERRORE CORRETTO TOLTO /-->
+                        <span><input type="text" id="autore" name="autore"  placeholder="{autoreold}" value="{autoreold}" maxlength="100"></span><br>
+                        
                         <label for="titolo">Titolo: </label>
-                        <input type="text" name="titolo" id="titolo"  placeholder="{titoloold}" value="{titoloold}"><br><!--ERRORE CORRETTO TOLTO /,MAX-->
-
-                        <!--controllo che sia diverso da quelli già inseriti! In caso messaggio: il libro inserito è già presente nel data base
-                        meglio non lasciare il completamente di altri campi -->
+                        <span><input type="text" name="titolo" id="titolo"  placeholder="{titoloold}" value="{titoloold}" maxlength="100"></span><br>
+                        
+                        <label for="genere">Genere: </label>
+                        <span>
+                            <select name="genere" id="genere" placeholder="{genereold}" value="{genereold}">
+                                {selectGeneri}
+                            </select>
+                        </span>
                     </fieldset>
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
-
-                        <label id="Lingua">Lingua originale: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
-                        <input list="lingua" id="selezionalingua" name="lingua" placeholder="{linguaold}" value="{linguaold}">
-                        <datalist id="lingua" >
+                        <label for="lingua">Lingua originale: </label>
+                        <span><input list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}"></span>
+                        <datalist id="datalist_lingua">
                             {listaLingue}
-                        </datalist>
+                        </datalist><br>
                         
-                        <label id="durata">Numero capitoli: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
-                        <input type="number" name="capitoli" id="capitoli" max="1000" required placeholder="{capitoliold}" value="{capitoliold}"> <!--ERRORE Bad value {capitoliold} for attribute value on element input: Expected a minus sign or a digit but saw { instead./--><!--ERRORE CORRETTO RIMOSSO /-->
+                        <label for="capitoli">Numero capitoli: </label>
+                        <span><input type="number" name="capitoli" id="capitoli" max="1000" required placeholder="{capitoliold}" value="{capitoliold}"></span>
                     </fieldset>
                     <fieldset>
-                        <legend>Storia:</legend>
-                        <legend for="trama">Trama del libro:</legend><!--ERRORE  Element legend not allowed as child of element fieldset in this context. (Suppressing further errors from this subtree.)-->
-                        <textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}">{tramaold}</textarea>
+                        <legend>Trama:</legend>
+                        <label for="trama">Trama del libro:</legend>
+                        <span><textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}" maxlength="3000">{tramaold}</textarea></span>
                     </fieldset>
                     <fieldset>
-                        <legend>Genere</legend>
-                        <label id="genere">Seleziona: </label><!--ERRORE CORRETTO FOR SOSTITUITO CON ID-->
-                        <select name="genere" id="genere" placeholder="{genereold}" value="{genereold}"> <!--ERRORE CORRETTO RIMOSSO NAME--><!--ERRORE Attribute value not allowed on element datalist at this point. /-->
-                            {selectGeneri}
-                            <!--option between todos los generos del mundo-->
-                        </select><!--ERRORE CORRETTO RIMOSSO /-->
-                    </fieldset>
-                    <fieldset>
-                        <legend>Recensioni</legend>
-                        <h4>Recensioni della <span lang="en">community</span></h4>{recensioniComunity}
-                        <h4>Voto medio: </h4>{mediavoti}
-                    </fieldset>
-                    <fieldset>
+                        <legend>Conferma o annulla le modifiche:</legend>
                         <input type="hidden" id="id" name="id" value="{id_libro}">
-                        <input type="submit" id="modifica" name="modifica" value="modifica">
-                        <button type="reset">Annulla</button>
+                        <input type="submit" id="modifica" name="modifica" value="Modifica" onclick="return conferma('Sei sicuro/sicura di voler modificare il libro?')">
+                        <input type="reset" value="Annulla">
                     </fieldset>
                 </form>
-                <!--
-                <section><legend>Concludi l'inserimento:</legend></section>
-                <form method="get" action="modifica.php" >
-                    <fieldset>
-                        <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
-                        <input type="submit" id="modifica" name="modifica" value="modifica">
-                    </fieldset>
-                </form>
-                
-                <form method="get" action="modifica_libro.php" >
-                    <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
-                    <button type="reset">Annulla</button>
-                </form>
-                -->
             </section>
         </main>
          <footer id="footer">

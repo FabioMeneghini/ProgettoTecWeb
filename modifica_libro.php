@@ -5,30 +5,25 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-//controllo se si è admin perchè si va da scheda libro
 if(!isset($_SESSION['admin']) || $_SESSION['admin'] == 0) {
     header("Location: scheda_libro.php");
+    exit();
 }
 
 $paginaHTML = file_get_contents("template/templateModificaLibro.html");
 $listaGeneri = "";
 $listaKeyword = "";
-$immagine ="";//IMMAGINE CON ALT no ImgReplace qua
-//TO DO NEL DB METTERE ALT 
+$immagine ="";
 $titolo = "";
 $autore = "";
 $genere = "";
 $lingua = "";
 $trama = "";
 $n_capitoli = "";
-$media_voti = "";
 $lista_lingue="";
 $data_list_generi="";
-$listaRecensioni = "<div class=recensioni ><ul>";
 $messaggiForm = "";
 $messaggiErrore = "";
-//chiama se stessa come pagina nel form
-//TO DO deve avere un bottone per eliminarle una ad una è una tabella ?
 
 if(isset($_GET['modifica']) && $_GET['modifica'] == 0) {
     $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
@@ -38,8 +33,7 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
-        //Dentro ad un form non l'ho gestito 
-        //TO DO
+        //controllo se l'id del libro è presente
         $tmp=false;
         if(isset($_GET['id'])) {
             $LibroSelezionato = $_GET['id'];
@@ -47,16 +41,8 @@ try {
         }
         if(!$tmp) {
             header("Location: template/404.html");
+            exit();
         }
-        //$resultGeneri = $connection -> getListaGeneri();
-        //$resultKeyword = $connection->getKeywordLibro($LibroSelezionato);
-        //$immagine= $connection ->  getimmagine($LibroSelezionato);
-
-        //TO DO METTERE UN IMG E RESTITUIRE ALT CON UN ALTRA QUARY 
-
-
-        //IMMAGINE CON ALT no ImgReplace qua
-        //TO DO NEL DB METTERE ALT
 
         $ok=false;
         if(isset($_GET['id'])) {
@@ -70,18 +56,7 @@ try {
             $linguaold = $connection ->  getlinguaLibro($LibroSelezionato);
             $trama = $connection ->  gettramaLibro($LibroSelezionato);
             $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
-            //admin reindirizzato non ha la , non registrato ha link accedi, se registrato con rec la ha in textarea
-            //se non è un libro che ha terminato ha aggiungi ai salvati 
-            // se è un libro terminato ha una text area con lascia una recensione 
-            $media_voti = $connection -> getmediavoti($LibroSelezionato);
-            //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
-            // è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro ? 
-            $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
-            //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
-            /*foreach($altre_recensioni as $recensione) {
-                $listaRecensioni.='<dd>'.$recensione["commento"].'</dd>';
-            }//TODOTABELLA
-            $listaRecensioni.="</ul></div>";*/
+
             $resultGeneri = $connection -> getListaGeneri();
             $resultLingue= $connection -> getLingueLibri();
             
@@ -93,8 +68,8 @@ try {
                 else
                     $data_list_generi .= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
             }
-            foreach($resultLingue as $lingue) { //lista di tutte le lingue
-                $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>'; ////////////////////////////////
+            foreach($resultLingue as $lingue) {
+                $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
             }
             $connection -> closeConnection();
 
@@ -128,18 +103,14 @@ $paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{selectGeneri}", $data_list_generi, $paginaHTML);
 $paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);
-//prima sostituisce l'area della recensione con un form poi lo precompila 
-//<paginaHTML = str_replace("{arecensionevotoform}", $arearecensionevoto , $paginaHTML);
 
 $paginaHTML = str_replace("{ImmagineLibro}", $immagine , $paginaHTML);
 $paginaHTML = str_replace("{titoloold}", $titolo , $paginaHTML);
 $paginaHTML = str_replace("{autoreold}", $autore, $paginaHTML);
 $paginaHTML = str_replace("{genereold}", $genereold , $paginaHTML);
 $paginaHTML = str_replace("{linguaold}", $linguaold , $paginaHTML);
-$paginaHTML = str_replace("{mediavoti}", $media_voti , $paginaHTML);
 $paginaHTML = str_replace("{capitoliold}", $n_capitoli , $paginaHTML);
 $paginaHTML = str_replace("{tramaold}", $trama , $paginaHTML);
-$paginaHTML = str_replace("{recensioniComunity}", $listaRecensioni, $paginaHTML);
 $paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore, $paginaHTML);
 echo $paginaHTML;
 
