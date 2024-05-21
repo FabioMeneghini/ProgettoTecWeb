@@ -80,3 +80,12 @@ footer ul li{
 textarea{
     width: 50%;
 }
+
+.item{
+    flex-basis: 100%;
+}
+
+.slider img{
+    width: 184px;
+    height: 280px;
+}
