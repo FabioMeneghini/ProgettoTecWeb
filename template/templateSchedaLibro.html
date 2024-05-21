@@ -34,7 +34,6 @@
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <!--come ricordarsi da dove è entrato? dalla home , da letti , da leggere o da eliminati? o da generi?-->
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; <a href="genere.php?genere={GenereLibro}">{GenereLibro}</a> &gt; &gt; {TitoloLibro}</p>
         </nav>
         <main id="content">
@@ -55,13 +54,12 @@
 
                     {bottoniAdmin}
                 </div>
-                <!--TO CHECK giuste le aree? -->
                 <h3>Voto medio della nostra <span lang="en">community</span>: {mediavoti}</h3>
                 
                 <ul class="menulibro">
-                    <dd><a class="menulibro" href="#trama">Vai alla trama</a> </dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                    <li><a class="menulibro" href="#trama">Vai alla trama</a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
                     {menupersonale}
-                    <dd><a class="menulibro" href="#community">Vai alle recensioni della <span lang="en">community</span></a></dd><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                    <li><a class="menulibro" href="#community">Vai alle recensioni della <span lang="en">community</span></a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
                 </ul>
                 <div id="datilibro">
                     <section id="trama">
@@ -69,7 +67,6 @@
                         <p>{tramaLibro}</p>
                     </section>
                     {arearecensionevotoform}
-                    <!--se non è un utente registrato mettere accedi se ha un account allora mettere la sua recensione se no mettere il link all'accesso -->
                     <section id="community">
                         <h4>Recensioni della <span lang="en">community</span></h4>
                         {recensioniComunity}

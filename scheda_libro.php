@@ -42,11 +42,11 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
 }
 else if(isset($_SESSION['username'])){
     $menu = $userMenu;
-    $menupersonale = '<dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>';
+    $menupersonale = '<li><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></li>';
 }
 else {
     $menu = $NonRegistrato;
-    $menupersonale = '<dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>';
+    $menupersonale = '<li><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></li>';
 }
 
 $messaggiSuccesso = "";
@@ -64,9 +64,7 @@ $n_capitoli = "";
 $tua_recensione = "";
 $voto="";
 $media_voti = "";
-//in THML TO DO E DB
 $listaRecensioni = '<div class="recensioni"><ul>';
-//chiama se stessa come pagina nel form
 $arearecensionevoto="";
 $copertina="";
 $alt="";
@@ -156,7 +154,7 @@ try {
                                     <a href="registrati.php">Registrati</a>
                                 <div>';
             }
-            else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0/* && isset($_SESSION['username'])*/) {
+            else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
                 $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
                 $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
                 $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
@@ -224,7 +222,13 @@ try {
             }
             else {
                 $bottoni_admin='<section id="bottoni_admin">
-                    <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a>
+                    <!-- <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a> -->
+                    <form action="modifica_libro.php" method="get">
+                        <fieldset>
+                            <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                            <input type="submit" id="modifica_libro" name="modifica_libro" value="Modifica">
+                        </fieldset>
+                    </form>
                     <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
                         <fieldset>
                             <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
