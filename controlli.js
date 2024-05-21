@@ -310,3 +310,34 @@ function validaModificaLibro() {
     return validaAutore(autore) && validaTitolo(titolo) && validaGenere(genere) && validaLingua(lingua)
                                 && validaCapitoli(capitoli) && validaTrama(trama);
 }
+
+/******************************************** SCHEDA LIBRO */
+
+function validaRecensione(recensione){
+    removeChildInput(recensione);
+    if(recensione.value.length>1000){
+        showError(recensione, "La recensione non può essere più lunga di 1000 caratteri");
+        recensione.focus();
+        recensione.select();
+        return false;
+    }
+    return true;
+}
+
+function validaVoto(voto){
+    removeChildInput(voto);
+    if(voto.value<1 || voto.value>10){
+        showError(voto, "Inserisci un voto da 1 a 10");
+        voto.focus();
+        voto.select();
+        return false;
+    }
+    return true;
+}
+
+function validaSchedaLibro() {
+    let recensione = document.getElementById('recensione');
+    let voto = document.getElementById('voto');
+
+    return validaRecensione(recensione) && validaVoto(voto);
+}
