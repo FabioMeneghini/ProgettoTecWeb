@@ -154,11 +154,11 @@ ul.listageneri{
 li.listageneri{
     margin-right: 10px; 
 }
-
+/*TODO non mi convince
 .commento{
     font-style: italic;
 }
-
+*/
 h2{
     /*display: flex;
     flex-direction: column;
@@ -264,6 +264,16 @@ table tr.lista_libri td:hover{
 
 main > div{
     text-align: center;
+}
+
+a.torna_su{
+    float: right;
+    padding: 0.2em 0.5em;
+    border: solid 2px;
+    border-color: var(--buttonColor);
+    border-radius: 10px;
+    background-color: white;
+    color: var(--buttonColor);
 }
 
 /* FOOTER */
@@ -882,9 +892,13 @@ body > *{
 
 .slider img{
     margin-left: 15px;
-    width: 230px;
-    height: 350px;
+    max-width: 50%;
     float: left;
+    border-radius: 5px;
+}
+
+.slider li{
+    padding: 0.2em;
 }
 
 .prev, .next{
