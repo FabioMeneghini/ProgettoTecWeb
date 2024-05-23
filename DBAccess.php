@@ -1122,6 +1122,7 @@ class DBAccess {
             return null;
         }
     }
+    
     public function getNumeroUtentiRegistratiOggi(){
         $query = "SELECT COUNT(*) AS iscritti_oggi FROM utenti WHERE DATE(NOW()) = DATE(data_iscrizione)";
         $queryResult = mysqli_query($this->connection, $query);

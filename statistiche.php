@@ -28,7 +28,7 @@ try {
         $n_libri_stai_leggendo = $connection -> getNumeroLibriStaLeggendo($_SESSION['username']);
         $n_libri_salvati = $connection -> getNumeroLibriSalvati($_SESSION['username']);
         $resultListaGeneri = $connection -> getListaGeneri();
-           
+        
         foreach($resultListaGeneri as $genere) {
              $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
