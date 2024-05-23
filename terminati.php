@@ -26,14 +26,14 @@ try {
         $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultListaGeneri as $genere) {
-             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
         if(empty($lista)) {
-            $listaLibri = "Non hai terminato nessun libro."; //aggiungere link alla pagina di ricerca?
+            $listaLibri = "<p>Non hai terminato nessun libro.</p>";
         }
         else {
             $listaLibri .= '<form method="post" action="terminati.php" onsubmit="return conferma(\'Sei sicuro di voler eliminare i libri selezionati dalla lista dei tuoi libri terminati? Eventuali valutazioni assegnate ad essi verranno perse definitivamente.\')">
-                                <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: titolo, autore, data di fine lettura, voto assegnato e un checkbox per eliminare il libro.</p>
+                                <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: titolo, autore, data di fine lettura, voto assegnato e una <span lang="en">checkbox</span> per eliminare il libro.</p>
                                 <fieldset>
                                     <table aria-describedby="descr">
                                         <caption>Lista dei libri che hai terminato</caption>
@@ -56,7 +56,7 @@ try {
             $listaLibri .= '    </table>
                             </fieldset>
                             <fieldset>
-                                <input type="submit" id="elimina" name="elimina" value="Elimina">
+                                <input type="submit" id="elimina" name="elimina" value="Elimina" onclick="return validaLibriCheckbox()">
                             </fieldset>
                             </form>';
         }

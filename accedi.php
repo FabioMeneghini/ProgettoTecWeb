@@ -4,13 +4,13 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-/*if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
+if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
     if($_SESSION['admin'] == 1) {
         header("Location: admin.php");
     } else {
         header("Location: utente.php");
     }
-}*/
+}
 
 $paginaHTML = file_get_contents("template/templateAccedi.html");
 
@@ -22,9 +22,6 @@ function controllaInput($username, $password) { //da inserire eventualmente altr
     if($password == "") {
         $messaggi .= "<li>La password non può essere vuota</li>";
     }
-    /*if(strlen($username) <= 2) {
-        $messaggi .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
-    }*/
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
@@ -51,15 +48,17 @@ try {
                     $_SESSION['nome'] = $user['nome'];
                     $_SESSION['cognome'] = $user['cognome'];
                     $_SESSION['email'] = $user['email'];
-                    //$_SESSION['data_nascita'] = $user['data_nascita'];
+                    $_SESSION['data_nascita'] = $user['data_nascita'];
                     $_SESSION['data_iscrizione'] = $user['data_iscrizione'];
                     if($user['admin']==1) {
                         $_SESSION['admin'] = true;
                         header("Location: admin.php");
+                        exit();
                     }
                     else {
                         $_SESSION['admin'] = false;
                         header("Location: utente.php");
+                        exit();
                     }
                 } else {
                     $messaggiPerForm .= "<li>Credenziali errate. Riprova.</li>";
@@ -69,7 +68,7 @@ try {
         $resultListaGeneri = $connection -> getListaGeneri();
         $connection -> closeConnection();
         foreach($resultListaGeneri as $genere) {
-             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
     } else {
         $messaggiPerForm .= "<li>Errore di connessione al database</li>";
@@ -79,7 +78,7 @@ catch(Throwable $e) {
     $messaggiPerForm .= "<li>Errore: ".$e -> getMessage()."</li>";
 }
 
-$paginaHTML = str_replace("{messaggi}", $messaggiPerForm, $paginaHTML);
+$paginaHTML = str_replace("{messaggi}", $messaggiPerForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiPerForm."</ul>", $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 ?>

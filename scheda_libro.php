@@ -42,11 +42,11 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
 }
 else if(isset($_SESSION['username'])){
     $menu = $userMenu;
-    $menupersonale = '<dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>';
+    $menupersonale = '<li><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></li>';
 }
 else {
     $menu = $NonRegistrato;
-    $menupersonale = '<dd><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></dd>';
+    $menupersonale = '<li><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></li>';
 }
 
 $messaggiSuccesso = "";
@@ -54,7 +54,6 @@ $messaggiErrore = "";
 $messaggiForm = "";
 $listaGeneri = "";
 $listaKeyword = "";
-//TO DO NEL DB METTERE ALT 
 $titolo = "";
 $autore = "";
 $genere = "";
@@ -64,13 +63,22 @@ $n_capitoli = "";
 $tua_recensione = "";
 $voto="";
 $media_voti = "";
-//in THML TO DO E DB
 $listaRecensioni = '<div class="recensioni"><ul>';
-//chiama se stessa come pagina nel form
 $arearecensionevoto="";
 $copertina="";
 $alt="";
 $bottoni_admin="";
+
+function controlla($recensione, $voto) {
+    $messaggi = "";
+    if(strlen($recensione) > 1000) {
+        $messaggi .= "<li>La recensione può essere lunga al massimo 1000 caratteri</li>";
+    }
+    if($voto < 1 || $voto > 10) {
+        $messaggi .= "<li>Il voto deve essere compreso tra 1 e 10</li>";
+    }
+    return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
+}
 
 if(isset($_GET['eliminato']) && $_GET['eliminato'] == 0) {
     $messaggiErrore = '<p class="errore">Ci scusiamo per il disagio ma non è stato possibile eliminare il libro.</p>';
@@ -103,32 +111,27 @@ try {
             exit();
         }
         if(isset($_POST["valuta"])) {
-            $salvato = $connection -> aggiungiValutazione($_SESSION['username'], $_POST['id_libro'], $_POST['voto'], $_POST['recensione']);
-            //mi sposto con header(Location: ...) perché altrimenti da problemi con il libro che visualizza (mostra sempre il primo in quanto perde il parametro id nel get)
-            header("Location: scheda_libro.php?valutato=1&id=".$_POST['id_libro']);
-            exit();
+            $tmp = controlla($_POST["recensione"], $_POST["voto"]);
+            if($tmp["ok"]) {
+                $salvato = $connection -> aggiungiValutazione($_SESSION['username'], $_POST['id_libro'], $_POST['voto'], $_POST['recensione']);
+                //mi sposto con header(Location: ...) perché altrimenti da problemi con il libro che visualizza (mostra sempre il primo in quanto perde il parametro id nel get)
+                header("Location: scheda_libro.php?valutato=1&id=".$_POST['id_libro']);
+                exit();
+            }
+            else {
+                $messaggiForm = $tmp["messaggi"];
+            }
         }
 
-        $_SESSION['id_libro'] = 1; //libro di default
-        $ok=false;
-        if(isset($_GET['id'])) {
+        if(isset($_POST['id_libro']))
+            $LibroSelezionato = $_POST['id_libro'];
+        else if(isset($_GET['id']))
             $LibroSelezionato = $_GET['id'];
-            $_SESSION['id_libro'] = $LibroSelezionato;
-            $ok = $connection -> controllareIdLibro($LibroSelezionato);
-        }
-        else {
-            $LibroSelezionato = $_SESSION['id_libro'];
-            $ok = $connection -> controllareIdLibro($LibroSelezionato);
-        }
-        if(isset($_POST['modifica'])) {
-            $modificata = $connection -> modificaRecensione($_SESSION['id_libro'], $_SESSION['username'], $_POST["recensione"], $_POST["voto"]);
-            if($modificata)
-                $messaggiForm='<p class="messaggiSuccesso">Recensione modificata con successo</p>';
-        }
+        else
+            $LibroSelezionato = 1; //libro di default
+        $ok = $connection -> controllareIdLibro($LibroSelezionato);
         if($ok) {
             $resultGeneri = $connection -> getListaGeneri();
-            $listaKeyword = $connection->getkeywords($LibroSelezionato);
-            //TO DO NEL DB METTERE ALT 
             $titolo = $connection ->  gettitololibro($LibroSelezionato);
             $autore = $connection ->  getautoreLibro($LibroSelezionato);
             $genereLibro = $connection ->  getgenereLibro($LibroSelezionato);
@@ -147,48 +150,43 @@ try {
             // se è un libro terminato ha una text area con lascia una recensione 
 
             if(!isset($_SESSION['username'])) {
-                $arearecensionevoto='<h3 id="recensionetua">La tua Recensione e il tuo Voto:</h3> {recensione}';
-                $tua_recensione ='<div>
-                                    <p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
-                                    <a href="accedi.php">Accedi</a>
-                                    <p>Non hai ancora un <span lang="en">account</span>?</p>
-                                    <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
-                                    <a href="registrati.php">Registrati</a>
-                                <div>';
+                $arearecensionevoto='<div>
+                                        <p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
+                                        <a href="accedi.php">Accedi</a>
+                                        <p>Non hai ancora un <span lang="en">account</span>?</p>
+                                        <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
+                                        <a href="registrati.php">Registrati</a>
+                                    <div>';
             }
-            else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0/* && isset($_SESSION['username'])*/) {
+            else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
                 $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
                 $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
                 $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
                 if($terminato) {  
                     $tua_recensione = $connection -> getrecensionetua($LibroSelezionato,$_SESSION['username']);
                     $voto = $connection -> getvototuo($LibroSelezionato,$_SESSION['username']);
-                    //se la recensione è vuota
-                    if($tua_recensione==''){
+
+                    if($tua_recensione=='') { //se la recensione è vuota
                         $tua_recensione='Scrivi qui una recensione';
-                        //il voto rimane vuoto ok place holder vuoto
                     }
-                    $arearecensionevoto='<section id="recensionetua">
-                        <h3>La tua Recensione e il tuo Voto:</h3>
-                        <form method="post" action="scheda_libro.php"> 
+                    $arearecensionevoto='
+                        <form method="post" action="scheda_libro.php" onsubmit="return validaSchedaLibro()" onreset="conferma(\'Sei sicuro di voler annullare le modifiche alla tua recensione e al tuo voto?\')"> 
                             {messaggiForm}
                             <fieldset>
                                 <legend>La tua Recensione e il tuo voto:</legend>
                                 <label for="recensione">Recensione: </label><br>
-                                <textarea id="recensione" name="recensione" rows="20" cols="70" >'.$tua_recensione.'</textarea><br>
+                                <span><textarea id="recensione" name="recensione" rows="20" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span><br>
                                 <label for="voto">Voto: </label>
-                                <input type="number" name="voto" id="voto" max="10" min="0" required placeholder="{voto}" value="{voto}"><br>
+                                <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>
                                 <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                                <button type="submit" id="valuta" name="valuta">Pubblica valutazione</button><br>
-                                <button type="reset">Annulla</button>
+                                <input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">
+                                <input type="reset" value="Annulla">
                             </fieldset>
-                        </form>
-                        </section>';
+                        </form>';
                         //Modifica e annulla attivi su js solo se ha modificato qualcosa
                 }
                 else if($salvato) {
-                    $arearecensionevoto='<section id="recensionetua">
-                        <h3>La tua Recensione e il tuo Voto:</h3>
+                    $arearecensionevoto='
                         <form action="scheda_libro.php" method="post"> 
                         <fieldset>
                             <legend>Inizia a leggere:</legend>
@@ -196,35 +194,35 @@ try {
                             <label for="username">Questo libro è nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label><br>
                             <input type="submit" id="inizia" name="inizia" value="inizia">
                         </fieldset>
-                    </form>
-                    </section>';
+                    </form>';
                 }
                 else if($iniziato) {
-                    $arearecensionevoto='<section id="recensionetua">
-                                            <h3>La tua Recensione e il tuo Voto:</h3>
-                                            <p>Prima di poter recensire questo libro devi averlo terminato. Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>
-                                        </section>';
-                    //manca id del utente che sta leggendo il libro
+                    $arearecensionevoto='<p>Prima di poter recensire questo libro devi averlo terminato. Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>';
                 }
                 else  {
-                    $arearecensionevoto='<section id="recensionetua">
-                        <h3>La tua Recensione e il tuo Voto:</h3>
-                        <form action="scheda_libro.php" method="post"> 
+                    $arearecensionevoto='
+                        <form action="scheda_libro.php" method="post">
+                            <p>Prima di poter recensire questo libro devi averlo terminato. Vuoi iniziare questo libro o salvarlo per iniziarlo più tardi?</p>
                             <fieldset>
                                 <!-- <legend>Prima di poter recensire questo libro devi averlo terminato</legend> -->
                                 <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                                <label for="username">Salva per leggerlo più tardi:</label>
+                                <!-- <label for="username">Salva per leggerlo più tardi:</label> -->
                                 <input type="submit" id="salva" name="salva" value="Salva">
-                                <label for="username">Inizia a leggere:</label>
-                                <input type="submit" id="inizia" name="inizia" value="Inizia">
+                                <!-- <label for="username">Inizia a leggere:</label> -->
+                                <input type="submit" id="inizia" name="inizia" value="Inizia a leggere">
                             </fieldset>
-                        </form>
-                    </section>';
+                        </form>';
                 }
             }
             else {
                 $bottoni_admin='<section id="bottoni_admin">
-                    <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a>
+                    <!-- <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a> -->
+                    <form action="modifica_libro.php" method="get">
+                        <fieldset>
+                            <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                            <input type="submit" id="modifica_libro" name="modifica_libro" value="Modifica">
+                        </fieldset>
+                    </form>
                     <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
                         <fieldset>
                             <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
@@ -233,8 +231,6 @@ try {
                     </form>';
             }
             $media_voti = $connection -> getmediavoti($LibroSelezionato);
-            //è un paramtro salvato che va aggiornato ogni volta alle form delle recensioni 
-            // è una query che viene calcolata al momento in base al join con tutti gli utenti e il libro ? 
             $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
             $connection -> closeConnection();
             //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
@@ -291,10 +287,9 @@ $paginaHTML = str_replace("{mediavoti}", number_format(doubleval($media_voti), 1
 $paginaHTML = str_replace("{CapitoliLibro}", $n_capitoli , $paginaHTML);
 $paginaHTML = str_replace("{tramaLibro}", $trama , $paginaHTML);
 $paginaHTML = str_replace("{bottoniAdmin}", $bottoni_admin , $paginaHTML);
-$paginaHTML = str_replace("{recensione}", $tua_recensione , $paginaHTML);
 $paginaHTML = str_replace("{voto}", $voto, $paginaHTML);
 $paginaHTML = str_replace("{recensioniComunity}", $listaRecensioni, $paginaHTML);
-$paginaHTML = str_replace("{messaggiForm}", $messaggiForm ,$paginaHTML);
+$paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiForm."</ul>", $paginaHTML);
 $paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore ,$paginaHTML);
 $paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso ,$paginaHTML);
 echo $paginaHTML;

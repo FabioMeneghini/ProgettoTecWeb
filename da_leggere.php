@@ -38,10 +38,10 @@ try {
             $listaLibri = "Non hai nessun libro da leggere."; //aggiungere link alla pagina di ricerca?
         }
         else {
-            $listaLibri .= '<form method="post" action="da_leggere.php">
+            $listaLibri .= '<form method="post" action="da_leggere.php" onsubmit="return validaLibriCheckbox()">
                                 <p id="descr">
                                     La tabella contiene l\'elenco dei tuoi libri da leggere.
-                                    Ogni riga descrive un libro con tre colonne: "titolo", "autore" e un checkbox per iniziare o eliminare il libro.
+                                    Ogni riga descrive un libro con tre colonne: "titolo", "autore" e una <span lang="en">checkbox</span> per iniziare o eliminare il libro.
                                 </p>
                                 <fieldset>
                                     <table aria-describedby="descr">
