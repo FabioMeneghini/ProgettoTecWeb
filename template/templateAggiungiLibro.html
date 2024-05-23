@@ -25,18 +25,13 @@
             </label>
             <input id="hamburger" type="checkbox">
             <dl>
-                <!--link di admin-->
                 <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
-                <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
                 <dt>Aggiungi un libro</dt>
                 <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
                 <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-                <!--non direttemante da qua o si ? -->
                 <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri}
                 <dt><a href="area_personale.php">Area Personale</a></dt>
-                <!--vale anche per l'admin può cambiare credenziali -->
-                <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
                 <dt><a href="cerca.php">Cerca</a></dt>
             </dl><!--ERRORE dl-->
         </nav>
@@ -49,27 +44,22 @@
                 <form method="post" action="aggiungi_libro.php" onreset="return conferma('Sei sicuro/sicura di voler cancellare i dati inseriti?')"> 
                     {messaggiForm}
                     <fieldset>
-                        <legend>Informazioni generali: </legend>
-                        <label for="titolo">Autore: </label>
-                        <input type="text" id="autore" name="autore" required><!--ERRORE CORRETTO MIN NON DISPONIBILE PER TEXT--><!--ERRORE CORRETTO MAX NON DISPONIBILE PER TEXT-->
-                        <br><!--ERRORE CORRETTO TOLTO LO SLASH-->
-                        <label for="titolo">Titolo: </label>
-                        <input type="text" name="titolo" id="titolo" required><br><!--ERRORE CORRETTO MAX NON DISPONIBILE PER TEXT--><!--ERRORE CORRETTO MIN TOLTI SLASH-->
-                        <!--controllo che sia diverso da quelli già inseriti! In caso messaggio: il libro inserito è già presente nel data base
-                        meglio non lasciare il completamente di altri campi -->
+                        <legend>Informazioni generali:</legend>
+                        <label for="titolo">Autore:</label>
+                        <input type="text" id="autore" name="autore" maxlength="100" required>
+                        <br>
+                        <label for="titolo">Titolo:</label>
+                        <input type="text" name="titolo" id="titolo" maxlength="100" required><br>
                     </fieldset>
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
-                        <label id="Lingua">Lingua originale: </label><!--ERRORE CORRETTO FOR SOSTITUITO DA ID-->
+                        <label for="selezionalingua">Lingua originale: </label>
                         <input list="lingua" id="selezionalingua" name="lingua" required>
-                        <datalist id="lingua" ><!--ERRORE CORRETTO RIMOSSO NAME-->
+                        <datalist id="lingua">
                             {listaLingue}
-                            <!--option between todos los idiomas del mundo-->
-                        </datalist><br><!--ERRORE CORRETTO TOLTO SLASH-->
-                        <!-- <label for="casa editrice">Casa editrice: </label>
-                        <input type="text" name="editore" id="editore" /><br/>-->
-                        <label id="durata">Numero capitoli: </label><!--ERRORE CORRETTO FOR SOSTITUITO DA ID-->
-                        <input type="number" name="capitoli" id="capitoli" max="1000" required><!--ERRORE CORRETTO TOLTO SLASH-->
+                        </datalist><br>
+                        <label for="capitoli">Numero capitoli: </label>
+                        <input type="number" name="capitoli" id="capitoli" max="1000" required>
                     </fieldset>
                     <fieldset>
                         <legend>Storia :</legend>

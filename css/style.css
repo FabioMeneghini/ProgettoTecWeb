@@ -184,6 +184,9 @@ h3:first-of-type::before{
     /*border-bottom: 3px solid var(--flagColor);*/
    
 }
+textarea {
+    resize: none;
+}
 
 form{
     /*display: flex;
@@ -1042,4 +1045,10 @@ body > *{
 
   .errorSuggestion {
     display: block;
+  }
+
+  /*statistiche*/ 
+  .statistiche_admin{
+    float: left;
+    padding: 1em;
   }

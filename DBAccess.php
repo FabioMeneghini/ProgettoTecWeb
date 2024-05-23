@@ -1122,6 +1122,55 @@ class DBAccess {
             return null;
         }
     }
+    public function getNumeroUtentiRegistratiOggi(){
+        $query = "SELECT COUNT(*) AS iscritti_oggi FROM utenti WHERE DATE(NOW()) = DATE(data_iscrizione)";
+        $queryResult = mysqli_query($this->connection, $query);
+    
+        if (mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            return $row['iscritti_oggi'];
+        } else {
+            return null;
+        }
+    }
+    
+    public function getNumeroLibriTerminatiOggi(){
+        $query = "SELECT COUNT(*) AS letti_oggi FROM ha_letto WHERE DATE(NOW()) = DATE(data_fine_lettura)";
+        $queryResult = mysqli_query($this->connection, $query);
+    
+        if (mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            return $row['letti_oggi'];
+        } else {
+            return null;
+        }
+    }
+    
+    public function getEtaMediaUtenti(){
+        $query = "SELECT AVG(YEAR(NOW()) - YEAR(data_nascita)) AS eta_media FROM utenti";
+        $queryResult = mysqli_query($this->connection, $query);
+    
+        if (mysqli_num_rows($queryResult) != 0) {
+            $row = mysqli_fetch_assoc($queryResult);
+            return round($row['eta_media'], 2);
+        } else {
+            return null;
+        }
+    }
+    
+    public function getNumeroLibri(){
+        $query = "SELECT COUNT(*) as numero FROM libri";
+        $queryResult = mysqli_query($this->connection, $query);
+    
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            return $row['numero'];
+        } else {
+            return null;
+        }
+    }
+
+
 
 }
 ?> 

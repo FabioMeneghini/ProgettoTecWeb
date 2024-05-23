@@ -43,15 +43,39 @@
             <p>Ti trovi in: <span lang="en">Home</span></p>
         </nav>
         <main  id="content">
+            <section class="statistiche_generali">
             <h2>Statistiche:</h2>
-                <dl class="Statistiche">
-                    <dt>Numero di utenti registrati:</dt>
-                    <dd>{numeroUtentiRegistrati}</dd>
-                    <dt>Numero di recensioni:</dt>
-                    <dd>{numeroRecensioni}</dd>
-                    <dt>Numero di utenti che stanno leggendo:</dt>
-                    <dd>{numeroUtentiCheStannoLeggendo}</dd>
-                </dl>
+                <div class="statistiche_admin">
+                    <dl>
+                        <dt>Numero totale di utenti registrati:</dt>
+                        <dd>{numeroUtentiRegistrati}</dd>
+
+                        <dt>Numero di utenti registati oggi:</dt>
+                        <dd>{numeroRegistratiOggi}</dd>
+
+                        <dt>Numero di utenti che stanno leggendo:</dt>
+                        <dd>{numeroUtentiCheStannoLeggendo}</dd>
+
+                        <dt>Età media degli utenti registrati:</dt>
+                        <dd>{EtaMedia}</dd>
+                    </dl>
+
+                    <a href="tutti_utenti.php" >Vai all'archivio</a>
+                </div>
+                <div class="statistiche_admin">
+                    <dl>
+                        <dt>Numero totale di libri:</dt>
+                        <dd>{numeroLibriTotali}</dd>
+
+                        <dt>Numero totale di recensioni:</dt>
+                        <dd>{numeroRecensioni}</dd>
+
+                        <dt>Numero di libri terminati oggi:</dt>
+                        <dd>{numeroLibriTerminati}</dd>
+                    </dl>
+                    <a href="tutti_libri.php" >Vai al catalogo dei libri</a>
+                </div>
+            </section>
         </main>
          <footer id="footer">
             <ul>

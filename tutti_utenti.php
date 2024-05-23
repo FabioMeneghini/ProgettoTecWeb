@@ -23,7 +23,7 @@ $alfabetico_username="";
 $data_iscrizione_piu_recente="";
 $data_iscrizione_meno_recente="";
 $attivi="";
-
+$torna_su="";
 try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
@@ -89,6 +89,11 @@ try {
                         </tr>';
            }
            $utenti .= "</table>";
+            if(count($resultUtenti)>=20) {
+                $torna_su='<nav aria-label="Torna al form di ricerca">
+                                <a class="torna_su" href="#content">Torna su</a>
+                           </nav>';
+            }
        }
        else{
            $utenti= '<p>Al momento non ci sono utenti registrati al tuo servizio.</p>';
@@ -109,7 +114,7 @@ $paginaHTML = str_replace("{selected_alfabetico_username}", $alfabetico_username
 $paginaHTML = str_replace("{selected_data_piu_recente}", $data_iscrizione_piu_recente, $paginaHTML);
 $paginaHTML = str_replace("{selected_data_meno_recente}", $data_iscrizione_meno_recente, $paginaHTML);
 $paginaHTML = str_replace("{selected_attivi}", $attivi, $paginaHTML);
-
+$paginaHTML = str_replace("{torna_su}", $torna_su , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{ListaUtenti}", $utenti, $paginaHTML);
 echo $paginaHTML;
