@@ -9,7 +9,7 @@ ELS(".slider-wrapper").forEach(EL_par => {
   const tot = Math.ceil(ELS_items.length / sub);
   let c = 0;
   
-  const anim = () => EL_slider.style.transform = `translateX(-${c*100}%)`;
+  const anim = () => EL_slider.style.transform = 'translateX(-${c*100}%)';
   const prev = () => (c = mod(c-1, tot), anim());
   const next = () => (c = mod(c+1, tot), anim());
   
