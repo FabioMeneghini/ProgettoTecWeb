@@ -1113,14 +1113,25 @@ body > *{
     transition:.5s;
 }
 
-  /* ERRORI JS */
+/* ERRORI JS */
 
-  .errorSuggestion {
-    display: block;
-  }
+.errorSuggestion {
+display: block;
+}
 
-  /*statistiche*/ 
-  .statistiche_admin{
-    float: left;
+/*statistiche*/ 
+
+.statistiche_generali{
+    display: flex;
+    flex-direction: row;
+}
+
+.statistiche_admin{ 
+    width: 50%;   
+    margin: 1em;
     padding: 1em;
-  }
+    background-color: #dfd76790; /*TODO colore da cambiare*/
+    border: 2px solid;
+    border-color: var(--flagColor);
+    border-radius: 5px;
+}
