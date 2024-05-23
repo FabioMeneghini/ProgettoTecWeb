@@ -80,3 +80,7 @@ footer ul li{
 textarea{
     width: 50%;
 }
+
+.item{
+    flex-basis: 100%;
+}
