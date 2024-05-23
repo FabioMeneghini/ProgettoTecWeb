@@ -16,10 +16,3 @@ ELS(".slider-wrapper").forEach(EL_par => {
   EL(".prev", EL_par).addEventListener("click", prev);
   EL(".next", EL_par).addEventListener("click", next);
 });
-
-/*TODO non funziona per ora*/
-const sliderWrapper = document.getElementById('sliderWrapper');
-
-if (window.innerWidth < 2000) {
-    sliderWrapper.setAttribute('data-items', '1');
-}
