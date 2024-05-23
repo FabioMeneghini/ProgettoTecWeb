@@ -28,27 +28,20 @@ try {
         
 
         foreach($resultGeneri as $genere) {
-            $listaLibri.='<h3><hr><a href="genere.php?genere="'.$genere["genere"].'">'.$genere["genere"].'</a></h3>
-            <ul class="listagenere">';
+            $listaLibri.='<h3><hr><a href="genere.php?genere="'.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
             $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"],10);
             if(empty($risultatiLibri)) {
                 $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';//da capire se ha senso 
             }
             else {
-                $listaLibri.='<ul class="listagenere">';
+                $listaLibri.='<ul class="librigeneri">';
                 foreach($risultatiLibri as $libro) {
                     //$listaLibri.='<li><a href="scehda_libro.php?id='.$libro["id"].'" id="'.$libro["titolo_IR"].'">'.$libro["titolo"].'</a></li>';
-                    $listaLibri.='<li><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
+                    $listaLibri.='<li><a id="'.$libro["titolo_ir"].'" href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
                     //torna il titolo che deve fare img replace 
                 }
                 $listaLibri.='</ul>';
             }
-            foreach($risultatiLibri as $libro) {
-                //$listaLibri.='<li><a href="scehda_libro.php?id='.$libro["id"].'" id="'.$libro["titolo_IR"].'">'.$libro["titolo"].'</a></li>';
-                $listaLibri.='<li><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
-                //torna il titolo che deve fare img replace 
-            }
-            $listaLibri.='</ul>';
         }
         $listaLibri.="</div>";  
         //$risultatiLibri = $connection ->getListaLibriGenere($genere);
@@ -57,18 +50,16 @@ try {
            // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
            //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
             $listaBestSeller .=  '<div class="item">
-                                    <img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'">
+                                    <img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" >
                                     <ul>
                                         <li><strong>Titolo:</strong> '.$libro["autore"].'</li>
                                         <li><strong>Autore:</strong> '.$libro["titolo"].'</li>
                                         <li><strong>Genere:</strong> '.$libro["genere"].'</li>
                                         <li class="commento"><strong>Commento:</strong>'.$libro["migliore_recensione"].'</li>
-                                        <li><strong>Voto medio:</strong></li>
-                                        <li><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
+                                        <li><strong>Voto medio:</strong><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
                                         </ul>
                                   </div>';
         }
-        
         foreach($resultListaGeneri as $genere){
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
