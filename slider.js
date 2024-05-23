@@ -9,10 +9,17 @@ ELS(".slider-wrapper").forEach(EL_par => {
   const tot = Math.ceil(ELS_items.length / sub);
   let c = 0;
   
-  const anim = () => EL_slider.style.transform = `translateX(-${c*100}%)`;
+  const anim = () => EL_slider.style.transform = 'translateX(-${c*100}%)';
   const prev = () => (c = mod(c-1, tot), anim());
   const next = () => (c = mod(c+1, tot), anim());
   
   EL(".prev", EL_par).addEventListener("click", prev);
   EL(".next", EL_par).addEventListener("click", next);
 });
+
+/*TODO non funziona per ora*/
+const sliderWrapper = document.getElementById('sliderWrapper');
+
+if (window.innerWidth < 2000) {
+    sliderWrapper.setAttribute('data-items', '1');
+}

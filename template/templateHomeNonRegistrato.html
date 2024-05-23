@@ -44,12 +44,12 @@
         </nav>
         <main id="content">
             <h2 class="titologenere"><span lang="en">Best seller:</span></h2>
-            <div class="slider-wrapper" data-items="2">
+            <div class="slider-wrapper" data-items="1">
                 <div class="slider">
                     {listaBestSeller}
                 </div>
-                <button class="prev" type="button">&lt;</button>
-                <button class="next" type="button">&gt;</button>
+                <button class="prev" type="button"></button>
+                <button class="next" type="button"></button>
             </div>
             {LibriGenere}
         <nav aria-label="Torna al form di ricerca">
@@ -64,6 +64,7 @@
             </ul>
             <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
         </footer>
+        <!--TODO far funzionare il file js-->
         <script>
             const ELS = (sel, par) => (par || document).querySelectorAll(sel);
             const EL = (sel, par) => (par || document).querySelector(sel);

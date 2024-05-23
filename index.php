@@ -59,11 +59,12 @@ try {
             $listaBestSeller .=  '<div class="item">
                                     <img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'">
                                     <ul>
-                                        <li>Titolo: '.$libro["autore"].'</li>
-                                        <li>Autore: '.$libro["titolo"].'</li>
-                                        <li>Genere: '.$libro["genere"].'</li>
-                                        <li class="commento">'.$libro["migliore_recensione"].'</li>
-                                        <li>Voto medio della <span lang="en">community</span>: <span class="voto_medio">'.$libro["voto_medio"].'</span></li>
+                                        <li><strong>Titolo:</strong> '.$libro["autore"].'</li>
+                                        <li><strong>Autore:</strong> '.$libro["titolo"].'</li>
+                                        <li><strong>Genere:</strong> '.$libro["genere"].'</li>
+                                        <li class="commento"><strong>Commento:</strong>'.$libro["migliore_recensione"].'</li>
+                                        <li><strong>Voto medio:</strong></li>
+                                        <li><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
                                         </ul>
                                   </div>';
         }
