@@ -175,6 +175,9 @@ h3:first-of-type::before{
     /*border-bottom: 3px solid var(--flagColor);*/
    
 }
+textarea {
+    resize: none;
+}
 
 form{
     /*display: flex;
@@ -1089,18 +1092,20 @@ body > *{
   
   .librigeneri li a:hover {
     transform: scale(1.1); /* Effetto hover */
-    transition: 0.3s; /* Transizione più fluida */
+    transition: 0.5s; /* Transizione più fluida */
+  }
+  .librigeneri li a:link{
+    transition:.5s;
+}
+
+  /* ERRORI JS */
+
+  .errorSuggestion {
+    display: block;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
+  /*statistiche*/ 
+  .statistiche_admin{
+    float: left;
+    padding: 1em;
+  }

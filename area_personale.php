@@ -4,12 +4,15 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-/*if(!isset($_SESSION['username'])) {
+if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
-}if($_SESSION['admin'] != 1) {
-        header("Location: utente.php");
-    }
-*/
+    exit();
+}
+if($_SESSION['admin'] != 1) {
+    header("Location: utente.php");
+    exit();
+}
+
 $isAdmin = true; 
 if($_SESSION['admin'] != 1) 
     $isAdmin = false;
@@ -68,7 +71,10 @@ function controllaPassword($password_old, $password1, $password2) {
     else {
         $regexOk=preg_match('/[0-9]/', $password1) && preg_match('/[A-Z]/', $password1) && preg_match('/[a-z]/', $password1);
         if(!$regexOk) {
-            $messaggi .= "<li>La password deve contenere almeno un numero, una lettera maiuscola e una minuscola</li>";
+            $messaggi .= "<li>La nuova password deve contenere almeno un numero, una lettera maiuscola e una minuscola</li>";
+        }
+        else if($password1 != $password2) {
+            $messaggi .= "<li>Le due password non coincidono</li>";
         }
     }
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
@@ -76,9 +82,17 @@ function controllaPassword($password_old, $password1, $password2) {
 
 function controllaEmail($email) {
     $messaggi = "";
-    $regexOk = preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email); //da testare
-    if(!$regexOk) {
-        $messaggi .= "<li>L'email non è valida</li>";
+    if($email == "") {
+        $messaggi .= "<li>L'email non può essere vuota</li>";
+    }
+    else if($email == $_SESSION["email"]) {
+        $messaggi .= "<li>L'email è uguale a quella precedente</li>";
+    }
+    else {
+        $regexOk = preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email);
+        if(!$regexOk) {
+            $messaggi .= "<li>L'email non è valida</li>";
+        }
     }
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
@@ -104,7 +118,6 @@ try {
         if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
             $username = trim($_POST['username']);
             $tmp = controllaUsername($username);
-
             if($tmp['ok']) {
                 if($connection -> verificaUsername($username)) {
                     $messaggiUsername .= "<li>Lo username '".$username."' è già in uso</li>";
@@ -159,6 +172,7 @@ try {
         if(isset($_POST['disconnetti'])) {
             session_destroy();
             header("Location: index.php");
+            exit();
         }
 
         //elimina
@@ -166,6 +180,7 @@ try {
             $connection -> eliminaUtente($_SESSION['username']);
             session_destroy();
             header("Location: index.php");
+            exit();
         }
 
         $resultGeneri = $connection -> getListaGeneri();
@@ -188,15 +203,13 @@ $paginaHTML = str_replace("{nome}", $_SESSION["nome"], $paginaHTML);
 $paginaHTML = str_replace("{usernameattuale}", $_SESSION["username"], $paginaHTML);
 $paginaHTML = str_replace("{emailattuale}", $_SESSION["email"], $paginaHTML);
 $paginaHTML = str_replace("{data_iscrizione}", $data, $paginaHTML);
-$paginaHTML = str_replace("{messaggi}", $messaggi, $paginaHTML);
-$paginaHTML = str_replace("{messaggiUsername}", $messaggiUsername, $paginaHTML);
-$paginaHTML = str_replace("{messaggiEmail}", $messaggiEmail, $paginaHTML);
-$paginaHTML = str_replace("{messaggiPassword}", $messaggiPassword, $paginaHTML);
-$paginaHTML = str_replace("{successoUsername}", $successoUsername, $paginaHTML);
-$paginaHTML = str_replace("{successoEmail}", $successoEmail, $paginaHTML);
-$paginaHTML = str_replace("{successoPassword}", $successoPassword, $paginaHTML);
-
-
+$paginaHTML = str_replace("{messaggi}", $messaggi=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggi."</ul>", $paginaHTML);
+$paginaHTML = str_replace("{messaggiUsername}", $messaggiUsername=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiUsername."</ul>", $paginaHTML);
+$paginaHTML = str_replace("{messaggiEmail}", $messaggiEmail=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiEmail."</ul>", $paginaHTML);
+$paginaHTML = str_replace("{messaggiPassword}", $messaggiPassword=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiPassword."</ul>", $paginaHTML);
+$paginaHTML = str_replace("{successoUsername}", $successoUsername=="" ? "" : "<div class=\"messaggiSuccesso\">".$successoUsername."</div>", $paginaHTML);
+$paginaHTML = str_replace("{successoEmail}", $successoEmail=="" ? "" : "<div class=\"messaggiSuccesso\">".$successoEmail."</div>", $paginaHTML);
+$paginaHTML = str_replace("{successoPassword}", $successoPassword=="" ? "" : "<div class=\"messaggiSuccesso\">".$successoPassword."</div>", $paginaHTML);
 
 echo $paginaHTML;
 

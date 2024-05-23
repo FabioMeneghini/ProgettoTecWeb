@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <script src="conferme.js"></script>
+        <script src="controlli.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -19,15 +20,13 @@
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
         </header>
-        <!--deve poter modificare nome e passsword e dati-->
-        <!--manca disconnessione e eliminazione profilo -->
         <nav id="menu">
             <label for="hamburger" tabindex="0">
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
-                {menu}<!--ERRORE ANCHE SE CREDO VADA BENE COMUNQUE-->
+                {menu}
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
@@ -35,12 +34,10 @@
         </nav>
         <main  id="content">
             <div id="profile">
-                <h2>Benvenuto, <span id="username">{nome}</span>!</h2><!--WARNING ID USERNAME-->
+                <h2>Benvenuto, <span id="nome">{nome}</span>!</h2>
             </div>
             <!--mettere nella relazione per il ranking che era troppo pesante e lo abbiamo tolto -->
-            <!-- NON sono sicura sia una form-->
 
-            <!--sarebbe meglio che avesse a disposizione il suo username e che se volesse potesse modificarlo-->
             <div id="datiattuali" >
                 <h2>Il tuo <span lang="en">username</span> attuale: {usernameattuale}</h2>
                 <!--php-->
@@ -49,80 +46,70 @@
                 <p>Non ricordi la tua <span lang="en">password</span>? Contatta il 0444 3940394, un/a nostro/a operatore/trice sarà a tua disposizione</p>
             </div>
             {messaggi}
-            <h3>Modifica I dati di accesso:</h3>
-
-            <section id="sectionModificaUsername"><!--Section lacks heading. Consider using h2-h6 elements to add identifying headings to all sections, or else use a div element instead for any cases where no heading is needed.-->
-                <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler modificare lo username?')"> 
-                    <!--aggiungi pagina php-->
+            <section id="sectionModificaUsername">
+                <h3>Modifica lo <span lang="en">username</span>:</h3>
+                <form method="post" action="area_personale.php" onsubmit="return validaUsernameCambio()"> 
                     <fieldset>
                         <legend><span lang="en">Username</span>:</legend>
-                        <ul class="messaggiErrore">{messaggiUsername}</ul><!--ERRORE ANCHE SE CREDO VADA BENE COMUNQUE-->
-                        <div class="messaggiSuccesso">{successoUsername}</div>
+                        {messaggiUsername}
+                        {successoUsername}
                         <p>
-                            Lo <span lang="en">username</span> deve contenere tra i 3 e i 10 caratteri:
+                            Lo <span lang="en">username</span> deve contenere tra i 3 e i 25 caratteri:
                         </p>
                         <label for="username">Inserisci un nuovo <span lang="en">username</span>: </label>
-                        <input type="text" id="username" name="username" maxlength="10" minlength="3" required><!--ERRORE DUPLICATE ID USERNAME-->
-                        <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
-                        <legend>Concludi l'inserimento:</legend><!--ERRORE Element legend not allowed as child of element fieldset in this context. (Suppressing further errors from this subtree.)-->
-                        <button type="submit" id="cambia_username" name="cambia_username">Modifica <span lang="en">Username</span></button>
-                        <!--messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
+                        <span><input type="text" id="username" name="username" maxlength="25" minlength="3" required></span>
+                        <button type="submit" id="cambia_username" name="cambia_username" onclick="return conferma('Sei sicuro/sicura di voler modificare lo username?')">Modifica <span lang="en">Username</span></button>
                     </fieldset>
                 </form>
             </section>
-
-            <section id="sectionModificaPassword"><!--WARNING Section lacks heading-->
-                <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler modificare la password?')"> 
-                    <!--aggiungi pagina php-->
+            <section id="sectionModificaPassword">
+                <h3>Modifica la <span lang="en">password</span>:</h3>
+                <form method="post" action="area_personale.php" onsubmit="return validaPasswordCambio()"> 
                     <fieldset>
                         <legend><span lang="en">Password</span>:</legend>
-                        <ul class="messaggiErrore">{messaggiPassword}</ul><!--ERRORE ANCHE SE CREDO VADA BENE COMUNQUE-->
-                        <div class="messaggiSuccesso">{successoPassword}</div>
+                        {messaggiPassword}
+                        {successoPassword}
                         <label for="passwordold">Inserisci la <span lang="en">password</span> attuale:</label>
-                        <input type="password" id="passwordold" name="passwordold" required>
+                        <span><input type="password" id="passwordold" name="passwordold" required></span>
                         <!--value={passwordattuale} , con php deve controllare sia la sua password di ora-->
-                        <!-- se non è giusta non lascia completare questi sotto : -->
                         <p>
-                            La <span lang="en">password</span> deve contenere almeno:
+                            La <span lang="en">password</span> deve:
                             <ul>
-                                <li>un numero</li>
-                                <li>una lettera maiuscola</li>
-                                <li>una lettera minuscola</li>
+                                <li>contenere almeno un numero;</li>
+                                <li>contenere almeno una lettera maiuscola;</li>
+                                <li>contenere almeno una lettera minuscola;</li>
+                                <li>essere lunga almeno 8 caratteri.</li>
                             </ul>
-                        </p><!--ERRORE No p element in scope but a p end tag seen-->
-                        <label id="passwordnew">Inserisci una nuova <span lang="en">password</span>:</label><!--ERRORE CORRETTO SOSTITUITO FOR CON ID-->
-                        <input type="password" id="passwordnew1" name="passwordnew1" required><br><!--ERRORE CORRETTO TOLTO /-->
-                        <label for="passwordnew1">Ripeti la stessa <span lang="en">password</span>:</label>
-                        <input type="password" id="passwordnew2" name="passwordnew2" required>
-                        <!--Messaggio di errore se la password è diversa da quella sopra forse value={passwordnew} -->
-                        <legend>Concludi l'inserimento:</legend><!--ERRORE Element legend not allowed as child of element fieldset in this context. (Suppressing further errors from this subtree.) -->
-                        <button type="submit" id="cambia_password" name="cambia_password">Cambia <span lang="en">Password</span></button>
+                        </p>
+                        <label for="passwordnew1">Inserisci una nuova <span lang="en">password</span>:</label>
+                        <span><input type="password" id="passwordnew1" name="passwordnew1" required></span><br>
+                        <label for="passwordnew2">Ripeti la stessa <span lang="en">password</span>:</label>
+                        <span><input type="password" id="passwordnew2" name="passwordnew2" required></span>
+                        <button type="submit" id="cambia_password" name="cambia_password" onclick="return conferma('Sei sicuro/sicura di voler modificare la password?')">Cambia <span lang="en">Password</span></button>
                         <!-- non so se si possa togliere ma non credo abbia senso qua :<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
                 </form>
             </section>
 
-            <section id="sectionModificaEmail"><!--WARNING Section lacks heading-->
-                <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler modificare la mail?')"> 
-                    <!--aggiungi pagina php-->
+            <section id="sectionModificaEmail">
+                <h3>Modifica l'<span lang="en">email</span>:</h3>
+                <form method="post" action="area_personale.php" onsubmit="return validaEmailCambio()"> 
                     <fieldset>
                         <legend><span lang="en">Email</span>:</legend>
-                        <ul class="messaggiErrore">{messaggiEmail}</ul><!--ERRORE ANCHE SE CREDO VADA BENE COMUNQUE-->
-                        <div class="messaggiSuccesso">{successoEmail}</div>
+                        {messaggiEmail}
+                        {successoEmail}
                         <label for="email">Nuovo indirizzo <span lang="en">email</span>:</label>
-                        <input type="email" id="email" name="email" maxlength="30" required>
-                        <!--Messaggio di errore se uno vuole usare un username già in uso meglio durante la compilazione-->
-                        <legend>Concludi l'inserimento:</legend>
-                        <button type="submit" id="cambia_email" name="cambia_email">Modifica <span lang="en">email</span></button>
-                        <!--controllo anche da php che sia una mail con controllo di caratteri -->
+                        <span><input type="email" id="email" name="email" maxlength="60" required></span>
+                        <button type="submit" id="cambia_email" name="cambia_email" onclick="return conferma('Sei sicuro/sicura di voler modificare la mail?')">Modifica <span lang="en">email</span></button>
                         <!--<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
                 </form>
             </section>
 
-            <section id="sectionDisconnetti"><!--WARNING Section lacks heading-->
+            <section id="sectionDisconnetti">
+                <h3>Disconnetti o elimina l'<span lang="en">account</span>:</h3>
                 <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler uscire dall\'account?')">
                     <label for="disconnetti">Disconnessione dell'<span lang="en">account</span>:</label>
                     <button type="submit" id="disconnetti" name="disconnetti">Disconnetti <span lang="en">account</span></button>

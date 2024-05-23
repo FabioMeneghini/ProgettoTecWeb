@@ -31,8 +31,7 @@ try {
                 }
             }
         }
-        header("Location: modifica_libro.php?id=$LibroSelezionato");
-        //header("Location: index.php?success=0"); //MOSTRARE MESSAGE DI ERRORE
+        header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
         exit();
     }
 } catch(Throwable $t) {
