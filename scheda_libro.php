@@ -74,6 +74,10 @@ function controlla($recensione, $voto) {
     if(strlen($recensione) > 1000) {
         $messaggi .= "<li>La recensione può essere lunga al massimo 1000 caratteri</li>";
     }
+    if(!is_numeric($voto) || !is_int($voto) || !preg_match("/^[0-9]+$/", $voto)) {
+        $messaggi .= "<li>Il voto deve essere un numero intero</li>";
+    }
+    else
     if($voto < 1 || $voto > 10) {
         $messaggi .= "<li>Il voto deve essere compreso tra 1 e 10</li>";
     }
@@ -97,7 +101,7 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
-        //controllo se l'utente vuole salvare o iniziare a leggere un libro
+        //controllo se l'utente vuole salvare, iniziare o valutare un libro
         if(isset($_POST["salva"])) {
             $salvato = $connection -> aggiungiDaLeggere($_SESSION['username'], $_POST['id_libro']);
             //mi sposto con header(Location: ...) perché altrimenti da problemi con il libro che visualizza (mostra sempre il primo in quanto perde il parametro id nel get)
@@ -177,7 +181,8 @@ try {
                                 <label for="recensione">Recensione: </label><br>
                                 <span><textarea id="recensione" name="recensione" rows="20" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span><br>
                                 <label for="voto">Voto: </label>
-                                <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>
+                                <!--<span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>-->
+                                <span><input type="text" name="voto" id="voto"required placeholder="{voto}" value="{voto}"></span><br>
                                 <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
                                 <input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">
                                 <input type="reset" value="Annulla">

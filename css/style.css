@@ -887,6 +887,10 @@ body > *{
     min-height: 150px;
 }
 
+.commento {
+    font-style: italic;
+}
+
 @media (max-width: 900px) {
     .item {
         flex: 1 0 100%;

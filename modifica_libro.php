@@ -5,6 +5,50 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
+function controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere) {
+    $messaggi = "";
+    if($titolo == "") {
+        $messaggi .= "<li>Il titolo non può essere vuoto</li>";
+    }
+    else if(strlen($titolo) > 100) {
+        $messaggi .= "<li>Il titolo non può superare i 100 caratteri</li>";
+    }
+    if($autore == "") {
+        $messaggi .= "<li>L'autore non può essere vuoto</li>";
+    }
+    else if(strlen($autore) > 100) {
+        $messaggi .= "<li>L'autore non può superare i 100 caratteri</li>";
+    }
+    if($genere == "") {
+        $messaggi .= "<li>Il genere non può essere vuoto</li>";
+    }
+    else if(strlen($genere) > 25) {
+        $messaggi .= "<li>Il genere non può superare i 25 caratteri</li>";
+    }
+    if($lingua == "") {
+        $messaggi .= "<li>La lingua non può essere vuota</li>";
+    }
+    else if(strlen($lingua) > 25) {
+        $messaggi .= "<li>La lingua non può superare i 25 caratteri</li>";
+    }
+    if($capitoli == "") {
+        $messaggi .= "<li>I capitoli non possono essere vuoti</li>";
+    }
+    else if(!is_numeric($capitoli)) {
+        $messaggi .= "<li>I capitoli devono essere un numero</li>";
+    }
+    else if($capitoli < 1) {
+        $messaggi .= "<li>I capitoli devono essere almeno 1</li>";
+    }
+    if($trama == "") {
+        $messaggi .= "<li>La trama non può essere vuota</li>";
+    }
+    else if(strlen($trama) > 3000) {
+        $messaggi .= "<li>La trama non può superare i 3000 caratteri</li>";
+    }
+    return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
+}
+
 if(!isset($_SESSION['admin']) || $_SESSION['admin'] == 0) {
     header("Location: scheda_libro.php");
     exit();
@@ -33,58 +77,89 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
+        //da controllare
+        if(isset($_POST['modifica'])) {
+            $titolo = $_POST['titolo'];
+            $autore = $_POST['autore'];
+            $lingua = $_POST['lingua'];
+            $capitoli = $_POST['capitoli'];
+            $trama = $_POST['trama'];
+            $genere = $_POST['genere'];
+            $input_ok = controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere);
+            if($input_ok["ok"]) {
+                if(isset($_POST['id'])) {
+                    $LibroSelezionato = $_POST['id'];
+                    $ok = $connection -> controllareIdLibro($LibroSelezionato);
+                    if($ok) {
+                        $modificato = $connection -> modificaLibro($LibroSelezionato, $_POST['titolo'], $_POST['autore'], $_POST['lingua'], $_POST['capitoli'], $_POST['trama'], $_POST['genere']);
+                        if($modificato) {
+                            $connection -> closeConnection();
+                            header("Location: scheda_libro.php?id=".$LibroSelezionato."&modificato=1");
+                            exit();
+                        }
+                        else {
+                            /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
+                            exit();*/
+                            $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
+                        }
+                    }
+                }
+                else {
+                    /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
+                    exit();*/
+                    $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
+                }
+            }
+            else {
+                $messaggiForm = $input_ok["messaggi"];
+            }
+        }
+
         //controllo se l'id del libro è presente
         $tmp=false;
-        if(isset($_GET['id'])) {
+        if(isset($_POST['id'])) {
+            $LibroSelezionato = $_POST['id'];
+            $tmp = $connection -> controllareIdLibro($LibroSelezionato);
+        }
+        else if(isset($_GET['id'])) {
             $LibroSelezionato = $_GET['id'];
             $tmp = $connection ->  controllareIdLibro($LibroSelezionato);
         }
         if(!$tmp) {
-            header("Location: template/404.html");
+            header("Location: template/404.html"); //libro non trovato o non impostato in $_GET o $_POST
             exit();
         }
+        $titolo = $connection ->  gettitololibro($LibroSelezionato);
+        $autore = $connection ->  getautoreLibro($LibroSelezionato);
+        $genereold = $connection ->  getgenereLibro($LibroSelezionato);
+        $linguaold = $connection ->  getlinguaLibro($LibroSelezionato);
+        $trama = $connection ->  gettramaLibro($LibroSelezionato);
+        $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
 
-        $ok=false;
-        if(isset($_GET['id'])) {
-            $LibroSelezionato = $_GET['id'];
-            $ok = $connection -> controllareIdLibro($LibroSelezionato);
-        }
-        if($ok) {
-            $titolo = $connection ->  gettitololibro($LibroSelezionato);
-            $autore = $connection ->  getautoreLibro($LibroSelezionato);
-            $genereold = $connection ->  getgenereLibro($LibroSelezionato);
-            $linguaold = $connection ->  getlinguaLibro($LibroSelezionato);
-            $trama = $connection ->  gettramaLibro($LibroSelezionato);
-            $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
-
-            $resultGeneri = $connection -> getListaGeneri();
-            $resultLingue= $connection -> getLingueLibri();
-            
-            foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-                $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-                if($genere["nome"] == $genereold) {
-                    $data_list_generi .= '<option value="'.$genere["nome"].'" selected>'.$genere["nome"].'</option>';
-                }
-                else
-                    $data_list_generi .= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
+        $resultGeneri = $connection -> getListaGeneri();
+        $resultLingue= $connection -> getLingueLibri();
+        
+        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            if($genere["nome"] == $genereold) {
+                $data_list_generi .= '<option value="'.$genere["nome"].'" selected>'.$genere["nome"].'</option>';
             }
-            foreach($resultLingue as $lingue) {
-                $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
-            }
-            $connection -> closeConnection();
-
-
-            /*if(!empty($resultKeyword)) {
-                for ($i=0; $i<count($resultKeyword)-1; $i++) {
-                    $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
-                }
-                $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
-            } else {
-                $listaKeyword = "Miglior libro";
-            }*/
+            else
+                $data_list_generi .= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
         }
-        /*else {
-            $messaggigenereselezionato.="Libro non trovato";
+        foreach($resultLingue as $lingue) {
+            $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
+        }
+        $connection -> closeConnection();
+
+
+        /*if(!empty($resultKeyword)) {
+            for ($i=0; $i<count($resultKeyword)-1; $i++) {
+                $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
+            }
+            $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
+        } else {
+            $listaKeyword = "Miglior libro";
         }*/
     }
     else {
@@ -97,13 +172,11 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{id_libro}", $LibroSelezionato, $paginaHTML);
 $paginaHTML = str_replace("{TitoloLibro}", $titolo, $paginaHTML);
-$paginaHTML = str_replace("{messaggiForm}", $messaggiForm, $paginaHTML);
+$paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\"'>".$messaggiForm."</ul>", $paginaHTML);
 $paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
-
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{selectGeneri}", $data_list_generi, $paginaHTML);
 $paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);
-
 $paginaHTML = str_replace("{ImmagineLibro}", $immagine , $paginaHTML);
 $paginaHTML = str_replace("{titoloold}", $titolo , $paginaHTML);
 $paginaHTML = str_replace("{autoreold}", $autore, $paginaHTML);
@@ -111,7 +184,7 @@ $paginaHTML = str_replace("{genereold}", $genereold , $paginaHTML);
 $paginaHTML = str_replace("{linguaold}", $linguaold , $paginaHTML);
 $paginaHTML = str_replace("{capitoliold}", $n_capitoli , $paginaHTML);
 $paginaHTML = str_replace("{tramaold}", $trama , $paginaHTML);
-$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore, $paginaHTML);
+$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore=="" ? "" : "<ul class=\"messaggiErrore\"'>".$messaggiErrore."</ul>", $paginaHTML);
 echo $paginaHTML;
 
 ?>

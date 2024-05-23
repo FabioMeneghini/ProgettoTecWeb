@@ -71,16 +71,6 @@ try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
-        $resultGeneri = $connection -> getListaGeneri();
-        foreach($resultGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-            $data_list_generi.= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
-        }
-        $resultLingue= $connection -> getLingueLibri();
-        foreach($resultLingue as $lingue) {
-            $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
-        }
-
         if(isset($_POST['inserisci'])) {
             $titolo = $_POST['titolo'];
             $autore = $_POST['autore'];
@@ -91,8 +81,8 @@ try {
             $ok = controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere);
             if($ok["ok"]) {
                 $result = $connection -> aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere);
-                $connection -> closeConnection();
                 if($result) {
+                    $connection -> closeConnection();
                     header("Location: tutti_libri.php?inserito=1");
                     exit();
                 }
@@ -101,6 +91,16 @@ try {
             }
             else
                 $messaggi = $ok["messaggi"];
+        }
+
+        $resultGeneri = $connection -> getListaGeneri();
+        foreach($resultGeneri as $genere) {
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $data_list_generi.= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
+        }
+        $resultLingue= $connection -> getLingueLibri();
+        foreach($resultLingue as $lingue) {
+            $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
         }
     }
     else {
@@ -112,7 +112,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
-$paginaHTML = str_replace("{messaggiForm}", $messaggi=="" ? "" : "<ul>".$messaggi."</ul>", $paginaHTML);
+$paginaHTML = str_replace("{messaggiForm}", $messaggi=="" ? "" : "<ul class=\"messaggiErrore\"'>".$messaggi."</ul>", $paginaHTML);
 $paginaHTML = str_replace("{selectGeneri}", $data_list_generi, $paginaHTML);
 $paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);
 

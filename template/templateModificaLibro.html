@@ -46,19 +46,19 @@
             <section id="modificaLibro">
                 {messaggiErrore}
                 <h2>Inserisci i nuovi dati del libro</h2>
-                <form method="post" action="modifica.php" onsubmit="return validaModificaLibro()" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
+                <form method="post" action="modifica_libro.php" onsubmit="return true" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
                     {messaggiForm}
                     <fieldset>
                         <legend>Informazioni generali: </legend>
                         <label for="autore">Autore: </label>
-                        <span><input type="text" id="autore" name="autore" placeholder="{autoreold}" value="{autoreold}" maxlength="100"></span><br>
+                        <span><input type="text" id="autore" name="autore" placeholder="{autoreold}" value="{autoreold}" maxlength="100" required></span><br>
                         
                         <label for="titolo">Titolo: </label>
-                        <span><input type="text" name="titolo" id="titolo" placeholder="{titoloold}" value="{titoloold}" maxlength="100"></span><br>
+                        <span><input type="text" name="titolo" id="titolo" placeholder="{titoloold}" value="{titoloold}" maxlength="100" required></span><br>
                         
                         <label for="genere">Genere: </label>
                         <span>
-                            <select name="genere" id="genere" placeholder="{genereold}" value="{genereold}">
+                            <select name="genere" id="genere" placeholder="{genereold}" value="{genereold}" required>
                                 {selectGeneri}
                             </select>
                         </span>
@@ -66,7 +66,7 @@
                     <fieldset>
                         <legend>Informazioni specifiche:</legend>
                         <label for="lingua">Lingua originale: </label>
-                        <span><input list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}"></span>
+                        <span><input list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}" required></span>
                         <datalist id="datalist_lingua">
                             {listaLingue}
                         </datalist><br>
@@ -77,7 +77,7 @@
                     <fieldset>
                         <legend>Trama:</legend>
                         <label for="trama">Trama del libro:</legend>
-                        <span><textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}" maxlength="3000">{tramaold}</textarea></span>
+                        <span><textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}" maxlength="3000" required>{tramaold}</textarea></span>
                     </fieldset>
                     <fieldset>
                         <legend>Conferma o annulla le modifiche:</legend>
