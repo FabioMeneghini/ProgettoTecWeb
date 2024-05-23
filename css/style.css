@@ -265,7 +265,7 @@ table tr.lista_libri td:hover{
 main > div{
     text-align: center;
 }
-
+/*
 a.torna_su{
     float: right;
     padding: 0.2em 0.5em;
@@ -274,6 +274,15 @@ a.torna_su{
     border-radius: 10px;
     background-color: white;
     color: var(--buttonColor);
+}
+*/
+.torna_su{
+    float: right;
+    width: 50px;
+    height: 50px;
+    background-image: url("../arrow.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* FOOTER */
@@ -900,7 +909,7 @@ body > *{
 .slider li{
     padding: 0.2em;
 }
-
+/*
 .prev, .next{
     padding: 0.5em 1em;
     margin: 1em 0.5em;
@@ -908,6 +917,26 @@ body > *{
     border-radius: 10px;
     background-color: white;
     color: var(--buttonColor);
+}
+*/
+.prev, .next{
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.prev{
+    background-image: url("../arrow.png");
+    transform: rotate(-90deg);
+}
+
+.next{
+    background-image: url("../arrow.png");
+    transform: rotate(90deg);
 }
 
 /* Lista libri per genere */
