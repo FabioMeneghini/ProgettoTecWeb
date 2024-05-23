@@ -78,7 +78,7 @@ header h1{
 body{
     max-width: 1344px;
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 1fr 8fr;
     grid-template-rows: auto auto 1fr auto;
     grid-template-areas: "l h"
                          "l b"
@@ -96,6 +96,7 @@ body{
     padding: 1em;
     background-color: var(--flagColor);
     color: var(--textColor);
+    min-width: 7em;
     /*overflow-y: auto;*/
 }
 
@@ -154,11 +155,7 @@ ul.listageneri{
 li.listageneri{
     margin-right: 10px; 
 }
-/*TODO non mi convince
-.commento{
-    font-style: italic;
-}
-*/
+
 h2{
     /*display: flex;
     flex-direction: column;
@@ -232,7 +229,7 @@ fieldset ul{
     list-style: inside;
 }
 
-input[type=text], input[type=password], input[type=email]{
+input[type=text], input[type=password], input[type=email], input[type=number], select, form button {
     outline: none;
     padding: 12px 20px;
     margin: 8px 0;
@@ -242,7 +239,7 @@ input[type=text], input[type=password], input[type=email]{
     box-sizing: border-box;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus {
     border: 3px solid var(--flagColor);
 }
 
@@ -254,7 +251,9 @@ input[type=submit], input[type=reset] {
     text-decoration: none;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 4px;
 }
+
 
 /*da finire*/
 table tr.lista_libri{
@@ -286,6 +285,12 @@ a.torna_su{
     background-image: url("../arrow.png");
     background-size: cover;
     background-repeat: no-repeat;
+    text-indent: -9999px;
+    /*TODO: decidere se tenere il torna_su fisso a schermo
+    position: fixed;
+    right: 7%;
+    bottom: 7%;
+    */
 }
 
 /* FOOTER */
@@ -882,10 +887,20 @@ body > *{
     min-height: 150px;
 }
 
+@media (max-width: 900px) {
+    .item {
+        flex: 1 0 100%;
+    }
+    .commento{
+        display: none;
+    }
+}
+
 .item ul{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .voto_medio{
