@@ -8,10 +8,6 @@ if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
     exit();
 }
-if($_SESSION['admin'] != 1) {
-    header("Location: utente.php");
-    exit();
-}
 
 $isAdmin = true; 
 if($_SESSION['admin'] != 1) 
