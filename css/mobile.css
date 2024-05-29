@@ -84,3 +84,11 @@ textarea{
 .item{
     flex-basis: 100%;
 }
+
+#listagenere li{
+    width: 80%;
+}
+
+#generi li{
+    width: 70%;
+}
