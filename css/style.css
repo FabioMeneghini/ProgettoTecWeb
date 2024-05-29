@@ -1,7 +1,7 @@
 *{
     margin:0;
     padding:0;
-    font-family: 'Century Gothic', 'CenturyGothic', 'AppleGothic', sans-serif'
+    font-family: 'OCR A Std', monospace;
 }
 
 :root{
@@ -888,15 +888,6 @@ body > *{
     min-height: 150px;
 }
 
-@media (max-width: 900px) {
-    .item {
-        flex: 1 0 100%;
-    }
-    .commento{
-        display: none;
-    }
-}
-
 .item ul{
     display: flex;
     flex-direction: column;
@@ -968,9 +959,9 @@ body > *{
 
 #listagenere li{
     display: inline-block;
-    width: 26%;
+    width: 30%;
     aspect-ratio: 1/1;
-    padding: 2em;
+    padding: 1em 0em;
 }
 
 #listagenere li a {
@@ -1011,7 +1002,7 @@ body > *{
     width: 10%;
     aspect-ratio: 1/1;
     padding: 1em;
-    margin-right: 2em; /* Spazio tra gli elementi */
+    margin: 0em 1em; /* Spazio tra gli elementi */
 }
 
 .librigeneri li:last-child {
@@ -1131,8 +1122,30 @@ display: block;
     width: 50%;   
     margin: 1em;
     padding: 1em;
-    background-color: #dfd76790; /*TODO colore da cambiare*/
+    background-color: var(--formColor); /*TODO colore da cambiare*/
     border: 2px solid;
     border-color: var(--flagColor);
     border-radius: 5px;
+}
+
+/*TODO fare file a parte*/
+@media (max-width: 900px) {
+    .item {
+        flex: 1 0 100%;
+    }
+    .commento{
+        display: none;
+    }
+    .statistiche_generali{
+        flex-direction: column;
+    }
+    .statistiche_admin{ 
+        width: auto;
+    }
+    #listagenere li{
+        width: 40%;
+    }
+    #generi li{
+        width: 40%;
+    }
 }
