@@ -231,7 +231,7 @@ function validaLibriCheckbox() {
     return true;
 }
 
-/******************************************** MODIFICA LIBRO */
+/******************************************** MODIFICA LIBRO e AGGIUNGI LIBRO */
 
 function validaAutore(autore){
     removeChildInput(autore);
@@ -263,6 +263,12 @@ function validaGenere(genere){
         genere.select();
         return false;
     }
+    else if(genere.value.length>25){  
+        showError(genere, "Il genere non può essere più lungo di 25 caratteri");
+        genere.focus();
+        genere.select();
+        return false;
+    }
     return true;
 }
 
@@ -277,9 +283,15 @@ function validaLingua(lingua){
     return true;
 }
 
-function validaCapitoli(capitoli){
+function validaCapitoli(capitoli){ //da controllare, sembra non funzionare
     removeChildInput(capitoli);
-    if(capitoli.value==0){
+    if(capitoli.value.search(/^[0-9]+$/)!=0){
+        showError(capitoli, "I capitoli devono essere un numero");
+        capitoli.focus();
+        capitoli.select();
+        return false;
+    }
+    else if(capitoli.value==0){
         showError(capitoli, "Il libro deve avere almeno un capitolo");
         capitoli.focus();
         capitoli.select();
@@ -290,7 +302,7 @@ function validaCapitoli(capitoli){
 
 function validaTrama(trama){
     removeChildInput(trama);
-    if(trama.value.length==0 || trama.value.length>3000){
+    if(trama.value.trim().length==0 || trama.value.trim().length>3000){
         showError(trama, "La trama non può essere vuota o più lunga di 3000 caratteri");
         trama.focus();
         trama.select();
@@ -326,7 +338,13 @@ function validaRecensione(recensione){
 
 function validaVoto(voto){
     removeChildInput(voto);
-    if(voto.value<1 || voto.value>10){
+    if(voto.value.search(/^[0-9]+$/)!=0){
+        showError(voto, "Il voto deve essere un numero");
+        voto.focus();
+        voto.select();
+        return false;
+    }
+    else if(voto.value<1 || voto.value>10){
         showError(voto, "Inserisci un voto da 1 a 10");
         voto.focus();
         voto.select();
