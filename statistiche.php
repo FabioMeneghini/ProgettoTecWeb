@@ -5,14 +5,16 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-/*if(isset($_SESSION['admin'])) {
-    if($_SESSION['admin'] != 1) {
-        header("Location: utente.php");
+if(isset($_SESSION['admin'])) {
+    if($_SESSION['admin'] == 1) {
+        header("Location: admin.php");
+        exit();
     }
 }
 else {
     header("Location: index.php");
-}*/
+    exit();
+}
 
 $paginaHTML = file_get_contents("template/templateStatisticheUtente.html");
 $listaGeneri = "";
@@ -24,9 +26,11 @@ try {
     
     if($connectionOk) {
         $n_recensioni = $connection -> getRecensioniUtente($_SESSION['username']);
-        $n_libri_letti = $connection ->  getLibriUtente($_SESSION['username']);
+        $n_libri_letti = $connection ->  getNumeroLibriLetti($_SESSION['username']);
         $n_libri_stai_leggendo = $connection -> getNumeroLibriStaLeggendo($_SESSION['username']);
         $n_libri_salvati = $connection -> getNumeroLibriSalvati($_SESSION['username']);
+        $n_libri_letti_anno = $connection -> getNumeroLibriLettiUltimoAnno($_SESSION['username']);
+
         $resultListaGeneri = $connection -> getListaGeneri();
            
         foreach($resultListaGeneri as $genere) {
@@ -47,6 +51,7 @@ $paginaHTML = str_replace("{LibriLetti}", $n_libri_letti, $paginaHTML);
 $paginaHTML = str_replace("{LibriStaiLeggendo}", $n_libri_stai_leggendo, $paginaHTML);
 $paginaHTML = str_replace("{LibriSalvati}", $n_libri_salvati, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{LibriLettiAnno}", $n_libri_letti_anno, $paginaHTML);
 echo $paginaHTML;
 
 ?>

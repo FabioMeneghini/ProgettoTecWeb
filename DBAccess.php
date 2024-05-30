@@ -209,18 +209,6 @@ class DBAccess {
         }
     }
 
-    public function getLibriUtente($username) {
-        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto WHERE username = '$username' ";
-        $queryResult = mysqli_query($this->connection, $query);
-        if (mysqli_num_rows($queryResult) != 0) {
-            $row = mysqli_fetch_assoc($queryResult);
-            mysqli_free_result($queryResult);
-            return $row['numeroLibri'];
-        } else {
-            return null;
-        }
-    }
-
     public function getUtentiCheStannoLeggendoCount() {
         $query = "SELECT COUNT(*) AS count FROM sta_leggendo";
         $queryResult = mysqli_query($this -> connection, $query);
@@ -1122,6 +1110,33 @@ class DBAccess {
             return null;
         }
     }
+
+    public function getNumeroLibriLettiUltimoAnno($username) {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto WHERE username = '$username' AND data_fine_lettura >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['numeroLibri'];
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function getNumeroLibriLetti($username) {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto WHERE username = '$username'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
+            $queryResult -> free();
+            return $row['numeroLibri'];
+        }
+        else {
+            return null;
+        }
+    }
+
     public function getNumeroUtentiRegistratiOggi(){
         $query = "SELECT COUNT(*) AS iscritti_oggi FROM utenti WHERE DATE(NOW()) = DATE(data_iscrizione)";
         $queryResult = mysqli_query($this->connection, $query);

@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -30,10 +29,8 @@
                 <dt><a href="terminati.php">Libri terminati</a></dt>
                 <dt><a href="da_leggere.php">Libri da leggere</a></dt>
                 <dt><a href="recensione.php">Aggiungi Recensione</a></dt>
-                <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
                 <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri}
-                <!--php x menu con categorie link a templategenere-->
                 <dt>Statistiche</dt>
                 <dt><a href="area_personale.php">Area Personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
@@ -45,56 +42,17 @@
         <main  id="content">
             <h2>Statistiche:</h2>
                 <dl class="Statistiche">
-                    <dt>Numero recensioni scritte:</dt>
+                    <dt>Numero libri recensiti in totale:</dt>
                     <dd>{NumeroRecensioni}</dd>
-                    <dt>Numero libri letti:</dt>
+                    <dt>Numero libri letti in totale:</dt>
                     <dd>{LibriLetti}</dd>
-                    <!--si può mettere link alle recensioni? -->
-                    <!--si possono mettere delle canvas per fare i grafici-->
+                    <dt>Numero libri letti quest'anno:</dt>
+                    <dd>{LibriLettiAnno}</dd>
+                    <dt>Numero libri attualmente salvati:</dt>
+                    <dd>{LibriSalvati}</dd>
+                    <dt>Numero libri che stai leggendo attualmente:</dt>
+                    <dd>{LibriStaiLeggendo}</dd>
                 </dl>
-                <canvas id="myChart" width="400" height="200"></canvas>
-
-                
-                <script>
-                    async function fetchChartData() {
-                      const response = await fetch('get_chart_data.php'); // Assicurati che il percorso sia corretto
-                      if (!response.ok) {
-                        console.error("Errore nel caricamento dei dati");
-                        return;
-                      }
-                      return response.json(); // Converte la risposta in JSON
-                    }
-                  
-                    async function createChart() {
-                      const data = await fetchChartData(); // Ottiene i dati da PHP
-                  
-                      if (data) {
-                        const ctx = document.getElementById('myChart').getContext('2d');
-                        const myChart = new Chart(ctx, {
-                          type: 'bar', // Tipo di grafico
-                          data: {
-                            labels: data.labels, // Etichette degli assi
-                            datasets: [{
-                              label: 'Valori', // Nome del dataset
-                              data: data.values, // Dati da visualizzare
-                              backgroundColor: 'rgba(75, 192, 192, 0.2)', // Colore delle barre
-                              borderColor: 'rgba(75, 192, 192, 1)', // Colore dei bordi
-                              borderWidth: 1 // Spessore del bordo
-                            }]
-                          },
-                          options: {
-                            scales: {
-                              y: {
-                                beginAtZero: true // L'asse Y parte da zero
-                              }
-                            }
-                          }
-                        });
-                      }
-                    }
-                  
-                    createChart(); // Crea il grafico al caricamento della pagina
-                  </script>
                   
         </main>
          <footer id="footer">
