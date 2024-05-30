@@ -54,7 +54,7 @@ try {
                                         <li><strong>Autore:</strong> '.$libro["titolo"].'</li>
                                         <li><strong>Genere:</strong> '.$libro["genere"].'</li>
                                         <li class="commento"><strong>Commento:</strong> '.$libro["migliore_recensione"].'</li>
-                                        <li><strong>Voto medio:</strong><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
+                                        <li><strong>Voto medio:</strong></li><li><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
                                         </ul>
                                   </div>';
         }
