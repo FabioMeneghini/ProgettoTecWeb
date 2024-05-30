@@ -41,6 +41,14 @@ a:visited{
     border-bottom: 3px solid var(--flagColor);
 }
 
+#breadcrumbs a:link{
+    color: var(--linkNotVisitedBodyColor);
+}
+
+#breadcrumbs a:visited{
+    color: var(--flagColor);
+}
+
 html, body{
     margin-left: auto;
     margin-right: auto;
