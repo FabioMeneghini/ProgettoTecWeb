@@ -38,48 +38,57 @@
         <main id="content">
             {messaggiErrore}
             {messaggiSuccesso}
-            <div id="arealibro">
-                <div id="datilibro">
+            <div>
+                <div>
                     <h2 id="titolo">{TitoloLibro}</h2>
                     <img src="{ImmagineLibro}" alt="{altlibro}" height="400">
-                    <h3>Autore:</h3>
-                    <p>{AutoreLibro}</p>
-                    <h3>Genere:</h3>
-                    <p>{GenereLibro}</p>
-                    <h3>Lingua:</h3>
-                    <p>{LinguaLibro}</p>
-                    <h3>Numero capitoli:</h3>
-                    <p>{CapitoliLibro}</p>
-
+                    <dl class="datilistalibro">
+                        <div>
+                        <dt>Autore: </dt>
+                        <dd>{AutoreLibro}</dd>
+                        </div>
+                        <div>
+                        <dt>Genere: </dt>
+                        <dd>{GenereLibro}</dd>
+                        </div>
+                        <div>
+                        <dt>Lingua: </dt>
+                        <dd>{LinguaLibro}</dd>
+                        </div>
+                        <div>
+                        <dt>Numero capitoli: </dt>
+                        <dd>{CapitoliLibro}</dd>
+                        </div>
+                    </dl>
                     {bottoniAdmin}
                 </div>
                 <h3>Voto medio della nostra <span lang="en">community</span>: {mediavoti}</h3>
-                
-                <ul class="menulibro">
-                    <li><a class="menulibro" href="#trama">Vai alla trama</a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
-                    {menupersonale}
-                    <li><a class="menulibro" href="#community">Vai alle recensioni della <span lang="en">community</span></a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
-                </ul>
-                <div id="datilibro">
-                    <section id="trama">
-                        <h3>Trama:</h3>
-                        <p>{tramaLibro}</p>
-                    </section>
-                    <section id="recensionetua">
-                        <h3>La tua recensione e il tuo voto:</h3>
-                        {arearecensionevotoform}
-                    </section>
-                    <section id="community">
-                        <h4>Recensioni della <span lang="en">community</span></h4>
-                        {recensioniComunity}
-                    </section>
+                <div>
+                    <h3>Menù</h3>
+                    <ul class="menulibro">    
+                        <li><a href="#trama">Vai alla trama</a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                        {menupersonale}
+                        <li><a href="#community">Vai alle recensioni della <span lang="en">community</span></a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                    </ul>
                 </div>
+                <div>
+                    <dl>
+                        <dt id="trama">Trama:</dt>
+                        <dd>{tramaLibro}</dd>
+                        <dt id="recensionetua">La tua recensione e il tuo voto:</dt>
+                        {arearecensionevotoform}
+                    </dl>
+                </div>
+                <section>
+                    <h4 id="community">Recensioni della <span lang="en">community</span></h4>
+                    {recensioniComunity}
+                </section>
                 <nav aria-label="Torna al form di ricerca">
                     <a class="torna_su" href="#content">Torna su</a>
                 </nav> 
             </div>
         </main>
-         <footer id="footer">
+        <footer id="footer">
             <ul>
                 <li><a href="contatti.php">Contatti</a></li>
                 <li><a href="chisiamo.php">Chi siamo</a></li>

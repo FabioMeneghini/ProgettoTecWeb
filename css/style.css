@@ -6,23 +6,23 @@
 
 :root{
     --formColor: #ccecec;
-    --flagColor: #008280;
+    --flagColor: #008280; /*linkVisitedBodyColor*/
     --background: white;
     --textColor: black;
-    --linkMenuColor: black; /*#fffdd6*/
-    --visitedLinkMenuColor: black;
-    --menuTextColor: #ccecec;
+    --linkVisitedMenuColor: white;
+    --linkNotVisitedMenuColor: black;
+    --menuTextColor: #EEFFFB;
     --linkColor:#0B2114 ;
-    --LinkVisitedColor:#947425;
     --buttonColor: #660030;
+    --linkNotVisitedBodyColor: #E0008E;
 }
 
 a:link{
-    color: var(--linkMenuColor);
+    color: var(--linkNotVisitedMenuColor);
 }
 
 a:visited{
-    color: var(--visitedLinkMenuColor);
+    color: var(--linkVisitedMenuColor);
 }
 
 #logo{
@@ -1078,30 +1078,31 @@ body > *{
     flex-wrap: wrap; /* Permette di andare a capo */
     justify-content: center; /* Allinea orizzontalmente */
     gap: 10px; /* Spaziatura uniforme tra gli elementi */
-  }
+}
   
-  .librigeneri li {
+.librigeneri li {
     flex: 0 1 150px; /* Consente flessibilità, ma mantiene una larghezza fissa */
     height: 200px; /* Altezza uniforme */
     display: flex; /* Garanzia di coerenza nell'allineamento */
     align-items: center; /* Allinea verticalmente gli elementi */
     justify-content: center; /* Centra orizzontalmente */
-  }
+}
   
-  .librigeneri li a {
+.librigeneri li a {
     display: block;
     width: 100%; /* Copre l'intera larghezza */
     height: 100%; /* Copre l'intera altezza */
     background-size: cover; /* Riempie l'intero spazio */
     background-position: center; /* Centra l'immagine */
     text-indent: -9999px; /* Nasconde il testo */
-  }
-  
-  .librigeneri li a:hover {
+ }
+
+.librigeneri li a:hover {
     transform: scale(1.1); /* Effetto hover */
     transition: 0.5s; /* Transizione più fluida */
-  }
-  .librigeneri li a:link{
+}
+
+.librigeneri li a:link{
     transition:.5s;
 }
 
@@ -1126,6 +1127,28 @@ display: block;
     border: 2px solid;
     border-color: var(--flagColor);
     border-radius: 5px;
+}
+
+.datilistalibro div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.datilistalibro dt{
+    font-weight: bold;
+}
+
+#trama, #recensionetua{
+    font-weight: bold;
+}
+
+main a:link{
+    color: var(--linkNotVisitedBodyColor);
+}
+
+main a:visited{
+    color: var(--flagColor);
 }
 
 /*TODO fare file a parte*/
