@@ -133,12 +133,17 @@ main{
     padding: 1em;
 }
 
-hr{
+.genere_singolo::before {
+    content: "";
+    display: block;
+    border-top: 2em solid var(--formColor);
+}
+/*hr{
     color: var(--flagColor);
     background-color: var(--flagColor);
     height: 1px;
     margin: 1em 0em;
-}
+}*/
 
 .genere{
     background-color: var(--flagColor);

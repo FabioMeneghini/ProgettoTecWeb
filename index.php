@@ -28,7 +28,7 @@ try {
         
 
         foreach($resultGeneri as $genere) {
-            $listaLibri.='<h3><hr><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
+            $listaLibri.='<h3><a class="genere_singolo" href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
             $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"],10);
             if(empty($risultatiLibri)) {
                 $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
@@ -48,7 +48,7 @@ try {
            // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
            //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
             $listaBestSeller .=  '<div class="item">
-                                    <img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" >
+                                    <a href="scheda_libro.php?id='.$libro["id"].'"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" ></a>
                                     <ul>
                                         <li><strong>Titolo:</strong> '.$libro["autore"].'</li>
                                         <li><strong>Autore:</strong> '.$libro["titolo"].'</li>
