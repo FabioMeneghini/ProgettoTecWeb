@@ -46,7 +46,7 @@
             <section id="modificaLibro">
                 {messaggiErrore}
                 <h2>Inserisci i nuovi dati del libro</h2>
-                <form method="post" action="modifica_libro.php" onsubmit="return true" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
+                <form method="post" action="modifica_libro.php" onsubmit="return validaModificaLibro()" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
                     {messaggiForm}
                     <fieldset>
                         <legend>Informazioni generali: </legend>
