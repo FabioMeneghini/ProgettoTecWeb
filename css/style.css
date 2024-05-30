@@ -401,47 +401,31 @@ ul{
 /* ID GENERI */
 
 #Fantasy{
-    background-image: url("../copertine_generi/fantasy.jpg");
-}
-
-#Distopico{
-    background-image: url("../copertine_generi/distopico.jpg");
-}
-
-#Favola{
-    background-image: url("../copertine_generi/favola.jpg");
+    background-image: url("../copertine_generi/fantasy.png");
 }
 
 #Romanzo{
-    background-image: url("../copertine_generi/romanzo.jpg");
-}
-
-#Mistero{
-    background-image: url("../copertine_generi/mistero.jpg");
+    background-image: url("../copertine_generi/romanzo.png");
 }
 
 #Fantascienza{
-    background-image: url("../copertine_generi/fantascienza.jpg");
+    background-image: url("../copertine_generi/fantascienza.png");
 }
 
 #Storico{
-    background-image: url("../copertine_generi/storico.jpg");
+    background-image: url("../copertine_generi/storico.png");
 }
 
 #Avventura{
-    background-image: url("../copertine_generi/avventura.jpg");
+    background-image: url("../copertine_generi/avventura.png");
 }
 
 #Horror{
-    background-image: url("../copertine_generi/horror.jpg");
-}
-
-#Drama{
-    background-image: url("../copertine_generi/drammatico.jpg");
+    background-image: url("../copertine_generi/horror.png");
 }
 
 #Thriller{
-    background-image: url("../copertine_generi/thriller.jpg");
+    background-image: url("../copertine_generi/thriller.png");
 }
 
 /*ID LIBRI*/
