@@ -74,7 +74,7 @@ function controlla($recensione, $voto) {
     if(strlen($recensione) > 1000) {
         $messaggi .= "<li>La recensione può essere lunga al massimo 1000 caratteri</li>";
     }
-    if(!is_numeric($voto) || !is_int($voto) || !preg_match("/^[0-9]+$/", $voto)) {
+    if(!is_numeric($voto)) {
         $messaggi .= "<li>Il voto deve essere un numero intero</li>";
     }
     else
@@ -147,11 +147,7 @@ try {
 
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
                 $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-            }
-
-            //admin reindirizzato non ha la , non registrato ha link accedi, se registrato con rec la ha in textarea
-            //se non è un libro che ha terminato ha aggiungi ai salvati 
-            // se è un libro terminato ha una text area con lascia una recensione 
+            } 
 
             if(!isset($_SESSION['username'])) {
                 $arearecensionevoto='<div>
@@ -181,14 +177,12 @@ try {
                                 <label for="recensione">Recensione: </label><br>
                                 <span><textarea id="recensione" name="recensione" rows="20" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span><br>
                                 <label for="voto">Voto: </label>
-                                <!--<span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>-->
-                                <span><input type="text" name="voto" id="voto"required placeholder="{voto}" value="{voto}"></span><br>
+                                <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>
                                 <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
                                 <input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">
                                 <input type="reset" value="Annulla">
                             </fieldset>
                         </form>';
-                        //Modifica e annulla attivi su js solo se ha modificato qualcosa
                 }
                 else if($salvato) {
                     $arearecensionevoto='
