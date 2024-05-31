@@ -675,7 +675,7 @@ class DBAccess {
     }
     //aggiungere che toni il nome dell'utente che ha lasciato la recensione
     public function getaltrerecensioni($LibroSelezionato) {
-        $query = "SELECT commento FROM recensioni WHERE id_libro = '$LibroSelezionato'";
+        $query = "SELECT username_autore , commento FROM recensioni WHERE id_libro = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();

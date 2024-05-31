@@ -14,7 +14,6 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
     <dt><a href="terminati.php">Libri terminati</a></dt>
     <dt><a href="da_leggere.php">Libri da leggere</a></dt>
-    <dt><a href="recensione.php">Aggiungi Recensione</a></dt>
     <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
@@ -71,7 +70,7 @@ try {
             $connection -> closeConnection();
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
                 if($_GET["genere"]==$genere["nome"])
-                    $listaGeneri .=$genere["nome"];
+                    $listaGeneri .='<dd>'.$genere["nome"]. '</dd>';
                 else
                     $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
             }

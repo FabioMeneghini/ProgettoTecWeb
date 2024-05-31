@@ -37,6 +37,13 @@ try {
              $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
         $connection -> closeConnection();
+        if ($n_libri_letti_anno == 0 && $n_libri_letti > 0 && $n_libri_stai_leggendo == 0) {
+            $messaggio_motivazionale = '<p>Ogni impresa inizia con piccoli passi quest\'anno puoi ancora leggere molti libri! Lasciati ispirare dalle recensioni della <span lang="en">per iniziare nuove letture</span></p>';
+        } elseif ($n_libri_letti_anno == 0 && $n_libri_letti == 0 && $n_libri_stai_leggendo == 0 && $n_libri_salvati == 0 && $n_recensioni == 0) {
+            $messaggio_motivazionale = '</p>Dedica il giusto tempo alla lettura per crescere, per rilassarti e imparare e non dimenticarti di segnare i tuoi miglioramenti e le recensioni per aiutare gli altri come te!</p>';
+        } elseif ($n_libri_stai_leggendo != 0) {
+            $messaggio_motivazionale = '</p>Complimenti!!Continua a leggere i tuoi libri,grazie a te ed alle tue recensioni altre persone scoprono e continuano ad amare il mondo dei libri</p>';
+        }
     }
     else {
         echo "Connessione fallita";
@@ -52,6 +59,9 @@ $paginaHTML = str_replace("{LibriStaiLeggendo}", $n_libri_stai_leggendo, $pagina
 $paginaHTML = str_replace("{LibriSalvati}", $n_libri_salvati, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{LibriLettiAnno}", $n_libri_letti_anno, $paginaHTML);
+// Sostituisci il messaggio motivazionale nella tua pagina HTML
+$paginaHTML = str_replace("{messaggio_motivazionale}", $messaggio_motivazionale.'<img src="smile.png" alt="faccina gialla disegnata che sorride e alza un pollice in su "height=70em>', $paginaHTML);
+
 echo $paginaHTML;
 
 ?>

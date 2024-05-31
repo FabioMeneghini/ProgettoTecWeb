@@ -108,7 +108,11 @@ $paginaHTML = str_replace("{selected_piu_recente}", $selezionato_piu_recente, $p
 $paginaHTML = str_replace("{selected_meno_recente}", $selezionato_meno_recente, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{CatalogoLibri}", $catalogo, $paginaHTML);
-$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
+if (empty($messaggiSuccesso)) {
+    $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
+} else {
+    $paginaHTML = str_replace("{messaggiSuccesso}", "<div class=\"messaggiSuccesso\">".$messaggiSuccesso."</div>", $paginaHTML);
+}
 echo $paginaHTML;
 
 ?>
