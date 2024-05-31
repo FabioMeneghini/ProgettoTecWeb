@@ -39,31 +39,33 @@
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; Statistiche </p>
         </nav>
         <main id="content">
-            <div class="gruppo">
-                <h2>Statistiche:</h2>
-                <dl class="gruppo_statistiche">
+            <section>
+            <div class="gruppostatistiche">
+                <h2>Statistiche</h2>
+                <dl>
                     <div>
-                        <dt>Numero libri recensiti in totale:</dt>
+                        <dt>Numero libri recensiti in totale: </dt>
                         <dd>{NumeroRecensioni}</dd>
                     </div>
                     <div>
-                        <dt>Numero libri letti in totale:</dt>
+                        <dt>Numero libri letti in totale: </dt>
                         <dd>{LibriLetti}</dd>
                     </div>
                     <div>
-                        <dt>Numero libri letti quest'anno:</dt>
+                        <dt>Numero libri letti quest'anno: </dt>
                         <dd>{LibriLettiAnno}</dd>
                     </div>
                     <div>
-                        <dt>Numero libri attualmente salvati:</dt>
+                        <dt>Numero libri attualmente salvati: </dt>
                         <dd>{LibriSalvati}</dd>
                     </div>
                     <div>
-                        <dt>Numero libri che stai leggendo attualmente:</dt>
+                        <dt>Numero libri che stai leggendo attualmente: </dt>
                         <dd>{LibriStaiLeggendo}</dd>
                     </div>
                 </dl>
             </div>
+            </section>
             <div id="messaggio_motivazionale">{messaggio_motivazionale}</div>
         </main>
         <footer id="footer">

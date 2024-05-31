@@ -173,7 +173,7 @@ if($connectionOk) {
                         <fieldset>
                             <legend>La tua Recensione e il tuo voto:</legend>
                             <label for="recensione">Recensione: </label><br>
-                            <span><textarea id="recensione" name="recensione" rows="20" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span><br>
+                            <span><textarea id="recensione" name="recensione" rows="10" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span><br>
                             <label for="voto">Voto: </label>
                             <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>
                             <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
@@ -236,7 +236,7 @@ if($connectionOk) {
         else {
             $listaRecensioni.='<ul class="lista_recensioni_scheda_libro">';
             foreach($altre_recensioni as $recensione) {
-                $listaRecensioni .= '<li><p class="commento"><span class="username">'.$recensione["username_autore"].':</span> <span class="commento-testuale">'.$recensione["commento"].'</span></p></li>';
+                $listaRecensioni .= '<li><p><span class="username">'.$recensione["username_autore"].':</span> <span class="commento-testuale">'.$recensione["commento"].'</span></p></li>';
             }
             $listaRecensioni.="</ul></div>";
         }

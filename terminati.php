@@ -33,43 +33,41 @@ $torna_su="";
         }
         else {
             $listaLibri .= '<form method="post" action="terminati.php" onsubmit="return conferma(\'Sei sicuro di voler eliminare i libri selezionati dalla lista dei tuoi libri terminati? Eventuali valutazioni assegnate ad essi verranno perse definitivamente.\')">
-                                <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: titolo, autore, data di fine lettura, voto assegnato e una <span lang="en">checkbox</span> per eliminare il libro.</p>
-                                <fieldset>
-                                    <table aria-describedby="descr">
-                                        <caption>Lista dei libri che hai terminato</caption>
-                                        <tr>
-                                            <th scope="col">Titolo</th>
-                                            <th scope="col">Autore</th>
-                                            <th scope="col">Data di fine lettura</th>
-                                            <th scope="col">Voto assegnato</th>
-                                            <th scope="col">Elimina</th>
-                                        </tr>';
+                            <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: titolo, autore, data di fine lettura, voto assegnato e una <span lang="en">checkbox</span> per eliminare il libro.</p>
+                            <fieldset class="righealternate">
+                                <table aria-describedby="descr">
+                                    <caption>Lista dei libri che hai terminato</caption>
+                                    <tr>
+                                        <th scope="col">Titolo</th>
+                                        <th scope="col">Autore</th>
+                                        <th scope="col">Data di fine lettura</th>
+                                        <th scope="col">Voto assegnato</th>
+                                        <th scope="col">Elimina</th>
+                                    </tr>';
             foreach($lista as $libro) {
-                $listaLibri .= '<tr>
-                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                    <td>'.$libro["autore"].'</td>
-                                    <td>'.$libro["data_fine_lettura"].'</td>
-                                    <td>'.$libro["voto"].'</td>
-                                    <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
-                                </tr>';
-            }
-            $listaLibri .= '    </table>
-                            </fieldset>
-                            <fieldset>
-                                <input type="submit" id="elimina" name="elimina" value="Elimina" onclick="return validaLibriCheckbox()">
-                            </fieldset>
-                            </form>';
-        }
+              $listaLibri .= '<tr>
+                                  <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
+                                  <td>'.$libro["autore"].'</td>
+                                  <td>'.$libro["data_fine_lettura"].'</td>
+                                  <td>'.$libro["voto"].'</td>
+                                  <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
+                              </tr>';
+          }
+          $listaLibri .= '    </table>
+                              <input type="submit" id="elimina" name="elimina" value="Elimina" onclick="return validaLibriCheckbox()">
+                          </fieldset>
+                          </form>';
     }
-    if(count($lista)>=8) {
+}
+if(count($lista)>=8) {
 
-        $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
-                         <a class="torna_su" href="#content">Torna su</a>
-                    </nav>';
-    }
-    else {
-        echo "Connessione fallita";
-    }
+    $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
+                     <a class="torna_su" href="#content">Torna su</a>
+                </nav>';
+}
+else {
+    echo "Connessione fallita";
+}
 
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);

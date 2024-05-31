@@ -201,9 +201,9 @@ h3:first-of-type::before{
    
 }
 
-
 textarea {
     resize: none;
+    width: 100%;
 }
 
 form{
@@ -1192,15 +1192,22 @@ display: block;
     border-color: var(--flagColor);
     border-radius: 5px;
 }
+
 /*statistiche utente*/ 
 /* Stile per lo sfondo giallo e centratura del testo del messaggio motivazionale */
 #messaggio_motivazionale {
-    background-color: var(--bgcolorextra); /* Sfondo giallo */
-    border-radius: 20em;
     text-align: center; /* Centratura del testo */
+    background-color: var(--bgcolorextra);
+    border-radius: 5px;
+    margin: 1em;
+    padding: 1em;
 }
 
-.datilistalibro div, .datiattuali div{
+#faccina{
+    width: 30%;
+}
+
+.datilistalibro div, .datiattuali div, .gruppostatistiche div{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1294,5 +1301,8 @@ table{
     }
     #generi li{
         width: 40%;
+    }
+    .rimuovi{
+        display: none;
     }
 }
