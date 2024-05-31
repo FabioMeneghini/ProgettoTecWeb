@@ -86,22 +86,23 @@ if($connectionOk) {
                         <td>'.$utente["username"].'</td>
                         <td>'.$utente["email"].'</td>
                         <td>'.$utente["data_iscrizione"].'</td>
-                    </tr>';
-        }
-        $utenti .= "</table>";
-        if(count($resultUtenti)>=20) {
-            $torna_su='<nav aria-label="Torna al form di ricerca">
+                        </tr>';
+           }
+           $utenti .= "</table>";
+           if(count($resultUtenti)>=20) {
+            $torna_su='<nav aria-label="Torna all\' inizio della lista deli utenti ">
                             <a class="torna_su" href="#content">Torna su</a>
-                        </nav>';
+                       </nav>';
         }
-    }
-    else{
-        $utenti= '<p>Al momento non ci sono utenti registrati al tuo servizio.</p>';
-    }  
+       }
+       else{
+           $utenti= '<p>Al momento non ci sono utenti registrati al tuo servizio.</p>';
+       }
 }
 else {
     echo "Connessione fallita";
 }
+
 
 $paginaHTML = str_replace("{selected_alfabetico_nome}", $alfabetico_nome, $paginaHTML);
 $paginaHTML = str_replace("{selected_alfabetico_cognome}", $alfabetico_cognome, $paginaHTML);

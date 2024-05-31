@@ -14,6 +14,7 @@ $listaLibri = "";
 $listaGeneri = "";
 $messaggiSuccesso = "";
 $messaggiErrore = "";
+$torna_su="";
 
 if(isset($_GET['iniziato']) && $_GET['iniziato'] == 1) {
     $messaggiSuccesso = '<p class="messaggiSuccesso">Libro iniziato con successo!</p>';
@@ -31,6 +32,7 @@ if($connectionOk) {
         else
             $messaggiErrore = '<p class="messaggiErrore">Errore nell\'aggiornamento dei capitoli. Riprova.</p>';
     }
+
     $lista = $connection -> getListaStaLeggendo($_SESSION['username']);
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
@@ -75,6 +77,12 @@ if($connectionOk) {
                         </fieldset>
                         </form>';
     }
+    if(count($lista)>=8) {
+
+        $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
+                         <a class="torna_su" href="#content">Torna su</a>
+                    </nav>';
+    }
 }
 else {
     echo "Connessione fallita";
@@ -84,6 +92,7 @@ $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 $paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore, $paginaHTML);
+$paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
 echo $paginaHTML;
 
 ?>
