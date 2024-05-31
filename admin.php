@@ -19,30 +19,25 @@ else {
 $paginaHTML = file_get_contents("template/templateHomeAdmin.html");
 $listaGeneri = "";
 
-try {
-    $connection = new DBAccess();
-    $connectionOk = $connection -> openDBConnection();
-    if($connectionOk) {
-        $n_registrati= $connection -> getUtentiRegistratiCount();
-        $n_recensioni= $connection -> getRecensioniCount();
-        $n_utenti= $connection -> getUtentiCheStannoLeggendoCount();
-        $resultListaGeneri = $connection -> getListaGeneri();
-        $n_libri = $connection-> getNumeroLibri();
-        $n_eta = $connection-> getEtaMediaUtenti();
-        $n_terminati = $connection-> getNumeroLibriTerminatiOggi();
-        $n_registrati_oggi = $connection-> getNumeroUtentiRegistratiOggi();
-        foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-        }
-        
-        $connection -> closeConnection();
+$connection = new DBAccess();
+$connectionOk = $connection -> openDBConnection();
+if($connectionOk) {
+    $n_registrati= $connection -> getUtentiRegistratiCount();
+    $n_recensioni= $connection -> getRecensioniCount();
+    $n_utenti= $connection -> getUtentiCheStannoLeggendoCount();
+    $resultListaGeneri = $connection -> getListaGeneri();
+    $n_libri = $connection-> getNumeroLibri();
+    $n_eta = $connection-> getEtaMediaUtenti();
+    $n_terminati = $connection-> getNumeroLibriTerminatiOggi();
+    $n_registrati_oggi = $connection-> getNumeroUtentiRegistratiOggi();
+    foreach($resultListaGeneri as $genere) {
+        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
     }
-    else {
-        echo "Connessione fallita";
-    }
+    
+    $connection -> closeConnection();
 }
-catch(Throwable $e) {
-    echo "Errore: ".$e -> getMessage();
+else {
+    echo "Connessione fallita";
 }
 
 $paginaHTML = str_replace("{numeroUtentiRegistrati}", $n_registrati, $paginaHTML);
