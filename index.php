@@ -17,6 +17,7 @@ $paginaHTML = file_get_contents("template/templateHomeNonRegistrato.html");
 $listaBestSeller = "";
 $listaGeneri = "";
 $listaLibri = '<div class="libri_genere">';
+$torna_su="";
 
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
@@ -39,6 +40,13 @@ if($connectionOk) {
             }
             $listaLibri.='</ul>';
         }
+        if($resultGeneri>=15) {
+
+            $torna_su=' <nav aria-label="Torna all\' inizio della pagina">
+                             <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+         }
+        
     }
     $listaLibri.="</div>";  
     //$risultatiLibri = $connection ->getListaLibriGenere($genere);
@@ -67,6 +75,7 @@ else {
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
+$paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 

@@ -52,6 +52,7 @@ $listaGeneri = "";
 $listaLibri = "";
 $resultKeyword ="";
 
+
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
 if($connectionOk) {
@@ -64,6 +65,7 @@ if($connectionOk) {
         $resultGeneri = $connection -> getListaGeneri();
         $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
         //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
+        //TO DO DB
         $connection -> closeConnection();
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
             if($_GET["genere"]==$genere["nome"])
@@ -81,7 +83,8 @@ if($connectionOk) {
             }
             $listaLibri.='</ul>';
         }
-        if(count($risultatiLibri)>=15) {
+            if(count($risultatiLibri)>=15) {
+
             $torna_su=' <nav aria-label="Torna al form di ricerca">
                             <a class="torna_su" href="#content">Torna su</a>
                         </nav>';
@@ -96,12 +99,13 @@ if($connectionOk) {
     }
     else {
         header("Location: 404.html");
-        exit();
+
     }
 } 
 else {
     echo "Connessione fallita";
 }
+
 
 //$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
