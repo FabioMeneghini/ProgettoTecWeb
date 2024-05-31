@@ -17,7 +17,6 @@ $messaggiSuccesso = "";
 if(isset($_GET['iniziato']) && $_GET['iniziato'] == 1) {
     $messaggiSuccesso = '<p class="messaggiSuccesso">Libro iniziato con successo!</p>';
 }
-
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
 if($connectionOk) {

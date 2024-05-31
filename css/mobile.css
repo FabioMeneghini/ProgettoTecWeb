@@ -92,3 +92,7 @@ textarea{
 #generi li{
     width: 70%;
 }
+
+.datiattuali div{
+    flex-direction: column;
+}
