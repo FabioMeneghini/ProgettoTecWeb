@@ -42,7 +42,7 @@ if($connectionOk) {
                                 La tabella contiene l\'elenco dei tuoi libri da leggere.
                                 Ogni riga descrive un libro con tre colonne: "titolo", "autore" e una <span lang="en">checkbox</span> per iniziare o eliminare il libro.
                             </p>
-                            <fieldset>
+                            <fieldset class="righealternate">
                                 <table aria-describedby="descr">
                                     <caption>Lista dei libri salvati</caption>
                                     <tr>
@@ -58,8 +58,6 @@ if($connectionOk) {
                             </tr>';
         }
         $listaLibri .= '    </table>
-                        </fieldset>
-                        <fieldset>
                             <input type="submit" id="inizia" name="inizia" value="Inizia">
                             <input type="submit" id="elimina" name="elimina" value="Elimina" onclick="return conferma(\'Sei sicuro/sicura di voler eliminare i libri selezionati dalla lista dei libri da leggere?\')">
                         </fieldset>

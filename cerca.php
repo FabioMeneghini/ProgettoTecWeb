@@ -92,16 +92,16 @@ if($connectionOk) {
                             <th scope="col">Titolo</th>
                             <th scope="col">Copertina</th>
                             <th scope="col">Autore</th>
-                            <th scope="col">Genere</th>
-                            <th scope="col">lingua </th>
+                            <th class="rimuovi" scope="col">Genere</th>
+                            <th class="rimuovi" scope="col">lingua </th>
                         </tr>';
         foreach($libri_ricercati as $libro) {
             $rislutati_ricerca .= '<tr>
                                 <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
                                 <td><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
                                 <td>'.$libro["autore"].'</td>
-                                <td>'.$libro["genere"].'</td>
-                                <td>'.$libro["lingua"].'</td>
+                                <td class="rimuovi">'.$libro["genere"].'</td>
+                                <td class="rimuovi">'.$libro["lingua"].'</td>
                             </tr>';
         }
         $rislutati_ricerca .= "</table>";

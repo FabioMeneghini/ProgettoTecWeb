@@ -77,8 +77,8 @@ footer ul li{
     padding: 0em 1em;
 }
 
-textarea{
-    width: 50%;
+footer p{
+    display: none;
 }
 
 .item{
@@ -95,4 +95,8 @@ textarea{
 
 .datiattuali div{
     flex-direction: column;
+}
+
+#faccina{
+    width: 50%;
 }

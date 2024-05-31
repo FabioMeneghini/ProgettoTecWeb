@@ -54,7 +54,7 @@ $paginaHTML = str_replace("{LibriSalvati}", $n_libri_salvati, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{LibriLettiAnno}", $n_libri_letti_anno, $paginaHTML);
 // Sostituisci il messaggio motivazionale nella tua pagina HTML
-$paginaHTML = str_replace("{messaggio_motivazionale}", $messaggio_motivazionale.'<img id="faccina" src="smile.png" alt="Faccina gialla disegnata che sorride e alza un pollice in su">', $paginaHTML);
+$paginaHTML = str_replace("{messaggio_motivazionale}", $messaggio_motivazionale.'<img id="faccina" src="smile.png" alt="Faccina gialla disegnata che sorride e alza un indice in su">', $paginaHTML);
 
 echo $paginaHTML;
 

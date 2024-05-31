@@ -33,7 +33,7 @@ if($connectionOk) {
     else {
         $listaLibri .= '<form method="post" action="terminati.php" onsubmit="return conferma(\'Sei sicuro di voler eliminare i libri selezionati dalla lista dei tuoi libri terminati? Eventuali valutazioni assegnate ad essi verranno perse definitivamente.\')">
                             <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: titolo, autore, data di fine lettura, voto assegnato e una <span lang="en">checkbox</span> per eliminare il libro.</p>
-                            <fieldset>
+                            <fieldset class="righealternate">
                                 <table aria-describedby="descr">
                                     <caption>Lista dei libri che hai terminato</caption>
                                     <tr>
@@ -53,8 +53,6 @@ if($connectionOk) {
                             </tr>';
         }
         $listaLibri .= '    </table>
-                        </fieldset>
-                        <fieldset>
                             <input type="submit" id="elimina" name="elimina" value="Elimina" onclick="return validaLibriCheckbox()">
                         </fieldset>
                         </form>';
