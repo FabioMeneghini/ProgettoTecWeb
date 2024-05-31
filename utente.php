@@ -34,7 +34,7 @@ try {
         }
         if(is_array($resultNEW)) {
             foreach ($resultNEW as $genere) {
-                $listaLibri.='<h3><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
+                $listaLibri.='<div class="genere_singolo"><h3><a  href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3></div>';
                 $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
                 if(empty($risultatiLibri)) {
                     $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
@@ -69,7 +69,11 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
-$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
+if (empty($messaggiSuccesso)) {
+    $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
+} else {
+    $paginaHTML = str_replace("{messaggiSuccesso}", "<div class=\"messaggiSuccesso\">".$messaggiSuccesso."</div>", $paginaHTML);
+}
 echo $paginaHTML;
 
 ?>
