@@ -13,6 +13,7 @@ $paginaHTML = file_get_contents("template/templateStaiLeggendo.html");
 $listaLibri = "";
 $listaGeneri = "";
 $messaggiSuccesso = "";
+$messaggiErrore = "";
 
 if(isset($_GET['iniziato']) && $_GET['iniziato'] == 1) {
     $messaggiSuccesso = '<p class="messaggiSuccesso">Libro iniziato con successo!</p>';
@@ -24,13 +25,17 @@ if($connectionOk) {
         $capitoli=$_POST["capitoli"];
         $id_libri=$_POST["id_libri"];
         $username=$_SESSION["username"];
-        $connection -> aggiornaStaLeggendo($username, $id_libri, $capitoli); //AGGIORNARE LIBRI CHE STA LEGGENDO L'UTENTE CON QUELLI PRESI DA POST, SE HA MESSO MASSIMO DEVE ANDARE IN TERMINATI E TOGLIERLO DA DA LEGGERE
+        $aggiornamento = $connection -> aggiornaStaLeggendo($username, $id_libri, $capitoli);
+        if($aggiornamento)
+            $messaggiSuccesso = '<p class="messaggiSuccesso">Capitoli aggiornati con successo!</p>';
+        else
+            $messaggiErrore = '<p class="messaggiErrore">Errore nell\'aggiornamento dei capitoli. Riprova.</p>';
     }
     $lista = $connection -> getListaStaLeggendo($_SESSION['username']);
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
     }
     if(empty($lista)) {
         $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati
@@ -77,13 +82,8 @@ else {
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
-/*if (empty($messaggiSuccesso)) {
-    $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
-} else {
-    $paginaHTML = str_replace("{messaggiSuccesso}", "<div class=\"messaggiSuccesso\">".$messaggiSuccesso."</div>", $paginaHTML);
-}*/
-//$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso=="" ? "" : , $paginaHTML);
 $paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
+$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore, $paginaHTML);
 echo $paginaHTML;
 
 ?>
