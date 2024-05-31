@@ -15,6 +15,14 @@
     --linkColor:#0B2114 ;
     --buttonColor: #660030;
     --linkNotVisitedBodyColor: #E0008E;
+
+    --erroreBgColor: rgba(255, 0, 0, 0.2); /* Rosso chiaro con trasparenza */
+    --erroreBorderColor: rgba(139, 0, 0, 1); /* Rosso scuro */
+    --erroreTextColor: rgba(139, 0, 0, 1); /* Rosso scuro */
+
+    --successoBgColor: rgba(0, 255, 0, 0.2); /* Verde chiaro con trasparenza */
+    --successoBorderColor: rgba(0, 100, 0, 1); /* Verde scuro */
+    --successoTextColor: rgba(0, 100, 0, 1); /* Verde scuro */
 }
 
 a:link{
@@ -136,7 +144,7 @@ main{
 .genere_singolo::before {
     content: "";
     display: block;
-    border-top: 2em solid var(--formColor);
+    border-top: 1em solid var(--formColor);
 }
 /*hr{
     color: var(--flagColor);
@@ -186,6 +194,8 @@ h3:first-of-type::before{
     /*border-bottom: 3px solid var(--flagColor);*/
    
 }
+
+
 textarea {
     resize: none;
 }
@@ -1163,6 +1173,34 @@ main a:link{
 main a:visited{
     color: var(--flagColor);
 }
+blockquote {
+    font-family: 'Times New Roman', Times, serif; /* Font comune */
+    font-style: italic; /* Testo in corsivo */
+    text-align: center; /* Testo centrato */
+    background-color: #ffffcc; /* Sfondo giallino */
+    padding: 10px; /* Spaziatura interna */
+    border-radius: 50%; /* Sfondo ovale */
+    margin-bottom: 20px; /* Spazio tra il blocco citazione e l'elemento successivo */
+}
+
+
+.messaggiErrore {
+    background-color: var(--erroreBgColor);
+    border: 2px solid var(--erroreBorderColor);
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--erroreTextColor);
+}
+
+.messaggiSuccesso {
+    background-color: var(--successoBgColor);
+    border: 2px solid var(--successoBorderColor);
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--successoTextColor);
+}
+
+
 
 /*TODO fare file a parte*/
 @media (max-width: 900px) {
@@ -1184,4 +1222,8 @@ main a:visited{
     #generi li{
         width: 40%;
     }
+
+    
+    
+    
 }

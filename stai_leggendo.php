@@ -49,7 +49,7 @@ try {
                                 <p id="descr">
                                     La tabella contiene l\'elenco dei libri che stai leggendo.
                                     Ogni riga descrive un libro con tre colonne: "titolo", "autore", "numero capitoli letti".
-                                    La terza colonna contiene un input per modificare il numero di capitoli che stai leggendo, con la possibilità di aumentare o diminuire.
+                                    La terza colonna è un campo per modificare il numero del capitolo a cui sei arrivato/a nella lettura, con la possibilità di aumentarli fino a terminare il libro o diminuirli.
                                 </p>
                                 <fieldset>
                                     <table aria-describedby="descr">
@@ -90,7 +90,11 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
-$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
+if (empty($messaggiSuccesso)) {
+    $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
+} else {
+    $paginaHTML = str_replace("{messaggiSuccesso}", "<div class=\"messaggiSuccesso\">".$messaggiSuccesso."</div>", $paginaHTML);
+}
 echo $paginaHTML;
 
 ?>

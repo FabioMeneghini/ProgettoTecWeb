@@ -287,9 +287,20 @@ $paginaHTML = str_replace("{tramaLibro}", $trama , $paginaHTML);
 $paginaHTML = str_replace("{bottoniAdmin}", $bottoni_admin , $paginaHTML);
 $paginaHTML = str_replace("{voto}", $voto, $paginaHTML);
 $paginaHTML = str_replace("{recensioniComunity}", $listaRecensioni, $paginaHTML);
-$paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiForm."</ul>", $paginaHTML);
-$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore ,$paginaHTML);
-$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso ,$paginaHTML);
+/*$paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiForm."</ul>", $paginaHTML);*/
+if (empty($messaggiErrore)) {
+    $paginaHTML = str_replace("{messaggiErrore}", "", $paginaHTML);
+} else {
+    $paginaHTML = str_replace("{messaggiErrore}", "<div class=\"messaggiErrore\">".$messaggiErrore."</div>", $paginaHTML);
+}
+
+// Sostituzione per messaggi di successo
+if (empty($messaggiSuccesso)) {
+    $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
+} else {
+    $paginaHTML = str_replace("{messaggiSuccesso}", "<div class=\"messaggiSuccesso\">".$messaggiSuccesso."</div>", $paginaHTML);
+}
+
 echo $paginaHTML;
 
 ?>
