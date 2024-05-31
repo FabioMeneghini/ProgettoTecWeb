@@ -46,38 +46,31 @@ else {
     $menu =$NonRegistrato;
 }
 
-
 $menuGeneri = "";
 $listaGeneri = "";
 $resultKeyword = "";
 
-try {
-    $connection = new DBAccess();
-    $connectionOk = $connection -> openDBConnection();
-    if($connectionOk) {
-        $resultGeneri = $connection -> getListaGeneri();
-        //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
-        //TO DO DB
-        $connection -> closeConnection();
-        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $menuGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-            $listaGeneri .= '<li><a id="'.$genere["nome"].'" href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
+$connection = new DBAccess();
+$connectionOk = $connection -> openDBConnection();
+if($connectionOk) {
+    $resultGeneri = $connection -> getListaGeneri();
+    //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
+    $connection -> closeConnection();
+    foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+        $menuGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a id="'.$genere["nome"].'" href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
+    }
+
+    /*if(!empty($resultKeyword)) {
+        foreach($resultKeyword as $keyword) {
+            $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
         }
-    
-        /*if(!empty($resultKeyword)) {
-            foreach($resultKeyword as $keyword) {
-                $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
-            }
-        } else {
-            $listaKeyword = "Miglior genere";
-        }*/
-    }
-    else {
-        echo "Connessione fallita";
-    }
+    } else {
+        $listaKeyword = "Miglior genere";
+    }*/
 }
-catch(Throwable $e) {
-    echo "Errore: ".$e -> getMessage();
+else {
+    echo "Connessione fallita";
 }
 
 //$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);

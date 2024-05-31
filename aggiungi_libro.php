@@ -67,48 +67,43 @@ $messaggi = "";
 $lista_lingue="";
 $data_list_generi="";
 
-try {
-    $connection = new DBAccess();
-    $connectionOk = $connection -> openDBConnection();
-    if($connectionOk) {
-        if(isset($_POST['inserisci'])) {
-            $titolo = $_POST['titolo'];
-            $autore = $_POST['autore'];
-            $lingua = $_POST['lingua'];
-            $capitoli = $_POST['capitoli'];
-            $trama = $_POST['trama'];
-            $genere = $_POST['genere'];
-            $ok = controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere);
-            if($ok["ok"]) {
-                $result = $connection -> aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere);
-                if($result) {
-                    $connection -> closeConnection();
-                    header("Location: tutti_libri.php?inserito=1");
-                    exit();
-                }
-                else
-                    $messaggi = '<li>Errore durante l\'inserimento del libro</li>';
+$connection = new DBAccess();
+$connectionOk = $connection -> openDBConnection();
+if($connectionOk) {
+    if(isset($_POST['inserisci'])) {
+        $titolo = $_POST['titolo'];
+        $autore = $_POST['autore'];
+        $lingua = $_POST['lingua'];
+        $capitoli = $_POST['capitoli'];
+        $trama = $_POST['trama'];
+        $genere = $_POST['genere'];
+        $ok = controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere);
+        if($ok["ok"]) {
+            $result = $connection -> aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere);
+            if($result) {
+                $connection -> closeConnection();
+                header("Location: tutti_libri.php?inserito=1");
+                exit();
             }
             else
-                $messaggi = $ok["messaggi"];
+                $messaggi = '<li>Errore durante l\'inserimento del libro</li>';
         }
-
-        $resultGeneri = $connection -> getListaGeneri();
-        foreach($resultGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-            $data_list_generi.= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
-        }
-        $resultLingue= $connection -> getLingueLibri();
-        foreach($resultLingue as $lingue) {
-            $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
-        }
+        else
+            $messaggi = $ok["messaggi"];
     }
-    else {
-        echo "Connessione fallita";
+
+    $resultGeneri = $connection -> getListaGeneri();
+    foreach($resultGeneri as $genere) {
+        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $data_list_generi.= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
+    }
+    $resultLingue= $connection -> getLingueLibri();
+    foreach($resultLingue as $lingue) {
+        $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
     }
 }
-catch(Throwable $e) {
-    echo "Errore: ".$e -> getMessage();
+else {
+    echo "<li>Errore di connessione al database</li>";
 }
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
