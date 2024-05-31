@@ -59,7 +59,6 @@ if($connectionOk) {
     }
     $connection -> closeConnection();
     if(count($resultGeneri)>=3) {
-
         $torna_su=' <nav aria-label="Torna all\'inizio della home">
                          <a class="torna_su" href="#content">Torna su</a>
                     </nav>';
@@ -69,15 +68,9 @@ else {
     echo "Connessione fallita";
 }
 
-
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
-if (empty($messaggiSuccesso)) {
-    $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
-} else {
-    $paginaHTML = str_replace("{messaggiSuccesso}", "<div class=\"messaggiSuccesso\">".$messaggiSuccesso."</div>", $paginaHTML);
-}*/
 $paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 echo $paginaHTML;
 

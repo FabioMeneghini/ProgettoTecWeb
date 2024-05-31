@@ -78,7 +78,6 @@ if($connectionOk) {
                         </form>';
     }
     if(count($lista)>=8) {
-
         $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
                          <a class="torna_su" href="#content">Torna su</a>
                     </nav>';
