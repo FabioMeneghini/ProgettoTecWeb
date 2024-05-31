@@ -51,7 +51,7 @@ try {
                                     Ogni riga descrive un libro con tre colonne: "titolo", "autore", "numero capitoli letti".
                                     La terza colonna è un campo per modificare il numero del capitolo a cui sei arrivato/a nella lettura, con la possibilità di aumentarli fino a terminare il libro o diminuirli.
                                 </p>
-                                <fieldset>
+                                <fieldset class="righealternate">
                                     <table aria-describedby="descr">
                                         <caption>Lista dei libri che stai leggendo</caption>
                                         <tr>
@@ -73,8 +73,6 @@ try {
                 $i+=1;
             }
             $listaLibri .= '    </table>
-                            </fieldset>
-                            <fieldset>
                                 <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna capitoli">
                             </fieldset>
                             </form>';
