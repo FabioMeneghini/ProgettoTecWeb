@@ -48,68 +48,64 @@ else {
     $menu =$NonRegistrato;
 }
 
-
 $listaGeneri = "";
 $listaLibri = "";
 $resultKeyword ="";
 
-try {
-    $connection = new DBAccess();
-    $connectionOk = $connection -> openDBConnection();
-    if($connectionOk) {
-        $ok=false;
-        if(isset($_GET['genere'])) {
-            $genereSelezionato = $_GET['genere'];
-            $ok = $connection -> controllagenere($genereSelezionato);
-        }
-        if($ok) {
-            $resultGeneri = $connection -> getListaGeneri();
-            $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
-            //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
-            //TO DO DB
-            $connection -> closeConnection();
-            foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-                if($_GET["genere"]==$genere["nome"])
-                    $listaGeneri .='<dd>'.$genere["nome"]. '</dd>';
-                else
-                    $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-            }
-            if(empty($risultatiLibri)) {
-                $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
-            }
-            else {
-                $listaLibri.='<ul id="listagenere">';
-                foreach($risultatiLibri as $libro) {
-                    $listaLibri.='<li><a id="'.$libro["titolo_ir"].'" href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
-                }
-                $listaLibri.='</ul>';
-            }
-            if(count($risultatiLibri)>=8) {
 
-               $torna_su=' <nav aria-label="Torna ai primi libri del genere selezionato">
-                                <a class="torna_su" href="#content">Torna su</a>
-                           </nav>';
-            }
-            /*if(!empty($resultKeyword)) {
-                foreach($resultKeyword as $keyword) {
-                    $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
-                }
-            } else {
-                $listaKeyword = "Miglior genere";
-            }*/
+$connection = new DBAccess();
+$connectionOk = $connection -> openDBConnection();
+if($connectionOk) {
+    $ok=false;
+    if(isset($_GET['genere'])) {
+        $genereSelezionato = $_GET['genere'];
+        $ok = $connection -> controllagenere($genereSelezionato);
+    }
+    if($ok) {
+        $resultGeneri = $connection -> getListaGeneri();
+        $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
+        //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
+        //TO DO DB
+        $connection -> closeConnection();
+        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+            if($_GET["genere"]==$genere["nome"])
+                $listaGeneri .='<dd>'.$genere["nome"]. '</dd>';
+            else
+                $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        }
+        if(empty($risultatiLibri)) {
+            $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
         }
         else {
-            header("Location: 404.html");
-
+            $listaLibri.='<ul id="listagenere">';
+            foreach($risultatiLibri as $libro) {
+                $listaLibri.='<li><a id="'.$libro["titolo_ir"].'" href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
+            }
+            $listaLibri.='</ul>';
         }
-    } 
-    else {
-        echo "Connessione fallita";
+            if(count($risultatiLibri)>=15) {
+
+            $torna_su=' <nav aria-label="Torna al form di ricerca">
+                            <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+        }
+        /*if(!empty($resultKeyword)) {
+            foreach($resultKeyword as $keyword) {
+                $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
+            }
+        } else {
+            $listaKeyword = "Miglior genere";
+        }*/
     }
+    else {
+        header("Location: 404.html");
+
+    }
+} 
+else {
+    echo "Connessione fallita";
 }
-catch(Throwable $e) {
-    echo "Errore: ".$e -> getMessage();
-}
+
 
 //$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);

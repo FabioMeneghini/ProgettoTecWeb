@@ -14,7 +14,6 @@ $listaLibri = "";
 $listaGeneri = "";
 $torna_su="";
 
-try {
     $connection = new DBAccess();
     $connectionOk = $connection -> openDBConnection();
     if($connectionOk) {
@@ -61,20 +60,16 @@ try {
                             </fieldset>
                             </form>';
         }
-        if(count($lista)>=8) {
+    }
+    if(count($lista)>=8) {
 
-            $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
-                             <a class="torna_su" href="#content">Torna su</a>
-                        </nav>';
-        }
+        $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
+                         <a class="torna_su" href="#content">Torna su</a>
+                    </nav>';
     }
     else {
         echo "Connessione fallita";
     }
-}
-catch(Throwable $e) {
-    echo "Errore: ".$e -> getMessage();
-}
 
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);

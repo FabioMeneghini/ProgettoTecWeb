@@ -27,6 +27,8 @@
     --successoBgColor: #7DE300; /* Verde chiaro con trasparenza */
     --successoBorderColor: #006400; /* Verde scuro */
     --successoTextColor: #006400; /* Verde scuro */
+
+    --red: #ff0000;
 }
 
 a:link{
@@ -117,7 +119,7 @@ body{
     padding: 1em;
     background-color: var(--flagColor);
     color: var(--textColor);
-    min-width: 7em;
+    min-width: 9em;
     /*overflow-y: auto;*/
 }
 
@@ -148,7 +150,7 @@ main{
 .genere_singolo::before {
     content: "";
     display: block;
-    border-top: 1em solid var(--formColor);
+    border-top: 3px solid var(--flagColor);
 }
 /*hr{
     color: var(--flagColor);
@@ -257,7 +259,7 @@ fieldset ul{
     list-style: inside;
 }
 
-input[type=text], input[type=password], input[type=email], input[type=number], select, form button {
+input[type=text], input[type=password], input[type=email], input[type=number], input[type=date], select {
     outline: none;
     padding: 12px 20px;
     margin: 8px 0;
@@ -267,7 +269,7 @@ input[type=text], input[type=password], input[type=email], input[type=number], s
     box-sizing: border-box;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, input[type=date]:focus {
     border: 3px solid var(--flagColor);
 }
 
@@ -473,47 +475,31 @@ ul{
 /* ID GENERI */
 
 #Fantasy{
-    background-image: url("../copertine_generi/fantasy.jpg");
-}
-
-#Distopico{
-    background-image: url("../copertine_generi/distopico.jpg");
-}
-
-#Favola{
-    background-image: url("../copertine_generi/favola.jpg");
+    background-image: url("../copertine_generi/fantasy.png");
 }
 
 #Romanzo{
-    background-image: url("../copertine_generi/romanzo.jpg");
-}
-
-#Mistero{
-    background-image: url("../copertine_generi/mistero.jpg");
+    background-image: url("../copertine_generi/romanzo.png");
 }
 
 #Fantascienza{
-    background-image: url("../copertine_generi/fantascienza.jpg");
+    background-image: url("../copertine_generi/fantascienza.png");
 }
 
 #Storico{
-    background-image: url("../copertine_generi/storico.jpg");
+    background-image: url("../copertine_generi/storico.png");
 }
 
 #Avventura{
-    background-image: url("../copertine_generi/avventura.jpg");
+    background-image: url("../copertine_generi/avventura.png");
 }
 
 #Horror{
-    background-image: url("../copertine_generi/horror.jpg");
-}
-
-#Drama{
-    background-image: url("../copertine_generi/drammatico.jpg");
+    background-image: url("../copertine_generi/horror.png");
 }
 
 #Thriller{
-    background-image: url("../copertine_generi/thriller.jpg");
+    background-image: url("../copertine_generi/thriller.png");
 }
 
 /*ID LIBRI*/
@@ -1214,19 +1200,25 @@ display: block;
     text-align: center; /* Centratura del testo */
 }
 
-.datilistalibro div{
+.datilistalibro div, .datiattuali div{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.datilistalibro dt{
+.datilistalibro dt, .datiattuali dt{
     font-weight: bold;
 }
+
+.datiattuali{
+    background-color: var(--bgcolorextra);
+    border-radius: 3px;
+    padding-bottom: 1em;
+}
+
 .menu_scheda_libro {
     text-align: left; /* Allinea il testo a sinistra */
 }
-
 
 #trama, #recensionetua{
     font-weight: bold;
@@ -1239,6 +1231,7 @@ main a:link{
 main a:visited{
     color: var(--flagColor);
 }
+
 blockquote {
     font-family: 'Times New Roman', Times, serif; /* Font comune */
     font-style: italic; /* Testo in corsivo */
@@ -1248,8 +1241,6 @@ blockquote {
     border-radius: 50%; /* Sfondo ovale */
     margin-bottom: 20px; /* Spazio tra il blocco citazione e l'elemento successivo */
 }
-
-
 
 .messaggiErrore {
     background-color: var(--erroreBgColor);
@@ -1267,7 +1258,22 @@ blockquote {
     color: var(--successoTextColor);
 }
 
+#eliminaaccount{
+    background-color: var(--red);
+}
 
+.righealternate{
+    background-color: transparent;
+    border: none;
+}
+
+.righealternate tr:nth-child(even) {
+    background-color: var(--bgcercabg);
+}
+
+table{
+    width: 100%;
+}
 
 /*TODO fare file a parte*/
 @media (max-width: 900px) {
@@ -1289,8 +1295,4 @@ blockquote {
     #generi li{
         width: 40%;
     }
-
-    
-    
-    
 }

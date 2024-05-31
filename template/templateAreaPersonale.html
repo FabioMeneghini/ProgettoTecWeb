@@ -33,16 +33,22 @@
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; Area Personale</p>
         </nav>
         <main  id="content">
-            <div id="profile">
+            <div class="datiattuali">
                 <h2>Benvenuto, <span id="nome">{nome}</span>!</h2>
-            </div>
-            <!--mettere nella relazione per il ranking che era troppo pesante e lo abbiamo tolto -->
-
-            <div id="datiattuali" >
-                <h2>Il tuo <span lang="en">username</span> attuale: {usernameattuale}</h2>
-                <!--php-->
-                <h2>La tua <span lang="en">email</span> attuale: {emailattuale}</h2>
-                <h2>Data di iscrizione: <time datetime="{data_iscrizione}">{data_iscrizione}</time></h2>
+                <dl>
+                    <div>
+                    <dt>Il tuo <span lang="en">username</span> attuale: </dt>
+                    <dd>{usernameattuale}</dd>
+                    </div>
+                    <div>
+                    <dt>La tua <span lang="en">email</span> attuale: </dt>
+                    <dd>{emailattuale}</dd>
+                    </div>
+                    <div>
+                    <dt>Data di iscrizione: </dt>
+                    <dd><time datetime="{data_iscrizione}">{data_iscrizione}</time></dd>
+                    </div>
+                </dl>
                 <p>Non ricordi la tua <span lang="en">password</span>? Contatta il 0444 3940394, un/a nostro/a operatore/trice sarà a tua disposizione</p>
             </div>
             {messaggi}
@@ -58,7 +64,7 @@
                         </p>
                         <label for="username">Inserisci un nuovo <span lang="en">username</span>: </label>
                         <span><input type="text" id="username" name="username" maxlength="25" minlength="3" required></span>
-                        <button type="submit" id="cambia_username" name="cambia_username" onclick="return conferma('Sei sicuro/sicura di voler modificare lo username?')">Modifica <span lang="en">Username</span></button>
+                        <input type="submit" id="cambia_username" name="cambia_username" value="Modifica Username" onclick="return conferma('Sei sicuro/sicura di voler modificare lo username?')">
                     </fieldset>
                 </form>
             </section>
@@ -85,7 +91,7 @@
                         <span><input type="password" id="passwordnew1" name="passwordnew1" required></span><br>
                         <label for="passwordnew2">Ripeti la stessa <span lang="en">password</span>:</label>
                         <span><input type="password" id="passwordnew2" name="passwordnew2" required></span>
-                        <button type="submit" id="cambia_password" name="cambia_password" onclick="return conferma('Sei sicuro/sicura di voler modificare la password?')">Cambia <span lang="en">Password</span></button>
+                        <input type="submit" id="cambia_password" name="cambia_password" value="Modifica Password" onclick="return conferma('Sei sicuro/sicura di voler modificare la password?')">
                         <!-- non so se si possa togliere ma non credo abbia senso qua :<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
@@ -101,7 +107,7 @@
                         {successoEmail}
                         <label for="email">Nuovo indirizzo <span lang="en">email</span>:</label>
                         <span><input type="email" id="email" name="email" maxlength="60" required></span>
-                        <button type="submit" id="cambia_email" name="cambia_email" onclick="return conferma('Sei sicuro/sicura di voler modificare la mail?')">Modifica <span lang="en">email</span></button>
+                        <input type="submit" id="cambia_email" name="cambia_email" value="Modifica Email" onclick="return conferma('Sei sicuro/sicura di voler modificare la mail?')">
                         <!--<button type="reset">Elimina</button>
                         messaggio prima di cancellare : sei sicuro di voler eliminare tutti i dati che hai compilato ? -->
                     </fieldset>
@@ -112,11 +118,11 @@
                 <h3>Disconnetti o elimina l'<span lang="en">account</span>:</h3>
                 <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler uscire dall\'account?')">
                     <label for="disconnetti">Disconnessione dell'<span lang="en">account</span>:</label>
-                    <button type="submit" id="disconnetti" name="disconnetti">Disconnetti <span lang="en">account</span></button>
+                    <input type="submit" id="disconnetti" name="disconnetti" value="Disconnetti Account">
                 </form>
                 <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler eliminare l\'account? I tuoi dati andranno persi per sempre.')">
                     <label for="elimina">Disconnessione dell'<span lang="en">account</span>:</label>
-                    <button type="submit" id="elimina" name="elimina">Elimina <span lang="en">account</span></button>
+                    <input type="submit" id="eliminaaccount" name="elimina" value="Elimina Account">
                 </form>
             </section>
         </main>

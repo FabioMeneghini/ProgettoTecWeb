@@ -73,101 +73,96 @@ if(isset($_GET['modifica']) && $_GET['modifica'] == 0) {
     $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
 }
 
-try {
-    $connection = new DBAccess();
-    $connectionOk = $connection -> openDBConnection();
-    if($connectionOk) {
-        //da controllare
-        if(isset($_POST['modifica'])) {
-            $titolo = $_POST['titolo'];
-            $autore = $_POST['autore'];
-            $lingua = $_POST['lingua'];
-            $capitoli = $_POST['capitoli'];
-            $trama = $_POST['trama'];
-            $genere = $_POST['genere'];
-            $input_ok = controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere);
-            if($input_ok["ok"]) {
-                if(isset($_POST['id'])) {
-                    $LibroSelezionato = $_POST['id'];
-                    $ok = $connection -> controllareIdLibro($LibroSelezionato);
-                    if($ok) {
-                        $modificato = $connection -> modificaLibro($LibroSelezionato, $_POST['titolo'], $_POST['autore'], $_POST['lingua'], $_POST['capitoli'], $_POST['trama'], $_POST['genere']);
-                        if($modificato) {
-                            $connection -> closeConnection();
-                            header("Location: scheda_libro.php?id=".$LibroSelezionato."&modificato=1");
-                            exit();
-                        }
-                        else {
-                            /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
-                            exit();*/
-                            $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
-                        }
+$connection = new DBAccess();
+$connectionOk = $connection -> openDBConnection();
+if($connectionOk) {
+    //da controllare
+    if(isset($_POST['modifica'])) {
+        $titolo = $_POST['titolo'];
+        $autore = $_POST['autore'];
+        $lingua = $_POST['lingua'];
+        $capitoli = $_POST['capitoli'];
+        $trama = $_POST['trama'];
+        $genere = $_POST['genere'];
+        $input_ok = controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere);
+        if($input_ok["ok"]) {
+            if(isset($_POST['id'])) {
+                $LibroSelezionato = $_POST['id'];
+                $ok = $connection -> controllareIdLibro($LibroSelezionato);
+                if($ok) {
+                    $modificato = $connection -> modificaLibro($LibroSelezionato, $_POST['titolo'], $_POST['autore'], $_POST['lingua'], $_POST['capitoli'], $_POST['trama'], $_POST['genere']);
+                    if($modificato) {
+                        $connection -> closeConnection();
+                        header("Location: scheda_libro.php?id=".$LibroSelezionato."&modificato=1");
+                        exit();
                     }
-                }
-                else {
-                    /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
-                    exit();*/
-                    $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
+                    else {
+                        /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
+                        exit();*/
+                        $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
+                    }
                 }
             }
             else {
-                $messaggiForm = $input_ok["messaggi"];
+                /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
+                exit();*/
+                $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
             }
         }
-
-        //controllo se l'id del libro è presente
-        $tmp=false;
-        if(isset($_POST['id'])) {
-            $LibroSelezionato = $_POST['id'];
-            $tmp = $connection -> controllareIdLibro($LibroSelezionato);
+        else {
+            $messaggiForm = $input_ok["messaggi"];
         }
-        else if(isset($_GET['id'])) {
-            $LibroSelezionato = $_GET['id'];
-            $tmp = $connection ->  controllareIdLibro($LibroSelezionato);
-        }
-        if(!$tmp) {
-            header("Location: template/404.html"); //libro non trovato o non impostato in $_GET o $_POST
-            exit();
-        }
-        $titolo = $connection ->  gettitololibro($LibroSelezionato);
-        $autore = $connection ->  getautoreLibro($LibroSelezionato);
-        $genereold = $connection ->  getgenereLibro($LibroSelezionato);
-        $linguaold = $connection ->  getlinguaLibro($LibroSelezionato);
-        $trama = $connection ->  gettramaLibro($LibroSelezionato);
-        $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
-
-        $resultGeneri = $connection -> getListaGeneri();
-        $resultLingue= $connection -> getLingueLibri();
-        
-        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-            if($genere["nome"] == $genereold) {
-                $data_list_generi .= '<option value="'.$genere["nome"].'" selected>'.$genere["nome"].'</option>';
-            }
-            else
-                $data_list_generi .= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
-        }
-        foreach($resultLingue as $lingue) {
-            $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
-        }
-        $connection -> closeConnection();
-
-
-        /*if(!empty($resultKeyword)) {
-            for ($i=0; $i<count($resultKeyword)-1; $i++) {
-                $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
-            }
-            $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
-        } else {
-            $listaKeyword = "Miglior libro";
-        }*/
     }
-    else {
-        echo "Connessione fallita";
+
+    //controllo se l'id del libro è presente
+    $tmp=false;
+    if(isset($_POST['id'])) {
+        $LibroSelezionato = $_POST['id'];
+        $tmp = $connection -> controllareIdLibro($LibroSelezionato);
     }
+    else if(isset($_GET['id'])) {
+        $LibroSelezionato = $_GET['id'];
+        $tmp = $connection ->  controllareIdLibro($LibroSelezionato);
+    }
+    if(!$tmp) {
+        header("Location: template/404.html"); //libro non trovato o non impostato in $_GET o $_POST
+        exit();
+    }
+    $titolo = $connection ->  gettitololibro($LibroSelezionato);
+    $autore = $connection ->  getautoreLibro($LibroSelezionato);
+    $genereold = $connection ->  getgenereLibro($LibroSelezionato);
+    $linguaold = $connection ->  getlinguaLibro($LibroSelezionato);
+    $trama = $connection ->  gettramaLibro($LibroSelezionato);
+    $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
+
+    $resultGeneri = $connection -> getListaGeneri();
+    $resultLingue= $connection -> getLingueLibri();
+    
+    foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        if($genere["nome"] == $genereold) {
+            $data_list_generi .= '<option value="'.$genere["nome"].'" selected>'.$genere["nome"].'</option>';
+        }
+        else
+            $data_list_generi .= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
+    }
+    foreach($resultLingue as $lingue) {
+        $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
+    }
+    $connection -> closeConnection();
+
+
+    /*if(!empty($resultKeyword)) {
+        for ($i=0; $i<count($resultKeyword)-1; $i++) {
+            $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
+        }
+        $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
+    } else {
+        $listaKeyword = "Miglior libro";
+    }*/
 }
-catch(Throwable $e) {
-    echo "Errore: ".$e -> getMessage();
+else {
+    echo "Connessione fallita";
 }
 
 $paginaHTML = str_replace("{id_libro}", $LibroSelezionato, $paginaHTML);
