@@ -238,7 +238,7 @@ fieldset ul{
     list-style: inside;
 }
 
-input[type=text], input[type=password], input[type=email], input[type=number], select, form button {
+input[type=text], input[type=password], input[type=email], input[type=number], input[type=data], select, form button {
     outline: none;
     padding: 12px 20px;
     margin: 8px 0;
