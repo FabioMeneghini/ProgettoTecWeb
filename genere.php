@@ -70,7 +70,7 @@ try {
             $connection -> closeConnection();
             foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
                 if($_GET["genere"]==$genere["nome"])
-                    $listaGeneri .=$genere["nome"];
+                    $listaGeneri .='<dd>'.$genere["nome"]. '</dd>';
                 else
                     $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
             }

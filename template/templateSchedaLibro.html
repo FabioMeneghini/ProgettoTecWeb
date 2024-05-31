@@ -38,55 +38,54 @@
         <main id="content">
             {messaggiErrore}
             {messaggiSuccesso}
-            <div>
-                <div>
-                    <h2 id="titolo">{TitoloLibro}</h2>
-                    <img src="{ImmagineLibro}" alt="{altlibro}" height="400">
-                    <dl class="datilistalibro">
-                        <div>
+            <div class="container">
+                <h2 id="titolo">{TitoloLibro}</h2>
+                <img src="{ImmagineLibro}" alt="{altlibro}" height="400">
+                <dl class="datilistalibro">
+                    <div>
                         <dt>Autore: </dt>
                         <dd>{AutoreLibro}</dd>
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                         <dt>Genere: </dt>
                         <dd>{GenereLibro}</dd>
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                         <dt>Lingua: </dt>
                         <dd>{LinguaLibro}</dd>
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                         <dt>Numero capitoli: </dt>
                         <dd>{CapitoliLibro}</dd>
-                        </div>
-                    </dl>
-                    {bottoniAdmin}
-                </div>
+                    </div>
+                </dl>
+                {bottoniAdmin}
                 <h3>Voto medio della nostra <span lang="en">community</span>: {mediavoti}</h3>
-                <div>
-                    <h3>Menù</h3>
-                    <ul class="menulibro">    
-                        <li><a href="#trama">Vai alla trama</a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
-                        {menupersonale}
-                        <li><a href="#community">Vai alle recensioni della <span lang="en">community</span></a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
-                    </ul>
-                </div>
-                <div>
-                    <dl>
-                        <dt id="trama">Trama:</dt>
-                        <dd>{tramaLibro}</dd>
-                        <dt id="recensionetua">La tua recensione e il tuo voto:</dt>
-                        {arearecensionevotoform}
-                    </dl>
-                </div>
-                <section>
-                    <h4 id="community">Recensioni della <span lang="en">community</span></h4>
-                    {recensioniComunity}
-                </section>
-                <nav aria-label="Torna al form di ricerca">
-                    <a class="torna_su" href="#content">Torna su</a>
-                </nav> 
             </div>
+            <h3>Menù</h3>
+            <div class="menu_scheda_libro">
+                <ul class="menulibro">    
+                    <li><a href="#trama">Vai alla trama</a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                    {menupersonale}
+                    <li><a href="#community">Vai alle recensioni della <span lang="en">community</span></a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
+                </ul>
+            </div>
+            <div>
+                <dl>
+                    <dt id="trama">Trama:</dt>
+                    <dd class="trama_contenuto">{tramaLibro}</dd>
+                </dl>
+            </div>
+            <div id="recensionetua">
+                {arearecensionevotoform}
+            </div>
+            <section>
+                <h4 id="community">Recensioni della <span lang="en">community</span></h4>
+                {recensioniComunity}
+            </section>
+            <nav aria-label="Torna al form di ricerca">
+                <a class="torna_su" href="#content">Torna su</a>
+            </nav> 
         </main>
         <footer id="footer">
             <ul>

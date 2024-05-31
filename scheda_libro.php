@@ -199,17 +199,16 @@ try {
                 }
                 else  {
                     $arearecensionevoto='
-                        <form action="scheda_libro.php" method="post">
-                            <p>Prima di poter recensire questo libro devi averlo terminato. Vuoi iniziare questo libro o salvarlo per iniziarlo più tardi?</p>
-                            <fieldset>
-                                <!-- <legend>Prima di poter recensire questo libro devi averlo terminato</legend> -->
-                                <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                                <!-- <label for="username">Salva per leggerlo più tardi:</label> -->
-                                <input type="submit" id="salva" name="salva" value="Salva">
-                                <!-- <label for="username">Inizia a leggere:</label> -->
-                                <input type="submit" id="inizia" name="inizia" value="Inizia a leggere">
-                            </fieldset>
-                        </form>';
+                    <form action="scheda_libro.php" method="post" class="form-bottoni">
+                        <fieldset>
+                            <legend>Prima di poter recensire questo libro devi averlo terminato</legend>
+                            <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
+                            <label for="username">Salva per leggerlo più tardi:</label> 
+                            <input type="submit" id="salva" name="salva" value="Salva">
+                            <label for="username">Inizia a leggere:</label> 
+                            <input type="submit" id="inizia" name="inizia" value="Inizia a leggere">
+                        </fieldset>
+                    </form>';
                 }
             }
             else {
@@ -236,9 +235,9 @@ try {
                 $listaRecensioni.='<p>Non ci sono ancora recensioni per questo libro</p>';
             }
             else {
-                $listaRecensioni.='<ul>';
+                $listaRecensioni.='<ul class="lista_recensioni_scheda_libro">';
                 foreach($altre_recensioni as $recensione) {
-                    $listaRecensioni.='<li><p class="commento">'.$recensione["username_autore"].': '.$recensione["commento"].'</p></li>';
+                    $listaRecensioni .= '<li><p class="commento"><span class="username">'.$recensione["username_autore"].':</span> <span class="commento-testuale">'.$recensione["commento"].'</span></p></li>';
                 }
                 $listaRecensioni.="</ul></div>";
             }
@@ -287,7 +286,7 @@ $paginaHTML = str_replace("{tramaLibro}", $trama , $paginaHTML);
 $paginaHTML = str_replace("{bottoniAdmin}", $bottoni_admin , $paginaHTML);
 $paginaHTML = str_replace("{voto}", $voto, $paginaHTML);
 $paginaHTML = str_replace("{recensioniComunity}", $listaRecensioni, $paginaHTML);
-/*$paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiForm."</ul>", $paginaHTML);*/
+$paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiForm."</ul>", $paginaHTML);
 if (empty($messaggiErrore)) {
     $paginaHTML = str_replace("{messaggiErrore}", "", $paginaHTML);
 } else {

@@ -86,7 +86,7 @@ try {
                                 La tabella contiene l\'elenco dei libri che corrispondono alla tua ricerca.
                                 Ogni riga descrive un libro con cinque colonne nominate:"titolo","copertina", "autore", "genere", "lingua".
                             </p>
-                            <table aria-describedby="descr">
+                            <table  id="tabella_risultati_ricerca_libri" aria-describedby="descr">
                             <caption>Risultati della tua ricerca</caption>
                             <tr>
                                 <th scope="col">Titolo</th>
