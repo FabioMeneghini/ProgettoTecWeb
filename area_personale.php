@@ -104,92 +104,87 @@ $successoEmail = "";
 $successoPassword = "";
 $data = "";
 
-try {
-    $connection = new DBAccess();
-    $connectionOk = $connection -> openDBConnection();
-    if($connectionOk) {
-        $data = $connection -> getDataIscrione($_SESSION['username']);
-        //username
-        if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
-            $username = trim($_POST['username']);
-            $tmp = controllaUsername($username);
-            if($tmp['ok']) {
-                if($connection -> verificaUsername($username)) {
-                    $messaggiUsername .= "<li>Lo username '".$username."' è già in uso</li>";
-                }
-                else {
-                    $connection -> modificaUsername($_SESSION['username'], $username);
-                    $_SESSION['username'] = $username;
-                    $successoUsername = '<span lang="en">Username</span> modificato con successo';
-                }
+$connection = new DBAccess();
+$connectionOk = $connection -> openDBConnection();
+if($connectionOk) {
+    $data = $connection -> getDataIscrione($_SESSION['username']);
+    //username
+    if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
+        $username = trim($_POST['username']);
+        $tmp = controllaUsername($username);
+        if($tmp['ok']) {
+            if($connection -> verificaUsername($username)) {
+                $messaggiUsername .= "<li>Lo username '".$username."' è già in uso</li>";
             }
             else {
-                $messaggiUsername .= $tmp['messaggi'];
+                $connection -> modificaUsername($_SESSION['username'], $username);
+                $_SESSION['username'] = $username;
+                $successoUsername = '<span lang="en">Username</span> modificato con successo';
             }
         }
-
-        //password
-        if(isset($_POST['cambia_password'])) { //se è stato premuto il pulsante per cambiare la password
-            $password_old = trim($_POST['passwordold']);
-            $password_new1 = trim($_POST['passwordnew1']);
-            $password_new2 = trim($_POST['passwordnew2']);
-
-            if($connection -> verificaPassword($_SESSION['username'], $password_old)) { //se la password vecchia è corretta
-                $tmp = controllaPassword($password_old, $password_new1, $password_new2);
-                if($tmp['ok']) {
-                    $connection -> modificaPassword($_SESSION['username'], $password_new1);
-                    $successoPassword = '<span lang="en">Password</span> modificata con successo';
-                }
-                else {
-                    $messaggiPassword .= $tmp['messaggi'];
-                }
-            }
-            else {
-                $messaggiPassword .= "<li>La password vecchia non è corretta</li>";
-            }
-        }
-
-        //mail
-        if(isset($_POST['cambia_email'])) {
-            $email = trim($_POST['email']);
-            $tmp = controllaEmail($email);
-            if($tmp['ok']) {
-                $connection -> modificaEmail($_SESSION['username'], $email);
-                $_SESSION['email'] = $email;
-                $successoEmail = '<span lang="en">Email</span> modificata con successo';
-            }
-            else {
-                $messaggiEmail .= $tmp['messaggi'];
-            }
-        }
-
-        //disconnetti
-        if(isset($_POST['disconnetti'])) {
-            session_destroy();
-            header("Location: index.php");
-            exit();
-        }
-
-        //elimina
-        if(isset($_POST['elimina'])) {
-            $connection -> eliminaUtente($_SESSION['username']);
-            session_destroy();
-            header("Location: index.php");
-            exit();
-        }
-
-        $resultGeneri = $connection -> getListaGeneri();
-        $connection -> closeConnection();
-        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        else {
+            $messaggiUsername .= $tmp['messaggi'];
         }
     }
-    else {
-        $messaggi.="<li>Connessione fallita</li>";
+
+    //password
+    if(isset($_POST['cambia_password'])) { //se è stato premuto il pulsante per cambiare la password
+        $password_old = trim($_POST['passwordold']);
+        $password_new1 = trim($_POST['passwordnew1']);
+        $password_new2 = trim($_POST['passwordnew2']);
+
+        if($connection -> verificaPassword($_SESSION['username'], $password_old)) { //se la password vecchia è corretta
+            $tmp = controllaPassword($password_old, $password_new1, $password_new2);
+            if($tmp['ok']) {
+                $connection -> modificaPassword($_SESSION['username'], $password_new1);
+                $successoPassword = '<span lang="en">Password</span> modificata con successo';
+            }
+            else {
+                $messaggiPassword .= $tmp['messaggi'];
+            }
+        }
+        else {
+            $messaggiPassword .= "<li>La password vecchia non è corretta</li>";
+        }
+    }
+
+    //mail
+    if(isset($_POST['cambia_email'])) {
+        $email = trim($_POST['email']);
+        $tmp = controllaEmail($email);
+        if($tmp['ok']) {
+            $connection -> modificaEmail($_SESSION['username'], $email);
+            $_SESSION['email'] = $email;
+            $successoEmail = '<span lang="en">Email</span> modificata con successo';
+        }
+        else {
+            $messaggiEmail .= $tmp['messaggi'];
+        }
+    }
+
+    //disconnetti
+    if(isset($_POST['disconnetti'])) {
+        session_destroy();
+        header("Location: index.php");
+        exit();
+    }
+
+    //elimina
+    if(isset($_POST['elimina'])) {
+        $connection -> eliminaUtente($_SESSION['username']);
+        session_destroy();
+        header("Location: index.php");
+        exit();
+    }
+
+    $resultGeneri = $connection -> getListaGeneri();
+    $connection -> closeConnection();
+    foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
     }
 }
-catch(Throwable $e) {
-    $messaggi.="<li>Errore: ".$e -> getMessage()."</li>";
+else {
+    $messaggi.="<li>Errore di connessione al database</li>";
 }
 
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);

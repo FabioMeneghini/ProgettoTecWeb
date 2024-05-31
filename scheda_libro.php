@@ -96,174 +96,169 @@ if(isset($_GET['valutato']) && $_GET['valutato'] == 1) {
     $messaggiSuccesso = '<p class="successo">Valutazione aggiunta/modificata con successo!</p>';
 }
 
-try {
-    $connection = new DBAccess();
-    $connectionOk = $connection -> openDBConnection();
-    if($connectionOk) {
-        //controllo se l'utente vuole salvare, iniziare o valutare un libro
-        if(isset($_POST["salva"])) {
-            $salvato = $connection -> aggiungiDaLeggere($_SESSION['username'], $_POST['id_libro']);
+$connection = new DBAccess();
+$connectionOk = $connection -> openDBConnection();
+if($connectionOk) {
+    //controllo se l'utente vuole salvare, iniziare o valutare un libro
+    if(isset($_POST["salva"])) {
+        $salvato = $connection -> aggiungiDaLeggere($_SESSION['username'], $_POST['id_libro']);
+        //mi sposto con header(Location: ...) perché altrimenti da problemi con il libro che visualizza (mostra sempre il primo in quanto perde il parametro id nel get)
+        header("Location: scheda_libro.php?salvato=1&id=".$_POST['id_libro']);
+        exit();
+    }
+    if(isset($_POST["inizia"])) {
+        $eliminato = $connection -> rimuoviDaLeggere($_SESSION['username'], $_POST['id_libro']);
+        $iniziato = $connection -> aggiungiStaLeggendo($_SESSION['username'], $_POST['id_libro']);
+        header("Location: stai_leggendo.php?iniziato=1");
+        exit();
+    }
+    if(isset($_POST["valuta"])) {
+        $tmp = controlla($_POST["recensione"], $_POST["voto"]);
+        if($tmp["ok"]) {
+            $salvato = $connection -> aggiungiValutazione($_SESSION['username'], $_POST['id_libro'], $_POST['voto'], $_POST['recensione']);
             //mi sposto con header(Location: ...) perché altrimenti da problemi con il libro che visualizza (mostra sempre il primo in quanto perde il parametro id nel get)
-            header("Location: scheda_libro.php?salvato=1&id=".$_POST['id_libro']);
+            header("Location: scheda_libro.php?valutato=1&id=".$_POST['id_libro']);
             exit();
-        }
-        if(isset($_POST["inizia"])) {
-            $eliminato = $connection -> rimuoviDaLeggere($_SESSION['username'], $_POST['id_libro']);
-            $iniziato = $connection -> aggiungiStaLeggendo($_SESSION['username'], $_POST['id_libro']);
-            header("Location: stai_leggendo.php?iniziato=1");
-            exit();
-        }
-        if(isset($_POST["valuta"])) {
-            $tmp = controlla($_POST["recensione"], $_POST["voto"]);
-            if($tmp["ok"]) {
-                $salvato = $connection -> aggiungiValutazione($_SESSION['username'], $_POST['id_libro'], $_POST['voto'], $_POST['recensione']);
-                //mi sposto con header(Location: ...) perché altrimenti da problemi con il libro che visualizza (mostra sempre il primo in quanto perde il parametro id nel get)
-                header("Location: scheda_libro.php?valutato=1&id=".$_POST['id_libro']);
-                exit();
-            }
-            else {
-                $messaggiForm = $tmp["messaggi"];
-            }
-        }
-
-        if(isset($_POST['id_libro']))
-            $LibroSelezionato = $_POST['id_libro'];
-        else if(isset($_GET['id']))
-            $LibroSelezionato = $_GET['id'];
-        else
-            $LibroSelezionato = 1; //libro di default
-        $ok = $connection -> controllareIdLibro($LibroSelezionato);
-        if($ok) {
-            $resultGeneri = $connection -> getListaGeneri();
-            $titolo = $connection ->  gettitololibro($LibroSelezionato);
-            $autore = $connection ->  getautoreLibro($LibroSelezionato);
-            $genereLibro = $connection ->  getgenereLibro($LibroSelezionato);
-            $lingua = $connection ->  getlinguaLibro($LibroSelezionato);
-            $trama = $connection ->  gettramaLibro($LibroSelezionato);
-            $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
-            $copertina = $connection -> getcopertina($LibroSelezionato);
-            $alt = $connection -> getalt($LibroSelezionato);
-
-            foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-                $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
-            } 
-
-            if(!isset($_SESSION['username'])) {
-                $arearecensionevoto='<div>
-                                        <p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
-                                        <a href="accedi.php">Accedi</a>
-                                        <p>Non hai ancora un <span lang="en">account</span>?</p>
-                                        <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
-                                        <a href="registrati.php">Registrati</a>
-                                    <div>';
-            }
-            else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
-                $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
-                $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
-                $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
-                if($terminato) {  
-                    $tua_recensione = $connection -> getrecensionetua($LibroSelezionato,$_SESSION['username']);
-                    $voto = $connection -> getvototuo($LibroSelezionato,$_SESSION['username']);
-
-                    if($tua_recensione=='') { //se la recensione è vuota
-                        $tua_recensione='Scrivi qui una recensione';
-                    }
-                    $arearecensionevoto='
-                        <form method="post" action="scheda_libro.php" onsubmit="return validaSchedaLibro()" onreset="conferma(\'Sei sicuro di voler annullare le modifiche alla tua recensione e al tuo voto?\')"> 
-                            {messaggiForm}
-                            <fieldset>
-                                <legend>La tua Recensione e il tuo voto:</legend>
-                                <label for="recensione">Recensione: </label><br>
-                                <span><textarea id="recensione" name="recensione" rows="20" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span><br>
-                                <label for="voto">Voto: </label>
-                                <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>
-                                <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                                <input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">
-                                <input type="reset" value="Annulla">
-                            </fieldset>
-                        </form>';
-                }
-                else if($salvato) {
-                    $arearecensionevoto='
-                        <form action="scheda_libro.php" method="post"> 
-                        <fieldset>
-                            <legend>Inizia a leggere:</legend>
-                            <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                            <label for="username">Questo libro è nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label><br>
-                            <input type="submit" id="inizia" name="inizia" value="inizia">
-                        </fieldset>
-                    </form>';
-                }
-                else if($iniziato) {
-                    $arearecensionevoto='<p>Prima di poter recensire questo libro devi averlo terminato. Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>';
-                }
-                else  {
-                    $arearecensionevoto='
-                    <form action="scheda_libro.php" method="post" class="form-bottoni">
-                        <fieldset>
-                            <legend>Prima di poter recensire questo libro devi averlo terminato</legend>
-                            <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                            <label for="username">Salva per leggerlo più tardi:</label> 
-                            <input type="submit" id="salva" name="salva" value="Salva">
-                            <label for="username">Inizia a leggere:</label> 
-                            <input type="submit" id="inizia" name="inizia" value="Inizia a leggere">
-                        </fieldset>
-                    </form>';
-                }
-            }
-            else {
-                $bottoni_admin='<section id="bottoni_admin">
-                    <!-- <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a> -->
-                    <form action="modifica_libro.php" method="get">
-                        <fieldset>
-                            <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
-                            <input type="submit" id="modifica_libro" name="modifica_libro" value="Modifica">
-                        </fieldset>
-                    </form>
-                    <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
-                        <fieldset>
-                            <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
-                            <input type="submit" id="elimina" name="elimina" value="Elimina">
-                        </fieldset>
-                    </form>';
-            }
-            $media_voti = $connection -> getmediavoti($LibroSelezionato);
-            $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
-            $connection -> closeConnection();
-            //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
-            if(empty($altre_recensioni)) {
-                $listaRecensioni.='<p>Non ci sono ancora recensioni per questo libro</p>';
-            }
-            else {
-                $listaRecensioni.='<ul class="lista_recensioni_scheda_libro">';
-                foreach($altre_recensioni as $recensione) {
-                    $listaRecensioni .= '<li><p class="commento"><span class="username">'.$recensione["username_autore"].':</span> <span class="commento-testuale">'.$recensione["commento"].'</span></p></li>';
-                }
-                $listaRecensioni.="</ul></div>";
-            }
-
-            if(!empty($resultKeyword)) {
-                for ($i=0; $i<count($resultKeyword)-1; $i++) {
-                    $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
-                }
-                $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
-            } else {
-                $listaKeyword = "Miglior libro";
-            }
-    
         }
         else {
-            header("Location: index.php");
-            //header("Location: index.php?success=0??????"); //MOSTRARE MESSAGE DI ERRORE (libro non trovato)
-            exit();
+            $messaggiForm = $tmp["messaggi"];
         }
     }
+
+    if(isset($_POST['id_libro']))
+        $LibroSelezionato = $_POST['id_libro'];
+    else if(isset($_GET['id']))
+        $LibroSelezionato = $_GET['id'];
+    else
+        $LibroSelezionato = 1; //libro di default
+    $ok = $connection -> controllareIdLibro($LibroSelezionato);
+    if($ok) {
+        $resultGeneri = $connection -> getListaGeneri();
+        $titolo = $connection ->  gettitololibro($LibroSelezionato);
+        $autore = $connection ->  getautoreLibro($LibroSelezionato);
+        $genereLibro = $connection ->  getgenereLibro($LibroSelezionato);
+        $lingua = $connection ->  getlinguaLibro($LibroSelezionato);
+        $trama = $connection ->  gettramaLibro($LibroSelezionato);
+        $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
+        $copertina = $connection -> getcopertina($LibroSelezionato);
+        $alt = $connection -> getalt($LibroSelezionato);
+
+        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        } 
+
+        if(!isset($_SESSION['username'])) {
+            $arearecensionevoto='<div>
+                                    <p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
+                                    <a href="accedi.php">Accedi</a>
+                                    <p>Non hai ancora un <span lang="en">account</span>?</p>
+                                    <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
+                                    <a href="registrati.php">Registrati</a>
+                                <div>';
+        }
+        else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
+            $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
+            $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
+            $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
+            if($terminato) {  
+                $tua_recensione = $connection -> getrecensionetua($LibroSelezionato,$_SESSION['username']);
+                $voto = $connection -> getvototuo($LibroSelezionato,$_SESSION['username']);
+
+                if($tua_recensione=='') { //se la recensione è vuota
+                    $tua_recensione='Scrivi qui una recensione';
+                }
+                $arearecensionevoto='
+                    <form method="post" action="scheda_libro.php" onsubmit="return validaSchedaLibro()" onreset="conferma(\'Sei sicuro di voler annullare le modifiche alla tua recensione e al tuo voto?\')"> 
+                        {messaggiForm}
+                        <fieldset>
+                            <legend>La tua Recensione e il tuo voto:</legend>
+                            <label for="recensione">Recensione: </label><br>
+                            <span><textarea id="recensione" name="recensione" rows="20" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span><br>
+                            <label for="voto">Voto: </label>
+                            <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>
+                            <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
+                            <input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">
+                            <input type="reset" value="Annulla">
+                        </fieldset>
+                    </form>';
+            }
+            else if($salvato) {
+                $arearecensionevoto='
+                    <form action="scheda_libro.php" method="post"> 
+                    <fieldset>
+                        <legend>Inizia a leggere:</legend>
+                        <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
+                        <label for="username">Questo libro è nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label><br>
+                        <input type="submit" id="inizia" name="inizia" value="inizia">
+                    </fieldset>
+                </form>';
+            }
+            else if($iniziato) {
+                $arearecensionevoto='<p>Prima di poter recensire questo libro devi averlo terminato. Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>';
+            }
+            else  {
+                $arearecensionevoto='
+                <form action="scheda_libro.php" method="post" class="form-bottoni">
+                    <fieldset>
+                        <legend>Prima di poter recensire questo libro devi averlo terminato</legend>
+                        <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
+                        <label for="username">Salva per leggerlo più tardi:</label> 
+                        <input type="submit" id="salva" name="salva" value="Salva">
+                        <label for="username">Inizia a leggere:</label> 
+                        <input type="submit" id="inizia" name="inizia" value="Inizia a leggere">
+                    </fieldset>
+                </form>';
+            }
+        }
+        else {
+            $bottoni_admin='<section id="bottoni_admin">
+                <!-- <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a> -->
+                <form action="modifica_libro.php" method="get">
+                    <fieldset>
+                        <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                        <input type="submit" id="modifica_libro" name="modifica_libro" value="Modifica">
+                    </fieldset>
+                </form>
+                <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
+                    <fieldset>
+                        <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                        <input type="submit" id="elimina" name="elimina" value="Elimina">
+                    </fieldset>
+                </form>';
+        }
+        $media_voti = $connection -> getmediavoti($LibroSelezionato);
+        $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
+        $connection -> closeConnection();
+        //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
+        if(empty($altre_recensioni)) {
+            $listaRecensioni.='<p>Non ci sono ancora recensioni per questo libro</p>';
+        }
+        else {
+            $listaRecensioni.='<ul class="lista_recensioni_scheda_libro">';
+            foreach($altre_recensioni as $recensione) {
+                $listaRecensioni .= '<li><p class="commento"><span class="username">'.$recensione["username_autore"].':</span> <span class="commento-testuale">'.$recensione["commento"].'</span></p></li>';
+            }
+            $listaRecensioni.="</ul></div>";
+        }
+
+        if(!empty($resultKeyword)) {
+            for ($i=0; $i<count($resultKeyword)-1; $i++) {
+                $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
+            }
+            $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
+        } else {
+            $listaKeyword = "Miglior libro";
+        }
+
+    }
     else {
-        echo "Connessione fallita";
+        header("Location: index.php");
+        //header("Location: index.php?success=0??????"); //MOSTRARE MESSAGGIO DI ERRORE (libro non trovato)
+        exit();
     }
 }
-catch(Throwable $e) {
-    echo "Errore: ".$e -> getMessage();
+else {
+    $messaggiForm = '<li>Errore di connessione al database</li';
 }
 
 $paginaHTML = str_replace("{keywords}", $listaKeyword ,$paginaHTML);
