@@ -27,13 +27,6 @@ if($connectionOk) {
         $username=$_SESSION["username"];
         $connection -> aggiornaStaLeggendo($username, $id_libri, $capitoli); //AGGIORNARE LIBRI CHE STA LEGGENDO L'UTENTE CON QUELLI PRESI DA POST, SE HA MESSO MASSIMO DEVE ANDARE IN TERMINATI E TOGLIERLO DA DA LEGGERE
     }
-    /*if(isset($_GET['id_add'])) { // !!!!! da giustificare nella relazione il perché ho usato il metodo GET invece del POST: !!!!!
-                                    // in pratica se avessi usato il post avrei dovuto fare un form per ogni riga della tabella,
-                                    // mentre così la tabella è più accessibile (credo)
-        $connection -> rimuoviDaLeggere($_SESSION['username'], $_GET['id_add']);
-        if(!$connection -> staLeggendo($_SESSION['username'], $_GET['id_add']))
-            $connection -> aggiungiStaLeggendo($_SESSION['username'], $_GET['id_add']);
-    }*/ //DA TOGLIERE
     $lista = $connection -> getListaStaLeggendo($_SESSION['username']);
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
