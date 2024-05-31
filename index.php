@@ -17,6 +17,7 @@ $paginaHTML = file_get_contents("template/templateHomeNonRegistrato.html");
 $listaBestSeller = "";
 $listaGeneri = "";
 $listaLibri = '<div class="libri_genere">';
+$torna_su="";
 
 try {
     $connection = new DBAccess();
@@ -61,6 +62,13 @@ try {
         foreach($resultListaGeneri as $genere){
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
+        if($resultGeneri>=15) {
+
+            $torna_su=' <nav aria-label="Torna all\' inizio della pagina">
+                             <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+         }
+        
     }
     else {
         echo "Connessione fallita";
@@ -72,6 +80,7 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
+$paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 

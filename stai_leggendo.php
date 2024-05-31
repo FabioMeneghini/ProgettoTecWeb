@@ -13,6 +13,7 @@ $paginaHTML = file_get_contents("template/templateStaiLeggendo.html");
 $listaLibri = "";
 $listaGeneri = "";
 $messaggiSuccesso = "";
+$torna_su="";
 
 if(isset($_GET['iniziato']) && $_GET['iniziato'] == 1) {
     $messaggiSuccesso = '<p class="successo">Libro iniziato con successo!</p>';
@@ -79,6 +80,12 @@ try {
                             </fieldset>
                             </form>';
         }
+        if(count($lista)>=8) {
+
+            $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
+                             <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+        }
     }
     else {
         echo "Connessione fallita";
@@ -90,6 +97,7 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
+$paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
 if (empty($messaggiSuccesso)) {
     $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
 } else {

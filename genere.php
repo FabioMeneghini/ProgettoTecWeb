@@ -84,9 +84,9 @@ try {
                 }
                 $listaLibri.='</ul>';
             }
-             if(count($risultatiLibri)>=15) {
+            if(count($risultatiLibri)>=8) {
 
-               $torna_su=' <nav aria-label="Torna al form di ricerca">
+               $torna_su=' <nav aria-label="Torna ai primi libri del genere selezionato">
                                 <a class="torna_su" href="#content">Torna su</a>
                            </nav>';
             }

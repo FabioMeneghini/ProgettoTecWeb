@@ -12,6 +12,7 @@ $paginaHTML = file_get_contents("template/templateDaLeggere.html");
 
 $listaLibri = "";
 $listaGeneri = "";
+$torna_su="";
 
 try {
     $connection = new DBAccess();
@@ -66,6 +67,13 @@ try {
                             </fieldset>
                             </form>';
         }
+        if(count($lista)>=10) {
+
+            $torna_su=' <nav aria-label="Torna all\' inizio della lista dei libri salvati">
+                             <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+        }
+        
     }
     else {
         echo "Connessione fallita";
@@ -76,6 +84,7 @@ catch(Throwable $e) {
 }
 
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);
+$paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 

@@ -50,6 +50,7 @@ else {
 $menuGeneri = "";
 $listaGeneri = "";
 $resultKeyword = "";
+$torna_su="";
 
 try {
     $connection = new DBAccess();
@@ -62,6 +63,11 @@ try {
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
             $menuGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
             $listaGeneri .= '<li><a id="'.$genere["nome"].'" href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
+        }
+        if(count($resultGeneri)>=20) {
+            $torna_su='<nav aria-label="Torna all\' inizio della lista dei generi">
+                            <a class="torna_su" href="#content">Torna su</a>
+                       </nav>';
         }
     
         /*if(!empty($resultKeyword)) {
@@ -83,6 +89,7 @@ catch(Throwable $e) {
 //$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{Generi}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $menuGeneri, $paginaHTML);
 
 echo $paginaHTML;

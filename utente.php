@@ -19,6 +19,7 @@ $paginaHTML = file_get_contents("template/templateHomeUtente.html");
 $messaggiSuccesso = "";
 $listaGeneri = "";
 $listaLibri = '<div id="libri_genere_home">';
+$torna_su="";
 
 if(isset($_GET['registrato']) && $_GET['registrato'] == 1) {
     $messaggiSuccesso = '<p class="successo">Registrazione avvenuta con successo. Benvenuto, '.$_SESSION['username'].'!</p>';
@@ -58,6 +59,12 @@ try {
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
         }
         $connection -> closeConnection();
+        if(count($resultGeneri)>=3) {
+
+            $torna_su=' <nav aria-label="Torna all\'inizio della home">
+                             <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+         }
     }
     else {
         echo "Connessione fallita";
@@ -69,6 +76,7 @@ catch(Throwable $e) {
 
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
 if (empty($messaggiSuccesso)) {
     $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
 } else {

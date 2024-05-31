@@ -90,7 +90,7 @@ try {
            }
            $utenti .= "</table>";
             if(count($resultUtenti)>=20) {
-                $torna_su='<nav aria-label="Torna al form di ricerca">
+                $torna_su='<nav aria-label="Torna all\' inizio della lista deli utenti ">
                                 <a class="torna_su" href="#content">Torna su</a>
                            </nav>';
             }
