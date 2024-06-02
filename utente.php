@@ -77,7 +77,7 @@ if (empty($messaggiSuccesso)) {
     $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
 } else {
     $paginaHTML = str_replace("{messaggiSuccesso}", "<div class=\"messaggiSuccesso\">".$messaggiSuccesso."</div>", $paginaHTML);
-}*/
+}
 $paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 echo $paginaHTML;
 
