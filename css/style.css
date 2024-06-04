@@ -193,6 +193,11 @@ h2{
     padding: 1em;
 }
 
+h3{
+    font-size: 1.5em;
+    padding: 1em;
+}
+
 h3:first-of-type::before{
     content: "";
     display: block;

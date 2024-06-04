@@ -49,6 +49,27 @@ main img{
     width: 50%;
 }
 
-footer{
+footer {
     display: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#logo img {
+    width: 20%;
+}
+
+.slider-wrapper, .titologenere{
+    display: none;
+}
+
+h3 {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.librigeneri li {
+    padding-top: 0.5em;
 }
