@@ -40,10 +40,14 @@ class DBAccess {
     }
 
     public function getListaBestSeller() {
-        $query = "SELECT libri.titolo, libri.titolo_ir, libri.autore, generi.nome AS genere, libri.descrizione, libri.id
-                  FROM libri, generi
-                  WHERE libri.id_genere=generi.id
-                  LIMIT 10";
+        
+        $query = "SELECT libri.titolo, libri.titolo_ir, libri.autore, generi.nome AS genere, libri.descrizione, libri.id, AVG(recensioni.voto) AS voto_medio
+              FROM libri
+              JOIN generi ON libri.id_genere = generi.id
+              LEFT JOIN recensioni ON libri.id = recensioni.id_libro
+              GROUP BY libri.id
+              ORDER BY voto_medio DESC
+              LIMIT 10";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
