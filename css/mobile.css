@@ -28,7 +28,7 @@ input[type="checkbox"]:not(:checked) + ul, input[type="checkbox"]:not(:checked) 
 }
 
 #menu label{
-    text-align: left;
+    text-align: right;
     display: block;
 }
 

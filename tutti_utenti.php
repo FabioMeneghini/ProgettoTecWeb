@@ -76,16 +76,16 @@ if($connectionOk) {
                         <th scope="col">Nome</th>
                         <th scope="col">Cognome</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Data di iscrizione</th>
+                        <th class="rimuovi" scope="col">Email</th>
+                        <th class="rimuovi" scope="col">Data di iscrizione</th>
                     </tr>';
         foreach($resultUtenti as $utente) {
         $utenti .= '<tr>
                         <td scope="row">'.$utente["nome"].'</td>
                         <td>'.$utente["cognome"].'</td>
                         <td>'.$utente["username"].'</td>
-                        <td>'.$utente["email"].'</td>
-                        <td>'.$utente["data_iscrizione"].'</td>
+                        <td class="rimuovi">'.$utente["email"].'</td>
+                        <td class="rimuovi">'.$utente["data_iscrizione"].'</td>
                         </tr>';
            }
            $utenti .= "</table>";
