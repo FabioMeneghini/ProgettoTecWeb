@@ -40,16 +40,16 @@ $torna_su="";
                                     <tr>
                                         <th scope="col">Titolo</th>
                                         <th scope="col">Autore</th>
-                                        <th scope="col">Data di fine lettura</th>
-                                        <th scope="col">Voto assegnato</th>
+                                        <th class="rimuovi" scope="col">Data di fine lettura</th>
+                                        <th class="rimuovi" scope="col">Voto assegnato</th>
                                         <th scope="col">Elimina</th>
                                     </tr>';
             foreach($lista as $libro) {
               $listaLibri .= '<tr>
                                   <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
                                   <td>'.$libro["autore"].'</td>
-                                  <td>'.$libro["data_fine_lettura"].'</td>
-                                  <td>'.$libro["voto"].'</td>
+                                  <td class="rimuovi">'.$libro["data_fine_lettura"].'</td>
+                                  <td class="rimuovi">'.$libro["voto"].'</td>
                                   <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                               </tr>';
           }
