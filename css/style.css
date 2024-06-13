@@ -1287,28 +1287,3 @@ blockquote {
 table{
     width: 100%;
 }
-
-/*TODO fare file a parte*/
-@media (max-width: 900px) {
-    .item {
-        flex: 1 0 100%;
-    }
-    .commento{
-        display: none;
-    }
-    .statistiche_generali{
-        flex-direction: column;
-    }
-    .statistiche_admin{ 
-        width: auto;
-    }
-    #listagenere li{
-        width: 40%;
-    }
-    #generi li{
-        width: 40%;
-    }
-    .rimuovi{
-        display: none;
-    }
-}
