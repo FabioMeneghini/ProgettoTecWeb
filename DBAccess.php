@@ -153,20 +153,16 @@ class DBAccess {
         }
     }
     
-    //DONE ma genere deve avere una tabella? 
-    public function getKeywordByGenere($genereSelezionato) {
-        $query = "SELECT keyword FROM genere WHERE genere = '$genereSelezionato'";
-        $queryResult = mysqli_query($this->connection, $query);
-    
-        if (mysqli_num_rows($queryResult) != 0) {
-            $result = array();
-            while ($row = mysqli_fetch_assoc($queryResult)) {
-                $result[] = $row['keyword'];
-            }
-            mysqli_free_result($queryResult);
-            return $result;
-        } else {
-            return null;
+    public function getkeywordsGenere($genereSelezionato) {
+        $query = "SELECT keywords FROM generi WHERE nome = '$genereSelezionato'";
+        $queryResult = mysqli_query($this -> connection, $query);
+        if(mysqli_num_rows($queryResult) != 0){
+            $row = mysqli_fetch_assoc($queryResult);
+            $queryResult -> free();
+            return $row['keywords'];
+        }
+        else {
+            return "";
         }
     }
     
@@ -539,7 +535,7 @@ class DBAccess {
         }
     }
 
-    public function getkeywords($LibroSelezionato) {
+    public function getkeywordsLibro($LibroSelezionato) {
         $query = "SELECT keywords FROM libri WHERE id = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
@@ -548,7 +544,7 @@ class DBAccess {
             return $row['keywords'];
         }
         else {
-            return null;
+            return "";
         }
     }
 

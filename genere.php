@@ -42,16 +42,15 @@ if(isset($_SESSION['admin'])) {
         $menu = $adminMenu;
     } 
     else
-        $menu =$userMenu;
+        $menu = $userMenu;
 }
 else {
-    $menu =$NonRegistrato;
+    $menu = $NonRegistrato;
 }
 
 $listaGeneri = "";
 $listaLibri = "";
-$resultKeyword ="";
-
+$keywords ="";
 
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
@@ -64,9 +63,9 @@ if($connectionOk) {
     if($ok) {
         $resultGeneri = $connection -> getListaGeneri();
         $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
-        //$resultKeyword = $connection->getKeywordByGenere($genereSelezionato);
-        //TO DO DB
+        $keywords = $connection->getkeywordsGenere($genereSelezionato);
         $connection -> closeConnection();
+
         foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
             if($_GET["genere"]==$genere["nome"])
                 $listaGeneri .='<dd>'.$genere["nome"]. '</dd>';
@@ -89,25 +88,19 @@ if($connectionOk) {
                             <a class="torna_su" href="#content">Torna su</a>
                         </nav>';
         }
-        /*if(!empty($resultKeyword)) {
-            foreach($resultKeyword as $keyword) {
-                $listaKeyword .= '<li>'.$keyword['keyword'].'</li>';
-            }
-        } else {
-            $listaKeyword = "Miglior genere";
-        }*/
     }
     else {
         header("Location: 404.html");
-
     }
 } 
 else {
     echo "Connessione fallita";
 }
 
+if($keywords=="")
+    $keywords="narrazione, personaggi, trama, emozioni, conflitto, ambientazione, temi, climax, svolgimento, conclusione";
 
-//$paginaHTML = str_replace("{keyword}", $listaKeyword , $paginaHTML);
+$paginaHTML = str_replace("{keyword}", $keywords , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);

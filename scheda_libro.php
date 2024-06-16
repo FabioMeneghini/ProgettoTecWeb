@@ -67,6 +67,7 @@ $arearecensionevoto="";
 $copertina="";
 $alt="";
 $bottoni_admin="";
+$keywords="";
 
 function controlla($recensione, $voto) {
     $messaggi = "";
@@ -228,6 +229,7 @@ if($connectionOk) {
         }
         $media_voti = $connection -> getmediavoti($LibroSelezionato);
         $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato, isset($_SESSION['username']) ? $_SESSION['username'] : "" );
+        $keywords = $connection -> getkeywordsLibro($LibroSelezionato);
         $connection -> closeConnection();
         
         if(empty($altre_recensioni)) {
@@ -240,16 +242,6 @@ if($connectionOk) {
             }
             $listaRecensioni.="</ul></div>";
         }
-
-        if(!empty($resultKeyword)) {
-            for ($i=0; $i<count($resultKeyword)-1; $i++) {
-                $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
-            }
-            $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
-        } else {
-            $listaKeyword = "Miglior libro";
-        }
-
     }
     else {
         header("Location: index.php");
@@ -261,7 +253,10 @@ else {
     $messaggiForm = '<li>Errore di connessione al database</li';
 }
 
-$paginaHTML = str_replace("{keywords}", $listaKeyword ,$paginaHTML);
+if($keywords=="")
+    $keywords="libro, recensioni, lettura, autore, genere, lingua, trama, capitoli, voto, recensione, storia, personaggi";
+
+$paginaHTML = str_replace("{keywords}", $keywords, $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{menupersonale}", $menupersonale, $paginaHTML);
