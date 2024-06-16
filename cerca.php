@@ -84,25 +84,25 @@ if($connectionOk) {
     if(!empty($libri_ricercati) && $messaggi_form==""){
             $rislutati_ricerca.= '<p id="descr">
                             La tabella contiene l\'elenco dei libri che corrispondono alla tua ricerca.
-                            Ogni riga descrive un libro con cinque colonne nominate:"titolo","copertina", "autore", "genere", "lingua".
-                        </p>
-                        <table  id="tabella_risultati_ricerca_libri" aria-describedby="descr">
-                        <caption>Risultati della tua ricerca</caption>
-                        <tr>
-                            <th scope="col">Titolo</th>
-                            <th scope="col">Copertina</th>
-                            <th scope="col">Autore</th>
-                            <th class="rimuovi" scope="col">Genere</th>
-                            <th class="rimuovi" scope="col">lingua </th>
-                        </tr>';
+                            Ogni riga descrive un libro con cinque colonne nominate: "titolo", "copertina", "autore", "genere", "lingua".
+                            </p>
+                            <table id="tabella_risultati_ricerca_libri" aria-describedby="descr">
+                                <caption>Risultati della tua ricerca</caption>
+                                <tr>
+                                    <th scope="col">Titolo</th>
+                                    <th scope="col">Copertina</th>
+                                    <th scope="col">Autore</th>
+                                    <th class="rimuovi" scope="col">Genere</th>
+                                    <th class="rimuovi" scope="col">lingua </th>
+                                </tr>';
         foreach($libri_ricercati as $libro) {
             $rislutati_ricerca .= '<tr>
-                                <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                <td><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
-                                <td>'.$libro["autore"].'</td>
-                                <td class="rimuovi">'.$libro["genere"].'</td>
-                                <td class="rimuovi">'.$libro["lingua"].'</td>
-                            </tr>';
+                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
+                                    <td><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
+                                    <td>'.$libro["autore"].'</td>
+                                    <td class="rimuovi">'.$libro["genere"].'</td>
+                                    <td class="rimuovi">'.$libro["lingua"].'</td>
+                                </tr>';
         }
         $rislutati_ricerca .= "</table>";
         if(count($libri_ricercati)>=3) {

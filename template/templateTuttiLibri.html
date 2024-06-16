@@ -26,25 +26,22 @@
             </label>
             <input id="hamburger" type="checkbox">
             <dl>
-                <!--link di admin-->
                 <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
-                <dt>Catalogo Libri</dt>
+                <dt>Catalogo libri</dt>
                 <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-                <!--non direttemante da qua o si ? -->
                 <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri} 
-                <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
                 <dt><a href="area_personale.php">Area Personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
             </dl><!--ERRORE MANCA DL-->
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: :<a href="admin.php"><span lang="en">Home</span></a>&gt; &gt; Catalogo</p>
+            <p>Ti trovi in: <a href="admin.php"><span lang="en">Home</span></a> &gt;&gt; Catalogo libri</p>
         </nav>
         <main id="content">
             {messaggiSuccesso}
-            <h2>Tutti i libri:</h2>
+            <h2>Tutti i libri</h2>
             <form method="post" action="tutti_libri.php">
                 <label for="opzioni_ordinamento">Ordina per:</label>
                 <select id="opzioni_ordinamento" name="opzione">
@@ -55,10 +52,7 @@
                 </select>
                 <input type="submit" value="Ordina" name="ordina" id="ordina">
             </form>
-
-            <!--scelta ordinamento-->
             {CatalogoLibri} 
-            <!--trona la lista/tabella delle recensioni con button x eliminarle e button x like e senza immagini-->
             {torna_su}
         </main>
          <footer id="footer">

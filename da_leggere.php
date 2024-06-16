@@ -63,14 +63,13 @@ if($connectionOk) {
                             <input type="submit" id="elimina" name="elimina" value="Elimina" onclick="return conferma(\'Sei sicuro/sicura di voler eliminare i libri selezionati dalla lista dei libri da leggere?\')">
                         </fieldset>
                         </form>';
+        if(count($lista)>=10) {
+            $torna_su=' <nav aria-label="Torna all\' inizio della lista dei libri salvati">
+                            <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+        }
     }
 } 
-if(count($lista)>=10) {
-
-        $torna_su=' <nav aria-label="Torna all\' inizio della lista dei libri salvati">
-                         <a class="torna_su" href="#content">Torna su</a>
-                    </nav>';
-}
 else {
     echo "Connessione fallita";
 }
