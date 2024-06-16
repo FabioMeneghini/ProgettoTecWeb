@@ -227,11 +227,11 @@ if($connectionOk) {
                 </form>';
         }
         $media_voti = $connection -> getmediavoti($LibroSelezionato);
-        $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato);
+        $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato, isset($_SESSION['username']) ? $_SESSION['username'] : "" );
         $connection -> closeConnection();
         //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
         if(empty($altre_recensioni)) {
-            $listaRecensioni.='<p>Non ci sono ancora recensioni per questo libro</p>';
+            $listaRecensioni.='<p>Non ci sono ancora recensioni per questo libro da parte degli altri utenti</p>';
         }
         else {
             $listaRecensioni.='<ul class="lista_recensioni_scheda_libro">';

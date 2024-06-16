@@ -655,8 +655,8 @@ class DBAccess {
         }
     }
     
-    public function getaltrerecensioni($LibroSelezionato) {
-        $query = "SELECT username_autore , commento FROM recensioni WHERE id_libro = '$LibroSelezionato'";
+    public function getaltrerecensioni($LibroSelezionato, $username="") {
+        $query = "SELECT username_autore , commento FROM recensioni WHERE id_libro = '$LibroSelezionato' AND username_autore != '$username'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $result = array();
