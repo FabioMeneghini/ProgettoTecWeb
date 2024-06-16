@@ -84,16 +84,16 @@ function controlla($recensione, $voto) {
 }
 
 if(isset($_GET['eliminato']) && $_GET['eliminato'] == 0) {
-    $messaggiErrore = '<p class="errore">Ci scusiamo per il disagio ma non è stato possibile eliminare il libro.</p>';
+    $messaggiErrore = '<p class="messsaggiErrore">Ci scusiamo per il disagio ma non è stato possibile eliminare il libro.</p>';
 }
 if(isset($_GET['modificato']) && $_GET['modificato'] == 1) {
-    $messaggiSuccesso = '<p class="successo">Libro modificato con successo!</p>';
+    $messaggiSuccesso = '<p class="messaggiSuccesso">Libro modificato con successo!</p>';
 }
 if(isset($_GET['salvato']) && $_GET['salvato'] == 1) {
-    $messaggiSuccesso = '<p class="successo">Libro salvato con successo!</p>';
+    $messaggiSuccesso = '<p class="messaggiSuccesso">Libro salvato con successo!</p>';
 }
 if(isset($_GET['valutato']) && $_GET['valutato'] == 1) {
-    $messaggiSuccesso = '<p class="successo">Valutazione aggiunta/modificata con successo!</p>';
+    $messaggiSuccesso = '<p class="messaggiSuccesso">Valutazione aggiunta/modificata con successo!</p>';
 }
 
 $connection = new DBAccess();
@@ -229,7 +229,7 @@ if($connectionOk) {
         $media_voti = $connection -> getmediavoti($LibroSelezionato);
         $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato, isset($_SESSION['username']) ? $_SESSION['username'] : "" );
         $connection -> closeConnection();
-        //torna un array che deve essere messo in una lista se sono vuote scritta non ci sono recensioni
+        
         if(empty($altre_recensioni)) {
             $listaRecensioni.='<p>Non ci sono ancora recensioni per questo libro da parte degli altri utenti</p>';
         }
@@ -282,18 +282,8 @@ $paginaHTML = str_replace("{bottoniAdmin}", $bottoni_admin , $paginaHTML);
 $paginaHTML = str_replace("{voto}", $voto, $paginaHTML);
 $paginaHTML = str_replace("{recensioniComunity}", $listaRecensioni, $paginaHTML);
 $paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiForm."</ul>", $paginaHTML);
-if (empty($messaggiErrore)) {
-    $paginaHTML = str_replace("{messaggiErrore}", "", $paginaHTML);
-} else {
-    $paginaHTML = str_replace("{messaggiErrore}", "<div class=\"messaggiErrore\">".$messaggiErrore."</div>", $paginaHTML);
-}
-
-// Sostituzione per messaggi di successo
-if (empty($messaggiSuccesso)) {
-    $paginaHTML = str_replace("{messaggiSuccesso}", "", $paginaHTML);
-} else {
-    $paginaHTML = str_replace("{messaggiSuccesso}", "<div class=\"messaggiSuccesso\">".$messaggiSuccesso."</div>", $paginaHTML);
-}
+$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore, $paginaHTML);
+$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 
 echo $paginaHTML;
 

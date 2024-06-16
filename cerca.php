@@ -76,7 +76,7 @@ if($connectionOk) {
         $genereSelezionato = isset($_POST['genere']) ? $_POST['genere'] : "";
         $lingua = isset($_POST['lingua']) ? $_POST['lingua'] : "";
         if($stringa=="" && $autore=="" && $genereSelezionato=="" && $lingua=="")
-            $messaggi_form = "<p>Inserisci almeno un parametro di ricerca</p>";
+            $messaggi_form = '<p class="messaggiErrore">Inserisci almeno un parametro di ricerca</p>';
         else
             $libri_ricercati = $connection -> cercaLibro($stringa, $autore, $genereSelezionato, $lingua);
     }
@@ -129,7 +129,7 @@ if($connectionOk) {
     
 }
 else {
-    $messaggi_form = "<p>Inserisci almeno un parametro di ricerca</p>";
+    $messaggi_form = '<p class="messaggiErrore">Errore di connessione al database</p>';
 }
 
 $paginaHTML = str_replace("{stringa}", $stringa, $paginaHTML);

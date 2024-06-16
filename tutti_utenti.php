@@ -103,7 +103,6 @@ else {
     echo "Connessione fallita";
 }
 
-
 $paginaHTML = str_replace("{selected_alfabetico_nome}", $alfabetico_nome, $paginaHTML);
 $paginaHTML = str_replace("{selected_alfabetico_cognome}", $alfabetico_cognome, $paginaHTML);
 $paginaHTML = str_replace("{selected_alfabetico_username}", $alfabetico_username, $paginaHTML);

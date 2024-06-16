@@ -69,7 +69,6 @@ else {
     echo "Connessione fallita";
 }
 
-
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);
