@@ -35,7 +35,7 @@ if($connectionOk) {
             $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
     }
     if(empty($lista)) {
-        $listaLibri = "Non hai nessun libro da leggere."; //aggiungere link alla pagina di ricerca?
+        $listaLibri = "Non hai nessun libro da leggere.";
     }
     else {
         $listaLibri .= '<form method="post" action="da_leggere.php" onsubmit="return validaLibriCheckbox()">

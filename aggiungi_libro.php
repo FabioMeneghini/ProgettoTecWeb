@@ -48,6 +48,12 @@ function controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere) {
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
+function pulisciInput($input) {
+    $input = trim($input);
+    $input = strip_tags($input);
+    $input = htmlentities($input);
+    return $input;
+}
 
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] != 1) {
@@ -71,12 +77,12 @@ $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
 if($connectionOk) {
     if(isset($_POST['inserisci'])) {
-        $titolo = $_POST['titolo'];
-        $autore = $_POST['autore'];
-        $lingua = $_POST['lingua'];
-        $capitoli = $_POST['capitoli'];
-        $trama = $_POST['trama'];
-        $genere = $_POST['genere'];
+        $titolo = pulisciInput($_POST['titolo']);
+        $autore = pulisciInput($_POST['autore']);
+        $lingua = pulisciInput($_POST['lingua']);
+        $capitoli = pulisciInput($_POST['capitoli']);
+        $trama = pulisciInput($_POST['trama']);
+        $genere = pulisciInput($_POST['genere']);
         $ok = controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere);
         if($ok["ok"]) {
             $result = $connection -> aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere);

@@ -245,7 +245,6 @@ if($connectionOk) {
     }
     else {
         header("Location: index.php");
-        //header("Location: index.php?success=0??????"); //MOSTRARE MESSAGGIO DI ERRORE (libro non trovato)
         exit();
     }
 }

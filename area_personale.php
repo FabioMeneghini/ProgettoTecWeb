@@ -92,6 +92,13 @@ function controllaEmail($email) {
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
+function pulisciInput($input) {
+    $input = trim($input);
+    $input = strip_tags($input);
+    $input = htmlentities($input);
+    return $input;
+}
+
 $paginaHTML = file_get_contents("template/templateAreaPersonale.html");
 
 $messaggi = "";
@@ -110,7 +117,7 @@ if($connectionOk) {
     $data = $connection -> getDataIscrione($_SESSION['username']);
     //username
     if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
-        $username = trim($_POST['username']);
+        $username = pulisciInput($_POST['username']);
         $tmp = controllaUsername($username);
         if($tmp['ok']) {
             if($connection -> verificaUsername($username)) {
@@ -129,9 +136,9 @@ if($connectionOk) {
 
     //password
     if(isset($_POST['cambia_password'])) { //se è stato premuto il pulsante per cambiare la password
-        $password_old = trim($_POST['passwordold']);
-        $password_new1 = trim($_POST['passwordnew1']);
-        $password_new2 = trim($_POST['passwordnew2']);
+        $password_old = pulisciInput($_POST['passwordold']);
+        $password_new1 = pulisciInput($_POST['passwordnew1']);
+        $password_new2 = pulisciInput($_POST['passwordnew2']);
 
         if($connection -> verificaPassword($_SESSION['username'], $password_old)) { //se la password vecchia è corretta
             $tmp = controllaPassword($password_old, $password_new1, $password_new2);
@@ -150,7 +157,7 @@ if($connectionOk) {
 
     //mail
     if(isset($_POST['cambia_email'])) {
-        $email = trim($_POST['email']);
+        $email = pulisciInput($_POST['email']);
         $tmp = controllaEmail($email);
         if($tmp['ok']) {
             $connection -> modificaEmail($_SESSION['username'], $email);
