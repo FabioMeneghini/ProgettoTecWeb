@@ -26,10 +26,9 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $resultGeneri = $connection -> getGeneriPiuPopolari();
     
-
     foreach($resultGeneri as $genere) {
         $listaLibri.='<div class="genere_singolo"><h3><a  href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3></div>';
-        $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"],10);
+        $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
         if(empty($risultatiLibri)) {
             $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
         }
@@ -41,19 +40,15 @@ if($connectionOk) {
             $listaLibri.='</ul>';
         }
         if($resultGeneri>=15) {
-
             $torna_su=' <nav aria-label="Torna all\' inizio della pagina">
                              <a class="torna_su" href="#content">Torna su</a>
                         </nav>';
-         }
-        
+         }    
     }
     $listaLibri.="</div>";  
     //$risultatiLibri = $connection ->getListaLibriGenere($genere);
     $connection -> closeConnection();
     foreach($resultListaBestSeller as $libro) {
-        // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
-        //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
         $listaBestSeller .=  '<div class="item">
                                 <a href="scheda_libro.php?id='.$libro["id"].'"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" ></a>
                                 <ul>

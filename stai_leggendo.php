@@ -74,12 +74,11 @@ if($connectionOk) {
                             <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna capitoli">
                         </fieldset>
                         </form>';
-    }
-    if(count($lista)>=8) {
-
-        $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
-                         <a class="torna_su" href="#content">Torna su</a>
-                    </nav>';
+        if(count($lista)>=8) {
+            $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
+                            <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+        }
     }
 }
 else {

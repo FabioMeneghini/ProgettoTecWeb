@@ -35,6 +35,13 @@ $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt>Cerca</dt>';
 
+function pulisciInput($input) {
+    $input = trim($input);
+    $input = strip_tags($input);
+    $input = htmlentities($input);
+    return $input;
+}
+
 if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
     $menu = $adminMenu;
     $breadcrumbs = "admin.php";
@@ -71,10 +78,10 @@ if($connectionOk) {
         $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>'; 
     }
     if(isset($_POST['cerca_generale'])) {
-        $stringa = isset($_POST['stringa']) ? $_POST['stringa'] : "";
-        $autore = isset($_POST['autore']) ? $_POST['autore'] : "";
-        $genereSelezionato = isset($_POST['genere']) ? $_POST['genere'] : "";
-        $lingua = isset($_POST['lingua']) ? $_POST['lingua'] : "";
+        $stringa = isset($_POST['stringa']) ? pulisciInput($_POST['stringa']) : "";
+        $autore = isset($_POST['autore']) ? pulisciInput($_POST['autore']) : "";
+        $genereSelezionato = isset($_POST['genere']) ? pulisciInput($_POST['genere']) : "";
+        $lingua = isset($_POST['lingua']) ? pulisciInput($_POST['lingua']) : "";
         if($stringa=="" && $autore=="" && $genereSelezionato=="" && $lingua=="")
             $messaggi_form = '<p class="messaggiErrore">Inserisci almeno un parametro di ricerca</p>';
         else
