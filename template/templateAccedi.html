@@ -36,11 +36,11 @@
             </dl><!--ERRORE Either: Zero or more groups each consisting of one or more dt elements followed by one or more dd elements, optionally intermixed with script-supporting elements.-->
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a>&gt; &gt; Accedi</p>
+            <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a> &gt;&gt; Accedi</p>
         </nav>
         <main id="content">
             <section id="accediform">
-                <h2>Inserisci i dati per l'accesso:</h2>
+                <h2>Inserisci i dati per l'accesso</h2>
                 <form id="loginForm" action="accedi.php" method="post" onsubmit="return validaLogin()">
                     {messaggi}
                     <fieldset>
@@ -50,7 +50,7 @@
                         <label for="password"><span lang="en">Password</span>:</label><br>
                         <span><input type="password" id="password" name="password" maxlength="10" required></span><br>
                         <input type="submit" id="accedi" name="accedi" value="Accedi">
-                        <input type="reset" id="reset" name="reset" value="Cancella"><!-- NON SEGNALATO COME ERROR MA COME INFO Trailing slash on void elements has no effect and interacts badly with unquoted attribute values.-->
+                        <input type="reset" id="reset" name="reset" value="Cancella">
                     </fieldset>
                 </form>
             </section>

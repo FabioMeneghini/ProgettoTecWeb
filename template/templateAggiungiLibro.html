@@ -39,15 +39,15 @@
             </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: :<a href="admin.php"><span lang="en">Home</span></a>&gt; &gt; Aggiungi libro</p>
+            <p>Ti trovi in: <a href="admin.php"><span lang="en">Home</span></a> &gt;&gt; Aggiungi un libro</p>
         </nav>
         <main id="content">
             <section id="sectionAggiungiLibro">
-                <h2>Inserisci un nuovo libro</h2>
+                <h2>Aggiungi un nuovo libro</h2>
                 <form method="post" action="aggiungi_libro.php" onsubmit="return validaModificaLibro()" onreset="return conferma('Sei sicuro/sicura di voler cancellare i dati inseriti?')"> 
                     {messaggiForm}
                     <fieldset>
-                        <legend>Informazioni generali:</legend>
+                        <legend>Informazioni generali</legend>
                         <label for="titolo">Autore:</label>
                         <span><input type="text" id="autore" name="autore" maxlength="100" required></span>
                         <br>
@@ -60,37 +60,25 @@
                                 {selectGeneri}
                             </select>
                         </span>
-                        <legend>Informazioni generali:</legend>
-                        <label for="titolo">Autore:</label>
-                        <input type="text" id="autore" name="autore" maxlength="100" required>
-                        <br>
-                        <label for="titolo">Titolo:</label>
-                        <input type="text" name="titolo" id="titolo" maxlength="100" required><br>
                     </fieldset>
                     <fieldset>
-                        <legend>Informazioni specifiche:</legend>
+                        <legend>Informazioni specifiche</legend>
                         <label for="lingua">Lingua originale:</label>
-                        <span><input list="lingua_list" id="lingua" name="lingua" maxlength="25" required></span>
+                        <span><input type="text" list="lingua_list" id="lingua" name="lingua" maxlength="25" required></span>
                         <datalist id="lingua_list">
-                        <label for="selezionalingua">Lingua originale: </label>
-                        <input list="lingua" id="selezionalingua" name="lingua" required>
-                        <datalist id="lingua">
                             {listaLingue}
                         </datalist>
                         <br>
                         <label for="capitoli">Numero capitoli:</label>
                         <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required></span>
-                        </datalist><br>
-                        <label for="capitoli">Numero capitoli: </label>
-                        <input type="number" name="capitoli" id="capitoli" max="1000" required>
                     </fieldset>
                     <fieldset>
-                        <legend>Trama:</legend>
+                        <legend>Trama</legend>
                         <label for="trama">Trama del libro:</label>
                         <span><textarea id="trama" name="trama" rows="20" cols="70" maxlength="3000" required></textarea></span>
                     </fieldset>
                     <fieldset>
-                        <legend>Concludi l'inserimento:</legend>
+                        <legend>Concludi l'inserimento</legend>
                         <input type="submit" id="inserisci" name="inserisci" value="Inserisci">
                         <input type="reset" value="Annulla">
                     </fieldset>

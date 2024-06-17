@@ -28,24 +28,21 @@
             </label>
             <input id="hamburger" type="checkbox">
             <dl>
-                <!--link di admin-->
                 <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
                 <dt><a href="tutti_libri.php">Catalogo Libri</a></dt>
                 <dt>Archivio utenti</dt>
-                <!--non direttemante da qua o si ? -->
                 <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri} 
-                <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
                 <dt><a href="area_personale.php">Area Personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
             </dl><!--ERRORE DL-->
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a>&gt; &gt; Archivio utenti</p>
+            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; Archivio utenti</p>
         </nav>
         <main id="content">
-            <h2>Tutti gli utenti:</h2>
+            <h2>Tutti gli utenti</h2>
             <form method="post" action="tutti_utenti.php">
                 <label for="opzioni_ordinamento">Ordina per:</label>
                 <select id="opzioni_ordinamento" name="opzione">
@@ -58,7 +55,6 @@
                 </select>
                 <input type="submit" value="Ordina" name="ordina" id="ordina">
             </form>
-
             {ListaUtenti}
             {torna_su}
         </main>

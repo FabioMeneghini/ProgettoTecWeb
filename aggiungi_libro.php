@@ -103,7 +103,7 @@ if($connectionOk) {
     }
 }
 else {
-    echo "<li>Errore di connessione al database</li>";
+    echo "Errore di connessione al database";
 }
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);

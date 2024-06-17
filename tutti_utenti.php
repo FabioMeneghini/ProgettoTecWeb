@@ -68,9 +68,9 @@ if($connectionOk) {
     if(!empty($resultUtenti)){
         $utenti.= '<p id="descr">
                         La tabella contiene l&apos; elenco di tutti gli utenti registrati al sito.
-                        Ogni riga descrive un utente con 5 colonne nell&apos; ordine: nome, cognome, username, email, data di iscrizione al sito.
+                        Ogni riga descrive un utente con 5 colonne nominate: "nome", "cognome", "username", "email", "data di iscrizione al sito"s.
                     </p>
-                    <table aria-describedby="descr">
+                    <table aria-describedby="descr" class="righealternate">
                     <caption>Tutti gli utenti del sito</caption>
                     <tr>
                         <th scope="col">Nome</th>
@@ -80,29 +80,28 @@ if($connectionOk) {
                         <th class="rimuovi" scope="col">Data di iscrizione</th>
                     </tr>';
         foreach($resultUtenti as $utente) {
-        $utenti .= '<tr>
-                        <td scope="row">'.$utente["nome"].'</td>
-                        <td>'.$utente["cognome"].'</td>
-                        <td>'.$utente["username"].'</td>
-                        <td class="rimuovi">'.$utente["email"].'</td>
-                        <td class="rimuovi">'.$utente["data_iscrizione"].'</td>
+            $utenti .= '<tr>
+                            <td scope="row">'.$utente["nome"].'</td>
+                            <td>'.$utente["cognome"].'</td>
+                            <td>'.$utente["username"].'</td>
+                            <td class="rimuovi">'.$utente["email"].'</td>
+                            <td class="rimuovi"><time datetime="'.$utente["data_iscrizione"].'">'.$utente["data_iscrizione"].'</time></td>
                         </tr>';
-           }
-           $utenti .= "</table>";
-           if(count($resultUtenti)>=20) {
-            $torna_su='<nav aria-label="Torna all\' inizio della lista deli utenti ">
-                            <a class="torna_su" href="#content">Torna su</a>
-                       </nav>';
         }
-       }
-       else{
-           $utenti= '<p>Al momento non ci sono utenti registrati al tuo servizio.</p>';
-       }
+        $utenti .= "</table>";
+        if(count($resultUtenti)>=20) {
+            $torna_su='<nav aria-label="Torna all\'inizio della lista degli utenti">
+                            <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+        }
+    }
+    else{
+        $utenti= '<p>Al momento non ci sono utenti registrati al tuo servizio.</p>';
+    }
 }
 else {
     echo "Connessione fallita";
 }
-
 
 $paginaHTML = str_replace("{selected_alfabetico_nome}", $alfabetico_nome, $paginaHTML);
 $paginaHTML = str_replace("{selected_alfabetico_cognome}", $alfabetico_cognome, $paginaHTML);

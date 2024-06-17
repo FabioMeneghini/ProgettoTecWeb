@@ -70,7 +70,7 @@ $messaggiForm = "";
 $messaggiErrore = "";
 
 if(isset($_GET['modifica']) && $_GET['modifica'] == 0) {
-    $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
+    $messaggiErrore = '<p class="messaggiErrore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
 }
 
 $connection = new DBAccess();
@@ -99,14 +99,14 @@ if($connectionOk) {
                     else {
                         /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
                         exit();*/
-                        $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
+                        $messaggiErrore = '<p class="messaggiErrore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
                     }
                 }
             }
             else {
                 /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
                 exit();*/
-                $messaggiErrore = '<p class="errore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
+                $messaggiErrore = '<p class="messaggiErrore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
             }
         }
         else {
@@ -179,7 +179,7 @@ $paginaHTML = str_replace("{genereold}", $genereold , $paginaHTML);
 $paginaHTML = str_replace("{linguaold}", $linguaold , $paginaHTML);
 $paginaHTML = str_replace("{capitoliold}", $n_capitoli , $paginaHTML);
 $paginaHTML = str_replace("{tramaold}", $trama , $paginaHTML);
-$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore=="" ? "" : "<ul class=\"messaggiErrore\"'>".$messaggiErrore."</ul>", $paginaHTML);
+$paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore, $paginaHTML);
 echo $paginaHTML;
 
 ?>

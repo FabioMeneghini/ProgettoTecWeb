@@ -20,8 +20,6 @@ else {
     echo "Connessione fallita";
 }
 
-
-
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 echo $paginaHTML;
 

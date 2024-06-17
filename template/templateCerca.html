@@ -30,36 +30,31 @@
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="{breadcrumbs}"><span lang="en">Home</span></a> &gt; &gt; Cerca </p>
+            <p>Ti trovi in: <a href="{breadcrumbs}"><span lang="en">Home</span></a> &gt;&gt; Cerca </p>
         </nav>
         <main id="content">
             <section id="cerca">
-                <h2>Cerca un libro:</h2>
-                <form method="post" action="cerca.php"> 
-                    <!--aggiungi pagina php-->
+                <h2>Cerca un libro</h2>
+                <form method="post" action="cerca.php">
                     {messaggiForm}
                     <fieldset>
                         <legend>Ricerca</legend>
-                        <!--da css bisognerebbe far venire o uno o l'altro come formo i filtri che si possano aggiungere sotto-->
                         <label for="stringa">Ricerca generale:</label>
                         <input type="text" id="stringa" name="stringa" maxlength="50" value="{stringa}">
                         <input type="submit" id="cerca_generale" name="cerca_generale" value="Cerca">
                     </fieldset>
                     <fieldset>
                         <legend>Filtri</legend>
-                        <!--controllare coerenze con lunghezze
-                        in css diminuire lo spazio x la scrittura -->
                         <label for="autore">Autore:</label>
                         <input type="text" id="autore" name="autore" maxlength="50" value="{autore}"><br>
                         <label for="genere">Genere: </label>
-                        <select name="genere" id="genere" required> <!--ERRORE CORRETTO RIMOSSO NAME--><!--ERRORE Attribute value not allowed on element datalist at this point. /-->
+                        <select name="genere" id="genere" required>
                             {opzioneGeneri}
-                            <!--option between todos los generos del mundo-->
                         </select>
-                        <br><!--da togliere poi e mettere in css!! -->
+                        <br>
                         <label for="lingua">Lingua:</label>
                         <input type="text" list="lingua" id="selezionalingua" name="lingua" maxlength="15" value="{lingua}">
-                        <datalist id="lingua" ><!--ERRORE CORRETTO RIMOSSO NAME-->
+                        <datalist id="lingua">
                             {listaLingue}
                         </datalist>
                     </fieldset>
