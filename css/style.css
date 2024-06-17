@@ -476,8 +476,8 @@ ul{
     background-color: var(--bgcercabg);
 }
 
-.libri a:hover{
-transform: scale(1.3);
+.libri a:hover {
+    transform: scale(1.3);
 }
 
 /*SCORRIMENTO IMMAGINI*/
@@ -755,10 +755,10 @@ display: block;
     width: 30%;
 }
 
-.datilistalibro div, .datiattuali div, .gruppostatistiche div{
+.datilistalibro div, .datiattuali div, .gruppostatistiche div, .dati_lista_statistiche div {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
 }
 
 .datilistalibro dt, .datiattuali dt{

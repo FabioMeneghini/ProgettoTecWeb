@@ -104,3 +104,9 @@ footer p{
 .trama_contenuto{
     text-align: left;
 }
+
+.datilistalibro div, .datiattuali div, .gruppostatistiche div, .dati_lista_statistiche div {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}
