@@ -107,6 +107,18 @@ footer p{
 
 .datilistalibro div, .datiattuali div, .gruppostatistiche div, .dati_lista_statistiche div {
     display: flex;
-    align-items: left;
-    justify-content: left;
+    align-items: center;
+    justify-content: center;
+}
+
+form, fieldset {
+    padding: 0.5em;
+}
+
+.capitoli_mobile {
+    width: 50%;
+}
+
+input {
+    width: 50%;
 }

@@ -54,7 +54,7 @@ if($connectionOk) {
                                     <caption>Lista dei libri che stai leggendo</caption>
                                     <tr>
                                         <th scope="col">Titolo</th>
-                                        <th scope="col">Autore</th>
+                                        <th class="rimuovi" scope="col">Autore</th>
                                         <th scope="col">Numero capitoli letti</th>
                                     </tr>';
         $i=0;
@@ -62,7 +62,7 @@ if($connectionOk) {
             $i++;
             $listaLibri .= '<tr>
                                 <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                <td>'.$libro["autore"].'</td>
+                                <td class="rimuovi">'.$libro["autore"].'</td>
                                 <td>
                                     <input type="number" name="capitoli[]" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
                                     <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
