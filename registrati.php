@@ -69,6 +69,13 @@ function controllaInput($nome, $cognome, $username, $email, $password1, $passwor
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
+function pulisciInput($input) {
+    $input = trim($input);
+    $input = strip_tags($input);
+    $input = htmlentities($input);
+    return $input;
+}
+
 $messaggiPerForm = "";
 $listaGeneri = "";
 
@@ -83,13 +90,13 @@ if($connectionOk) {
 
     $ok = true;
     if(isset($_POST['registrati'])) {
-        $nome = trim($_POST['name']);
-        $cognome = trim($_POST['cognome']);
+        $nome = pulisciInput($_POST['name']);
+        $cognome = pulisciInput($_POST['cognome']);
         $data = date('Y-m-d', strtotime($_POST['data']));
-        $username = trim($_POST['username']);
-        $email = trim($_POST['email']);
-        $password1 = $_POST['password1'];
-        $password2 = $_POST['password2'];
+        $username = pulisciInput($_POST['username']);
+        $email = pulisciInput($_POST['email']);
+        $password1 = pulisciInput($_POST['password1']);
+        $password2 = pulisciInput($_POST['password2']);
 
         $tmp = controllaInput($nome, $cognome, $username, $email, $password1, $password2, $data);
         $ok = $tmp['ok'];

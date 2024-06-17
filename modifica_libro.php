@@ -49,6 +49,13 @@ function controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere) {
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
+function pulisciInput($input) {
+    $input = trim($input);
+    $input = strip_tags($input);
+    $input = htmlentities($input);
+    return $input;
+}
+
 if(!isset($_SESSION['admin']) || $_SESSION['admin'] == 0) {
     header("Location: scheda_libro.php");
     exit();
@@ -78,12 +85,12 @@ $connectionOk = $connection -> openDBConnection();
 if($connectionOk) {
     //da controllare
     if(isset($_POST['modifica'])) {
-        $titolo = $_POST['titolo'];
-        $autore = $_POST['autore'];
-        $lingua = $_POST['lingua'];
-        $capitoli = $_POST['capitoli'];
-        $trama = $_POST['trama'];
-        $genere = $_POST['genere'];
+        $titolo = pulisciInput($_POST['titolo']);
+        $autore = pulisciInput($_POST['autore']);
+        $lingua = pulisciInput($_POST['lingua']);
+        $capitoli = pulisciInput($_POST['capitoli']);
+        $trama = pulisciInput($_POST['trama']);
+        $genere = pulisciInput($_POST['genere']);
         $input_ok = controllaInput($titolo, $autore, $lingua, $capitoli, $trama, $genere);
         if($input_ok["ok"]) {
             if(isset($_POST['id'])) {
@@ -150,16 +157,6 @@ if($connectionOk) {
         $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
     }
     $connection -> closeConnection();
-
-
-    /*if(!empty($resultKeyword)) {
-        for ($i=0; $i<count($resultKeyword)-1; $i++) {
-            $listaKeyword .= $resultKeyword[$i]['keyword'].', ';
-        }
-        $listaKeyword .= $resultKeyword[count($resultKeyword)-1]['keyword'];
-    } else {
-        $listaKeyword = "Miglior libro";
-    }*/
 }
 else {
     echo "Connessione fallita";
@@ -168,7 +165,7 @@ else {
 $paginaHTML = str_replace("{id_libro}", $LibroSelezionato, $paginaHTML);
 $paginaHTML = str_replace("{TitoloLibro}", $titolo, $paginaHTML);
 $paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\"'>".$messaggiForm."</ul>", $paginaHTML);
-$paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
+//$paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{selectGeneri}", $data_list_generi, $paginaHTML);
 $paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);
