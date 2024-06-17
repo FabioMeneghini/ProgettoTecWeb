@@ -25,3 +25,9 @@
 .rimuovi {
     display: none;
 }
+
+.datilistalibro div, .datiattuali div, .gruppostatistiche div, .dati_lista_statistiche div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
