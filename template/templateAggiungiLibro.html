@@ -34,7 +34,7 @@
                 <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
                 <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri}
-                <dt><a href="area_personale.php">Area Personale</a></dt>
+                <dt><a href="area_personale.php">Area personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
             </dl>
         </nav>
@@ -50,10 +50,10 @@
                         <legend>Informazioni generali</legend>
                         <label for="titolo">Autore:</label>
                         <span><input type="text" id="autore" name="autore" maxlength="100" required></span>
-                        <br>
+                        
                         <label for="titolo">Titolo:</label>
                         <span><input type="text" name="titolo" id="titolo" maxlength="100" required></span>
-                        <br>
+                        
                         <label for="genere">Genere:</label>
                         <span>
                             <select name="genere" id="genere" required>
@@ -68,7 +68,7 @@
                         <datalist id="lingua_list">
                             {listaLingue}
                         </datalist>
-                        <br>
+                        
                         <label for="capitoli">Numero capitoli:</label>
                         <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required></span>
                     </fieldset>

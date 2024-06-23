@@ -24,6 +24,9 @@ $torna_su="";
 if(isset($_GET['registrato']) && $_GET['registrato'] == 1) {
     $messaggiSuccesso = '<p class="messaggiSuccesso">Registrazione avvenuta con successo. Benvenuto, '.$_SESSION['username'].'!</p>';
 }
+if(isset($_GET['accesso']) && $_GET['accesso'] == 1) {
+    $messaggiSuccesso = '<p class="messaggiSuccesso">Accesso avvenuto con successo. Bentornato, '.$_SESSION['username'].'!</p>';
+}
 
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();

@@ -75,13 +75,13 @@ if($connectionOk) {
                     <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">Cognome</th>
-                        <th scope="col">Username</th>
-                        <th class="rimuovi" scope="col">Email</th>
-                        <th class="rimuovi" scope="col">Data di iscrizione</th>
+                        <th scope="col"><span lang="en">Username</span></th>
+                        <th class="rimuovi" scope="col"><span lang="en">Email</span></th>
+                        <th class="rimuovi" scope="col" abbr="Data isc">Data di iscrizione</th>
                     </tr>';
         foreach($resultUtenti as $utente) {
             $utenti .= '<tr>
-                            <td scope="row">'.$utente["nome"].'</td>
+                            <th scope="row">'.$utente["nome"].'</th>
                             <td>'.$utente["cognome"].'</td>
                             <td>'.$utente["username"].'</td>
                             <td class="rimuovi">'.$utente["email"].'</td>

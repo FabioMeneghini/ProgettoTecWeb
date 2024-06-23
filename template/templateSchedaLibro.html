@@ -30,9 +30,9 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <ul>
+            <dl>
                 {menu}<!--ERRORE MA CREDO VADA BENE -->
-            </ul>
+            </dl>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; <a href="generi.php">Generi</a> &gt;&gt; <a href="genere.php?genere={GenereLibro}">{GenereLibro}</a> &gt;&gt; {TitoloLibro}</p>
@@ -40,7 +40,7 @@
         <main id="content">
             {messaggiErrore}
             {messaggiSuccesso}
-            <div class="container">
+            <section class="container">
                 <h2 id="titolo">{TitoloLibro}</h2>
                 <img src="{ImmagineLibro}" alt="{altlibro}" height="400">
                 <dl class="datilistalibro">
@@ -66,29 +66,29 @@
                     </div>
                 </dl>
                 {bottoniAdmin}
-            </div>
-            <h3>Menù</h3>
-            <div class="menu_scheda_libro">
-                <ul class="menulibro">    
-                    <li><a href="#trama">Vai alla trama</a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
-                    {menupersonale}
-                    <li><a href="#community">Vai alle recensioni della <span lang="en">community</span></a></li>
-                </ul>
-            </div>
-            <div>
-                <dl>
-                    <dt id="trama">Trama:</dt>
-                    <dd class="trama_contenuto">{tramaLibro}</dd>
-                </dl>
-            </div>
+            </section>
+            <section>
+                <h3>Menù</h3>
+                <nav class="menu_scheda_libro">
+                    <ul class="menulibro">    
+                        <li><a href="#trama">Vai alla trama</a></li>
+                        {menupersonale}
+                        <li><a href="#community">Vai alle recensioni della <span lang="en">community</span></a></li>
+                    </ul>
+                </nav>
+            </section>
+            <section>
+                <h2 id="trama">Trama</h2>
+                <p class="trama_contenuto">{tramaLibro}</p>
+            </section>
             <div id="recensionetua">
                 {arearecensionevotoform}
             </div>
             <section>
-                <h4 id="community">Recensioni della <span lang="en">community</span></h4>
+                <h2 id="community">Recensioni della <span lang="en">community</span></h2>
                 {recensioniComunity}
             </section>
-            <nav aria-label="Torna all\' inizio dei dati del libro">
+            <nav aria-label="Torna all\'inizio dei dati del libro">
                 <a class="torna_su" href="#content">Torna su</a>
             </nav> 
         </main>
