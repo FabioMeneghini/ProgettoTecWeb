@@ -15,7 +15,7 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
-    <dt><a href="area_personale.php">Area Personale</a></dt>
+    <dt><a href="area_personale.php">Area personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
 $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
@@ -24,7 +24,7 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
     <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
-    <dt><a href="area_personale.php">Area Personale</a></dt>
+    <dt><a href="area_personale.php">Area personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
