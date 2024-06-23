@@ -18,6 +18,11 @@ else {
 
 $paginaHTML = file_get_contents("template/templateHomeAdmin.html");
 $listaGeneri = "";
+$messaggiSuccesso = "";
+
+if(isset($_GET['accesso']) && $_GET['accesso'] == 1) {
+    $messaggiSuccesso = '<p class="messaggiSuccesso">Accesso avvenuto con successo. Bentornato, '.$_SESSION['username'].'!</p>';
+}
 
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
@@ -48,6 +53,7 @@ $paginaHTML = str_replace("{EtaMedia}", $n_eta, $paginaHTML);
 $paginaHTML = str_replace("{numeroLibriTerminati}", $n_terminati, $paginaHTML);
 $paginaHTML = str_replace("{numeroRegistratiOggi}", $n_registrati_oggi, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 echo $paginaHTML;
 
 ?>

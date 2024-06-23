@@ -56,12 +56,12 @@ if($connectionOk) {
                 $_SESSION['data_iscrizione'] = $user['data_iscrizione'];
                 if($user['admin']==1) {
                     $_SESSION['admin'] = true;
-                    header("Location: admin.php");
+                    header("Location: admin.php?accesso=1");
                     exit();
                 }
                 else {
                     $_SESSION['admin'] = false;
-                    header("Location: utente.php");
+                    header("Location: utente.php?accesso=1");
                     exit();
                 }
             } else {
