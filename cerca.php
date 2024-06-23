@@ -15,7 +15,7 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
-    <dt><a href="area_personale.php">Area Personale</a></dt>
+    <dt><a href="area_personale.php">Area personale</a></dt>
     <dt>Cerca</dt>';
 
 //admin
@@ -25,7 +25,7 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
     <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
-    <dt><a href="area_personale.php">Area Personale</a></dt>
+    <dt><a href="area_personale.php">Area personale</a></dt>
     <dt>Cerca</dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
@@ -97,14 +97,14 @@ if($connectionOk) {
                                 <caption>Risultati della tua ricerca</caption>
                                 <tr>
                                     <th scope="col">Titolo</th>
-                                    <th scope="col">Copertina</th>
-                                    <th scope="col">Autore</th>
-                                    <th class="rimuovi" scope="col">Genere</th>
-                                    <th class="rimuovi" scope="col">lingua </th>
+                                    <th scope="col" abbr="Cop">Copertina</th>
+                                    <th scope="col" abbr="Aut">Autore</th>
+                                    <th class="rimuovi" scope="col" abbr="Gen">Genere</th>
+                                    <th class="rimuovi" scope="col" abbr="Lin">Lingua </th>
                                 </tr>';
         foreach($libri_ricercati as $libro) {
             $rislutati_ricerca .= '<tr>
-                                    <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
+                                    <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                                     <td><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td class="rimuovi">'.$libro["genere"].'</td>

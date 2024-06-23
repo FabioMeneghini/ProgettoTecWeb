@@ -85,7 +85,7 @@ $connectionOk = $connection -> openDBConnection();
 if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     foreach($resultListaGeneri as $genere) {
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 
     $ok = true;
@@ -114,6 +114,7 @@ if($connectionOk) {
                     $_SESSION['admin'] = false;
                     $_SESSION['data'] = $data;
                     header("Location: utente.php?registrato=1");
+                    exit();
                 } else {
                     $messaggiPerForm .= "<li>".$erroriRegistrazione."</li>";
                 }

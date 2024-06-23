@@ -2,8 +2,8 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>AdminHome - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
+        <title>Home admin - BookClub</title>
+        <meta name="keywords" content="utenti, libri, statistiche, admin">
         <meta name="description" content="Questa pagina è dedicata alle statistiche del sito, visualizzabbili dall'admin.">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
         <link rel="stylesheet" href="css/style.css" media="screen">
@@ -25,21 +25,36 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
+            <!-- <dl>
                 <dt><span lang="en">Home</span></dt>
                 <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
                 <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
                 <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
                 <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri}
-                <dt><a href="area_personale.php">Area Personale</a></dt>
+                <dt><a href="area_personale.php">Area personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE DL-->
+            </dl> -->
+            <ul>
+                <li><span lang="en">Home</span></li>
+                <li><a href="aggiungi_libro.php">Aggiungi un libro</a></li>
+                <li><a href="tutti_libri.php">Catalogo libri</a></li>
+                <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <span lang="en">Home</span></p>
         </nav>
         <main  id="content">
+            {messaggiSuccesso}
             <h2>Statistiche</h2>
             <section class="statistiche_generali">
                 <div class="statistiche_admin">

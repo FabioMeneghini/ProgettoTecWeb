@@ -15,7 +15,7 @@ $userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
     <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
     <dt><a href="statistiche.php">Statistiche</a></dt>
-    <dt><a href="area_personale.php">Area Personale</a></dt>
+    <dt><a href="area_personale.php">Area personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
 $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
@@ -24,7 +24,7 @@ $adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
     <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
     <dt><a href="generi.php">Generi:</a></dt>
     {listaGeneri}
-    <dt><a href="area_personale.php">Area Personale</a></dt>
+    <dt><a href="area_personale.php">Area personale</a></dt>
     <dt><a href="cerca.php">Cerca</a></dt>';
 
 $NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
@@ -172,11 +172,11 @@ if($connectionOk) {
                     <form method="post" action="scheda_libro.php" onsubmit="return validaSchedaLibro()" onreset="conferma(\'Sei sicuro di voler annullare le modifiche alla tua recensione e al tuo voto?\')"> 
                         {messaggiForm}
                         <fieldset>
-                            <legend>La tua Recensione e il tuo voto:</legend>
-                            <label for="recensione">Recensione: </label><br>
-                            <span><textarea id="recensione" name="recensione" rows="10" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span><br>
-                            <label for="voto">Voto: </label>
-                            <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span><br>
+                            <legend>La tua Recensione e il tuo voto</legend>
+                            <label for="recensione">Recensione:</label>
+                            <span><textarea id="recensione" name="recensione" rows="10" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span>
+                            <label for="voto">Voto:</label>
+                            <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span>
                             <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
                             <input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">
                             <input type="reset" value="Annulla">
@@ -187,9 +187,9 @@ if($connectionOk) {
                 $arearecensionevoto='
                     <form action="scheda_libro.php" method="post"> 
                     <fieldset>
-                        <legend>Inizia a leggere:</legend>
+                        <legend>Inizia a leggere</legend>
                         <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                        <label for="username">Questo libro è nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label><br>
+                        <label for="username">Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label>
                         <input type="submit" id="inizia" name="inizia" value="inizia">
                     </fieldset>
                 </form>';
@@ -212,20 +212,17 @@ if($connectionOk) {
             }
         }
         else {
-            $bottoni_admin='<section id="bottoni_admin">
-                <!-- <a href="modifica_libro.php?id='.$LibroSelezionato.'">Modifica</a> -->
-                <form action="modifica_libro.php" method="get">
-                    <fieldset>
+            $bottoni_admin='
+                <div class="container_form">
+                    <form action="modifica_libro.php" method="get">
                         <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
                         <input type="submit" id="modifica_libro" name="modifica_libro" value="Modifica">
-                    </fieldset>
-                </form>
-                <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
-                    <fieldset>
+                    </form>
+                    <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
                         <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
                         <input type="submit" id="elimina" name="elimina" value="Elimina">
-                    </fieldset>
-                </form>';
+                    </form>
+                </div>';
         }
         $media_voti = $connection -> getmediavoti($LibroSelezionato);
         $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato, isset($_SESSION['username']) ? $_SESSION['username'] : "" );

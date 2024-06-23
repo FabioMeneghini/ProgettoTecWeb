@@ -21,18 +21,29 @@
             <img src="menu.png"><!--ERRORE MANCA ALT-->
         </label>
         <input id="hamburger" type="checkbox">
-        <dl>
+        <!-- <dl>
             <dt><a href="index.php"><span lang="en">Home</span></a></dt>
             <dt><a href="generi.php">Generi:</a></dt>
             {listaGeneri}
             <dt><a href="accedi.php">Accedi</a></dt>
             <dt><a href="registrati.php">Registrati</a></dt>
             <dt><a href="cerca.php">Cerca</a></dt>
-        </dl>
-        
+        </dl> -->
+        <ul>
+            <li><a href="index.php"><span lang="en">Home</span></a></li>
+            <li>
+                <a href="generi.php">Generi:</a>
+                <ul>
+                    {listaGeneri}
+                </ul>
+            </li>
+            <li><a href="accedi.php">Accedi</a></li>
+            <li><a href="registrati.php">Registrati</a></li>
+            <li><a href="cerca.php">Cerca</a></li>
+        </ul>
     </nav>
     <nav id="breadcrumbs">
-        <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Componenti</span></p>
+        <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Componenti</p>
     </nav>
     <main>
         <h2>I componenti</h2>

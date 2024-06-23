@@ -122,3 +122,7 @@ form, fieldset {
 input {
     width: 50%;
 }
+
+.container_form {
+    display: block;
+}

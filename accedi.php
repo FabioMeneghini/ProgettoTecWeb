@@ -56,12 +56,12 @@ if($connectionOk) {
                 $_SESSION['data_iscrizione'] = $user['data_iscrizione'];
                 if($user['admin']==1) {
                     $_SESSION['admin'] = true;
-                    header("Location: admin.php");
+                    header("Location: admin.php?accesso=1");
                     exit();
                 }
                 else {
                     $_SESSION['admin'] = false;
-                    header("Location: utente.php");
+                    header("Location: utente.php?accesso=1");
                     exit();
                 }
             } else {
@@ -72,7 +72,7 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultListaGeneri as $genere) {
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 } else {
     $messaggiPerForm .= "<li>Errore di connessione al database</li>";

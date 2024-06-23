@@ -2,7 +2,7 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Aggiungi Libro - BookClub</title>
+        <title>Aggiungi libro - BookClub</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
@@ -27,16 +27,30 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
+            <!-- <dl>
                 <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
                 <dt>Aggiungi un libro</dt>
                 <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
                 <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
                 <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri}
-                <dt><a href="area_personale.php">Area Personale</a></dt>
+                <dt><a href="area_personale.php">Area personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            </dl> -->
+            <ul>
+                <li><a href="admin.php"><span lang="en">Home</span></a></li>
+                <li>Aggiungi un libro</li>
+                <li><a href="tutti_libri.php">Catalogo libri</a></li>
+                <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="admin.php"><span lang="en">Home</span></a> &gt;&gt; Aggiungi un libro</p>
@@ -50,10 +64,10 @@
                         <legend>Informazioni generali</legend>
                         <label for="titolo">Autore:</label>
                         <span><input type="text" id="autore" name="autore" maxlength="100" required></span>
-                        <br>
+                        
                         <label for="titolo">Titolo:</label>
                         <span><input type="text" name="titolo" id="titolo" maxlength="100" required></span>
-                        <br>
+                        
                         <label for="genere">Genere:</label>
                         <span>
                             <select name="genere" id="genere" required>
@@ -68,7 +82,7 @@
                         <datalist id="lingua_list">
                             {listaLingue}
                         </datalist>
-                        <br>
+                        
                         <label for="capitoli">Numero capitoli:</label>
                         <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required></span>
                     </fieldset>

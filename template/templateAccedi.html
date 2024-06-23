@@ -26,14 +26,25 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
+            <!-- <dl>
                 <dt><a href="index.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="generi.php">Generi:</a></dt>
                 {listaGeneri}
                 <dt>Accedi</dt>
                 <dt><a href="registrati.php">Registrati</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE Either: Zero or more groups each consisting of one or more dt elements followed by one or more dd elements, optionally intermixed with script-supporting elements.-->
+            </dl> -->
+            <ul>
+                <li><a href="index.php"><span lang="en">Home</span></a></li>
+                <li><a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li>Accedi</li>
+                <li><a href="registrati.php">Registrati</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a> &gt;&gt; Accedi</p>
@@ -45,10 +56,10 @@
                     {messaggi}
                     <fieldset>
                         <legend>Credenziali</legend>
-                        <label for="username"><span lang="en">Username</span>:</label><br>
-                        <span><input type="text" id="username" name="username" maxlength="10" required></span><br>
-                        <label for="password"><span lang="en">Password</span>:</label><br>
-                        <span><input type="password" id="password" name="password" maxlength="10" required></span><br>
+                        <label for="username"><span lang="en">Username</span>:</label>
+                        <span><input type="text" id="username" name="username" required></span>
+                        <label for="password"><span lang="en">Password</span>:</label>
+                        <span><input type="password" id="password" name="password" required></span>
                         <input type="submit" id="accedi" name="accedi" value="Accedi">
                         <input type="reset" id="reset" name="reset" value="Cancella">
                     </fieldset>
@@ -58,7 +69,6 @@
                 <p>Non hai ancora un <span lang="en">account</span>?</p>
                 <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
                 <a href="registrati.php">Registrati</a>
-                <!--css immagine-->
             </div> 
         </main>
          <footer id="footer">

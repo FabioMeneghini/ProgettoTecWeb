@@ -100,7 +100,7 @@ if($connectionOk) {
 
     $resultGeneri = $connection -> getListaGeneri();
     foreach($resultGeneri as $genere) {
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
         $data_list_generi.= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
     }
     $resultLingue= $connection -> getLingueLibri();

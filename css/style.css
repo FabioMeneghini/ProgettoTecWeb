@@ -127,15 +127,11 @@ body{
     display: none;
 }
 
-#menu li, #menu dt{
-    padding: 0.2em 0em;
-}
-
-#menu dt,#footer li,#menu dd{
+#menu>ul>li, #footer li, #menu ul li ul li {
     color: var(--menuTextColor);
 }
 
-#menu dd{
+#menu ul li ul li{
     padding: 0.2em 1em;
 }
 
@@ -219,6 +215,10 @@ form{
     padding: 1em;
 }
 
+form label, form span:has(+input) { 
+    display: block;
+}
+
 input{
     margin-bottom: 2em;
 }
@@ -246,6 +246,19 @@ nav.login{
     align-items: center;
     position: relative;
     right: 50pt;
+}
+
+/*#cercaForm label {
+    display: inline-block;
+}*/
+
+/*#form_disconnetti_account, #form_elimina_account {
+    display: inline-block;
+}*/
+
+.container_form {
+    display: flex;
+    justify-content: center;
 }
 
 fieldset{
@@ -452,10 +465,6 @@ ul{
     font-style: italic;
 }
 
-/*#bottoni_admin form {
-    display: flex;
-    flex-direction: column;
-}*/
 .form-bottoni input[type="submit"] {
     display: block;
     margin: 0 auto; /* Centra il bottone orizzontalmente */
@@ -834,5 +843,9 @@ blockquote {
 
 table{
     width: 100%;
+    text-align: center;
+}
+
+section.container {
     text-align: center;
 }
