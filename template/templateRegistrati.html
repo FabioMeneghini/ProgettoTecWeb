@@ -48,13 +48,13 @@
                     <fieldset>
                         <legend>Dati personali</legend>
                         <p>Il nome e il cognome non possono essere più lunghi di 25 caratteri.</p>
-                        <label for="name">Inserisci il tuo nome: </label><br>
+                        <label for="name">Inserisci il tuo nome:</label><br>
                         <span><input type="text" id="name" name="name" maxlength="25" minlength="1" required></span><br>
 
-                        <label for="cognome">Inserisci il tuo cognome: </label><br>
+                        <label for="cognome">Inserisci il tuo cognome:</label><br>
                         <span><input type="text" id="cognome" name="cognome" maxlength="25" minlength="1" required></span><br>
 
-                        <label for="data">Inserisci la tua data di nascita: </label><br>
+                        <label for="data">Inserisci la tua data di nascita:</label><br>
                         <span><input type="date" id="data" name="data" required></span><br>
                         
                         <label for="email">Indirizzo <span lang="en">Email</span>:</label><br>
@@ -75,9 +75,9 @@
                             </ul>
                         </p>
                         <label for="password1">Inserisci la <span lang="en">password</span>:</label><br>
-                        <span><input type="password" id="password1" name="password1" required></span><br>
+                        <span><input type="password" id="password1" name="password1" pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}$" required></span><br>
                         <label for="password2">Ripeti la stessa <span lang="en">password</span>:</label><br>
-                        <span><input type="password" id="password2" name="password2" required></span>
+                        <span><input type="password" id="password2" name="password2" pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}$" required></span>
                     </fieldset>
                     <input type="submit" id="registrati" name="registrati" value="Registrati">
                     <input type="reset" value="Cancella">
