@@ -50,10 +50,10 @@
                     <fieldset>
                         <legend>Informazioni generali</legend>
                         <label for="autore">Autore:</label>
-                        <span><input type="text" id="autore" name="autore" placeholder="{autoreold}" value="{autoreold}" maxlength="100" required></span><br>
+                        <span><input type="text" id="autore" name="autore" placeholder="{autoreold}" value="{autoreold}" maxlength="100" required></span>
                         
                         <label for="titolo">Titolo:</label>
-                        <span><input type="text" name="titolo" id="titolo" placeholder="{titoloold}" value="{titoloold}" maxlength="100" required></span><br>
+                        <span><input type="text" name="titolo" id="titolo" placeholder="{titoloold}" value="{titoloold}" maxlength="100" required></span>
                         
                         <label for="genere">Genere:</label>
                         <span>
@@ -65,10 +65,10 @@
                     <fieldset>
                         <legend>Informazioni specifiche</legend>
                         <label for="lingua">Lingua originale:</label>
-                        <span><input list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}" required></span>
+                        <span><input type="text" list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}" required></span>
                         <datalist id="datalist_lingua">
                             {listaLingue}
-                        </datalist><br>
+                        </datalist>
                         
                         <label for="capitoli">Numero capitoli:</label>
                         <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required placeholder="{capitoliold}" value="{capitoliold}"></span>

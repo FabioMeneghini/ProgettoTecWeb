@@ -89,7 +89,7 @@
                             </ul>
                         </p>
                         <label for="passwordnew1">Inserisci una nuova <span lang="en">password</span>:</label>
-                        <span><input type="password" id="passwordnew1" name="passwordnew1" pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}$" required></span><br>
+                        <span><input type="password" id="passwordnew1" name="passwordnew1" pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}$" required></span>
                         <label for="passwordnew2">Ripeti la stessa <span lang="en">password</span>:</label>
                         <span><input type="password" id="passwordnew2" name="passwordnew2" pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}$" required></span>
                         <input type="submit" id="cambia_password" name="cambia_password" value="Modifica Password" onclick="return conferma('Sei sicuro/sicura di voler modificare la password?')">
@@ -113,12 +113,14 @@
 
             <section id="sectionDisconnetti">
                 <h3>Disconnetti o elimina l'<span lang="en">account</span></h3>
-                <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler uscire dall\'account?')">
-                    <input type="submit" id="disconnetti" name="disconnetti" value="Disconnetti Account">
-                </form>
-                <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler eliminare l\'account? I tuoi dati andranno persi per sempre.')">
-                    <input type="submit" id="eliminaaccount" name="elimina" value="Elimina Account">
-                </form>
+                <div class="container_form">
+                    <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler uscire dall\'account?')">
+                        <input type="submit" id="disconnetti" name="disconnetti" value="Disconnetti Account">
+                    </form>
+                    <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler eliminare l\'account? I tuoi dati andranno persi per sempre.')">
+                        <input type="submit" id="eliminaaccount" name="elimina" value="Elimina Account">
+                    </form>
+                </div>
             </section>
         </main>
 
