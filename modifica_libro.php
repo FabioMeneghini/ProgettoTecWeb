@@ -132,7 +132,7 @@ if($connectionOk) {
         $tmp = $connection ->  controllareIdLibro($LibroSelezionato);
     }
     if(!$tmp) {
-        header("Location: template/404.html"); //libro non trovato o non impostato in $_GET o $_POST
+        header("Location: 404.html"); //libro non trovato o non impostato in $_GET o $_POST
         exit();
     }
     $titolo = $connection ->  gettitololibro($LibroSelezionato);
@@ -141,12 +141,12 @@ if($connectionOk) {
     $linguaold = $connection ->  getlinguaLibro($LibroSelezionato);
     $trama = $connection ->  gettramaLibro($LibroSelezionato);
     $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
-
     $resultGeneri = $connection -> getListaGeneri();
     $resultLingue= $connection -> getLingueLibri();
+    $connection -> closeConnection();
     
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
         if($genere["nome"] == $genereold) {
             $data_list_generi .= '<option value="'.$genere["nome"].'" selected>'.$genere["nome"].'</option>';
         }
@@ -156,7 +156,6 @@ if($connectionOk) {
     foreach($resultLingue as $lingue) {
         $lista_lingue .= '<option value="'.$lingue["lingua"].'">'.$lingue["lingua"].'</option>';
     }
-    $connection -> closeConnection();
 }
 else {
     echo "Connessione fallita";
@@ -176,6 +175,7 @@ $paginaHTML = str_replace("{genereold}", $genereold , $paginaHTML);
 $paginaHTML = str_replace("{linguaold}", $linguaold , $paginaHTML);
 $paginaHTML = str_replace("{capitoliold}", $n_capitoli , $paginaHTML);
 $paginaHTML = str_replace("{tramaold}", $trama , $paginaHTML);
+$paginaHTML = str_replace("{idlibro}", $LibroSelezionato , $paginaHTML);
 $paginaHTML = str_replace("{messaggiErrore}", $messaggiErrore, $paginaHTML);
 echo $paginaHTML;
 

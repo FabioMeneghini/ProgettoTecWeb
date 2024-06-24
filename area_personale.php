@@ -1,7 +1,6 @@
 <?php
 
 include "config.php";
-include "menu.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
@@ -13,6 +12,35 @@ if(!isset($_SESSION['username'])) {
 $isAdmin = true; 
 if($_SESSION['admin'] != 1) 
     $isAdmin = false;
+
+//utenti
+$userMenu ='<li><a href="utente.php"><span lang="en">Home</span></a></li>
+    <li><a href="stai_leggendo.php">Libri che stai leggendo</a></li>
+    <li><a href="terminati.php">Libri terminati</a></li>
+    <li><a href="da_leggere.php">Libri da leggere</a></li>
+    <li>
+        <a href="generi.php">Generi:</a>
+        <ul>
+            {listaGeneri}
+        </ul>
+    </li>
+    <li><a href="statistiche.php">Statistiche</a></li>
+    <li>Area personale</li>
+    <li><a href="cerca.php">Cerca</a></li>';
+
+//admin
+$adminMenu = '<li><a href="admin.php"><span lang="en">Home</span></a></li>
+    <li><a href="aggiungi_libro.php">Aggiungi un libro</a></li>
+    <li><a href="tutti_libri.php">Catalogo libri</a></li>
+    <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+    <li>
+        <a href="generi.php">Generi:</a>
+        <ul>
+            {listaGeneri}
+        </ul>
+    </li>
+    <li>Area personale</li>
+    <li><a href="cerca.php">Cerca</a></li>';
 
 $menu = $isAdmin ? $adminMenu : $userMenu;
 
@@ -168,7 +196,7 @@ if($connectionOk) {
     $resultGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 }
 else {
