@@ -20,7 +20,7 @@ $userMenu ='<li><a href="utente.php"><span lang="en">Home</span></a></li>
     </li>
     <li><a href="statistiche.php">Statistiche</a></li>
     <li><a href="area_personale.php">Area personale</a></li>
-    <li><a href="area_personale.php">Cerca</a></li>';
+    <li><a href="cerca.php">Cerca</a></li>';
 
 //admin
 $adminMenu = '<li><a href="admin.php"><span lang="en">Home</span></a></li>
@@ -34,7 +34,7 @@ $adminMenu = '<li><a href="admin.php"><span lang="en">Home</span></a></li>
         </ul>
     </li>
     <li><a href="area_personale.php">Area personale</a></li>
-    <li><a href="area_personale.php">Cerca</a></li>';
+    <li><a href="cerca.php">Cerca</a></li>';
 
 $NonRegistrato='<li><a href="index.php"><span lang="en">Home</span></a></li>
     <li>
@@ -45,7 +45,7 @@ $NonRegistrato='<li><a href="index.php"><span lang="en">Home</span></a></li>
     </li>
     <li><a href="accedi.php">Accedi</a></li>
     <li><a href="registrati.php">Registrati</a></li>
-    <li><a href="area_personale.php">Cerca</a></li>';
+    <li><a href="cerca.php">Cerca</a></li>';
 
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {

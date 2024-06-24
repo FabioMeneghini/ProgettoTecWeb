@@ -6,6 +6,7 @@ use DB\DBAccess;
 
 if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
+    exit();
 }
 
 $paginaHTML = file_get_contents("template/templateTerminati.html");
