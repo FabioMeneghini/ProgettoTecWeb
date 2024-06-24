@@ -7,10 +7,12 @@ use DB\DBAccess;
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] != 1) {
         header("Location: utente.php");
+        exit();
     }
 }
 else {
     header("Location: index.php");
+    exit();
 }
 
 $paginaHTML = file_get_contents("template/templateTuttiUtenti.html");
