@@ -53,7 +53,6 @@ $paginaHTML = str_replace("{LibriStaiLeggendo}", $n_libri_stai_leggendo, $pagina
 $paginaHTML = str_replace("{LibriSalvati}", $n_libri_salvati, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{LibriLettiAnno}", $n_libri_letti_anno, $paginaHTML);
-// Sostituisci il messaggio motivazionale nella tua pagina HTML
 $paginaHTML = str_replace("{messaggio_motivazionale}", $messaggio_motivazionale, $paginaHTML);
 
 echo $paginaHTML;

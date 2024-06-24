@@ -1,6 +1,7 @@
 <?php
 
 include "config.php";
+include "menu.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
@@ -12,26 +13,6 @@ if(!isset($_SESSION['username'])) {
 $isAdmin = true; 
 if($_SESSION['admin'] != 1) 
     $isAdmin = false;
-//utenti
-$userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
-    <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
-    <dt><a href="terminati.php">Libri terminati</a></dt>
-    <dt><a href="da_leggere.php">Libri da leggere</a></dt>
-    <dt><a href="generi.php">Generi:</a></dt>
-    {listaGeneri}
-    <dt><a href="statistiche.php">Statistiche</a></dt>
-    <dt>Area personale</dt>
-    <dt><a href="cerca.php">Cerca</a></dt>';
-
-//admin
-$adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
-    <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
-    <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
-    <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-    <dt><a href="generi.php">Generi:</a></dt>
-    {listaGeneri}
-    <dt>Area personale</dt>
-    <dt><a href="cerca.php">Cerca</a></dt>';
 
 $menu = $isAdmin ? $adminMenu : $userMenu;
 
