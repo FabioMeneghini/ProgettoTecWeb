@@ -2,7 +2,7 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Aggiungi Libro - BookClub</title>
+        <title>Aggiungi libro - BookClub</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
@@ -27,16 +27,20 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
-                <dt>Aggiungi un libro</dt>
-                <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
-                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt><a href="area_personale.php">Area personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            <ul>
+                <li><a href="admin.php"><span lang="en">Home</span></a></li>
+                <li>Aggiungi un libro</li>
+                <li><a href="tutti_libri.php">Catalogo libri</a></li>
+                <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="admin.php"><span lang="en">Home</span></a> &gt;&gt; Aggiungi un libro</p>

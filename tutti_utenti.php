@@ -4,14 +4,16 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-/*if(isset($_SESSION['admin'])) {
+if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] != 1) {
         header("Location: utente.php");
+        exit();
     }
 }
 else {
     header("Location: index.php");
-}*/
+    exit();
+}
 
 $paginaHTML = file_get_contents("template/templateTuttiUtenti.html");
 
@@ -62,7 +64,7 @@ if($connectionOk) {
     }
     $connection -> closeConnection();
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     
     if(!empty($resultUtenti)){

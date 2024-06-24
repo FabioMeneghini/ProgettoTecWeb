@@ -52,7 +52,7 @@ if($connectionOk) {
     }
     $connection -> closeConnection();
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     if(!empty($resultLibri)){
         $catalogo.= '<p id="descr">

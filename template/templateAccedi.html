@@ -26,14 +26,17 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><a href="index.php"><span lang="en">Home</span></a></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt>Accedi</dt>
-                <dt><a href="registrati.php">Registrati</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE Either: Zero or more groups each consisting of one or more dt elements followed by one or more dd elements, optionally intermixed with script-supporting elements.-->
+            <ul>
+                <li><a href="index.php"><span lang="en">Home</span></a></li>
+                <li><a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li>Accedi</li>
+                <li><a href="registrati.php">Registrati</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="templateHomeNonRegistrato.html"><span lang="en">Home</span></a> &gt;&gt; Accedi</p>

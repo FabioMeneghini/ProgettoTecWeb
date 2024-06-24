@@ -31,7 +31,7 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
         
     foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     $connection -> closeConnection();
     if ($n_libri_letti_anno == 0 && $n_libri_letti > 0 && $n_libri_stai_leggendo == 0) {
@@ -53,7 +53,6 @@ $paginaHTML = str_replace("{LibriStaiLeggendo}", $n_libri_stai_leggendo, $pagina
 $paginaHTML = str_replace("{LibriSalvati}", $n_libri_salvati, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{LibriLettiAnno}", $n_libri_letti_anno, $paginaHTML);
-// Sostituisci il messaggio motivazionale nella tua pagina HTML
 $paginaHTML = str_replace("{messaggio_motivazionale}", $messaggio_motivazionale, $paginaHTML);
 
 echo $paginaHTML;

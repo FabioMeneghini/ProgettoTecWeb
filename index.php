@@ -7,8 +7,10 @@ use DB\DBAccess;
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         header("Location: admin.php");
+        exit();
     } else {
         header("Location: utente.php");
+        exit();
     }
 }
 
@@ -61,7 +63,7 @@ if($connectionOk) {
                                 </div>';
     }
     foreach($resultListaGeneri as $genere){
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 }
 else {

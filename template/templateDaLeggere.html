@@ -2,7 +2,7 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Da leggere - BookClub</title>
+        <title>Libri da leggere - BookClub</title>
         <meta name="keywords" content="libri da leggere, lista libri, futuri libri">
         <meta name="description" content="Questa pagina è per gli utenti che vogliono salvare dei libri da leggere in futuro creando la loro lista di letture.">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
@@ -27,17 +27,21 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><a href="utente.php"><span lang="en">Home</span></a></dt>
-                <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
-                <dt><a href="terminati.php">Libri terminati</a></dt>
-                <dt>Libri da leggere</dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt><a href="statistiche.php">Statistiche</a></dt>
-                <dt><a href="area_personale.php">Area personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE DL-->
+            <ul>
+                <li><a href="utente.php"><span lang="en">Home</span></a></li>
+                <li><a href="stai_leggendo.php">Libri che stai leggendo</a></li>
+                <li><a href="terminati.php">Libri terminati</a></li>
+                <li>Libri da leggere</li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="statistiche.php">Statistiche</a></li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; Libri da leggere</p>

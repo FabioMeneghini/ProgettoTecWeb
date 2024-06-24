@@ -25,16 +25,20 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><span lang="en">Home</span></dt>
-                <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
-                <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
-                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt><a href="area_personale.php">Area personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE DL-->
+            <ul>
+                <li><span lang="en">Home</span></li>
+                <li><a href="aggiungi_libro.php">Aggiungi un libro</a></li>
+                <li><a href="tutti_libri.php">Catalogo libri</a></li>
+                <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <span lang="en">Home</span></p>

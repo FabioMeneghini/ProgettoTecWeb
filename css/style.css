@@ -127,15 +127,11 @@ body{
     display: none;
 }
 
-#menu li, #menu dt{
-    padding: 0.2em 0em;
-}
-
-#menu dt,#footer li,#menu dd{
+#menu>ul>li, #footer li, #menu ul li ul li {
     color: var(--menuTextColor);
 }
 
-#menu dd{
+#menu ul li ul li{
     padding: 0.2em 1em;
 }
 

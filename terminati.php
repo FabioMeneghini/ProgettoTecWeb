@@ -6,6 +6,7 @@ use DB\DBAccess;
 
 if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
+    exit();
 }
 
 $paginaHTML = file_get_contents("template/templateTerminati.html");
@@ -26,7 +27,7 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultListaGeneri as $genere) {
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     if(empty($lista)) {
         $listaLibri = "<p>Non hai terminato nessun libro.</p>";
