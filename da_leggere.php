@@ -32,7 +32,7 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     if(empty($lista)) {
         $listaLibri = "Non hai nessun libro da leggere.";

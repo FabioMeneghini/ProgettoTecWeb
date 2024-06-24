@@ -2,7 +2,7 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Stai leggendo - BookClub</title>
+        <title>Libri che stai leggendo - BookClub</title>
         <meta name="keywords" content="libri da leggere, libri in corso, libri che stai leggendo, avanzamento capitoli">
         <meta name="description" content="Questa pagina è per tenere traccia dei libri che stai leggendo e il loro avanzamento nei capitoli.">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
@@ -25,7 +25,7 @@
                 <img src="menu.png"><!--ERRORE MANCA ALT-->
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
+            <!-- <dl>
                 <dt><a href="utente.php"><span lang="en">Home</span></a></dt>
                 <dt>Libri che stai leggendo</dt>
                 <dt><a href="terminati.php">Libri terminati</a></dt>
@@ -35,7 +35,22 @@
                 <dt><a href="statistiche.php">Statistiche</a></dt>
                 <dt><a href="area_personale.php">Area personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE DL-->
+            </dl> -->
+            <ul>
+                <li><a href="utente.php"><span lang="en">Home</span></a></li>
+                <li>Libri che stai leggendo</li>
+                <li><a href="terminati.php">Libri terminati</a></li>
+                <li><a href="da_leggere.php">Libri da leggere</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="statistiche.php">Statistiche</a></li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a> &gt;&gt; Libri che stai leggendo</p>

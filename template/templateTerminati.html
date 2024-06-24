@@ -2,7 +2,7 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Terminati - BookClub</title>
+        <title>Libri terminati - BookClub</title>
         <meta name="keywords" content="libri letti, lista libri, valutazione libri, voto libri">
         <meta name="description" content="Questa pagina è per gli utenti che vogliono avere la lista di libri letti fino ad ora con il voto dato.">
         <!--questa non può essere indicizzata !?-->
@@ -28,7 +28,7 @@
                 <img src="menu.png">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
+            <!-- <dl>
                 <dt><a href="utente.php"><span lang="en">Home</span></a></dt>
                 <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
                 <dt>Libri terminati</dt>
@@ -38,7 +38,22 @@
                 <dt><a href="statistiche.php">Statistiche</a></dt>
                 <dt><a href="area_personale.php">Area personale</a></dt>
                 <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            </dl> -->
+            <ul>
+                <li><a href="utente.php"><span lang="en">Home</span></a></li>
+                <li><a href="stai_leggendo.php">Libri che stai leggendo</a></li>
+                <li>Libri terminati</li>
+                <li><a href="da_leggere.php">Libri da leggere</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="statistiche.php">Statistiche</a></li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="templateHomeUtente.html"><span lang="en">Home</span></a> &gt;&gt; Libri terminati</p>

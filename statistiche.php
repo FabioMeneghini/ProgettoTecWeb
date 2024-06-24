@@ -31,7 +31,7 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
         
     foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     $connection -> closeConnection();
     if ($n_libri_letti_anno == 0 && $n_libri_letti > 0 && $n_libri_stai_leggendo == 0) {

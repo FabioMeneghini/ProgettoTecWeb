@@ -47,9 +47,7 @@ if($connectionOk) {
             else {
                 $listaLibri.='<ul class="librigeneri">';
                 foreach($risultatiLibri as $libro) {
-                    //$listaLibri.='<li><a href="scehda_libro.php?id='.$libro["id"].'" id="'.$libro["titolo_IR"].'">'.$libro["titolo"].'</a></li>';
                     $listaLibri.='<li><a id="'.$libro["titolo_ir"].'" href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
-                    //torna il titolo che deve fare img replace 
                 }
                 $listaLibri.='</ul>';
             }
@@ -60,7 +58,7 @@ if($connectionOk) {
     
     $resultGeneri = $connection -> getListaGeneri();
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     $connection -> closeConnection();
     if(count($resultGeneri)>=3) {
