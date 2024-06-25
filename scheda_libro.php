@@ -148,12 +148,12 @@ if($connectionOk) {
     $ok = $connection -> controllareIdLibro($LibroSelezionato);
     if($ok) {
         $resultGeneri = $connection -> getListaGeneri();
-        $titolo = $connection ->  gettitololibro($LibroSelezionato);
-        $autore = $connection ->  getautoreLibro($LibroSelezionato);
-        $genereLibro = $connection ->  getgenereLibro($LibroSelezionato);
-        $lingua = $connection ->  getlinguaLibro($LibroSelezionato);
-        $trama = $connection ->  gettramaLibro($LibroSelezionato);
-        $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
+        $titolo = $connection -> gettitololibro($LibroSelezionato);
+        $autore = $connection -> getautoreLibro($LibroSelezionato);
+        $genereLibro = $connection -> getgenereLibro($LibroSelezionato);
+        $lingua = $connection -> getlinguaLibro($LibroSelezionato);
+        $trama = $connection -> gettramaLibro($LibroSelezionato);
+        $n_capitoli = $connection -> getncapitoliLibro($LibroSelezionato);
         $copertina = $connection -> getcopertina($LibroSelezionato);
         $alt = $connection -> getalt($LibroSelezionato);
 
@@ -239,7 +239,7 @@ if($connectionOk) {
         }
         $media_voti = $connection -> getmediavoti($LibroSelezionato);
         $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato, isset($_SESSION['username']) ? $_SESSION['username'] : "" );
-        $keywords = $connection -> getkeywordsLibro($LibroSelezionato);
+        $meta = $connection -> getMetaLibro($LibroSelezionato);
         $connection -> closeConnection();
         
         if(empty($altre_recensioni)) {
@@ -254,7 +254,7 @@ if($connectionOk) {
         }
     }
     else {
-        header("Location: index.php");
+        header("Location: 404.php");
         exit();
     }
 }
@@ -262,16 +262,21 @@ else {
     $messaggiForm = '<li>Errore di connessione al database</li';
 }
 
+$keywords = $meta["keywords"];
 if($keywords=="")
     $keywords="libro, recensioni, lettura, autore, genere, lingua, trama, capitoli, voto, recensione, storia, personaggi";
+$description = $meta["descrizione_pagina"];
+if($description=="")
+    $description="Pagina dedicata al libro ".$titolo." di ".$autore." con trama, numero di capitoli, genere, lingua e media voti. Inoltre è possibile leggere le recensioni degli altri utenti e lasciare la propria valutazione.";
 
 $paginaHTML = str_replace("{keywords}", $keywords, $paginaHTML);
+$paginaHTML = str_replace("{description}", $description, $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{menupersonale}", $menupersonale, $paginaHTML);
 
 //prima sostituisce l'area della recensione con un form poi lo compila 
-$paginaHTML = str_replace("{arearecensionevotoform}", $arearecensionevoto , $paginaHTML);
+$paginaHTML = str_replace("{arearecensionevotoform}", $arearecensionevoto, $paginaHTML);
 
 $paginaHTML = str_replace("{ImmagineLibro}", "copertine_libri/".$copertina.".jpg", $paginaHTML);
 $paginaHTML = str_replace("{altlibro}", $alt , $paginaHTML);

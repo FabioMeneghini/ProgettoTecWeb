@@ -75,10 +75,10 @@ if($connectionOk) {
     if($ok) {
         $resultGeneri = $connection -> getListaGeneri();
         $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
-        $keywords = $connection->getkeywordsGenere($genereSelezionato);
+        $meta = $connection->getMetaGenere($genereSelezionato);
         $connection -> closeConnection();
 
-        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+        foreach($resultGeneri as $genere) {
             if($_GET["genere"]==$genere["nome"])
                 $listaGeneri .='<li>'.$genere["nome"].'</li>';
             else
@@ -94,8 +94,7 @@ if($connectionOk) {
             }
             $listaLibri.='</ul>';
         }
-            if(count($risultatiLibri)>=15) {
-
+        if(count($risultatiLibri)>=15) {
             $torna_su=' <nav aria-label="Torna al form di ricerca">
                             <a class="torna_su" href="#content">Torna su</a>
                         </nav>';
@@ -110,10 +109,16 @@ else {
     echo "Connessione fallita";
 }
 
+$keywords=$meta["keywords"];
 if($keywords=="")
-    $keywords="narrazione, personaggi, trama, emozioni, conflitto, ambientazione, temi, climax, svolgimento, conclusione";
+    $keywords="libri, ".$genereSelezionato.", personaggi, trama, emozioni, ambientazione, temi, climax, svolgimento";
+
+$description=$meta["descrizione"];
+if($description=="")
+    $description="Scopri i libri del genere ".$genereSelezionato." presenti nel nostro catalogo!";
 
 $paginaHTML = str_replace("{keyword}", $keywords , $paginaHTML);
+$paginaHTML = str_replace("{description}", $description , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);
