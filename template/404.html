@@ -2,18 +2,16 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Libri da leggere - BookClub</title>
-        <meta name="keywords" content="libri da leggere, libri salvati, lista libri, futuri libri">
-        <meta name="description" content="Questa pagina permette di visualizzare tutti i libri salvati dall'utente">
-        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
+        <title>Errore 404 - BookClub</title>
+        <meta name="keywords" content="errore, 404, non trovato, assente, risorsa, pagina">
+        <meta name="description" content="Pagina di errore 404 BookClub">
+        <meta name="author" content="Fabio Meneghini">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
         <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
-        <script src="conferme.js"></script>
-        <script src="controlli.js"></script>
     </head>
     <body>
         <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
@@ -29,30 +27,19 @@
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
-                <li><a href="utente.php"><span lang="en">Home</span></a></li>
-                <li><a href="stai_leggendo.php">Libri che stai leggendo</a></li>
-                <li><a href="terminati.php">Libri terminati</a></li>
-                <li>Libri da leggere</li>
-                <li>
-                    <a href="generi.php">Generi:</a>
-                    <ul>
-                        {listaGeneri}
-                    </ul>
-                </li>
-                <li><a href="statistiche.php">Statistiche</a></li>
-                <li><a href="area_personale.php">Area personale</a></li>
-                <li><a href="cerca.php">Cerca</a></li>
+                {menu}
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; Libri da leggere</p>
+            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Errore 404</p>
+            <span class="separatore"></span>
         </nav>
         <main  id="content">
-            <h2>Libri che hai salvato da leggere</h2>
-            {listaLibri}
-            {torna_su}
+            <h2>Errore 404</h2>
+            <p>Ci dispiace per l'inconveniente, ma la pagina o risorsa da lei cercata non è al momento disponibile. Nonostante questo errore, le assicuriamo che tutti i suoi dati personali sono comunque al sicuro.</p>
+            <p>Per continuare con la navigazione, la invitiamo a tornare alla sua <a href="index.php"><span lang="en">Homepage</span></a>.</p>
         </main>
-         <footer id="footer">
+        <footer id="footer">
             <ul>
                 <li><a href="contatti.php">Contatti</a></li>
                 <li><a href="chisiamo.php">Chi siamo</a></li>

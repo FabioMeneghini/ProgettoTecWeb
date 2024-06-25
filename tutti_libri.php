@@ -89,7 +89,8 @@ if($connectionOk) {
     }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 if($opzione=="alfabetico"){

@@ -104,15 +104,11 @@ if($connectionOk) {
                         exit();
                     }
                     else {
-                        /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
-                        exit();*/
                         $messaggiErrore = '<p class="messaggiErrore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
                     }
                 }
             }
             else {
-                /*header("Location: modifica_libro.php?id=".$LibroSelezionato."&modificato=0");
-                exit();*/
                 $messaggiErrore = '<p class="messaggiErrore">Ci scusiamo ma non è stato possibile effettuare la modifica.</p>';
             }
         }
@@ -132,24 +128,23 @@ if($connectionOk) {
         $tmp = $connection ->  controllareIdLibro($LibroSelezionato);
     }
     if(!$tmp) {
-        header("Location: 404.html"); //libro non trovato o non impostato in $_GET o $_POST
+        header("Location: 404.php"); //libro non trovato o non impostato in $_GET o $_POST
         exit();
     }
-    $titolo = $connection ->  gettitololibro($LibroSelezionato);
-    $autore = $connection ->  getautoreLibro($LibroSelezionato);
-    $genereold = $connection ->  getgenereLibro($LibroSelezionato);
-    $linguaold = $connection ->  getlinguaLibro($LibroSelezionato);
-    $trama = $connection ->  gettramaLibro($LibroSelezionato);
-    $n_capitoli = $connection ->  getncapitoliLibro($LibroSelezionato);
+    $titolo = $connection -> gettitololibro($LibroSelezionato);
+    $autore = $connection -> getautoreLibro($LibroSelezionato);
+    $genereold = $connection -> getgenereLibro($LibroSelezionato);
+    $linguaold = $connection -> getlinguaLibro($LibroSelezionato);
+    $trama = $connection -> gettramaLibro($LibroSelezionato);
+    $n_capitoli = $connection -> getncapitoliLibro($LibroSelezionato);
     $resultGeneri = $connection -> getListaGeneri();
     $resultLingue= $connection -> getLingueLibri();
     $connection -> closeConnection();
     
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
         $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
-        if($genere["nome"] == $genereold) {
+        if($genere["nome"] == $genereold)
             $data_list_generi .= '<option value="'.$genere["nome"].'" selected>'.$genere["nome"].'</option>';
-        }
         else
             $data_list_generi .= '<option value="'.$genere["nome"].'">'.$genere["nome"].'</option>';
     }
@@ -158,13 +153,13 @@ if($connectionOk) {
     }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{id_libro}", $LibroSelezionato, $paginaHTML);
 $paginaHTML = str_replace("{TitoloLibro}", $titolo, $paginaHTML);
 $paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\"'>".$messaggiForm."</ul>", $paginaHTML);
-//$paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{selectGeneri}", $data_list_generi, $paginaHTML);
 $paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);

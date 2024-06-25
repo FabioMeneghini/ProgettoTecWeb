@@ -109,7 +109,8 @@ if($connectionOk) {
     }
 }
 else {
-    echo "Errore di connessione al database";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);

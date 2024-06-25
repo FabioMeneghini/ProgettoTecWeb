@@ -66,7 +66,8 @@ if($connectionOk) {
     $connection -> closeConnection();
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{menu}", $menu, $paginaHTML);
