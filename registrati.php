@@ -125,7 +125,8 @@ if($connectionOk) {
     }
 }
 else {
-    $messaggiPerForm .= "<li>Errore di connessione al database</li>";
+    header("Location: 500.php");
+    exit();
 }
 $paginaHTML = str_replace("{messaggi}", $messaggiPerForm=="" ? "" : "<ul class=\"messaggiErrore\">".$messaggiPerForm."</ul>", $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);

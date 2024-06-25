@@ -34,5 +34,9 @@ if($connectionOk) {
     header("Location: index.php");
     exit();
 }
+else {
+    header("Location: 500.php");
+    exit();
+}
 
 ?>

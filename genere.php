@@ -106,7 +106,8 @@ if($connectionOk) {
     }
 } 
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $keywords=$meta["keywords"];

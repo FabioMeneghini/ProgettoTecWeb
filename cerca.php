@@ -149,7 +149,8 @@ if($connectionOk) {
     
 }
 else {
-    $messaggi_form = '<p class="messaggiErrore">Errore di connessione al database</p>';
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{stringa}", $stringa, $paginaHTML);

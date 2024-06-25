@@ -43,7 +43,8 @@ if($connectionOk) {
     }
     }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{listaLibri}", $listaGeneri, $paginaHTML);

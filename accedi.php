@@ -75,7 +75,8 @@ if($connectionOk) {
         $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 } else {
-    $messaggiPerForm .= "<li>Errore di connessione al database</li>";
+    header("Location: 500.php");
+    exit();
 }
 
 

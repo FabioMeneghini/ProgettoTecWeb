@@ -69,7 +69,8 @@ if($connectionOk) {
         $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 } else {
-    echo "Errore di connessione al database";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);

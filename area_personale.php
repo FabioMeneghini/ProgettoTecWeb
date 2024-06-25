@@ -200,7 +200,8 @@ if($connectionOk) {
     }
 }
 else {
-    $messaggi.="<li>Errore di connessione al database</li>";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);

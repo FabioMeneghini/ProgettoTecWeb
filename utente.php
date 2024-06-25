@@ -54,7 +54,6 @@ if($connectionOk) {
         }
         $listaLibri.="</div>";
     }
-    //$risultatiLibri = $connection ->getListaLibriGenere($genere);
     
     $resultGeneri = $connection -> getListaGeneri();
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
@@ -62,14 +61,14 @@ if($connectionOk) {
     }
     $connection -> closeConnection();
     if(count($resultGeneri)>=3) {
-
         $torna_su=' <nav aria-label="Torna all\'inizio della home">
                          <a class="torna_su" href="#content">Torna su</a>
                     </nav>';
-     }
+    }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);

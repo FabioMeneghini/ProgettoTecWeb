@@ -61,6 +61,7 @@ else {
 $menuGeneri = "";
 $listaGeneri = "";
 $torna_su="";
+$keywords = "";
 
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
@@ -70,8 +71,8 @@ if($connectionOk) {
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
         $menuGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
         $listaGeneri .= '<li><a id="'.$genere["nome"].'" href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
+        $keywords .= ", ".$genere["nome"];
     }
-
     if(count($resultGeneri)>=20) {
         $torna_su='<nav aria-label="Torna all\' inizio della lista dei generi">
                         <a class="torna_su" href="#content">Torna su</a>
@@ -79,15 +80,11 @@ if($connectionOk) {
     }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
-$keywords = "Generi, Libri";
-foreach($resultGeneri as $genere) {
-    $keywords .= ", ".$genere["nome"];
-}
-
-$paginaHTML = str_replace("{keyword}", $keywords , $paginaHTML);
+$paginaHTML = str_replace("{keywords}", $keywords , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{Generi}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{torna_su}", $torna_su, $paginaHTML);

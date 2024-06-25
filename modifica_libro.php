@@ -158,13 +158,13 @@ if($connectionOk) {
     }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{id_libro}", $LibroSelezionato, $paginaHTML);
 $paginaHTML = str_replace("{TitoloLibro}", $titolo, $paginaHTML);
 $paginaHTML = str_replace("{messaggiForm}", $messaggiForm=="" ? "" : "<ul class=\"messaggiErrore\"'>".$messaggiForm."</ul>", $paginaHTML);
-//$paginaHTML = str_replace("{keywords}", $listaKeyword, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{selectGeneri}", $data_list_generi, $paginaHTML);
 $paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);

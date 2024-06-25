@@ -259,7 +259,8 @@ if($connectionOk) {
     }
 }
 else {
-    $messaggiForm = '<li>Errore di connessione al database</li';
+    header("Location: 500.php");
+    exit();
 }
 
 $keywords = $meta["keywords"];
