@@ -102,7 +102,8 @@ if($connectionOk) {
         }
     }
     else {
-        header("Location: 404.html");
+        header("Location: 404.php");
+        exit();
     }
 } 
 else {
