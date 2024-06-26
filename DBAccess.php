@@ -2,10 +2,10 @@
 
 namespace DB;
 class DBAccess {
-    private $HOST_DB = "localhost"; //questi valori sono da cambiare prima di provarlo sul server di unipd
-    private $DATABASE_NAME = "bookclub";
-    private $USERNAME = "root";
-    private $PASSWORD = "";
+    private $HOST_DB = "localhost";
+    private $DATABASE_NAME = "famenegh";
+    private $USERNAME = "famenegh";
+    private $PASSWORD = "einohn7yie1soaBu";
 
     private $connection;
 
