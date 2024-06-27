@@ -425,6 +425,10 @@ ul{
     width: 16em;
 }
 
+.username {
+    font-weight: bold;
+}
+
 .trama_contenuto {
     background-color: var(--bgcolorextra); /* Giallo chiaro */
     padding: 10px;

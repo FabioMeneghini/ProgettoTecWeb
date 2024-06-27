@@ -75,7 +75,7 @@ $n_capitoli = "";
 $tua_recensione = "";
 $voto="";
 $media_voti = "";
-$listaRecensioni = '<div class="recensioni"><ul>';
+$listaRecensioni = "";
 $arearecensionevoto="";
 $copertina="";
 $alt="";
@@ -169,12 +169,11 @@ if($connectionOk) {
 
     if(!isset($_SESSION['username'])) {
         $arearecensionevoto='<div>
-                                <p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span><p>
-                                <a href="accedi.php">Accedi</a>
-                                <p>Non hai ancora un <span lang="en">account</span>?</p>
-                                <p>Entra a far parte della nostra <span lang="en">community</span>!</p>
-                                <a href="registrati.php">Registrati</a>
-                            <div>';
+                                <p>Per lasciare una recensione e un voto devi prima accedere al tuo <span lang="en">account</span></p>
+                                <p><a href="accedi.php">Accedi</a></p>
+                                <p>Non hai ancora un <span lang="en">account</span>? Entra a far parte della nostra <span lang="en">community</span>!</p>
+                                <p><a href="registrati.php">Registrati</a></p>
+                            </div>';
     }
     else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
         $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
@@ -184,20 +183,24 @@ if($connectionOk) {
             $tua_recensione = $connection -> getrecensionetua($LibroSelezionato,$_SESSION['username']);
             $voto = $connection -> getvototuo($LibroSelezionato,$_SESSION['username']);
 
-            if($tua_recensione=='') { //se la recensione è vuota
+            /*if($tua_recensione=='') { //se la recensione è vuota
                 $tua_recensione='Scrivi qui una recensione';
-            }
+            }*/
             $arearecensionevoto='
                 <form method="post" action="scheda_libro.php" onsubmit="return validaSchedaLibro()" onreset="conferma(\'Sei sicuro di voler annullare le modifiche alla tua recensione e al tuo voto?\')"> 
                     {messaggiForm}
                     <fieldset>
                         <legend>La tua Recensione e il tuo voto</legend>
                         <label for="recensione">Recensione:</label>
-                        <span><textarea id="recensione" name="recensione" rows="10" cols="70" maxlength="1000">'.$tua_recensione.'</textarea></span>
+                        <span><textarea id="recensione" name="recensione" rows="10" cols="70" maxlength="1000" placeholder="Inserisci la tua recensione...">'.$tua_recensione.'</textarea></span>
                         <label for="voto">Voto:</label>
-                        <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="{voto}" value="{voto}"></span>
-                        <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                        <input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">
+                        <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="Il tuo voto..." value="{voto}"></span>
+                        <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">';
+            if($tua_recensione=='' && $voto=='')
+                $arearecensionevoto.='<input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">';
+            else
+                $arearecensionevoto.='<input type="submit" id="valuta" name="valuta" value="Modifica valutazione">';
+            $arearecensionevoto.='
                         <input type="reset" value="Annulla">
                     </fieldset>
                 </form>';
@@ -205,13 +208,13 @@ if($connectionOk) {
         else if($salvato) {
             $arearecensionevoto='
                 <form action="scheda_libro.php" method="post"> 
-                <fieldset>
-                    <legend>Inizia a leggere</legend>
-                    <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                    <label for="username">Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label>
-                    <input type="submit" id="inizia" name="inizia" value="inizia">
-                </fieldset>
-            </form>';
+                    <fieldset>
+                        <legend>Inizia a leggere</legend>
+                        <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
+                        <label for="username">Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label>
+                        <input type="submit" id="inizia" name="inizia" value="inizia">
+                    </fieldset>
+                </form>';
         }
         else if($iniziato) {
             $arearecensionevoto='<p>Prima di poter recensire questo libro devi averlo terminato. Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>';
@@ -256,7 +259,7 @@ if($connectionOk) {
         foreach($altre_recensioni as $recensione) {
             $listaRecensioni .= '<li><p><span class="username">'.$recensione["username_autore"].':</span> <span class="commento-testuale">'.$recensione["commento"].'</span></p></li>';
         }
-        $listaRecensioni.="</ul></div>";
+        $listaRecensioni.="</ul>";
     }
 }
 else {
@@ -278,7 +281,7 @@ $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{menupersonale}", $menupersonale, $paginaHTML);
 
 //prima sostituisce l'area della recensione con un form poi lo compila 
-$paginaHTML = str_replace("{arearecensionevotoform}", $arearecensionevoto, $paginaHTML);
+$paginaHTML = str_replace("{arearecensionevotoform}", $arearecensionevoto=="" ? "" : '<section><h2 class="tua_recensione">La tua recensione</h2>'.$arearecensionevoto.'</section>', $paginaHTML);
 
 $paginaHTML = str_replace("{ImmagineLibro}", "copertine_libri/".$copertina.".jpg", $paginaHTML);
 $paginaHTML = str_replace("{altlibro}", $alt , $paginaHTML);
