@@ -45,13 +45,12 @@ if($connectionOk) {
             $torna_su=' <nav aria-label="Torna all\' inizio della pagina">
                              <a class="torna_su" href="#content">Torna su</a>
                         </nav>';
-         }    
+        }    
     }
-    $listaLibri.="</div>";  
-    //$risultatiLibri = $connection ->getListaLibriGenere($genere);
     $connection -> closeConnection();
+    $listaLibri.="</div>";
     foreach($resultListaBestSeller as $libro) {
-        $listaBestSeller .=  '<div class="item">
+        $listaBestSeller .= '<div class="item">
                                 <a href="scheda_libro.php?id='.$libro["id"].'"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" ></a>
                                 <ul>
                                     <li><strong>Titolo:</strong> '.$libro["autore"].'</li>
@@ -59,8 +58,8 @@ if($connectionOk) {
                                     <li><strong>Genere:</strong> '.$libro["genere"].'</li>
                                     <li class="commento"><strong>Commento:</strong> '.$libro["migliore_recensione"].'</li>
                                     <li><strong>Voto medio:</strong></li><li><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
-                                    </ul>
-                                </div>';
+                                </ul>
+                            </div>';
     }
     foreach($resultListaGeneri as $genere){
         $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';

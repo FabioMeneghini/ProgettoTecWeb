@@ -95,10 +95,12 @@ footer p{
 
 /*.datiattuali div{
     flex-direction: column;
-}
+}*/
 
 #faccina{
     width: 50%;
+    max-width: 15em;
+    min-width: 10em;
 }
 
 .trama_contenuto{

@@ -745,6 +745,8 @@ body > *{
 
 #faccina{
     width: 30%;
+    max-width: 12em;
+    min-width: 8em;
 }
 
 
