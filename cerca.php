@@ -4,7 +4,7 @@ include "config.php";
 require_once "DBAccess.php";
 use DB\DBAccess;
 
-$paginaHTML = file_get_contents("template/templatecerca.html");
+$paginaHTML = file_get_contents("template/templateCerca.html");
 $menu ="";
 $breadcrumbs = "";
 

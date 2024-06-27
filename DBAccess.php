@@ -2,7 +2,12 @@
 
 namespace DB;
 class DBAccess {
-    private $HOST_DB = "localhost"; //questi valori sono da cambiare prima di provarlo sul server di unipd
+    /*private $HOST_DB = "localhost"; //SERVER TECWEB
+    private $DATABASE_NAME = "famenegh";
+    private $USERNAME = "famenegh";
+    private $PASSWORD = "einohn7yie1soaBu";*/
+
+    private $HOST_DB = "localhost"; //SERVER LOCALE
     private $DATABASE_NAME = "bookclub";
     private $USERNAME = "root";
     private $PASSWORD = "";
