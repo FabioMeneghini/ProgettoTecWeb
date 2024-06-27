@@ -189,6 +189,11 @@ h2{
     padding: 1em;
 }
 
+#menu_scheda_libro {
+    text-align: left;
+    font-size: 1.6em;
+}
+
 h3{
     font-size: 1.5em;
     padding: 1em;
@@ -391,53 +396,34 @@ ul{
     margin-bottom: 1em;
 }
 
-#componenti > dd img{
-    width: 15%;
-    float: left;
-    margin-right: 1em;
-}
-
-.componente dt{
+.componente dt {
     float: left;
     font-weight: bold;
 }
 
-/*PAGINA 404*/
-
-#nongrid{
-    display:block;
-}
-
-#pagina{
-    position: relative;
-    width: 100%;
-    height: 100vh;
-}
-
-.errore404{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-}
-
-.errore404 p{
-    text-align: center;
-    margin-top: 20%;
-    vertical-align:middle;
-}
-
-.paper{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url(../404.png);
-    background-size: cover;
-    background-position: center;
-}
 /*SCHEDA LIBRO */
 
+.contenitore_lista_dati_libro, .contenitore_lista_dati_statistiche, .contenitore_lista_dati_personali, .contenitore_lista_dati_admin {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lista_dati_libro dt, .lista_dati_statistiche dt, .lista_dati_personali dt, .lista_dati_admin dt {
+    float: left;
+    font-weight: bold;
+}
+
+.lista_dati_libro dd, .lista_dati_statistiche dd, .lista_dati_personali dd, .lista_dati_admin dd {
+    margin-bottom: 0.3em;
+    text-align: left;
+}
+
+.lista_dati_libro, .lista_dati_personali {
+    padding: 0.5em;
+    margin-bottom: 1em;
+    width: 16em;
+}
 
 .trama_contenuto {
     background-color: var(--bgcolorextra); /* Giallo chiaro */
@@ -541,16 +527,7 @@ body > *{
 .slider li{
     padding: 0.2em;
 }
-/*
-.prev, .next{
-    padding: 0.5em 1em;
-    margin: 1em 0.5em;
-    border-color: var(--buttonColor);
-    border-radius: 10px;
-    background-color: white;
-    color: var(--buttonColor);
-}
-*/
+
 .prev, .next{
     margin: 0.5em;
     width: 50px;
@@ -632,7 +609,6 @@ body > *{
     margin-right: 0; /* Nessun margine a destra per l'ultimo elemento */
 }
 
-
 .librigeneri li a{
     display:flex;
     width: 100%;
@@ -645,8 +621,6 @@ body > *{
     font-size: 7em;
     line-height: 1.5em;
 }
-
-
 
 /* Generi */
 
@@ -676,7 +650,6 @@ body > *{
     line-height: 1.5em;
 }
 
-
 #generi li a:link{
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
@@ -687,9 +660,6 @@ body > *{
     filter: grayscale(0%);
     transform: scale(1.1);
 }
-
-
-
 
 .librigeneri {
     list-style-type: none;
@@ -730,28 +700,37 @@ body > *{
 /* ERRORI JS */
 
 .errorSuggestion {
-display: block;
+    display: block;
 }
 
 /*statistiche*/ 
 
-.statistiche_generali{
+.contenitore_liste_admin{
     display: flex;
     flex-direction: row;
 }
 
-.statistiche_admin{ 
+.contenitore_lista_dati_admin{ 
     width: 50%;   
     margin: 1em;
     padding: 1em;
-    background-color: var(--formColor); /*TODO colore da cambiare*/
+    background-color: var(--formColor);
     border: 2px solid;
     border-color: var(--flagColor);
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /*statistiche utente*/ 
-/* Stile per lo sfondo giallo e centratura del testo del messaggio motivazionale */
+
+.lista_dati_statistiche {
+    padding: 0.5em;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
 #messaggio_motivazionale {
     text-align: center; /* Centratura del testo */
     background-color: var(--bgcolorextra);
@@ -764,26 +743,31 @@ display: block;
     width: 30%;
 }
 
-.datilistalibro div, .datiattuali div, .gruppostatistiche div {
+
+
+/*.datilistalibro div, .datiattuali div, .gruppostatistiche div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.dati_lista_statistiche div {
+.lista_dati_admin div {
     display: flex;
     align-items: left;
     justify-content: left;
-}
+}*/
 
-.datilistalibro dt, .datiattuali dt{
+/*.datiattuali dt{
     font-weight: bold;
-}
+}*/
 
-.datiattuali{
+.lista_dati_personali {
     background-color: var(--bgcolorextra);
     border-radius: 3px;
+    padding: 0.5em;
     padding-bottom: 1em;
+    width: 100%;
+    max-width: 30em;
 }
 
 .menu_scheda_libro {

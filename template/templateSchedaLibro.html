@@ -41,32 +41,24 @@
             <section class="container">
                 <h2 id="titolo">{TitoloLibro}</h2>
                 <img src="{ImmagineLibro}" alt="{altlibro}" height="400">
-                <dl class="datilistalibro">
-                    <div>
-                        <dt>Autore: </dt>
+                <div class="contenitore_lista_dati_libro">
+                    <dl class="lista_dati_libro">
+                        <dt>Autore:&nbsp;</dt>
                         <dd>{AutoreLibro}</dd>
-                    </div>
-                    <div>
-                        <dt>Genere: </dt>
+                        <dt>Genere:&nbsp;</dt>
                         <dd>{GenereLibro}</dd>
-                    </div>
-                    <div>
-                        <dt>Lingua: </dt>
+                        <dt>Lingua:&nbsp;</dt>
                         <dd>{LinguaLibro}</dd>
-                    </div>
-                    <div>
-                        <dt>Numero capitoli: </dt>
+                        <dt>Numero capitoli:&nbsp;</dt>
                         <dd>{CapitoliLibro}</dd>
-                    </div>
-                    <div>
-                        <dt>Voto medio della nostra <span lang="en">community</span>: </dt>
+                        <dt>Voto medio:&nbsp;</dt>
                         <dd>{mediavoti}</dd>
-                    </div>
-                </dl>
+                    </dl>
+                </div>
                 {bottoniAdmin}
             </section>
             <section>
-                <h3>Menù</h3>
+                <h2 id="menu_scheda_libro">Menù</h2>
                 <nav class="menu_scheda_libro">
                     <ul class="menulibro">    
                         <li><a href="#trama">Vai alla trama</a></li>
