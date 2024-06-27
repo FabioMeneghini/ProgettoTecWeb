@@ -46,46 +46,33 @@
         </nav>
         <main  id="content">
             {messaggiSuccesso}
-            <h2>Statistiche</h2>
-            <section class="statistiche_generali">
-                <div class="statistiche_admin">
-                    <dl class="dati_lista_statistiche"> 
-                        <div>
-                            <dt>Numero totale di utenti registrati:</dt>
+            <section>
+                <h2><span lang="en">Home admin</span></h2>
+                <div class="contenitore_liste_admin">
+                    <div class="contenitore_lista_dati_admin">
+                        <dl class="lista_dati_admin">
+                            <dt>Numero totale di utenti registrati:&nbsp;</dt>
                             <dd>{numeroUtentiRegistrati}</dd>
-                        </div>
-                        <div>
-                            <dt>Numero di utenti registati oggi:</dt>
+                            <dt>Numero di utenti registati oggi:&nbsp;</dt>
                             <dd>{numeroRegistratiOggi}</dd>
-                        </div>
-                        <div>
-                            <dt>Numero di utenti che stanno leggendo:</dt>
+                            <dt>Numero di utenti che stanno leggendo:&nbsp;</dt>
                             <dd>{numeroUtentiCheStannoLeggendo}</dd>
-                        </div>
-                        <div>
-                            <dt>Età media degli utenti registrati:</dt>
+                            <dt>Età media degli utenti registrati:&nbsp;</dt>
                             <dd>{EtaMedia}</dd>
-                        </div>
-                    </dl>
-
-                    <a href="tutti_utenti.php" >Vai all'archivio</a>
-                </div>
-                <div class="statistiche_admin">
-                    <dl class="dati_lista_statistiche">
-                        <div>
-                            <dt>Numero totale di libri:</dt>
+                        </dl>
+                        <a href="tutti_utenti.php" >Vai all'archivio</a>
+                    </div>
+                    <div class="contenitore_lista_dati_admin">
+                        <dl class="lista_dati_admin">
+                            <dt>Numero totale di libri:&nbsp;</dt>
                             <dd>{numeroLibriTotali}</dd>
-                        </div>
-                        <div>
-                            <dt>Numero totale di recensioni:</dt>
+                            <dt>Numero totale di recensioni:&nbsp;</dt>
                             <dd>{numeroRecensioni}</dd>
-                        </div>
-                        <div>
-                            <dt>Numero di libri terminati oggi:</dt>
+                            <dt>Numero di libri terminati oggi:&nbsp;</dt>
                             <dd>{numeroLibriTerminati}</dd>
-                        </div>
-                    </dl>
-                    <a href="tutti_libri.php" >Vai al catalogo dei libri</a>
+                        </dl>
+                        <a href="tutti_libri.php" >Vai al catalogo dei libri</a>
+                    </div>
                 </div>
             </section>
         </main>

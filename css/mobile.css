@@ -93,22 +93,28 @@ footer p{
     width: 70%;
 }
 
-.datiattuali div{
+/*.datiattuali div{
     flex-direction: column;
-}
+}*/
 
 #faccina{
     width: 50%;
+    max-width: 15em;
+    min-width: 10em;
 }
 
 .trama_contenuto{
     text-align: left;
 }
 
-.datilistalibro div, .datiattuali div, .gruppostatistiche div, .dati_lista_statistiche div {
+/*.datilistalibro div, .datiattuali div, .gruppostatistiche div, .lista_dati_admin div {
     display: flex;
     align-items: center;
     justify-content: center;
+}*/
+
+.lista_dati_libro {
+    width: 14em;
 }
 
 form, fieldset {

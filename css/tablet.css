@@ -6,11 +6,11 @@
     display: none;
 }
 
-.statistiche_generali {
+.contenitore_liste_admin {
     flex-direction: column;
 }
 
-.statistiche_admin { 
+.contenitore_lista_dati_admin { 
     width: auto;
 }
 
@@ -26,8 +26,8 @@
     display: none;
 }
 
-.datilistalibro div, .datiattuali div, .gruppostatistiche div, .dati_lista_statistiche div {
+/*.datilistalibro div, .datiattuali div, .gruppostatistiche div, .lista_dati_admin div {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+}*/
