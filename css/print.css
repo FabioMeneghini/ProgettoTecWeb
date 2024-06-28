@@ -3,9 +3,22 @@
     padding: 0;
 }
 
+img, #breadcrumbs, #menu, footer, .slider-wrapper, .titologenere, input, select, nav, .torna_su, #menu_scheda_libro, .menu_scheda_libro, .rimuovi_print, #trama{
+    display: none;
+}
+
+input.non_rimuovi_print{
+    display: block;
+}
+
 html, body{
     font-size: 12pt;
     margin: auto;
+    line-height: 1.5em;
+}
+
+a{
+    color: black;
 }
 
 header{
@@ -17,14 +30,6 @@ header h1{
     font-size: 4em;
 }
 
-#breadcrumbs{
-    display:none;
-}
-
-#menu{
-    display: none;
-}
-
 main{
     text-align: justify;
     width: auto;
@@ -34,7 +39,11 @@ main{
 main h2{
     text-align: center;
     font-size: 2em;
-    padding: 1em 0em;
+    padding: 1em;
+}
+
+h3{
+    padding: 1em;
 }
 
 main dt{
@@ -43,27 +52,8 @@ main dt{
     padding: 1em 0em 0.5em 0em;
 }
 
-main img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
-
-footer {
-    display: none;
-}
-
 ul {
     list-style-type: none;
-}
-
-#logo img {
-    width: 20%;
-}
-
-.slider-wrapper, .titologenere{
-    display: none;
 }
 
 h3 {
@@ -83,19 +73,20 @@ legend {
     font-size: 1.2em;
 }
 
-fieldset, .contenitore_lista_dati_admin {
+/*fieldset, .contenitore_lista_dati_admin {
     border: 3px solid;
     border-radius: 5px;
-}
-
-input {
-    display: none;
-}
-
-select {
-    display: none;
-}
+}*/
 
 #componenti>dt {
     font-size: 1.5em;
 }
+
+a[href]:after {
+    content: " (" attr(href) ")";
+}
+
+fieldset{
+    border: 0;
+}
+

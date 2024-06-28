@@ -43,7 +43,7 @@ if($connectionOk) {
                                     <th scope="col" abbr="Aut">Autore</th>
                                     <th class="rimuovi" scope="col" abbr="Fine lett.">Data di fine lettura</th>
                                     <th class="rimuovi" scope="col" abbr="Voto">Voto assegnato</th>
-                                    <th scope="col" abbr="Sel">Seleziona</th>
+                                    <th class="rimuovi_print" scope="col" abbr="Sel">Seleziona</th>
                                 </tr>';
         foreach($lista as $libro) {
             $listaLibri .= '<tr>
@@ -51,7 +51,7 @@ if($connectionOk) {
                                 <td>'.$libro["autore"].'</td>
                                 <td class="rimuovi"><time datetime="'.$libro["data_fine_lettura"].'">'.$libro["data_fine_lettura"].'</time></td>
                                 <td class="rimuovi">'.$libro["voto"].'</td>
-                                <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
+                                <td class="rimuovi_print"><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                             </tr>';
         }
         $listaLibri .= '</table>
