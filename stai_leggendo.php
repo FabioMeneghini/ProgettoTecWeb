@@ -65,7 +65,7 @@ if($connectionOk) {
                                 <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                                 <td class="rimuovi">'.$libro["autore"].'</td>
                                 <td>
-                                    <input type="number" name="capitoli[]" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
+                                    <input type="number" name="capitoli[]" class="non_rimuovi_print" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
                                     <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
                                 </td>
                             </tr>';

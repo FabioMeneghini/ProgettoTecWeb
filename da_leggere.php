@@ -49,13 +49,13 @@ if($connectionOk) {
                                     <tr>
                                         <th scope="col">Titolo</th>
                                         <th scope="col" abbr="Aut">Autore</th>
-                                        <th scope="col" abbr="Sel">Seleziona</th>
+                                        <th class="rimuovi_print" scope="col" abbr="Sel">Seleziona</th>
                                     </tr>';
         foreach($lista as $libro) {
             $listaLibri .= '<tr>
                                 <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                                 <td>'.$libro["autore"].'</td>
-                                <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
+                                <td class="rimuovi_print"><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                             </tr>';
         }
         $listaLibri .= '    </table>
