@@ -6,6 +6,7 @@ use DB\DBAccess;
 
 if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
+    exit();
 }
 
 $paginaHTML = file_get_contents("template/templateStaiLeggendo.html");
@@ -37,7 +38,7 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultListaGeneri as $genere) {
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     if(empty($lista)) {
         $listaLibri = "Non stai leggendo nessun libro. Aggiungine uno ora dalla lista dei tuoi libri salvati."; //aggiungere link alla pagina dei libri salvati
@@ -54,15 +55,15 @@ if($connectionOk) {
                                     <caption>Lista dei libri che stai leggendo</caption>
                                     <tr>
                                         <th scope="col">Titolo</th>
-                                        <th scope="col">Autore</th>
-                                        <th scope="col">Numero capitoli letti</th>
+                                        <th class="rimuovi" scope="col" abbr="Aut">Autore</th>
+                                        <th scope="col" abbr="Cap. letti">Numero capitoli letti</th>
                                     </tr>';
         $i=0;
         foreach($lista as $libro) {
             $i++;
             $listaLibri .= '<tr>
-                                <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
-                                <td>'.$libro["autore"].'</td>
+                                <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
+                                <td class="rimuovi">'.$libro["autore"].'</td>
                                 <td>
                                     <input type="number" name="capitoli[]" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
                                     <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
@@ -74,16 +75,16 @@ if($connectionOk) {
                             <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna capitoli">
                         </fieldset>
                         </form>';
-    }
-    if(count($lista)>=8) {
-
-        $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
-                         <a class="torna_su" href="#content">Torna su</a>
-                    </nav>';
+        if(count($lista)>=8) {
+            $torna_su=' <nav aria-label="Torna al\'inizio della lista dei libri che stai leggendo">
+                            <a class="torna_su" href="#content">Torna su</a>
+                        </nav>';
+        }
     }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);

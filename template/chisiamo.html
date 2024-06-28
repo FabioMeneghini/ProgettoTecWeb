@@ -2,12 +2,14 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Componenti &minus; BookClub</title>
-    <meta name="keyword" content="BookClub, libri, libri dal leggere, consigli libri">
-    <meta name="description" content="Sito ufficiale di BookClub, gruppo fondato da Leonardo">
+    <title>Componenti - BookClub</title>
+    <meta name="keyword" content="chi siamo, componenti, fabio, martina, leonardo, nicola, BookClub">
+    <meta name="description" content="Descrizione dei componenti del gruppo che gestisce BookClub">
+    <meta name="author" content="Martina Dall'Amico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css" media="screen">
-    <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
     <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+    <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
     <link rel="stylesheet" href="css/print.css" media="print">
     <link rel="stylesheet" href="css/imageReplace.css" media="screen">
 </head>
@@ -18,59 +20,51 @@
     </header>
     <nav id="menu">
         <label for="hamburger" tabindex="0">
-            <img src="menu.png"><!--ERRORE MANCA ALT-->
+            <img src="menu.png" alt="">
         </label>
         <input id="hamburger" type="checkbox">
-        <dl>
-            <dt><a href="index.php"><span lang="en">Home</span></a></dt>
-            <dt><a href="generi.php">Generi:</a></dt>
-            {listaGeneri}
-            <dt><a href="accedi.php">Accedi</a></dt>
-            <dt><a href="registrati.php">Registrati</a></dt>
-            <dt><a href="cerca.php">Cerca</a></dt>
-        </dl>
-        
+        <ul>
+            {menu}
+        </ul>
     </nav>
     <nav id="breadcrumbs">
-        <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Componenti</span></p>
+        <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Componenti</p>
     </nav>
     <main>
         <h2>I componenti</h2>
         <dl id="componenti">
             <dt>Baldo Leonardo</dt>
             <dd>
-                <!--<img src="" alt="">-->
                 <dl class="componente">
-                    <dt>Data di nascita:</dt>
+                    <dt>Data di nascita:&nbsp;</dt>
                     <dd><time datetime="2001-12-31">31 Dicembre 2001</time></dd>
-                    <dt>Luogo:</dt>
+                    <dt>Luogo:&nbsp;</dt>
                     <dd>Verona (<abbr title="Verona">VR</abbr>)</dd>
-                    <dt>Biografia:</dt>
+                    <dt>Biografia:&nbsp;</dt>
                     <dd><strong>Leonardo Baldo</strong> è nato a Verona nel 2001 e fin da bambino ha avuto una predisposizione e passione per i cubi.
-                    Dopo essere rimasto inicinto per errore dal suo migliore amico Samuele, ha trasformato la sua passione per i cubi in passione per i libri,
+                    Dopo un ripensamento, ha trasformato la sua passione per i cubi in passione per i libri,
                     decidendo così di vendere tutta la sua collezione di cubi per aiutare il suo amico Nicola a sostenere i costi per fondare questa azienda.</dd>
                 </dl>
             </dd>
             <dt>Dall'Amico Martina</dt>
             <dd>
-                
                 <dl class="componente">
-                    <dt>Data di nascita:</dt>
-                    <dd><time datetime="1994-05-08">08 Maggio 1994</time></dd>
-                    <dt>Luogo:</dt>
-                    <dd>Seriate (<abbr title="Bergamo">BG</abbr>)</dd>
-                    <dt>Biografia:</dt>
+                    <dt>Data di nascita:&nbsp;</dt>
+                    <dd><time datetime="2002-04-27">27 Aprile 2002</time></dd>
+                    <dt>Luogo:&nbsp;</dt>
+                    <dd>Vicenza (<abbr title="Vicenza">VI</abbr>)</dd>
+                    <dt>Biografia:&nbsp;</dt>
                     <dd><strong>Martina Dall'Amico</strong> conosce tutte le lingue del mondo fin dalla nascita, ma pecca nella grammatica italiana.</dd>
                 </dl>
             </dd>
             <dt>Lazzarin Nicola</dt>
             <dd>
                 <dl class="componente">
-                    <dt>Data di nascita:</dt>
+                    <dt>Data di nascita:&nbsp;</dt>
                     <dd><time datetime="2002-03-07">7 Marzo 2002</time></dd>
-                    <dt>Luogo:</dt>
+                    <dt>Luogo:&nbsp;</dt>
                     <dd>Abano Terme (<abbr title="Abano Terme">PD</abbr>)</dd>
-                    <dt>Biografia:</dt>
+                    <dt>Biografia:&nbsp;</dt>
                     <dd><strong>Lazzarin Nicola</strong> è nato in provincia di Padova. Da sempre appassionato di giochi da tavolo, libri <span lang="en">Fantasy</span>, mitologia norrena e greca.
                     è solo grazie a lui che è stato possibile fondare questa azienda: purtroppo ha subito un terribile incidente stradale ed è rimasto parallizzato dal collo in giù,
                     ma grazie ai soldi ricevuti dall'assicurazione è stato possibile sostenere i costi di apertura e gestione dell'azienda.</dd>
@@ -80,11 +74,11 @@
             <dd>
                 
                 <dl class="componente">
-                    <dt>Data di nascita:</dt>
+                    <dt>Data di nascita:&nbsp;</dt>
                     <dd><time datetime="2002-04-08">08 Aprile 2002</time></dd>
-                    <dt>Luogo:</dt>
+                    <dt>Luogo:&nbsp;</dt>
                     <dd>Pegolotte (<abbr title="Venezia">VE</abbr>)</dd>
-                    <dt>Biografia:</dt>
+                    <dt>Biografia:&nbsp;</dt>
                     <dd>Nato nel 2002, <strong>Fabio Meneghini</strong> fa il tutor da tutta la vita. Dopo aver fallito come infomatico
                     si è appassionato di libri, e in un momento di pura follia, ha deciso con i suoi cari amici di fondare l'azienda <span lang="en">BookClub</span>,
                     con lo scopo di incentivare la lettura a tutta la popolazione italiana.</dd>

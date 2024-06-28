@@ -2,13 +2,14 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Aggiungi Libro -BookClub</title>
-        <meta name="keywords" content="nuovi libri, inserimento">
-        <meta name="description" content="Questa pagina dell'admin è per inserire nuovi libri.">
+        <title>Aggiungi libro - BookClub</title>
+        <meta name="keywords" content="aggiungi, libro, aggiungi libro, informazioni">
+        <meta name="description" content="Questa pagina permette di aggiungere un libro al database di BookClub">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
         <script src="conferme.js"></script>
@@ -24,19 +25,23 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png"  alt="">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
-                <dt>Aggiungi un libro</dt>
-                <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
-                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt><a href="area_personale.php">Area Personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            <ul>
+                <li><a href="admin.php"><span lang="en">Home</span></a></li>
+                <li>Aggiungi un libro</li>
+                <li><a href="tutti_libri.php">Catalogo libri</a></li>
+                <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="admin.php"><span lang="en">Home</span></a> &gt;&gt; Aggiungi un libro</p>
@@ -50,10 +55,10 @@
                         <legend>Informazioni generali</legend>
                         <label for="titolo">Autore:</label>
                         <span><input type="text" id="autore" name="autore" maxlength="100" required></span>
-                        <br>
+                        
                         <label for="titolo">Titolo:</label>
                         <span><input type="text" name="titolo" id="titolo" maxlength="100" required></span>
-                        <br>
+                        
                         <label for="genere">Genere:</label>
                         <span>
                             <select name="genere" id="genere" required>
@@ -68,7 +73,7 @@
                         <datalist id="lingua_list">
                             {listaLingue}
                         </datalist>
-                        <br>
+                        
                         <label for="capitoli">Numero capitoli:</label>
                         <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required></span>
                     </fieldset>

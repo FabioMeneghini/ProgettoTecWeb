@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="it">
-<!--deinire una icona per la pagina quando visualizzata assieme ad altre= un libro -->
-    <!--nel file ci sono cose in più per il php da togliere!!-->
     <head>
         <meta charset="UTF-8">
-        <title>Classifica Libri-BookClub</title>
-        <!--titolo not the best-->
-        <!--IN QUESTA PAGINA è IMPORTANTE IL RANKING-->
-        <meta name="keywords" content="migliori libri, libri del momento,libri più letti, letture consigliate,bestseller,nuove uscite libri,classifica libri,cercare e salvare libri">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri (bestseller) e generi per lettori in questo momento offrendo letture consigliate in base ai libri più letti, alla classifica e alle nuove uscite.Una volta registrati si possono salvare libri e recensirli">
+        <title>Home - BookClub</title>
+        <meta name="keywords" content="libri, migliori libri, libri del momento, libri più letti, letture consigliate, bestseller, nuove uscite, classifica libri, BookClub">
+        <meta name="description" content="Homepage per gli utenti non registrati, è dedicata ai migliori libri e generi in questo momento, offrendo letture consigliate in base ai libri più letti e alle loro valutazioni">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
-        <link rel="stylesheet" href="css/style.css" media="screen"> <!-- da questa cartella il verso percorso dovrebbe essere ../css/style.css, però quando il php carica questa pagina si trova già alla cartella precedente -->
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
         <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
@@ -27,18 +24,20 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><span lang="en">Home</span></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <!--php x menu con categorie-->
-                <dt><a href="accedi.php">Accedi</a></dt>
-                <dt><a href="registrati.php">Registrati</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE MANCA DL-->
+            <ul>
+                <li><span lang="en">Home</span></li>
+                <li><a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="accedi.php">Accedi</a></li>
+                <li><a href="registrati.php">Registrati</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <span lang="en">Home</span></p>

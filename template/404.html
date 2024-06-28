@@ -1,35 +1,51 @@
 <!DOCTYPE html>
-<!--configurare la pagina di errore : ErrorDocument 404 /404.html -->
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>404 - BookClub</title>
-        <meta name="keywords" content="">
-        <meta name="description" content=""> <!--non ha senso metterlo!-->
-        <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
+        <title>Errore 404 - BookClub</title>
+        <meta name="keywords" content="errore, 404, non trovato, assente, risorsa, pagina">
+        <meta name="description" content="Pagina di errore 404 BookClub">
+        <meta name="author" content="Fabio Meneghini">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
     </head>
-    <body id="nongrid"><!--??-->
-        <section id="pagina">
-            <div class="errore404">
-                <p>Ci scusiamo per l'errore, al momento questa pagina non è disponibile ma stiamo facendo il meglio per assicurarti
-                     il miglior servizio.</p>
-                <p>Prova a ricaricare la pagina tra qualche minuto</p>
-            </div>
-            <div class="paper">
-                
-            </div>
-        </section>
-         
-        
-      <!-- <p>Il numero di assistenza : e mail:</p>
-        qui il sito invia una mail all'admin scrivere nel progetto che x sicurezza non si può-->
-        <!--vedere slide cosa mettere -->
-        <!--da css una immagine vignetta ho perso la pagina !-->
-        
+    <body>
+        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
+        <header id="header">
+            <nav aria-label="Aiuti alla navigazione">
+                <a class="navigationHelp" href="#content">Vai al contenuto</a>
+            </nav> 
+            <h1 class="titolo"><span lang="en">BookClub</span></h1>
+        </header>
+        <nav id="menu">
+            <label for="hamburger" tabindex="0">
+                <img src="menu.png" alt="">
+            </label>
+            <input id="hamburger" type="checkbox">
+            <ul>
+                {menu}
+            </ul>
+        </nav>
+        <nav id="breadcrumbs" aria-label="Percorso">
+            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; Errore 404</p>
+            <span class="separatore"></span>
+        </nav>
+        <main  id="content">
+            <h2>Errore 404</h2>
+            <p>Ci dispiace per l'inconveniente, ma la pagina o risorsa da lei cercata non è al momento disponibile. Nonostante questo errore, le assicuriamo che tutti i suoi dati personali sono comunque al sicuro.</p>
+            <p>Per continuare con la navigazione, la invitiamo a tornare alla sua <a href="index.php"><span lang="en">Homepage</span></a>.</p>
+        </main>
+        <footer id="footer">
+            <ul>
+                <li><a href="contatti.php">Contatti</a></li>
+                <li><a href="chisiamo.php">Chi siamo</a></li>
+                <li><a href="privacy.php"><span lang="en">Privacy</span></a></li>
+            </ul>
+            <p>Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola - <span lang="en">All rights reserved</span></p>
+        </footer>
     </body>
 </html>

@@ -32,7 +32,10 @@ if($connectionOk) {
         }
     }
     header("Location: index.php");
-    //header("Location: index.php?success=0"); //MOSTRARE MESSAGE DI ERRORE
+    exit();
+}
+else {
+    header("Location: 500.php");
     exit();
 }
 

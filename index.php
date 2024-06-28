@@ -7,8 +7,10 @@ use DB\DBAccess;
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
         header("Location: admin.php");
+        exit();
     } else {
         header("Location: utente.php");
+        exit();
     }
 }
 
@@ -26,10 +28,9 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $resultGeneri = $connection -> getGeneriPiuPopolari();
     
-
     foreach($resultGeneri as $genere) {
         $listaLibri.='<div class="genere_singolo"><h3><a  href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3></div>';
-        $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"],10);
+        $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
         if(empty($risultatiLibri)) {
             $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
         }
@@ -41,20 +42,15 @@ if($connectionOk) {
             $listaLibri.='</ul>';
         }
         if($resultGeneri>=15) {
-
             $torna_su=' <nav aria-label="Torna all\' inizio della pagina">
                              <a class="torna_su" href="#content">Torna su</a>
                         </nav>';
-         }
-        
+        }    
     }
-    $listaLibri.="</div>";  
-    //$risultatiLibri = $connection ->getListaLibriGenere($genere);
     $connection -> closeConnection();
+    $listaLibri.="</div>";
     foreach($resultListaBestSeller as $libro) {
-        // $listaBestSeller .= "<li>".$libro["titolo"]."</li>";  
-        //$libro["autore"], $libro["genere"] lo si visualizza solo al momento del passaggio del mouse sopra al libro
-        $listaBestSeller .=  '<div class="item">
+        $listaBestSeller .= '<div class="item">
                                 <a href="scheda_libro.php?id='.$libro["id"].'"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" ></a>
                                 <ul>
                                     <li><strong>Titolo:</strong> '.$libro["autore"].'</li>
@@ -62,15 +58,16 @@ if($connectionOk) {
                                     <li><strong>Genere:</strong> '.$libro["genere"].'</li>
                                     <li class="commento"><strong>Commento:</strong> '.$libro["migliore_recensione"].'</li>
                                     <li><strong>Voto medio:</strong></li><li><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
-                                    </ul>
-                                </div>';
+                                </ul>
+                            </div>';
     }
     foreach($resultListaGeneri as $genere){
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{listaBestSeller}", $listaBestSeller, $paginaHTML);

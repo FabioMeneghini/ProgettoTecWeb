@@ -2,13 +2,14 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Utenti-BookClub</title>
-        <meta name="keywords" content=""><!--hanno senso le keyword qua?-->
-        <meta name="description" content="Questa pagina dell'admin è per aggiungere un genere">
+        <title>Archivio utenti - BookClub</title>
+        <meta name="keywords" content="utenti, utenti registrati, account, BookClub">
+        <meta name="description" content="Questa pagina riporta le informazioni principali di tutti gli utenti registrati al sito BookClub">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
     </head>
@@ -24,19 +25,23 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><a href="admin.php"><span lang="en">Home</span></a></dt>
-                <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
-                <dt><a href="tutti_libri.php">Catalogo Libri</a></dt>
-                <dt>Archivio utenti</dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri} 
-                <dt><a href="area_personale.php">Area Personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE DL-->
+            <ul>
+                <li><a href="admin.php"><span lang="en">Home</span></a></li>
+                <li><a href="aggiungi_libro.php">Aggiungi un libro</a></li>
+                <li><a href="tutti_libri.php">Catalogo libri</a></li>
+                <li>Archivio utenti</li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri} 
+                    </ul>
+                </li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; Archivio utenti</p>

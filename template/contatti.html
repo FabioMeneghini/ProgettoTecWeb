@@ -2,13 +2,14 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Home - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
-        <meta name="author" content="">
+        <title>Contatti - BookClub</title>
+        <meta name="keywords" content="contatti, numero, mail, assistenza, informazioni, BookClub">
+        <meta name="description" content="Contatti dell'assistenza di BookClub">
+        <meta name="author" content="Martina Dall'Amico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
     </head>
@@ -22,28 +23,25 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><a href="index.php"><span lang="en">Home</span></a></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt><a href="accedi.php">Accedi</a></dt>
-                <dt><a href="registrati.php">Registrati</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            <ul>
+                {menu}
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in:  <a href="index.php"><span lang="en">Home</span></a>&gt; &gt;  Contatti</p> 
+            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt;  Contatti</p> 
             <span class="separatore"></span>
         </nav>
-        <main  id="content">
+        <main id="content">
             <h2>Contatti</h2>
-            <ul>
-                <li>Mail : BookClub.assistenza@gmail.com</li>
-                <li>Telefono: 0444 322883</li>
-            </ul>
+            <dl>
+                <dt>Mail:</dt>
+                <dd>BookClub.assistenza@gmail.com</dd>
+                <dt>Telefono:</dt>
+                <dd>0444 322883</dd>
+            </dl>
         </main>
         <footer id="footer">
             <ul>

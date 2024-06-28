@@ -2,13 +2,14 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>AdminHome - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <title>Home admin - BookClub</title>
+        <meta name="keywords" content="utenti, libri, statistiche, admin">
+        <meta name="description" content="Homepage degli utenti admin, questa pagina è dedicata alle statistiche del sito, visualizzabbili dall'admin, riguardo i libri, le recensioni e gli utenti di BookClub">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
     </head>
@@ -22,60 +23,56 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <!--link di admin-->
-                <dt><span lang="en">Home</span></dt>
-                <!--l'home dell'admin ha o non ha le cose degli utenti? o ha una pagina per le statistice? -->
-                <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
-                <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
-                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>             <!--rimuovi da dove ci arriva? che pagine sono?
-                forse è visualizza tutti i libri e visualizza tutti i generi? 
-                da dentro il libro gestisce le recensioni ecc-->
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <!--metti php x menu con link alla pagina: <dd>templategenere.html-->
-                <dt><a href="area_personale.php">Area Personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE DL-->
+            <ul>
+                <li><span lang="en">Home</span></li>
+                <li><a href="aggiungi_libro.php">Aggiungi un libro</a></li>
+                <li><a href="tutti_libri.php">Catalogo libri</a></li>
+                <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <span lang="en">Home</span></p>
         </nav>
         <main  id="content">
-            <h2>Statistiche:</h2>
-            <section class="statistiche_generali">
-                <div class="statistiche_admin">
-                    <dl>
-                        <dt>Numero totale di utenti registrati:</dt>
-                        <dd>{numeroUtentiRegistrati}</dd>
-
-                        <dt>Numero di utenti registati oggi:</dt>
-                        <dd>{numeroRegistratiOggi}</dd>
-
-                        <dt>Numero di utenti che stanno leggendo:</dt>
-                        <dd>{numeroUtentiCheStannoLeggendo}</dd>
-
-                        <dt>Età media degli utenti registrati:</dt>
-                        <dd>{EtaMedia}</dd>
-                    </dl>
-
-                    <a href="tutti_utenti.php" >Vai all'archivio</a>
-                </div>
-                <div class="statistiche_admin">
-                    <dl>
-                        <dt>Numero totale di libri:</dt>
-                        <dd>{numeroLibriTotali}</dd>
-
-                        <dt>Numero totale di recensioni:</dt>
-                        <dd>{numeroRecensioni}</dd>
-
-                        <dt>Numero di libri terminati oggi:</dt>
-                        <dd>{numeroLibriTerminati}</dd>
-                    </dl>
-                    <a href="tutti_libri.php" >Vai al catalogo dei libri</a>
+            {messaggiSuccesso}
+            <section>
+                <h2><span lang="en">Home admin</span></h2>
+                <div class="contenitore_liste_admin">
+                    <div class="contenitore_lista_dati_admin">
+                        <dl class="lista_dati_admin">
+                            <dt>Numero totale di utenti registrati:&nbsp;</dt>
+                            <dd>{numeroUtentiRegistrati}</dd>
+                            <dt>Numero di utenti registati oggi:&nbsp;</dt>
+                            <dd>{numeroRegistratiOggi}</dd>
+                            <dt>Numero di utenti che stanno leggendo:&nbsp;</dt>
+                            <dd>{numeroUtentiCheStannoLeggendo}</dd>
+                            <dt>Età media degli utenti registrati:&nbsp;</dt>
+                            <dd>{EtaMedia}</dd>
+                        </dl>
+                        <a href="tutti_utenti.php" >Vai all'archivio</a>
+                    </div>
+                    <div class="contenitore_lista_dati_admin">
+                        <dl class="lista_dati_admin">
+                            <dt>Numero totale di libri:&nbsp;</dt>
+                            <dd>{numeroLibriTotali}</dd>
+                            <dt>Numero totale di recensioni:&nbsp;</dt>
+                            <dd>{numeroRecensioni}</dd>
+                            <dt>Numero di libri terminati oggi:&nbsp;</dt>
+                            <dd>{numeroLibriTerminati}</dd>
+                        </dl>
+                        <a href="tutti_libri.php" >Vai al catalogo dei libri</a>
+                    </div>
                 </div>
             </section>
         </main>

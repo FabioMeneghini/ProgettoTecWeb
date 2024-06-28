@@ -18,6 +18,11 @@ else {
 
 $paginaHTML = file_get_contents("template/templateHomeAdmin.html");
 $listaGeneri = "";
+$messaggiSuccesso = "";
+
+if(isset($_GET['accesso']) && $_GET['accesso'] == 1) {
+    $messaggiSuccesso = '<p class="messaggiSuccesso">Accesso avvenuto con successo. Bentornato, '.$_SESSION['username'].'!</p>';
+}
 
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
@@ -31,13 +36,14 @@ if($connectionOk) {
     $n_terminati = $connection-> getNumeroLibriTerminatiOggi();
     $n_registrati_oggi = $connection-> getNumeroUtentiRegistratiOggi();
     foreach($resultListaGeneri as $genere) {
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     
     $connection -> closeConnection();
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{numeroUtentiRegistrati}", $n_registrati, $paginaHTML);
@@ -48,6 +54,7 @@ $paginaHTML = str_replace("{EtaMedia}", $n_eta, $paginaHTML);
 $paginaHTML = str_replace("{numeroLibriTerminati}", $n_terminati, $paginaHTML);
 $paginaHTML = str_replace("{numeroRegistratiOggi}", $n_registrati_oggi, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
+$paginaHTML = str_replace("{messaggiSuccesso}", $messaggiSuccesso, $paginaHTML);
 echo $paginaHTML;
 
 ?>

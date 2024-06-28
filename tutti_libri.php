@@ -52,25 +52,25 @@ if($connectionOk) {
     }
     $connection -> closeConnection();
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     if(!empty($resultLibri)){
         $catalogo.= '<p id="descr">
-                            La tabella contiene l\'elenco di tutti i libri presenti nel sito.
-                            Ogni riga descrive un libro con 5 colonne nominate: "titolo", "copertina", "autore", "lingua", "data inserimento".
+                        La tabella contiene l\'elenco di tutti i libri presenti nel sito.
+                        Ogni riga descrive un libro con 5 colonne nominate: "titolo", "copertina", "autore", "lingua", "data inserimento".
                     </p>
                     <table aria-describedby="descr" class="righealternate">
                         <caption>Catalogo di tutti i libri</caption>
                         <tr>
                             <th scope="col">Titolo</th>
-                            <th scope="col">Copertina</th>
-                            <th scope="col">Autore</th>
-                            <th class="rimuovi" scope="col">Lingua</th>
-                            <th class="rimuovi" scope="col">Data inserimento</th>
+                            <th scope="col" abbr="Cop">Copertina</th>
+                            <th scope="col" abbr="Aut">Autore</th>
+                            <th class="rimuovi" scope="col" abbr="Lin">Lingua</th>
+                            <th class="rimuovi" scope="col" abbr="Data ins">Data inserimento</th>
                         </tr>';
         foreach($resultLibri as $libro) {
         $catalogo .= '<tr>
-                        <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
+                        <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                         <td><img src="copertine_libri/'.$libro['titolo_ir'].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
                         <td>'.$libro["autore"].'</td>
                         <td class="rimuovi">'.$libro["lingua"].'</td>
@@ -89,7 +89,8 @@ if($connectionOk) {
     }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 if($opzione=="alfabetico"){

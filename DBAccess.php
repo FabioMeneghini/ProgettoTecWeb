@@ -2,7 +2,12 @@
 
 namespace DB;
 class DBAccess {
-    private $HOST_DB = "localhost"; //questi valori sono da cambiare prima di provarlo sul server di unipd
+    /*private $HOST_DB = "localhost"; //SERVER TECWEB
+    private $DATABASE_NAME = "famenegh";
+    private $USERNAME = "famenegh";
+    private $PASSWORD = "einohn7yie1soaBu";*/
+
+    private $HOST_DB = "localhost"; //SERVER LOCALE
     private $DATABASE_NAME = "bookclub";
     private $USERNAME = "root";
     private $PASSWORD = "";
@@ -40,7 +45,6 @@ class DBAccess {
     }
 
     public function getListaBestSeller() {
-        
         $query = "SELECT libri.titolo, libri.titolo_ir, libri.autore, generi.nome AS genere, libri.descrizione, libri.id, AVG(recensioni.voto) AS voto_medio
               FROM libri
               JOIN generi ON libri.id_genere = generi.id
@@ -157,16 +161,16 @@ class DBAccess {
         }
     }
     
-    public function getkeywordsGenere($genereSelezionato) {
-        $query = "SELECT keywords FROM generi WHERE nome = '$genereSelezionato'";
+    public function getMetaGenere($genereSelezionato) {
+        $query = "SELECT keywords, descrizione FROM generi WHERE nome = '$genereSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $row = mysqli_fetch_assoc($queryResult);
             $queryResult -> free();
-            return $row['keywords'];
+            return $row;
         }
         else {
-            return "";
+            return null;
         }
     }
     
@@ -539,16 +543,16 @@ class DBAccess {
         }
     }
 
-    public function getkeywordsLibro($LibroSelezionato) {
-        $query = "SELECT keywords FROM libri WHERE id = '$LibroSelezionato'";
+    public function getMetaLibro($LibroSelezionato) {
+        $query = "SELECT keywords, descrizione_pagina FROM libri WHERE id = '$LibroSelezionato'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
             $row = mysqli_fetch_assoc($queryResult);
             $queryResult -> free();
-            return $row['keywords'];
+            return $row;
         }
         else {
-            return "";
+            return null;
         }
     }
 

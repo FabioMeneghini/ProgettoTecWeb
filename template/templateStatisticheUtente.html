@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <title>Statistiche - BookClub</title>
-        <meta name="keywords" content="">
-        <meta name="description" content="">
+        <meta name="keywords" content="statistiche, dati, informazioni, numero libri letti, numero libri salvati, numero recensioni, utente, account">
+        <meta name="description" content="Questa pagina contiene diverse informazioni riguardo i libri letti, salvati e recensiti dall'utente">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
     </head>
@@ -22,53 +23,50 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><a href="utente.php"><span lang="en">Home</span></a></dt>
-                <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
-                <dt><a href="terminati.php">Libri terminati</a></dt>
-                <dt><a href="da_leggere.php">Libri da leggere</a></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt>Statistiche</dt>
-                <dt><a href="area_personale.php">Area Personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE DL-->
+            <ul>
+                <li><a href="utente.php"><span lang="en">Home</span></a></li>
+                <li><a href="stai_leggendo.php">Libri che stai leggendo</a></li>
+                <li><a href="terminati.php">Libri terminati</a></li>
+                <li><a href="da_leggere.php">Libri da leggere</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li>Statistiche</li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; Statistiche </p>
         </nav>
         <main id="content">
             <section>
-            <div class="gruppostatistiche">
                 <h2>Statistiche</h2>
-                <dl>
-                    <div>
-                        <dt>Numero libri recensiti in totale: </dt>
+                <div class="contenitore_lista_dati_statistiche">
+                    <dl class="lista_dati_statistiche">
+                        <dt>Numero libri recensiti in totale:&nbsp;</dt>
                         <dd>{NumeroRecensioni}</dd>
-                    </div>
-                    <div>
-                        <dt>Numero libri letti in totale: </dt>
+                        <dt>Numero libri letti in totale:&nbsp;</dt>
                         <dd>{LibriLetti}</dd>
-                    </div>
-                    <div>
-                        <dt>Numero libri letti quest'anno: </dt>
+                        <dt>Numero libri letti quest'anno:&nbsp;</dt>
                         <dd>{LibriLettiAnno}</dd>
-                    </div>
-                    <div>
-                        <dt>Numero libri attualmente salvati: </dt>
+                        <dt>Numero libri attualmente salvati:&nbsp;</dt>
                         <dd>{LibriSalvati}</dd>
-                    </div>
-                    <div>
-                        <dt>Numero libri che stai leggendo attualmente: </dt>
+                        <dt>Numero libri che stai leggendo attualmente:&nbsp;</dt>
                         <dd>{LibriStaiLeggendo}</dd>
-                    </div>
-                </dl>
-            </div>
+                    </dl>
+                </div>
             </section>
-            <div id="messaggio_motivazionale">{messaggio_motivazionale}</div>
+            <div id="messaggio_motivazionale">
+                {messaggio_motivazionale}
+                <img id="faccina" src="smile.png" alt="">
+            </div>
         </main>
         <footer id="footer">
             <ul>

@@ -1,17 +1,15 @@
-
-<!--IN QUESTA PAGINA è IMPORTANTE IL RANKING!!!!!!!!!!!!!-->
-
 <!DOCTYPE html>
 <html lang="it">
     <head>
         <meta charset="UTF-8">
         <title>{TitoloLibro} - BookClub</title>
         <meta name="keywords" content="{keywords}">
-        <meta name="description" content="">
+        <meta name="description" content="{description}">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
         <script src="conferme.js"></script>
@@ -27,68 +25,58 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
-                {menu}<!--ERRORE MA CREDO VADA BENE -->
+                {menu}
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; <a href="genere.php?genere={GenereLibro}">{GenereLibro}</a> &gt;&gt; {TitoloLibro}</p>
+            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; <a href="generi.php">Generi</a> &gt;&gt; <a href="genere.php?genere={GenereLibro}">{GenereLibro}</a> &gt;&gt; {TitoloLibro}</p>
         </nav>
         <main id="content">
             {messaggiErrore}
             {messaggiSuccesso}
-            <div class="container">
+            <section class="container">
                 <h2 id="titolo">{TitoloLibro}</h2>
                 <img src="{ImmagineLibro}" alt="{altlibro}" height="400">
-                <dl class="datilistalibro">
-                    <div>
-                        <dt>Autore: </dt>
+                <div class="contenitore_lista_dati_libro">
+                    <dl class="lista_dati_libro">
+                        <dt>Autore:&nbsp;</dt>
                         <dd>{AutoreLibro}</dd>
-                    </div>
-                    <div>
-                        <dt>Genere: </dt>
+                        <dt>Genere:&nbsp;</dt>
                         <dd>{GenereLibro}</dd>
-                    </div>
-                    <div>
-                        <dt>Lingua: </dt>
+                        <dt>Lingua:&nbsp;</dt>
                         <dd>{LinguaLibro}</dd>
-                    </div>
-                    <div>
-                        <dt>Numero capitoli: </dt>
+                        <dt>Numero capitoli:&nbsp;</dt>
                         <dd>{CapitoliLibro}</dd>
-                    </div>
-                    <div>
-                        <dt>Voto medio della nostra <span lang="en">community</span>: </dt>
+                        <dt>Voto medio:&nbsp;</dt>
                         <dd>{mediavoti}</dd>
-                    </div>
-                </dl>
+                    </dl>
+                </div>
                 {bottoniAdmin}
-            </div>
-            <h3>Menù</h3>
-            <div class="menu_scheda_libro">
-                <ul class="menulibro">    
-                    <li><a href="#trama">Vai alla trama</a></li><!--ERRORE Element dd not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)-->
-                    {menupersonale}
-                    <li><a href="#community">Vai alle recensioni della <span lang="en">community</span></a></li>
-                </ul>
-            </div>
-            <div>
-                <dl>
-                    <dt id="trama">Trama:</dt>
-                    <dd class="trama_contenuto">{tramaLibro}</dd>
-                </dl>
-            </div>
-            <div id="recensionetua">
-                {arearecensionevotoform}
-            </div>
+            </section>
             <section>
-                <h4 id="community">Recensioni della <span lang="en">community</span></h4>
+                <h2 id="menu_scheda_libro">Menù</h2>
+                <nav class="menu_scheda_libro">
+                    <ul class="menulibro">    
+                        <li><a href="#trama">Vai alla trama</a></li>
+                        {menupersonale}
+                        <li><a href="#community">Vai alle recensioni della <span lang="en">community</span></a></li>
+                    </ul>
+                </nav>
+            </section>
+            <section>
+                <h2 id="trama">Trama</h2>
+                <p class="trama_contenuto">{tramaLibro}</p>
+            </section>
+            {arearecensionevotoform}
+            <section>
+                <h2 id="community">Recensioni della <span lang="en">community</span></h2>
                 {recensioniComunity}
             </section>
-            <nav aria-label="Torna all\' inizio dei dati del libro">
+            <nav aria-label="Torna all\'inizio dei dati del libro">
                 <a class="torna_su" href="#content">Torna su</a>
             </nav> 
         </main>

@@ -6,6 +6,7 @@ use DB\DBAccess;
 
 if(!isset($_SESSION['username'])) {
     header("Location: accedi.php");
+    exit();
 }
 
 $paginaHTML = file_get_contents("template/templateTerminati.html");
@@ -26,27 +27,27 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultListaGeneri as $genere) {
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     if(empty($lista)) {
         $listaLibri = "<p>Non hai terminato nessun libro.</p>";
     }
     else {
         $listaLibri .= '<form method="post" action="terminati.php" onsubmit="return conferma(\'Sei sicuro di voler eliminare i libri selezionati dalla lista dei tuoi libri terminati? Eventuali valutazioni assegnate ad essi verranno perse definitivamente.\')">
-                        <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: titolo, autore, data di fine lettura, voto assegnato e una <span lang="en">checkbox</span> per eliminare il libro.</p>
+                        <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: "titolo", "autore", "data di fine lettura", "voto assegnato" e "seleziona", ovvero una colonna utile per selezionare tramite <span lang="en">checkbox</span> i libri che si vogliono eliminare.</p>
                         <fieldset class="righealternate">
                             <table aria-describedby="descr">
                                 <caption>Lista dei libri che hai terminato</caption>
                                 <tr>
                                     <th scope="col">Titolo</th>
-                                    <th scope="col">Autore</th>
-                                    <th class="rimuovi" scope="col">Data di fine lettura</th>
-                                    <th class="rimuovi" scope="col">Voto assegnato</th>
-                                    <th scope="col">Elimina</th>
+                                    <th scope="col" abbr="Aut">Autore</th>
+                                    <th class="rimuovi" scope="col" abbr="Fine lett.">Data di fine lettura</th>
+                                    <th class="rimuovi" scope="col" abbr="Voto">Voto assegnato</th>
+                                    <th scope="col" abbr="Sel">Seleziona</th>
                                 </tr>';
         foreach($lista as $libro) {
             $listaLibri .= '<tr>
-                                <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
+                                <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                                 <td>'.$libro["autore"].'</td>
                                 <td class="rimuovi"><time datetime="'.$libro["data_fine_lettura"].'">'.$libro["data_fine_lettura"].'</time></td>
                                 <td class="rimuovi">'.$libro["voto"].'</td>
@@ -65,7 +66,8 @@ if($connectionOk) {
     }
 }
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);

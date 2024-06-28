@@ -2,13 +2,14 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Area Personale - BookClub</title>
+        <title>Area personale - BookClub</title>
         <meta name="keywords" content="area personale, cambia password, disconnetti, cambia nome utente, cambia username">
-        <meta name="description" content="Questa pagina è l'area personale degli utenti di BookClub in cui possono cambiare il nome utente, la password, disconnettersi ed eliminare il profilo.">
+        <meta name="description" content="Questa pagina è l'area personale degli utenti di BookClub in cui è possibile cambiare il nome utente, la password, disconnettersi ed eliminare il profilo.">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
         <script src="conferme.js"></script>
@@ -24,7 +25,7 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
@@ -32,27 +33,21 @@
             </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; Area Personale</p>
+            <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; Area personale</p>
         </nav>
         <main id="content">
-            <div class="datiattuali">
-                <h2>Benvenuto, <span id="nome">{nome}</span>!</h2>
-                <dl>
-                    <div>
-                        <dt>Il tuo <span lang="en">username</span> attuale: </dt>
-                        <dd>{usernameattuale}</dd>
-                    </div>
-                    <div>
-                        <dt>La tua <span lang="en">email</span> attuale: </dt>
-                        <dd>{emailattuale}</dd>
-                    </div>
-                    <div>
-                        <dt>Data di iscrizione: </dt>
-                        <dd><time datetime="{data_iscrizione}">{data_iscrizione}</time></dd>
-                    </div>
+            <h2>Benvenuto, <span id="nome">{nome}</span>!</h2>
+            <div class="contenitore_lista_dati_personali">
+                <dl class="lista_dati_personali">
+                    <dt>Il tuo <span lang="en">username</span> attuale:&nbsp;</dt>
+                    <dd>{usernameattuale}</dd>
+                    <dt>La tua <span lang="en">email</span> attuale:&nbsp;</dt>
+                    <dd>{emailattuale}</dd>
+                    <dt>Data di iscrizione:&nbsp;</dt>
+                    <dd><time datetime="{data_iscrizione}">{data_iscrizione}</time></dd>
                 </dl>
-                <p>Non ricordi la tua <span lang="en">password</span>? Contatta il 0444 3940394, un/a nostro/a operatore/trice sarà a tua disposizione</p>
             </div>
+            <p>Non ricordi la tua <span lang="en">password</span>? Contatta il 0444 3940394, un/a nostro/a operatore/trice sarà a tua disposizione</p>
             {messaggi}
             <section id="sectionModificaUsername">
                 <h3>Modifica lo <span lang="en">username</span></h3>
@@ -89,9 +84,9 @@
                             </ul>
                         </p>
                         <label for="passwordnew1">Inserisci una nuova <span lang="en">password</span>:</label>
-                        <span><input type="password" id="passwordnew1" name="passwordnew1" required></span><br>
+                        <span><input type="password" id="passwordnew1" name="passwordnew1" pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}$" required></span>
                         <label for="passwordnew2">Ripeti la stessa <span lang="en">password</span>:</label>
-                        <span><input type="password" id="passwordnew2" name="passwordnew2" required></span>
+                        <span><input type="password" id="passwordnew2" name="passwordnew2" pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}$" required></span>
                         <input type="submit" id="cambia_password" name="cambia_password" value="Modifica Password" onclick="return conferma('Sei sicuro/sicura di voler modificare la password?')">
                     </fieldset>
                 </form>
@@ -113,12 +108,14 @@
 
             <section id="sectionDisconnetti">
                 <h3>Disconnetti o elimina l'<span lang="en">account</span></h3>
-                <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler uscire dall\'account?')">
-                    <input type="submit" id="disconnetti" name="disconnetti" value="Disconnetti Account">
-                </form>
-                <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler eliminare l\'account? I tuoi dati andranno persi per sempre.')">
-                    <input type="submit" id="eliminaaccount" name="elimina" value="Elimina Account">
-                </form>
+                <div class="container_form">
+                    <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler uscire dall\'account?')">
+                        <input type="submit" id="disconnetti" name="disconnetti" value="Disconnetti Account">
+                    </form>
+                    <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler eliminare l\'account? I tuoi dati andranno persi per sempre.')">
+                        <input type="submit" id="eliminaaccount" name="elimina" value="Elimina Account">
+                    </form>
+                </div>
             </section>
         </main>
 

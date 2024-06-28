@@ -32,28 +32,28 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultListaGeneri as $genere) {
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
     if(empty($lista)) {
-        $listaLibri = "Non hai nessun libro da leggere."; //aggiungere link alla pagina di ricerca?
+        $listaLibri = "Non hai nessun libro da leggere.";
     }
     else {
         $listaLibri .= '<form method="post" action="da_leggere.php" onsubmit="return validaLibriCheckbox()">
                             <p id="descr">
                                 La tabella contiene l\'elenco dei tuoi libri da leggere.
-                                Ogni riga descrive un libro con tre colonne: "titolo", "autore" e una <span lang="en">checkbox</span> per iniziare o eliminare il libro.
+                                Ogni riga descrive un libro con tre colonne: "titolo", "autore" e "seleziona", ovvero una <span lang="en">checkbox</span> con cui è possibile selezionare i libri per poi iniziarli o eliminarli.
                             </p>
                             <fieldset class="righealternate">
                                 <table aria-describedby="descr">
                                     <caption>Lista dei libri salvati</caption>
                                     <tr>
                                         <th scope="col">Titolo</th>
-                                        <th scope="col">Autore</th>
-                                        <th>Seleziona</th>
+                                        <th scope="col" abbr="Aut">Autore</th>
+                                        <th scope="col" abbr="Sel">Seleziona</th>
                                     </tr>';
         foreach($lista as $libro) {
             $listaLibri .= '<tr>
-                                <td scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></td>
+                                <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                                 <td>'.$libro["autore"].'</td>
                                 <td><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                             </tr>';
@@ -71,7 +71,8 @@ if($connectionOk) {
     }
 } 
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{listaLibri}", $listaLibri, $paginaHTML);

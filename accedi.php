@@ -34,8 +34,13 @@ if($connectionOk) {
     //username
     if(isset($_POST['accedi'])) {
         $username = trim($_POST['username']);
+        $username = strip_tags($username); //elimina eventuali tag html
+        $username = htmlentities($username); //trasforma i caratteri html in entità
+
         //$password = md5($_POST['password']); //calcola l'hash md5 della password
         $password = $_POST['password'];
+        $password = strip_tags($password);
+        $password = htmlentities($password);
     
         $tmp = controllaInput($username, $password);
         $ok = $tmp['ok'];
@@ -51,12 +56,12 @@ if($connectionOk) {
                 $_SESSION['data_iscrizione'] = $user['data_iscrizione'];
                 if($user['admin']==1) {
                     $_SESSION['admin'] = true;
-                    header("Location: admin.php");
+                    header("Location: admin.php?accesso=1");
                     exit();
                 }
                 else {
                     $_SESSION['admin'] = false;
-                    header("Location: utente.php");
+                    header("Location: utente.php?accesso=1");
                     exit();
                 }
             } else {
@@ -67,10 +72,11 @@ if($connectionOk) {
     $resultListaGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultListaGeneri as $genere) {
-        $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 } else {
-    $messaggiPerForm .= "<li>Errore di connessione al database</li>";
+    header("Location: 500.php");
+    exit();
 }
 
 

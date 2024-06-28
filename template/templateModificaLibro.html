@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<!--arriva da cheda libro se clicca modifica o vede subito questo?-->
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>{TitoloLibro} - BookClub</title>
-        <!--nome libro PHP-->
-        <meta name="keywords" content="{keywords}">
-        <!--come trovare le parole chiave?-->
-        <meta name="description" content="">
+        <title>{TitoloLibro} - Modifica - BookClub</title>
+        <meta name="keywords" content="modifica, cambia, libro, autore, titolo, genere, lingua, trama, capitoli">
+        <meta name="description" content="Questa pagina serve per modificare i dati relativi al libro {titoloold}">
         <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
         <script src="conferme.js"></script>
@@ -27,22 +25,26 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><a href="index.php"><span lang="en">Home</span></a></dt>
-                <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
-                <dt><a href="tutti_libri.php">Catalogo Libri</a></dt>
-                <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt><a href="area_personale.php">Area Personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl>
+            <ul>
+                <li><a href="admin.php"><span lang="en">Home</span></a></li>
+                <li><a href="aggiungi_libro.php">Aggiungi un libro</a></li>
+                <li><a href="tutti_libri.php">Catalogo libri</a></li>
+                <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
-            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a>&gt; &gt; {titoloold}</p>
+            <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> &gt;&gt; <a href="generi.php">Generi</a> &gt;&gt; <a href="genere.php?genere={genereold}">{genereold}</a> &gt;&gt; <a href="scheda_libro.php?id={idlibro}">{titoloold}</a> &gt;&gt; Modifica {titoloold}</p>
         </nav>
         <main id="content">
             <section id="modificaLibro">
@@ -51,14 +53,14 @@
                 <form method="post" action="modifica_libro.php" onsubmit="return validaModificaLibro()" onreset="return conferma('Sei sicuro/sicura di voler annullare tutte le modifiche fatte?')"> 
                     {messaggiForm}
                     <fieldset>
-                        <legend>Informazioni generali: </legend>
-                        <label for="autore">Autore: </label>
-                        <span><input type="text" id="autore" name="autore" placeholder="{autoreold}" value="{autoreold}" maxlength="100" required></span><br>
+                        <legend>Informazioni generali</legend>
+                        <label for="autore">Autore:</label>
+                        <span><input type="text" id="autore" name="autore" placeholder="{autoreold}" value="{autoreold}" maxlength="100" required></span>
                         
-                        <label for="titolo">Titolo: </label>
-                        <span><input type="text" name="titolo" id="titolo" placeholder="{titoloold}" value="{titoloold}" maxlength="100" required></span><br>
+                        <label for="titolo">Titolo:</label>
+                        <span><input type="text" name="titolo" id="titolo" placeholder="{titoloold}" value="{titoloold}" maxlength="100" required></span>
                         
-                        <label for="genere">Genere: </label>
+                        <label for="genere">Genere:</label>
                         <span>
                             <select name="genere" id="genere" placeholder="{genereold}" value="{genereold}" required>
                                 {selectGeneri}
@@ -66,23 +68,23 @@
                         </span>
                     </fieldset>
                     <fieldset>
-                        <legend>Informazioni specifiche:</legend>
-                        <label for="lingua">Lingua originale: </label>
-                        <span><input list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}" required></span>
+                        <legend>Informazioni specifiche</legend>
+                        <label for="lingua">Lingua originale:</label>
+                        <span><input type="text" list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}" required></span>
                         <datalist id="datalist_lingua">
                             {listaLingue}
-                        </datalist><br>
+                        </datalist>
                         
-                        <label for="capitoli">Numero capitoli: </label>
+                        <label for="capitoli">Numero capitoli:</label>
                         <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required placeholder="{capitoliold}" value="{capitoliold}"></span>
                     </fieldset>
                     <fieldset>
-                        <legend>Trama:</legend>
+                        <legend>Trama</legend>
                         <label for="trama">Trama del libro:</legend>
                         <span><textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}" maxlength="3000" required>{tramaold}</textarea></span>
                     </fieldset>
                     <fieldset>
-                        <legend>Conferma o annulla le modifiche:</legend>
+                        <legend>Conferma o annulla le modifiche</legend>
                         <input type="hidden" id="id" name="id" value="{id_libro}">
                         <input type="submit" id="modifica" name="modifica" value="Modifica" onclick="return conferma('Sei sicuro/sicura di voler modificare il libro?')">
                         <input type="reset" value="Annulla">

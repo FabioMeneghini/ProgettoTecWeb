@@ -2,13 +2,14 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>Home - BookClub</title>
-        <meta name="keywords" content="libri ,migliori, generi, bestseller,">
-        <meta name="description" content="Questa pagina è dedicata ai migliori libri e generi per lettori in questo momento.">
+        <title>Home utente - BookClub</title>
+        <meta name="keywords" content="libri, migliori, generi, bestseller, BookClub">
+        <meta name="description" content="Homepage degli utenti registrati, offre dei consigli di lettura basati sui libri letti in precedenza dall'numeroUtentiRegistrati">
         <meta name="author" content="Baldo Leonardo, Dall'Amico Martina, Meneghini Fabio, Lazzarin Nicola">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
-        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width:600px)">
         <link rel="stylesheet" href="css/print.css" media="print">
         <link rel="stylesheet" href="css/imageReplace.css" media="screen">
     </head>
@@ -22,41 +23,35 @@
         </header>
         <nav id="menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"><!--ERRORE MANCA ALT-->
+                <img src="menu.png" alt="">
             </label>
             <input id="hamburger" type="checkbox">
-            <dl>
-                <dt><span lang="en">Home</span></dt>
-                <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
-                <dt><a href="terminati.php">Libri terminati</a></dt>
-                <dt><a href="da_leggere.php">Libri da leggere</a></dt>
-                <!--dove può inserire una recensione? solo dal libro, solo dalla home, dalla pagina letti? o dappertutto?-->
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <!--php x menu con categorie link a templategenere-->
-                <dt><a href="statistiche.php">Statistiche</a></dt>
-                <dt><a href="area_personale.php">Area Personale</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>
-            </dl><!--ERRORE DL-->
+            <ul>
+                <li><span lang="en">Home</span></li>
+                <li><a href="stai_leggendo.php">Libri che stai leggendo</a></li>
+                <li><a href="terminati.php">Libri terminati</a></li>
+                <li><a href="da_leggere.php">Libri da leggere</a></li>
+                <li>
+                    <a href="generi.php">Generi:</a>
+                    <ul>
+                        {listaGeneri}
+                    </ul>
+                </li>
+                <li><a href="statistiche.php">Statistiche</a></li>
+                <li><a href="area_personale.php">Area personale</a></li>
+                <li><a href="cerca.php">Cerca</a></li>
+            </ul>
         </nav>
         <nav id="breadcrumbs" aria-label="Percorso">
             <p>Ti trovi in: <span lang="en">Home</span></p>
         </nav>
         <main id="content">
-            <!-- <ul>
-                se si tiene solo recensione non ha senso una lista
-                si può mettere quanti capitoli ha letto oggi
-                <li><a href="recensione.php">Aggiungi Recensione</a></li>
-                <button type="button">+</button><a href="templateAggiungiRecensione.html">Aggiungi Recensione</a> va il link?
-                ERRORE  Element button not allowed as child of element ul in this context. (Suppressing further errors from this subtree.)
-            </ul> -->
             {messaggiSuccesso}
             <h2>Trova il tuo prossimo libro</h2>
             <blockquote>
                 Leggere un libro non è uscire dal mondo, ma entrare nel mondo attraverso un altro ingresso.
                 <cite>(Fabrizio Caramagna)</cite>
             </blockquote>
-            
             {LibriGenere}
             {torna_su} 
         </main>

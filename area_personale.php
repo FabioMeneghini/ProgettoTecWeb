@@ -12,26 +12,35 @@ if(!isset($_SESSION['username'])) {
 $isAdmin = true; 
 if($_SESSION['admin'] != 1) 
     $isAdmin = false;
+
 //utenti
-$userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
-    <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
-    <dt><a href="terminati.php">Libri terminati</a></dt>
-    <dt><a href="da_leggere.php">Libri da leggere</a></dt>
-    <dt><a href="generi.php">Generi:</a></dt>
-    {listaGeneri}
-    <dt><a href="statistiche.php">Statistiche</a></dt>
-    <dt>Area Personale</dt>
-    <dt><a href="cerca.php">Cerca</a></dt>';
+$userMenu ='<li><a href="utente.php"><span lang="en">Home</span></a></li>
+    <li><a href="stai_leggendo.php">Libri che stai leggendo</a></li>
+    <li><a href="terminati.php">Libri terminati</a></li>
+    <li><a href="da_leggere.php">Libri da leggere</a></li>
+    <li>
+        <a href="generi.php">Generi:</a>
+        <ul>
+            {listaGeneri}
+        </ul>
+    </li>
+    <li><a href="statistiche.php">Statistiche</a></li>
+    <li>Area personale</li>
+    <li><a href="cerca.php">Cerca</a></li>';
 
 //admin
-$adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
-    <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
-    <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
-    <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-    <dt><a href="generi.php">Generi:</a></dt>
-    {listaGeneri}
-    <dt>Area Personale</dt>
-    <dt><a href="cerca.php">Cerca</a></dt>';
+$adminMenu = '<li><a href="admin.php"><span lang="en">Home</span></a></li>
+    <li><a href="aggiungi_libro.php">Aggiungi un libro</a></li>
+    <li><a href="tutti_libri.php">Catalogo libri</a></li>
+    <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+    <li>
+        <a href="generi.php">Generi:</a>
+        <ul>
+            {listaGeneri}
+        </ul>
+    </li>
+    <li>Area personale</li>
+    <li><a href="cerca.php">Cerca</a></li>';
 
 $menu = $isAdmin ? $adminMenu : $userMenu;
 
@@ -92,6 +101,13 @@ function controllaEmail($email) {
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
+function pulisciInput($input) {
+    $input = trim($input);
+    $input = strip_tags($input);
+    $input = htmlentities($input);
+    return $input;
+}
+
 $paginaHTML = file_get_contents("template/templateAreaPersonale.html");
 
 $messaggi = "";
@@ -110,7 +126,7 @@ if($connectionOk) {
     $data = $connection -> getDataIscrione($_SESSION['username']);
     //username
     if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
-        $username = trim($_POST['username']);
+        $username = pulisciInput($_POST['username']);
         $tmp = controllaUsername($username);
         if($tmp['ok']) {
             if($connection -> verificaUsername($username)) {
@@ -129,9 +145,9 @@ if($connectionOk) {
 
     //password
     if(isset($_POST['cambia_password'])) { //se è stato premuto il pulsante per cambiare la password
-        $password_old = trim($_POST['passwordold']);
-        $password_new1 = trim($_POST['passwordnew1']);
-        $password_new2 = trim($_POST['passwordnew2']);
+        $password_old = pulisciInput($_POST['passwordold']);
+        $password_new1 = pulisciInput($_POST['passwordnew1']);
+        $password_new2 = pulisciInput($_POST['passwordnew2']);
 
         if($connection -> verificaPassword($_SESSION['username'], $password_old)) { //se la password vecchia è corretta
             $tmp = controllaPassword($password_old, $password_new1, $password_new2);
@@ -150,7 +166,7 @@ if($connectionOk) {
 
     //mail
     if(isset($_POST['cambia_email'])) {
-        $email = trim($_POST['email']);
+        $email = pulisciInput($_POST['email']);
         $tmp = controllaEmail($email);
         if($tmp['ok']) {
             $connection -> modificaEmail($_SESSION['username'], $email);
@@ -180,11 +196,12 @@ if($connectionOk) {
     $resultGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+            $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 }
 else {
-    $messaggi.="<li>Errore di connessione al database</li>";
+    header("Location: 500.php");
+    exit();
 }
 
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);

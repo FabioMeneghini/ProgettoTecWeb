@@ -1,7 +1,6 @@
 <?php
 
 include "config.php";
-
 require_once "DBAccess.php";
 use DB\DBAccess;
 
@@ -9,33 +8,46 @@ $paginaHTML = file_get_contents("template/templateGenere.html");
 $menu ="";
 $genereSelezionato="";
 $torna_su="";
+
 //utenti
-$userMenu ='<dt><a href="utente.php"><span lang="en">Home</span></a></dt>
-    <dt><a href="stai_leggendo.php">Libri che stai leggendo</a></dt>
-    <dt><a href="terminati.php">Libri terminati</a></dt>
-    <dt><a href="da_leggere.php">Libri da leggere</a></dt>
-    <dt><a href="generi.php">Generi:</a></dt>
-    {listaGeneri}
-    <dt><a href="statistiche.php">Statistiche</a></dt>
-    <dt><a href="area_personale.php">Area Personale</a></dt>
-    <dt><a href="cerca.php">Cerca</a></dt>';
+$userMenu ='<li><a href="utente.php"><span lang="en">Home</span></a></li>
+    <li><a href="stai_leggendo.php">Libri che stai leggendo</a></li>
+    <li><a href="terminati.php">Libri terminati</a></li>
+    <li><a href="da_leggere.php">Libri da leggere</a></li>
+    <li>
+        <a href="generi.php">Generi:</a>
+        <ul>
+            {listaGeneri}
+        </ul>
+    </li>
+    <li><a href="statistiche.php">Statistiche</a></li>
+    <li><a href="area_personale.php">Area personale</a></li>
+    <li><a href="cerca.php">Cerca</a></li>';
 
 //admin
-$adminMenu = '<dt><a href="admin.php"><span lang="en">Home</span></a></dt>
-    <dt><a href="aggiungi_libro.php">Aggiungi un libro</a></dt>
-    <dt><a href="tutti_libri.php">Catalogo libri</a></dt>
-    <dt><a href="tutti_utenti.php">Archivio utenti</a></dt>
-    <dt><a href="generi.php">Generi:</a></dt>
-    {listaGeneri}
-    <dt><a href="area_personale.php">Area Personale</a></dt>
-    <dt><a href="cerca.php">Cerca</a></dt>';
+$adminMenu = '<li><a href="admin.php"><span lang="en">Home</span></a></li>
+    <li><a href="aggiungi_libro.php">Aggiungi un libro</a></li>
+    <li><a href="tutti_libri.php">Catalogo libri</a></li>
+    <li><a href="tutti_utenti.php">Archivio utenti</a></li>
+    <li>
+        <a href="generi.php">Generi:</a>
+        <ul>
+            {listaGeneri}
+        </ul>
+    </li>
+    <li><a href="area_personale.php">Area personale</a></li>
+    <li><a href="cerca.php">Cerca</a></li>';
 
-$NonRegistrato='<dt><a href="index.php"><span lang="en">Home</span></a></dt>
-                <dt><a href="generi.php">Generi:</a></dt>
-                {listaGeneri}
-                <dt><a href="accedi.php">Accedi</a></dt>
-                <dt><a href="registrati.php">Registrati</a></dt>
-                <dt><a href="cerca.php">Cerca</a></dt>';
+$NonRegistrato='<li><a href="index.php"><span lang="en">Home</span></a></li>
+    <li>
+        <a href="generi.php">Generi:</a>
+        <ul>
+            {listaGeneri}
+        </ul>
+    </li>
+    <li><a href="accedi.php">Accedi</a></li>
+    <li><a href="registrati.php">Registrati</a></li>
+    <li><a href="cerca.php">Cerca</a></li>';
 
 if(isset($_SESSION['admin'])) {
     if($_SESSION['admin'] == 1) {
@@ -63,14 +75,14 @@ if($connectionOk) {
     if($ok) {
         $resultGeneri = $connection -> getListaGeneri();
         $risultatiLibri = $connection ->getListaLibriGenere($genereSelezionato);
-        $keywords = $connection->getkeywordsGenere($genereSelezionato);
+        $meta = $connection->getMetaGenere($genereSelezionato);
         $connection -> closeConnection();
 
-        foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
+        foreach($resultGeneri as $genere) {
             if($_GET["genere"]==$genere["nome"])
-                $listaGeneri .='<dd>'.$genere["nome"]. '</dd>';
+                $listaGeneri .='<li>'.$genere["nome"].'</li>';
             else
-                $listaGeneri .= '<dd><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></dd>';
+                $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
         }
         if(empty($risultatiLibri)) {
             $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
@@ -82,25 +94,32 @@ if($connectionOk) {
             }
             $listaLibri.='</ul>';
         }
-            if(count($risultatiLibri)>=15) {
-
+        if(count($risultatiLibri)>=15) {
             $torna_su=' <nav aria-label="Torna al form di ricerca">
                             <a class="torna_su" href="#content">Torna su</a>
                         </nav>';
         }
     }
     else {
-        header("Location: 404.html");
+        header("Location: 404.php");
+        exit();
     }
 } 
 else {
-    echo "Connessione fallita";
+    header("Location: 500.php");
+    exit();
 }
 
+$keywords=$meta["keywords"];
 if($keywords=="")
-    $keywords="narrazione, personaggi, trama, emozioni, conflitto, ambientazione, temi, climax, svolgimento, conclusione";
+    $keywords="libri, ".$genereSelezionato.", personaggi, trama, emozioni, ambientazione, temi, climax, svolgimento";
+
+$description=$meta["descrizione"];
+if($description=="")
+    $description="Scopri i libri del genere ".$genereSelezionato." presenti nel nostro catalogo!";
 
 $paginaHTML = str_replace("{keyword}", $keywords , $paginaHTML);
+$paginaHTML = str_replace("{description}", $description , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{LibriGenere}", $listaLibri, $paginaHTML);

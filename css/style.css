@@ -73,7 +73,7 @@ html{
     font-size: 100%;
     line-height: 1.5em;
     background-image: url("../background.jpg");
-    background-size: cover;
+    /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
 }
 
@@ -127,15 +127,11 @@ body{
     display: none;
 }
 
-#menu li, #menu dt{
-    padding: 0.2em 0em;
-}
-
-#menu dt,#footer li,#menu dd{
+#menu>ul>li, #footer li, #menu ul li ul li {
     color: var(--menuTextColor);
 }
 
-#menu dd{
+#menu ul li ul li{
     padding: 0.2em 1em;
 }
 
@@ -193,6 +189,11 @@ h2{
     padding: 1em;
 }
 
+#menu_scheda_libro {
+    text-align: left;
+    font-size: 1.6em;
+}
+
 h3{
     font-size: 1.5em;
     padding: 1em;
@@ -217,6 +218,10 @@ form{
     align-items: center;*/
     text-align: center;
     padding: 1em;
+}
+
+form label, form span:has(+input) { 
+    display: block;
 }
 
 input{
@@ -246,6 +251,19 @@ nav.login{
     align-items: center;
     position: relative;
     right: 50pt;
+}
+
+/*#cercaForm label {
+    display: inline-block;
+}*/
+
+/*#form_disconnetti_account, #form_elimina_account {
+    display: inline-block;
+}*/
+
+.container_form {
+    display: flex;
+    justify-content: center;
 }
 
 fieldset{
@@ -378,53 +396,38 @@ ul{
     margin-bottom: 1em;
 }
 
-#componenti > dd img{
-    width: 15%;
-    float: left;
-    margin-right: 1em;
-}
-
-.componente dt{
+.componente dt {
     float: left;
     font-weight: bold;
 }
 
-/*PAGINA 404*/
-
-#nongrid{
-    display:block;
-}
-
-#pagina{
-    position: relative;
-    width: 100%;
-    height: 100vh;
-}
-
-.errore404{
-    position: absolute;
-    width: 100%;
-    height: 100%;    
-    background-size: cover;
-    background-position: center;
-}
-
-.errore404 p{
-    text-align: center;
-    margin-top: 20%;
-    vertical-align:middle;
-}
-
-.paper{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url(../404.png);
-    background-size: cover;
-    background-position: center;
-}
 /*SCHEDA LIBRO */
 
+.contenitore_lista_dati_libro, .contenitore_lista_dati_statistiche, .contenitore_lista_dati_personali, .contenitore_lista_dati_admin {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lista_dati_libro dt, .lista_dati_statistiche dt, .lista_dati_personali dt, .lista_dati_admin dt {
+    float: left;
+    font-weight: bold;
+}
+
+.lista_dati_libro dd, .lista_dati_statistiche dd, .lista_dati_personali dd, .lista_dati_admin dd {
+    margin-bottom: 0.3em;
+    text-align: left;
+}
+
+.lista_dati_libro, .lista_dati_personali {
+    padding: 0.5em;
+    margin-bottom: 1em;
+    width: 16em;
+}
+
+.username {
+    font-weight: bold;
+}
 
 .trama_contenuto {
     background-color: var(--bgcolorextra); /* Giallo chiaro */
@@ -452,10 +455,6 @@ ul{
     font-style: italic;
 }
 
-/*#bottoni_admin form {
-    display: flex;
-    flex-direction: column;
-}*/
 .form-bottoni input[type="submit"] {
     display: block;
     margin: 0 auto; /* Centra il bottone orizzontalmente */
@@ -476,8 +475,8 @@ ul{
     background-color: var(--bgcercabg);
 }
 
-.libri a:hover{
-transform: scale(1.3);
+.libri a:hover {
+    transform: scale(1.3);
 }
 
 /*SCORRIMENTO IMMAGINI*/
@@ -532,16 +531,7 @@ body > *{
 .slider li{
     padding: 0.2em;
 }
-/*
-.prev, .next{
-    padding: 0.5em 1em;
-    margin: 1em 0.5em;
-    border-color: var(--buttonColor);
-    border-radius: 10px;
-    background-color: white;
-    color: var(--buttonColor);
-}
-*/
+
 .prev, .next{
     margin: 0.5em;
     width: 50px;
@@ -623,7 +613,6 @@ body > *{
     margin-right: 0; /* Nessun margine a destra per l'ultimo elemento */
 }
 
-
 .librigeneri li a{
     display:flex;
     width: 100%;
@@ -636,8 +625,6 @@ body > *{
     font-size: 7em;
     line-height: 1.5em;
 }
-
-
 
 /* Generi */
 
@@ -667,7 +654,6 @@ body > *{
     line-height: 1.5em;
 }
 
-
 #generi li a:link{
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
@@ -678,9 +664,6 @@ body > *{
     filter: grayscale(0%);
     transform: scale(1.1);
 }
-
-
-
 
 .librigeneri {
     list-style-type: none;
@@ -721,28 +704,37 @@ body > *{
 /* ERRORI JS */
 
 .errorSuggestion {
-display: block;
+    display: block;
 }
 
 /*statistiche*/ 
 
-.statistiche_generali{
+.contenitore_liste_admin{
     display: flex;
     flex-direction: row;
 }
 
-.statistiche_admin{ 
+.contenitore_lista_dati_admin{ 
     width: 50%;   
     margin: 1em;
     padding: 1em;
-    background-color: var(--formColor); /*TODO colore da cambiare*/
+    background-color: var(--formColor);
     border: 2px solid;
     border-color: var(--flagColor);
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /*statistiche utente*/ 
-/* Stile per lo sfondo giallo e centratura del testo del messaggio motivazionale */
+
+.lista_dati_statistiche {
+    padding: 0.5em;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
 #messaggio_motivazionale {
     text-align: center; /* Centratura del testo */
     background-color: var(--bgcolorextra);
@@ -753,22 +745,35 @@ display: block;
 
 #faccina{
     width: 30%;
+    max-width: 12em;
+    min-width: 8em;
 }
 
-.datilistalibro div, .datiattuali div, .gruppostatistiche div{
+
+
+/*.datilistalibro div, .datiattuali div, .gruppostatistiche div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.datilistalibro dt, .datiattuali dt{
-    font-weight: bold;
-}
+.lista_dati_admin div {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}*/
 
-.datiattuali{
+/*.datiattuali dt{
+    font-weight: bold;
+}*/
+
+.lista_dati_personali {
     background-color: var(--bgcolorextra);
     border-radius: 3px;
+    padding: 0.5em;
     padding-bottom: 1em;
+    width: 100%;
+    max-width: 30em;
 }
 
 .menu_scheda_libro {
@@ -828,4 +833,9 @@ blockquote {
 
 table{
     width: 100%;
+    text-align: center;
+}
+
+section.container {
+    text-align: center;
 }
