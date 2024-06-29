@@ -7,8 +7,10 @@ use DB\DBAccess;
 if(isset($_SESSION['admin'])) { //se l'utente è già loggato, viene reindirizzato alla sua homepage
     if($_SESSION['admin'] == 1) {
         header("Location: admin.php");
+        exit();
     } else {
         header("Location: utente.php");
+        exit();
     }
 }
 
@@ -17,10 +19,10 @@ $paginaHTML = file_get_contents("template/templateAccedi.html");
 function controllaInput($username, $password) { //da inserire eventualmente altri controlli su username e password
     $messaggi = "";
     if($username == "") {
-        $messaggi .= "<li>Lo username non può essere vuoto</li>";
+        $messaggi .= "<li>Lo <span lang=\"en\">username</span> non può essere vuoto</li>";
     }
     if($password == "") {
-        $messaggi .= "<li>La password non può essere vuota</li>";
+        $messaggi .= "<li>La <span lang=\"en\">password</span> non può essere vuota</li>";
     }
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
@@ -37,7 +39,6 @@ if($connectionOk) {
         $username = strip_tags($username); //elimina eventuali tag html
         $username = htmlentities($username); //trasforma i caratteri html in entità
 
-        //$password = md5($_POST['password']); //calcola l'hash md5 della password
         $password = $_POST['password'];
         $password = strip_tags($password);
         $password = htmlentities($password);

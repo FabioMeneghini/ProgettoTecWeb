@@ -72,7 +72,7 @@ $genere = "";
 $lingua = "";
 $trama = "";
 $n_capitoli = "";
-$tua_recensione = "";
+$tuo_commento = "";
 $voto="";
 $media_voti = "";
 $listaRecensioni = "";
@@ -154,7 +154,7 @@ if($connectionOk) {
         exit();
     }
     $resultGeneri = $connection -> getListaGeneri();
-    $titolo = $connection -> gettitololibro($LibroSelezionato);
+    /*$titolo = $connection -> gettitololibro($LibroSelezionato);
     $autore = $connection -> getautoreLibro($LibroSelezionato);
     $genereLibro = $connection -> getgenereLibro($LibroSelezionato);
     $lingua = $connection -> getlinguaLibro($LibroSelezionato);
@@ -162,6 +162,20 @@ if($connectionOk) {
     $n_capitoli = $connection -> getncapitoliLibro($LibroSelezionato);
     $copertina = $connection -> getcopertina($LibroSelezionato);
     $alt = $connection -> getalt($LibroSelezionato);
+    $meta = $connection -> getMetaLibro($LibroSelezionato);*/
+    $libro = $connection -> getLibro($LibroSelezionato);
+    $media_voti = $connection -> getmediavoti($LibroSelezionato);
+    $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato, isset($_SESSION['username']) ? $_SESSION['username'] : "" );
+    $titolo = $libro["titolo"];
+    $autore = $libro["autore"];
+    $genereLibro = $libro["genere"];
+    $lingua = $libro["lingua"];
+    $trama = $libro["trama"];
+    $n_capitoli = $libro["n_capitoli"];
+    $copertina = $libro["titolo_ir"];
+    $alt = $libro["descrizione"];
+    $keywords = $libro["keywords"];
+    $description = $libro["descrizione_pagina"];
 
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
         $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
@@ -176,27 +190,27 @@ if($connectionOk) {
                             </div>';
     }
     else if(isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
-        $terminato = $connection -> is_terminato($LibroSelezionato,$_SESSION['username']);
-        $salvato= $connection -> is_salvato($LibroSelezionato,$_SESSION['username']);
-        $iniziato= $connection -> is_iniziato($LibroSelezionato,$_SESSION['username']);
+        $terminato = $connection -> is_terminato($LibroSelezionato, $_SESSION['username']);
+        $salvato= $connection -> is_salvato($LibroSelezionato, $_SESSION['username']);
+        $iniziato= $connection -> is_iniziato($LibroSelezionato, $_SESSION['username']);
         if($terminato) {  
-            $tua_recensione = $connection -> getrecensionetua($LibroSelezionato,$_SESSION['username']);
-            $voto = $connection -> getvototuo($LibroSelezionato,$_SESSION['username']);
+            /*$tuo_commento = $connection -> getrecensionetua($LibroSelezionato, $_SESSION['username']);
+            $voto = $connection -> getvototuo($LibroSelezionato, $_SESSION['username']);*/
+            $recensione = $connection -> getTuaRecensione($LibroSelezionato, $_SESSION['username']);
+            $tuo_commento = $recensione["commento"];
+            $voto = $recensione["voto"];
 
-            /*if($tua_recensione=='') { //se la recensione è vuota
-                $tua_recensione='Scrivi qui una recensione';
-            }*/
             $arearecensionevoto='
                 <form method="post" action="scheda_libro.php" onsubmit="return validaSchedaLibro()" onreset="conferma(\'Sei sicuro di voler annullare le modifiche alla tua recensione e al tuo voto?\')"> 
                     {messaggiForm}
                     <fieldset>
                         <legend>La tua Recensione e il tuo voto</legend>
                         <label for="recensione">Recensione:</label>
-                        <span><textarea id="recensione" name="recensione" rows="10" cols="70" maxlength="1000" placeholder="Inserisci la tua recensione...">'.$tua_recensione.'</textarea></span>
+                        <span><textarea id="recensione" name="recensione" rows="10" cols="70" maxlength="1000" placeholder="Inserisci la tua recensione...">'.$tuo_commento.'</textarea></span>
                         <label for="voto">Voto:</label>
                         <span><input type="number" name="voto" id="voto" max="10" min="1" required placeholder="Il tuo voto..." value="{voto}"></span>
                         <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">';
-            if($tua_recensione=='' && $voto=='')
+            if($tuo_commento=='' && $voto=='')
                 $arearecensionevoto.='<input type="submit" id="valuta" name="valuta" value="Pubblica valutazione">';
             else
                 $arearecensionevoto.='<input type="submit" id="valuta" name="valuta" value="Modifica valutazione">';
@@ -246,9 +260,6 @@ if($connectionOk) {
                 </form>
             </div>';
     }
-    $media_voti = $connection -> getmediavoti($LibroSelezionato);
-    $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato, isset($_SESSION['username']) ? $_SESSION['username'] : "" );
-    $meta = $connection -> getMetaLibro($LibroSelezionato);
     $connection -> closeConnection();
     
     if(empty($altre_recensioni)) {
@@ -267,10 +278,8 @@ else {
     exit();
 }
 
-$keywords = $meta["keywords"];
 if($keywords=="")
     $keywords="libro, recensioni, lettura, autore, genere, lingua, trama, capitoli, voto, recensione, storia, personaggi";
-$description = $meta["descrizione_pagina"];
 if($description=="")
     $description="Pagina dedicata al libro ".$titolo." di ".$autore." con trama, numero di capitoli, genere, lingua e media voti. Inoltre è possibile leggere le recensioni degli altri utenti e lasciare la propria valutazione.";
 
