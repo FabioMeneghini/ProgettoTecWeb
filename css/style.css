@@ -143,17 +143,15 @@ main{
     padding: 1em;
 }
 
-.genere_singolo::before {
+.genere_singolo:not(:first-of-type)::before {
     content: "";
     display: block;
     border-top: 3px solid var(--flagColor);
 }
-/*hr{
-    color: var(--flagColor);
-    background-color: var(--flagColor);
-    height: 1px;
-    margin: 1em 0em;
-}*/
+
+.genere_singolo>h3 {
+    text-align: center;
+}
 
 .genere{
     background-color: var(--flagColor);
@@ -199,13 +197,13 @@ h3{
     padding: 1em;
 }
 
-h3:first-of-type::before{
+/*h3:first-of-type::before{
     content: "";
     display: block;
     /*width: 100%;*/
-    /*border-bottom: 3px solid var(--flagColor);*/
+    /*border-bottom: 3px solid var(--flagColor);
    
-}
+}*/
 
 textarea {
     resize: none;

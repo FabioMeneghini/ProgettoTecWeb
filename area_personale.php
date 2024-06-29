@@ -55,8 +55,8 @@ function controllaUsername($username) { //da inserire eventualmente altri contro
     if(strlen($username) < 3) {
         $messaggi .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
     }
-    else if(strlen($username) > 10) {
-        $messaggi .= "<li>Lo username non può essere più lungo di 10 caratteri</li>";
+    else if(strlen($username) > 25) {
+        $messaggi .= "<li>Lo username non può essere più lungo di 25 caratteri</li>";
     }
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
@@ -88,6 +88,9 @@ function controllaEmail($email) {
     $messaggi = "";
     if($email == "") {
         $messaggi .= "<li>L'email non può essere vuota</li>";
+    }
+    else if(strlen($email) > 60) {
+        $messaggi .= "<li>L'email non può essere più lunga di 60 caratteri</li>";
     }
     else if($email == $_SESSION["email"]) {
         $messaggi .= "<li>L'email è uguale a quella precedente</li>";
@@ -123,13 +126,13 @@ $data = "";
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
 if($connectionOk) {
-    $data = $connection -> getDataIscrione($_SESSION['username']);
+    $data = $connection -> getDataIscrizione($_SESSION['username']);
     //username
     if(isset($_POST['cambia_username'])) { //se è stato premuto il pulsante per cambiare lo username
         $username = pulisciInput($_POST['username']);
         $tmp = controllaUsername($username);
         if($tmp['ok']) {
-            if($connection -> verificaUsername($username)) {
+            if(!($connection -> usernameUnico($username))) {
                 $messaggiUsername .= "<li>Lo username '".$username."' è già in uso</li>";
             }
             else {
@@ -196,7 +199,7 @@ if($connectionOk) {
     $resultGeneri = $connection -> getListaGeneri();
     $connection -> closeConnection();
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
-            $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
+        $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
     }
 }
 else {

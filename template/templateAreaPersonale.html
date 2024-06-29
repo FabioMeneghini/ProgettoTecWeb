@@ -36,21 +36,23 @@
             <p>Ti trovi in: <a href="utente.php"><span lang="en">Home</span></a> &gt;&gt; Area personale</p>
         </nav>
         <main id="content">
-            <h2>Benvenuto, <span id="nome">{nome}</span>!</h2>
-            <div class="contenitore_lista_dati_personali">
-                <dl class="lista_dati_personali">
-                    <dt>Il tuo <span lang="en">username</span> attuale:&nbsp;</dt>
-                    <dd>{usernameattuale}</dd>
-                    <dt>La tua <span lang="en">email</span> attuale:&nbsp;</dt>
-                    <dd>{emailattuale}</dd>
-                    <dt>Data di iscrizione:&nbsp;</dt>
-                    <dd><time datetime="{data_iscrizione}">{data_iscrizione}</time></dd>
-                </dl>
-            </div>
-            <p>Non ricordi la tua <span lang="en">password</span>? Contatta il 0444 3940394, un/a nostro/a operatore/trice sarà a tua disposizione</p>
+            <section>
+                <h2>Benvenuto, <span id="nome">{nome}</span>!</h2>
+                <div class="contenitore_lista_dati_personali">
+                    <dl class="lista_dati_personali">
+                        <dt>Il tuo <span lang="en">username</span> attuale:&nbsp;</dt>
+                        <dd>{usernameattuale}</dd>
+                        <dt>La tua <span lang="en">email</span> attuale:&nbsp;</dt>
+                        <dd>{emailattuale}</dd>
+                        <dt>Data di iscrizione:&nbsp;</dt>
+                        <dd><time datetime="{data_iscrizione}">{data_iscrizione}</time></dd>
+                    </dl>
+                </div>
+            </section>
+            <!-- <p>Non ricordi la tua <span lang="en">password</span>? Contatta il 0444 3940394, un/a nostro/a operatore/trice sarà a tua disposizione</p> -->
             {messaggi}
             <section id="sectionModificaUsername">
-                <h3>Modifica lo <span lang="en">username</span></h3>
+                <h2>Modifica lo <span lang="en">username</span></h2>
                 <form method="post" action="area_personale.php" onsubmit="return validaUsernameCambio()"> 
                     <fieldset>
                         <legend><span lang="en">Username</span></legend>
@@ -65,8 +67,9 @@
                     </fieldset>
                 </form>
             </section>
+            
             <section id="sectionModificaPassword">
-                <h3>Modifica la <span lang="en">password</span></h3>
+                <h2>Modifica la <span lang="en">password</span></h2>
                 <form method="post" action="area_personale.php" onsubmit="return validaPasswordCambio()"> 
                     <fieldset>
                         <legend><span lang="en">Password</span></legend>
@@ -93,7 +96,7 @@
             </section>
 
             <section id="sectionModificaEmail">
-                <h3>Modifica l'<span lang="en">email</span></h3>
+                <h2>Modifica l'<span lang="en">email</span></h2>
                 <form method="post" action="area_personale.php" onsubmit="return validaEmailCambio()"> 
                     <fieldset>
                         <legend><span lang="en">Email</span></legend>
@@ -107,7 +110,7 @@
             </section>
 
             <section id="sectionDisconnetti">
-                <h3>Disconnetti o elimina l'<span lang="en">account</span></h3>
+                <h2>Disconnetti o elimina l'<span lang="en">account</span></h2>
                 <div class="container_form">
                     <form method="post" action="area_personale.php" onsubmit="return conferma('Sei sicuro/sicura di voler uscire dall\'account?')">
                         <input type="submit" id="disconnetti" name="disconnetti" value="Disconnetti Account">

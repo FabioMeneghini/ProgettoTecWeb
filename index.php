@@ -18,7 +18,7 @@ $paginaHTML = file_get_contents("template/templateHomeNonRegistrato.html");
 
 $listaBestSeller = "";
 $listaGeneri = "";
-$listaLibri = '<div class="libri_genere">';
+$listaLibri = "";
 $torna_su="";
 
 $connection = new DBAccess();
@@ -29,7 +29,7 @@ if($connectionOk) {
     $resultGeneri = $connection -> getGeneriPiuPopolari();
     
     foreach($resultGeneri as $genere) {
-        $listaLibri.='<div class="genere_singolo"><h3><a  href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3></div>';
+        $listaLibri.='<section class="genere_singolo"><h3><a  href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
         $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
         if(empty($risultatiLibri)) {
             $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
@@ -39,7 +39,7 @@ if($connectionOk) {
             foreach($risultatiLibri as $libro) {
                 $listaLibri.='<li><a id="'.$libro["titolo_ir"].'" href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
             }
-            $listaLibri.='</ul>';
+            $listaLibri.='</ul></section>';
         }
         if($resultGeneri>=15) {
             $torna_su=' <nav aria-label="Torna all\' inizio della pagina">

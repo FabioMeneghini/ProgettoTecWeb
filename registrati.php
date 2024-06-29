@@ -31,13 +31,13 @@ function controllaInput($nome, $cognome, $username, $email, $password1, $passwor
         $messaggi .= "<li>Il cognome non può essere più lungo di 25 caratteri</li>";
     }
     if($username == "") {
-        $messaggi .= "<li>Lo username non può essere vuoto</li>";
+        $messaggi .= "<li>Lo <span lang=\"en\">username</span> non può essere vuoto</li>";
     }
     else if(strlen($username) <= 2) {
-        $messaggi .= "<li>Lo username non può essere più corto di 3 caratteri</li>";
+        $messaggi .= "<li>Lo <span lang=\"en\">username</span> non può essere più corto di 3 caratteri</li>";
     }
     else if(strlen($username) > 25) {
-        $messaggi .= "<li>Lo username non può essere più lungo di 25 caratteri</li>";
+        $messaggi .= "<li>Lo <span lang=\"en\">username</span> non può essere più lungo di 25 caratteri</li>";
     }
     if($email == "") {
         $messaggi .= "<li>L'<span lang=\"en\">email</span> non può essere vuota</li>";
@@ -119,7 +119,7 @@ if($connectionOk) {
                     $messaggiPerForm .= "<li>".$erroriRegistrazione."</li>";
                 }
             } else {
-                $messaggiPerForm .= "<li>Lo username inserito è già presente nel database</li>";
+                $messaggiPerForm .= '<li>Lo <span lang="en">username</span> inserito è già utilizzato da un altro utente</li>';
             }
         }
     }

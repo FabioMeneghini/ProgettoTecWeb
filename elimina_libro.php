@@ -22,7 +22,7 @@ if($connectionOk) {
             $eliminato = $connection -> eliminaLibro($LibroSelezionato);
             $connection -> closeConnection();
             if($eliminato) {
-                header("Location: tutti_libri.php?eliminato=1.php");
+                header("Location: tutti_libri.php?eliminato=1");
                 exit();
             }
             else {
