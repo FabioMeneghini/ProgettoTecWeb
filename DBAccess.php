@@ -29,19 +29,23 @@ class DBAccess {
     }
 
     public function get_migliore_recensione($id_libro){
-        $query="SELECT recensioni.commento, recensioni.voto
-                FROM recensioni 
-                WHERE recensioni.id_libro='$id_libro'
-                ORDER BY recensioni.voto DESC
-                LIMIT 1";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            mysqli_free_result($queryResult);
+        $query = "SELECT recensioni.commento, recensioni.voto
+                  FROM recensioni 
+                  WHERE recensioni.id_libro=?
+                  ORDER BY recensioni.voto DESC
+                  LIMIT 1";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return null;
+        $stmt->bind_param("i", $id_libro);
+        $stmt->execute();
+        $queryResult = $stmt->get_result();
+        if ($queryResult->num_rows != 0) {
+            $row = $queryResult->fetch_assoc();
+            $queryResult->free();
             return $row['commento'];
-        } else {
+        } else
             return null; // Ritorna null se non ci sono recensioni
-        }
     }
 
     public function getListaBestSeller() {
@@ -56,17 +60,13 @@ class DBAccess {
         if(mysqli_num_rows($queryResult) != 0) {
             $result = array();
             while($row = mysqli_fetch_assoc($queryResult)) {
-                // Chiama get_migliore_recensione per ogni libro
                 $migliore_recensione = $this -> get_migliore_recensione($row["id"]);
                 $voto_medio = $this -> getmediavoti($row["id"]);
                 $row['voto_medio'] = $voto_medio;
-                if ($migliore_recensione) {
-                    // Aggiungi la migliore recensione al risultato del libro
-                    $row['migliore_recensione'] = $migliore_recensione;
-                } else {
-                    // Se non ci sono recensioni, imposta 'migliore_recensione' su null
-                    $row['migliore_recensione'] = null;
-                }
+                if ($migliore_recensione)
+                    $row['migliore_recensione'] = $migliore_recensione; // Aggiungi la migliore recensione al risultato del libro
+                else
+                    $row['migliore_recensione'] = null; // Se non ci sono recensioni, imposta 'migliore_recensione' a null
                 $result[] = $row;
             }
             mysqli_free_result($queryResult);
@@ -110,14 +110,12 @@ class DBAccess {
         $messaggio = "";
         $query = "INSERT INTO utenti (nome, cognome, username, email, password, data_nascita, data_iscrizione) VALUES (?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $this -> connection -> prepare($query);
-        if($stmt === false) {
+        if($stmt === false)
             $messaggio .= "<li>Errore nella preparazione dell'istruzione: " . $this -> connection -> error . "</li>";
-        }
         else {
             $stmt->bind_param("ssssss", $nome, $cognome, $username, $email, $password, $data);
-            if (!$stmt->execute()) {
+            if (!$stmt->execute())
                 $messaggio .= "<li>Errore durante la registrazione: " . $stmt->error . "</li>";
-            }
             $stmt->close();
         }
         return $messaggio;
@@ -298,18 +296,6 @@ class DBAccess {
             return null;
     }
 
-    public function staLeggendo($username, $id_libro) {
-        $query = "SELECT * FROM sta_leggendo WHERE username = '$username' AND id_libro = '$id_libro'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $queryResult -> free();
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     /********************************************************************************************** */
     public function aggiungiStaLeggendo($username, $id_libro) {
         $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
@@ -413,19 +399,6 @@ class DBAccess {
             return;
         $stmt->close();
     }
-
-    /*public function getInfoLibro($id_libro) {
-        $query = "SELECT * FROM libri WHERE id = '$id_libro'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row;
-        }
-        else {
-            return null;
-        }
-    }*/
 
     //questa funzione preleva dal database i 5 generi che hanno più libri
     public function getGeneriPiuPopolari() {
@@ -554,97 +527,6 @@ class DBAccess {
         } else
             return false;
     }
-    
-    public function getcopertina($LibroSelezionato) {
-        $query = "SELECT titolo_ir FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['titolo_ir'];
-        }
-        else {
-            return null;
-        }
-    }
-
-    public function getMetaLibro($LibroSelezionato) {
-        $query = "SELECT keywords, descrizione_pagina FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row;
-        }
-        else {
-            return null;
-        }
-    }
-
-    public function getalt($LibroSelezionato) {
-        $query = "SELECT descrizione FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['descrizione'];
-        }
-        else {
-            return null;
-        }
-    }
-
-    public function gettitololibro($LibroSelezionato) {
-        $query = "SELECT titolo FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['titolo'];
-        }
-        else {
-            return null;
-        }
-    }
-    
-    public function getgenereLibro($LibroSelezionato) {
-        $query = "SELECT generi.nome FROM libri, generi WHERE libri.id_genere=generi.id AND libri.id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['nome'];
-        }
-        else {
-            return null;
-        }
-    } 
-
-    public function getlinguaLibro($LibroSelezionato) {
-        $query = "SELECT lingua FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['lingua'];
-        }
-        else {
-            return null;
-        }
-    }
-
-    public function gettramaLibro($LibroSelezionato) {
-        $query = "SELECT trama FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['trama'];
-        }
-        else {
-            return null;
-        }
-    }
 
     public function getncapitoliLibro($LibroSelezionato) {
         $query = "SELECT n_capitoli FROM libri WHERE id = ?";
@@ -660,19 +542,6 @@ class DBAccess {
             return $row['n_capitoli'];
         } else
             return null;
-    }
-    
-    public function getautoreLibro($LibroSelezionato) {
-        $query = "SELECT autore FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['autore'];
-        }
-        else {
-            return null;
-        }
     }
 
     public function getmediavoti($LibroSelezionato) {
@@ -725,35 +594,6 @@ class DBAccess {
         } else
             return null;
     }
-    
-    /*public function getrecensionetua($LibroSelezionato, $utente) {
-        $query = "SELECT commento FROM recensioni WHERE id_libro = ? AND username_autore = ?";
-        $stmt = $this->connection->prepare($query);
-        if (!$stmt)
-            return null;
-        $stmt->bind_param("is", $LibroSelezionato, $utente);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows != 0) {
-            $row = $result->fetch_assoc();
-            $result->free();
-            return $row['commento'];
-        } else
-            return null;
-    }
-
-    public function getvototuo($LibroSelezionato,$utente) {
-        $query = "SELECT voto FROM recensioni WHERE id_libro = '$LibroSelezionato' AND username_autore = '$utente'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
-            $queryResult -> free();
-            return $row['voto'];
-        }
-        else {
-            return null;
-        }
-    }*/
 
     public function is_terminato($LibroSelezionato, $utente) {
         $query = "SELECT * FROM ha_letto WHERE id_libro = ? AND username = ?";
@@ -798,12 +638,6 @@ class DBAccess {
             return true;
         } else
             return false;
-    }
-
-    public function modificaRecensione($LibroSelezionato, $utente, $commento, $voto) {
-        $query = "UPDATE recensioni SET commento = '$commento', voto = '$voto' WHERE id_libro = '$LibroSelezionato' AND username_autore = '$utente'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
     }
 
     public function getTuttiUtenti() {
@@ -874,37 +708,38 @@ class DBAccess {
         if($this -> valutazionePresente($username, $id_libro)) {
             $query = "UPDATE recensioni SET voto = ?, commento = ? WHERE username_autore = ? AND id_libro = ?";
             $stmt = $this -> connection -> prepare($query);
-            if($stmt === false) {
+            if($stmt === false)
                 return false;
-            }
             else {
                 $stmt->bind_param("issi", $voto, $commento, $username, $id_libro);
-                if(!$stmt->execute()) {
+                if(!$stmt->execute())
                     return false;
-                }
                 $stmt->close();
             }
         }
         else {
             $query = "INSERT INTO recensioni (username_autore, id_libro, voto, commento) VALUES (?, ?, ?, ?)";
             $stmt = $this -> connection -> prepare($query);
-            if($stmt === false) {
+            if($stmt === false)
                 return false;
-            }
             else {
                 $stmt->bind_param("siis", $username, $id_libro, $voto, $commento);
-                if (!$stmt->execute()) {
+                if (!$stmt->execute())
                     return false;
-                }
                 $stmt->close();
             }
         }
     }
 
     public function eliminaLibro($id_libro) {
-        $query = "DELETE FROM libri WHERE id = '$id_libro'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
+        $query = "DELETE FROM libri WHERE id = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return false;
+        $stmt->bind_param("i", $id_libro);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
     }
 
     public function getTuttiLibriOrdinati($opzione) {
@@ -966,7 +801,7 @@ class DBAccess {
         }
     }
 
-    public function modificaLibro($id_libro=45, $titolo='ciaooooooooo', $autore='ciao', $lingua ='ciao', $capitoli=3, $trama='ciao', $genere=2) {
+    public function modificaLibro($id_libro, $titolo, $autore, $lingua, $capitoli, $trama, $genere) {
         $query='UPDATE libri SET titolo=?, autore=?, lingua=?, n_capitoli=?, trama=?, id_genere=(SELECT id FROM generi WHERE nome = ?) WHERE id = ?';
         $stmt = $this -> connection -> prepare($query);
         if($stmt===false)
@@ -982,14 +817,12 @@ class DBAccess {
     public function aggiungiHaLetto($username, $id_libro) {
         $query = "INSERT INTO ha_letto (username, id_libro, data_fine_lettura) VALUES (?, ?, NOW())";
         $stmt = $this -> connection -> prepare($query);
-        if($stmt === false) {
+        if($stmt === false)
             return false;
-        }
         else {
             $stmt->bind_param("si", $username, $id_libro);
-            if(!$stmt->execute()) {
+            if(!$stmt->execute())
                 return false;
-            }
             $stmt->close();
         }
     }
@@ -1009,9 +842,8 @@ class DBAccess {
         $n = count($capitoli);
         $query = "UPDATE sta_leggendo SET n_capitoli_letti = ? WHERE username = ? AND id_libro = ?";
         $stmt = mysqli_prepare($this -> connection, $query);
-        if($stmt === false) {
+        if($stmt === false)
             return false;
-        }
         for($i=0; $i<$n; $i++) {
             $n_capitoli_totali = $this -> getncapitoliLibro($id_libri[$i]);
             if($capitoli[$i] >= $n_capitoli_totali) {
@@ -1242,4 +1074,5 @@ class DBAccess {
         }
     }
 }
+
 ?> 

@@ -184,9 +184,7 @@ if($connectionOk) {
         $terminato = $connection -> is_terminato($LibroSelezionato, $_SESSION['username']);
         $salvato= $connection -> is_salvato($LibroSelezionato, $_SESSION['username']);
         $iniziato= $connection -> is_iniziato($LibroSelezionato, $_SESSION['username']);
-        if($terminato) {  
-            /*$tuo_commento = $connection -> getrecensionetua($LibroSelezionato, $_SESSION['username']);
-            $voto = $connection -> getvototuo($LibroSelezionato, $_SESSION['username']);*/
+        if($terminato) {
             $recensione = $connection -> getTuaRecensione($LibroSelezionato, $_SESSION['username']);
             $tuo_commento = $recensione["commento"];
             $voto = $recensione["voto"];
@@ -273,6 +271,8 @@ if($keywords=="")
     $keywords="libro, recensioni, lettura, autore, genere, lingua, trama, capitoli, voto, recensione, storia, personaggi";
 if($description=="")
     $description="Pagina dedicata al libro ".$titolo." di ".$autore." con trama, numero di capitoli, genere, lingua e media voti. Inoltre è possibile leggere le recensioni degli altri utenti e lasciare la propria valutazione.";
+if($alt=="")
+    $alt="Copertina del libro ".$titolo." di ".$autore;
 
 $paginaHTML = str_replace("{keywords}", $keywords, $paginaHTML);
 $paginaHTML = str_replace("{description}", $description, $paginaHTML);
