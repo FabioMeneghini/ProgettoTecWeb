@@ -20,7 +20,7 @@ $paginaHTML = file_get_contents("template/templateHomeUtente.html");
 
 $messaggiSuccesso = "";
 $listaGeneri = "";
-$listaLibri = '<div id="libri_genere_home">';
+$listaLibri = "";
 $torna_su="";
 
 if(isset($_GET['registrato']) && $_GET['registrato'] == 1) {
@@ -39,7 +39,7 @@ if($connectionOk) {
     }
     if(is_array($resultNEW)) {
         foreach ($resultNEW as $genere) {
-            $listaLibri.='<div class="genere_singolo"><h3><a  href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3></div>';
+            $listaLibri.='<section class="genere_singolo"><h3><a  href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
             $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
             if(empty($risultatiLibri)) {
                 $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
@@ -49,10 +49,9 @@ if($connectionOk) {
                 foreach($risultatiLibri as $libro) {
                     $listaLibri.='<li><a id="'.$libro["titolo_ir"].'" href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></li>';
                 }
-                $listaLibri.='</ul>';
+                $listaLibri.='</ul></section>';
             }
         }
-        $listaLibri.="</div>";
     }
     
     $resultGeneri = $connection -> getListaGeneri();

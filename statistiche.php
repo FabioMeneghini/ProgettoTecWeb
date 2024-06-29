@@ -23,7 +23,7 @@ $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();
 
 if($connectionOk) {
-    $n_recensioni = $connection -> getRecensioniUtente($_SESSION['username']);
+    $n_recensioni = $connection -> getNumeroRecensioniUtente($_SESSION['username']);
     $n_libri_letti = $connection ->  getNumeroLibriLetti($_SESSION['username']);
     $n_libri_stai_leggendo = $connection -> getNumeroLibriStaLeggendo($_SESSION['username']);
     $n_libri_salvati = $connection -> getNumeroLibriSalvati($_SESSION['username']);

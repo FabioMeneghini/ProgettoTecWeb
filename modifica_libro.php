@@ -131,15 +131,17 @@ if($connectionOk) {
         header("Location: 404.php"); //libro non trovato o non impostato in $_GET o $_POST
         exit();
     }
-    $titolo = $connection -> gettitololibro($LibroSelezionato);
-    $autore = $connection -> getautoreLibro($LibroSelezionato);
-    $genereold = $connection -> getgenereLibro($LibroSelezionato);
-    $linguaold = $connection -> getlinguaLibro($LibroSelezionato);
-    $trama = $connection -> gettramaLibro($LibroSelezionato);
-    $n_capitoli = $connection -> getncapitoliLibro($LibroSelezionato);
+    $libro = $connection -> getLibro($LibroSelezionato);
     $resultGeneri = $connection -> getListaGeneri();
     $resultLingue= $connection -> getLingueLibri();
     $connection -> closeConnection();
+    
+    $titolo = $libro["titolo"];
+    $autore = $libro["autore"];
+    $genereold = $libro["genere"];
+    $linguaold = $libro["lingua"];
+    $trama = $libro["trama"];
+    $n_capitoli = $libro["n_capitoli"];
     
     foreach($resultGeneri as $genere) { //per ogni genere, creo una lista di libri di quel genere
         $listaGeneri .= '<li><a href="genere.php?genere='.$genere["nome"].'">'.$genere["nome"].'</a></li>';
