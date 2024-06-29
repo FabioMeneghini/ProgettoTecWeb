@@ -3,11 +3,11 @@
     padding: 0;
 }
 
-img, #breadcrumbs, #menu, footer, .slider-wrapper, .titologenere, input, select, nav, .torna_su, #menu_scheda_libro, .menu_scheda_libro, .rimuovi_print, #trama{
+img, #breadcrumbs, #menu, footer, input, select, nav, .torna_su, #menu_scheda_libro, .menu_scheda_libro, .rimuovi_print, #trama, .prev, .next, fieldset{
     display: none;
 }
 
-input.non_rimuovi_print{
+input.non_rimuovi_print, fieldset.righealternate{
     display: block;
 }
 
@@ -70,17 +70,20 @@ legend {
     font-size: 1.2em;
 }
 
-/*fieldset, .contenitore_lista_dati_admin {
-    border: 3px solid;
-    border-radius: 5px;
-}*/
-
 #componenti>dt {
     font-size: 1.5em;
 }
 
 a[href]:after {
     content: " (" attr(href) ")";
+}
+
+.no-link a[href]:after {
+    content: "";
+}
+
+.item a {
+    display: none;
 }
 
 fieldset{
