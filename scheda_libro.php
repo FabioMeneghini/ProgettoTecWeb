@@ -154,15 +154,6 @@ if($connectionOk) {
         exit();
     }
     $resultGeneri = $connection -> getListaGeneri();
-    /*$titolo = $connection -> gettitololibro($LibroSelezionato);
-    $autore = $connection -> getautoreLibro($LibroSelezionato);
-    $genereLibro = $connection -> getgenereLibro($LibroSelezionato);
-    $lingua = $connection -> getlinguaLibro($LibroSelezionato);
-    $trama = $connection -> gettramaLibro($LibroSelezionato);
-    $n_capitoli = $connection -> getncapitoliLibro($LibroSelezionato);
-    $copertina = $connection -> getcopertina($LibroSelezionato);
-    $alt = $connection -> getalt($LibroSelezionato);
-    $meta = $connection -> getMetaLibro($LibroSelezionato);*/
     $libro = $connection -> getLibro($LibroSelezionato);
     $media_voti = $connection -> getmediavoti($LibroSelezionato);
     $altre_recensioni = $connection -> getaltrerecensioni($LibroSelezionato, isset($_SESSION['username']) ? $_SESSION['username'] : "" );

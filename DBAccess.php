@@ -187,19 +187,21 @@ class DBAccess {
         }
     }
 
-    public function getRecensioniUtente($username) {
-        $query = "SELECT COUNT(*) AS numeroRecensioni FROM recensioni WHERE username_autore = '$username' ";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0) {
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['numeroRecensioni'];
-        }
-        else {
+    public function getNumeroRecensioniUtente($username) {
+        $query = "SELECT COUNT(*) AS numeroRecensioni FROM recensioni WHERE username_autore = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
             return null;
-        }
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows != 0) {
+            $row = $result->fetch_assoc();
+            $result->free();
+            return $row['numeroRecensioni'];
+        } else
+            return null;
     }
-
 
     public function getRecensioniCount() {
         $query = "SELECT COUNT(*) AS numeroRecensioni FROM recensioni";
@@ -228,69 +230,72 @@ class DBAccess {
 
     public function getListaStaLeggendo($username) {
         $query = "SELECT libri.id, libri.titolo, libri.autore, libri.id_genere, sta_leggendo.n_capitoli_letti, libri.n_capitoli
-                  FROM libri, sta_leggendo
-                  WHERE sta_leggendo.username = '$username'
-                  AND sta_leggendo.id_libro = libri.id";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0) {
+                  FROM libri
+                  INNER JOIN sta_leggendo ON sta_leggendo.id_libro = libri.id
+                  WHERE sta_leggendo.username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return null;
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $queryResult = $stmt->get_result();
+        if ($queryResult->num_rows != 0) {
             $result = array();
-            while($row = mysqli_fetch_assoc($queryResult)) {
+            while ($row = $queryResult->fetch_assoc()) {
                 $result[] = $row;
             }
-            $queryResult -> free();
+            $queryResult->free();
             return $result;
-        }
-        else {
+        } else
             return null;
-        }
     }
 
     public function getListaSalvati($username) {
         $query = "SELECT libri.id, libri.titolo, libri.autore, generi.nome AS genere
-        FROM libri
-        JOIN generi ON libri.id_genere = generi.id
-        JOIN da_leggere ON da_leggere.id_libro = libri.id
-        WHERE da_leggere.username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0) {
+                  FROM libri
+                  JOIN generi ON libri.id_genere = generi.id
+                  JOIN da_leggere ON da_leggere.id_libro = libri.id
+                  WHERE da_leggere.username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return null;
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $queryResult = $stmt->get_result();
+        if ($queryResult->num_rows != 0) {
             $result = array();
-            while($row = mysqli_fetch_assoc($queryResult)) {
+            while ($row = $queryResult->fetch_assoc()) {
                 $result[] = $row;
             }
-            $queryResult -> free();
+            $queryResult->free();
             return $result;
-        }
-        else {
+        } else
             return null;
-        }
     }
 
     public function getListaTerminati($username) {
-        $query="SELECT libri.id, libri.titolo, libri.autore, generi.nome AS genere, ha_letto.data_fine_lettura, recensioni.voto
-                FROM libri
-                JOIN generi ON libri.id_genere = generi.id
-                JOIN ha_letto ON ha_letto.id_libro = libri.id
-                JOIN recensioni ON ha_letto.id_libro = recensioni.id_libro AND ha_letto.username = recensioni.username_autore
-                WHERE ha_letto.username = '$username'
-                UNION
-                SELECT libri.id, libri.titolo, libri.autore, generi.nome AS genere, ha_letto.data_fine_lettura, 'Non assegnato'
-                FROM libri
-                JOIN generi ON libri.id_genere = generi.id
-                JOIN ha_letto ON ha_letto.id_libro = libri.id
-                WHERE ha_letto.username = '$username'
-                AND ha_letto.id_libro NOT IN (SELECT DISTINCT id_libro FROM recensioni WHERE username_autore = '$username')";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0) {
+        $query = "SELECT libri.id, libri.titolo, libri.autore, generi.nome AS genere, ha_letto.data_fine_lettura, IFNULL(recensioni.voto, 'Non assegnato') AS voto
+                  FROM libri
+                  JOIN generi ON libri.id_genere = generi.id
+                  JOIN ha_letto ON ha_letto.id_libro = libri.id
+                  LEFT JOIN recensioni ON ha_letto.id_libro = recensioni.id_libro AND ha_letto.username = recensioni.username_autore
+                  WHERE ha_letto.username = ?
+                  ORDER BY ha_letto.data_fine_lettura DESC";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return null;
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $queryResult = $stmt->get_result();
+        if ($queryResult->num_rows != 0) {
             $result = array();
-            while($row = mysqli_fetch_assoc($queryResult)) {
+            while ($row = $queryResult->fetch_assoc()) {
                 $result[] = $row;
             }
-            $queryResult -> free();
+            $queryResult->free();
             return $result;
-        }
-        else {
+        } else
             return null;
-        }
     }
 
     public function staLeggendo($username, $id_libro) {
@@ -330,65 +335,86 @@ class DBAccess {
         else {
             $stmt->bind_param("si", $username, $id_libro);
             if (!$stmt->execute()) {
-                echo "<li>Errore durante l'aggiunta del libro: " . $stmt->error . "</li>";
+                return;
             }
-            return;
+            $stmt->close();
         }
     }
 
     public function rimuoviDaLeggere($username, $id_libro) {
         $query = "DELETE FROM da_leggere WHERE username = ? AND id_libro = ?";
         $stmt = $this -> connection -> prepare($query);
-        if($stmt === false) {
+        if($stmt === false)
             return;
-        }
         else {
             $stmt->bind_param("si", $username, $id_libro);
-            if (!$stmt->execute()) {
+            if (!$stmt->execute())
                 return;
-            }
             $stmt->close();
         }
     }
     /*********************************************************************************************** */
 
     public function modificaUsername($old, $new) {
-        $query = "UPDATE utenti SET username = '$new' WHERE username = '$old'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
+        $query = "UPDATE utenti SET username = ? WHERE username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return;
+        $stmt->bind_param("ss", $new, $old);
+        if(!$stmt->execute())
+            return;
+        $stmt->close();
     }
-
+    
     public function modificaPassword($username, $new) {
-        $query = "UPDATE utenti SET password = '$new' WHERE username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
+        $query = "UPDATE utenti SET password = ? WHERE username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return;
+        $stmt->bind_param("ss", $new, $username);
+        if(!$stmt->execute())
+            return;
+        $stmt->close();
     }
 
     public function modificaEmail($username, $new) {
-        $query = "UPDATE utenti SET email = '$new' WHERE username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
+        $query = "UPDATE utenti SET email = ? WHERE username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return;
+        $stmt->bind_param("ss", $new, $username);
+        if(!$stmt->execute())
+            return;
+        $stmt->close();
     }
 
     public function verificaPassword($username, $password) {
-        $query = "SELECT * FROM utenti WHERE username = '$username' AND password = '$password'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $queryResult -> free();
-            return true;
-        }
-        else {
+        $query = "SELECT * FROM utenti WHERE username = ? AND password = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
             return false;
-        }
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows != 0) {
+            $result->free();
+            return true;
+        } else
+            return false;
     }
 
     public function eliminaUtente($username) {
-        $query = "DELETE FROM utenti WHERE username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
+        $query = "DELETE FROM utenti WHERE username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return;
+        $stmt->bind_param("s", $username);
+        if(!$stmt->execute())
+            return;
+        $stmt->close();
     }
 
-    public function getInfoLibro($id_libro) {
+    /*public function getInfoLibro($id_libro) {
         $query = "SELECT * FROM libri WHERE id = '$id_libro'";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){
@@ -399,7 +425,7 @@ class DBAccess {
         else {
             return null;
         }
-    }
+    }*/
 
     //questa funzione preleva dal database i 5 generi che hanno più libri
     public function getGeneriPiuPopolari() {
@@ -430,24 +456,27 @@ class DBAccess {
                   WHERE EXISTS (
                       SELECT 1
                       FROM ha_letto
-                      WHERE ha_letto.username = '$username'
+                      WHERE ha_letto.username = ?
                       AND ha_letto.id_libro = libri.id
                   )
                   GROUP BY generi.nome
                   ORDER BY numeroLibri DESC
                   LIMIT 5";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return null;
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $queryResult = $stmt->get_result();
+        if ($queryResult->num_rows != 0) {
             $result = array();
-            while($row = mysqli_fetch_assoc($queryResult)) {
+            while ($row = $queryResult->fetch_assoc()) {
                 $result[] = $row;
             }
-            $queryResult -> free();
+            $queryResult->free();
             return $result;
-        }
-        else {
+        } else
             return null;
-        }
     }
 
     public function cercaLibro($stringa, $autore, $genere, $lingua) {
@@ -618,16 +647,19 @@ class DBAccess {
     }
 
     public function getncapitoliLibro($LibroSelezionato) {
-        $query = "SELECT n_capitoli FROM libri WHERE id = '$LibroSelezionato'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult);
-            $queryResult -> free();
-            return $row['n_capitoli'];
-        }
-        else {
+        $query = "SELECT n_capitoli FROM libri WHERE id = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
             return null;
-        }
+        $stmt->bind_param("i", $LibroSelezionato);
+        $stmt->execute();
+        $queryResult = $stmt->get_result();
+        if ($queryResult->num_rows != 0) {
+            $row = $queryResult->fetch_assoc();
+            $queryResult->free();
+            return $row['n_capitoli'];
+        } else
+            return null;
     }
     
     public function getautoreLibro($LibroSelezionato) {
@@ -947,18 +979,6 @@ class DBAccess {
         }
     }
 
-    public function verificaUsername($username) {
-        $query = "SELECT * FROM utenti WHERE username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $queryResult -> free();
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     public function aggiungiHaLetto($username, $id_libro) {
         $query = "INSERT INTO ha_letto (username, id_libro, data_fine_lettura) VALUES (?, ?, NOW())";
         $stmt = $this -> connection -> prepare($query);
@@ -975,9 +995,14 @@ class DBAccess {
     }
 
     public function rimuoviStaLeggendo($username, $id_libro) {
-        $query = "DELETE FROM sta_leggendo WHERE username = '$username' AND id_libro = '$id_libro'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
+        $query = "DELETE FROM sta_leggendo WHERE username = ? AND id_libro = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return false;
+        $stmt->bind_param("si", $username, $id_libro);
+        if(!$stmt->execute())
+            return false;
+        $stmt->close();
     }
 
     public function aggiornaStaLeggendo($username, $id_libri, $capitoli) {
@@ -1005,9 +1030,14 @@ class DBAccess {
     }
 
     public function rimuoviHaLetto($username, $id_libro) {
-        $query = "DELETE FROM ha_letto WHERE username = '$username' AND id_libro = '$id_libro'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        return $queryResult;
+        $query = "DELETE FROM ha_letto WHERE username = ? AND id_libro = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
+            return;
+        $stmt->bind_param("si", $username, $id_libro);
+        if(!$stmt->execute())
+            return;
+        $stmt->close();
     }
 
     public function eliminaLibriTerminati($username, $id_libri) {
@@ -1086,71 +1116,86 @@ class DBAccess {
         }
     }
 
-    public function getDataIscrione($username) {
-        $query = "SELECT data_iscrizione FROM utenti WHERE username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
-            $queryResult -> free();
-            return $row['data_iscrizione'];
-        }
-        else {
+    public function getDataIscrizione($username) {
+        $query = "SELECT data_iscrizione FROM utenti WHERE username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
             return null;
-        }
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows != 0) {
+            $row = $result->fetch_assoc();
+            $result->free();
+            return $row['data_iscrizione'];
+        } else
+            return null;
     }
 
     /* STATISTICHE */
 
     public function getNumeroLibriSalvati($username) {
-        $query = "SELECT COUNT(*) AS numeroLibri FROM da_leggere WHERE username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
-            $queryResult -> free();
-            return $row['numeroLibri'];
-        }
-        else {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM da_leggere WHERE username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
             return null;
-        }
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows != 0) {
+            $row = $result->fetch_assoc();
+            $result->free();
+            return $row['numeroLibri'];
+        } else
+            return null;
     }
 
     public function getNumeroLibriStaLeggendo($username) {
-        $query = "SELECT COUNT(*) AS numeroLibri FROM sta_leggendo WHERE username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
-            $queryResult -> free();
-            return $row['numeroLibri'];
-        }
-        else {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM sta_leggendo WHERE username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
             return null;
-        }
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows != 0) {
+            $row = $result->fetch_assoc();
+            $result->free();
+            return $row['numeroLibri'];
+        } else
+            return null;
     }
 
     public function getNumeroLibriLettiUltimoAnno($username) {
-        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto WHERE username = '$username' AND data_fine_lettura >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
-            $queryResult -> free();
-            return $row['numeroLibri'];
-        }
-        else {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto WHERE username = ? AND data_fine_lettura >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
             return null;
-        }
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows != 0) {
+            $row = $result->fetch_assoc();
+            $result->free();
+            return $row['numeroLibri'];
+        } else
+            return null;
     }
 
     public function getNumeroLibriLetti($username) {
-        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto WHERE username = '$username'";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $row = mysqli_fetch_assoc($queryResult); //dato che username è chiave primaria, ci sarà al più un risultato
-            $queryResult -> free();
-            return $row['numeroLibri'];
-        }
-        else {
+        $query = "SELECT COUNT(*) AS numeroLibri FROM ha_letto WHERE username = ?";
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt)
             return null;
-        }
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows != 0) {
+            $row = $result->fetch_assoc();
+            $result->free();
+            return $row['numeroLibri'];
+        } else
+            return null;
     }
 
     public function getNumeroUtentiRegistratiOggi(){

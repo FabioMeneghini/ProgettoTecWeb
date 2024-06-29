@@ -58,18 +58,15 @@ if($connectionOk) {
                                         <th class="rimuovi" scope="col" abbr="Aut">Autore</th>
                                         <th scope="col" abbr="Cap. letti">Numero capitoli letti</th>
                                     </tr>';
-        $i=0;
         foreach($lista as $libro) {
-            $i++;
             $listaLibri .= '<tr>
                                 <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                                 <td class="rimuovi">'.$libro["autore"].'</td>
                                 <td>
-                                    <input type="number" name="capitoli[]" class="non_rimuovi_print" id="capitoli'.$i.'" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
+                                    <input type="number" name="capitoli[]" class="non_rimuovi_print" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
                                     <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
                                 </td>
                             </tr>';
-            $i+=1;
         }
         $listaLibri .= '    </table>
                             <input type="submit" id="aggiorna" name="aggiorna" value="Aggiorna capitoli">
