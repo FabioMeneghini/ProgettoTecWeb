@@ -6,7 +6,6 @@ use DB\DBAccess;
 
 $paginaHTML = file_get_contents("template/templateCerca.html");
 $menu ="";
-$breadcrumbs = "";
 
 //utenti
 $userMenu ='<li><a href="utente.php"><span lang="en">Home</span></a></li>
@@ -55,18 +54,12 @@ function pulisciInput($input) {
     return $input;
 }
 
-if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
     $menu = $adminMenu;
-    $breadcrumbs = "admin.php";
-}
-else if(isset($_SESSION['username'])){
+else if(isset($_SESSION['username']))
     $menu = $userMenu;
-    $breadcrumbs = "index.php";
-}
-else {
+else
     $menu = $NonRegistrato;
-    $breadcrumbs = "index.php";
-}
 
 $listaGeneri = "";
 $lista_lingue="";
@@ -158,7 +151,6 @@ $paginaHTML = str_replace("{autore}", $autore, $paginaHTML);
 $paginaHTML = str_replace("{lingua}", $lingua, $paginaHTML);
 $paginaHTML = str_replace("{torna_su}", $torna_su , $paginaHTML);
 $paginaHTML = str_replace("{menu}", $menu , $paginaHTML);
-$paginaHTML = str_replace("{breadcrumbs}", $breadcrumbs, $paginaHTML);
 $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{opzioneGeneri}", $opzioneGeneri, $paginaHTML);
 $paginaHTML = str_replace("{listaLingue}", $lista_lingue, $paginaHTML);

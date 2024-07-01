@@ -16,3 +16,10 @@ ELS(".slider-wrapper").forEach(EL_par => {
     EL(".prev", EL_par).addEventListener("click", prev);
     EL(".next", EL_par).addEventListener("click", next);
 });
+
+document.addEventListener('keydown', function(event) {
+    if(event.key === "ArrowLeft")
+      document.querySelector('.prev').click();
+    else if(event.key === "ArrowRight")
+        document.querySelector('.next').click();
+});

@@ -29,7 +29,7 @@ if($connectionOk) {
     $resultGeneri = $connection -> getGeneriPiuPopolari();
     
     foreach($resultGeneri as $genere) {
-        $listaLibri.='<section class="genere_singolo"><h3><a  href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
+        $listaLibri.='<section class="genere_singolo"><h3><a href="genere.php?genere='.$genere["genere"].'">'.$genere["genere"].'</a></h3>';
         $risultatiLibri = $connection ->getListaLibriGenere($genere["genere"], 10);
         if(empty($risultatiLibri)) {
             $listaLibri.='<p>Ci scusiamo, al momento non abbiamo libri di questo genere</p>';
@@ -51,7 +51,7 @@ if($connectionOk) {
     $listaLibri.="</div>";
     foreach($resultListaBestSeller as $libro) {
         $listaBestSeller .= '<div class="item">
-                                <a href="scheda_libro.php?id='.$libro["id"].'"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" ></a>
+                                <a href="scheda_libro.php?id='.$libro["id"].'"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'"></a>
                                 <ul>
                                     <li><strong>Titolo:</strong> '.$libro["autore"].'</li>
                                     <li><strong>Autore:</strong> '.$libro["titolo"].'</li>
