@@ -187,8 +187,8 @@ if($connectionOk) {
         if($terminato) {
             $recensione = $connection -> getTuaRecensione($LibroSelezionato, $_SESSION['username']);
             if ($recensione !== null) {
-                $tuo_commento = $recensione["commento"] ?? "";
-                $voto = $recensione["voto"] ?? "";
+                $tuo_commento = $recensione["commento"] == null ? "" : $recensione["commento"];
+                $voto = $recensione["voto"] == null ? "" : $recensione["voto"];
             } else {
                 $tuo_commento = "";
                 $voto = "";
