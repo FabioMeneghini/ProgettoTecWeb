@@ -53,8 +53,8 @@ if($connectionOk) {
         $listaBestSeller .= '<div class="item">
                                 <a href="scheda_libro.php?id='.$libro["id"].'"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" ></a>
                                 <ul>
-                                    <li><strong class="rimuovi_print">Titolo:</strong> '.$libro["autore"].'</li>
-                                    <li class="rimuovi_print"><strong>Autore:</strong> '.$libro["titolo"].'</li>
+                                    <li><strong class="rimuovi_print">Titolo:</strong> '.$libro["titolo"].'</li>
+                                    <li class="rimuovi_print"><strong>Autore:</strong> '.$libro["autore"].'</li>
                                     <li class="rimuovi_print"><strong>Genere:</strong> '.$libro["genere"].'</li>
                                     <li class="rimuovi_print" class="commento"><strong>Commento:</strong> '.$libro["migliore_recensione"].'</li>
                                     <li class="rimuovi_print"><strong>Voto medio:</strong></li><li class="rimuovi_print"><span class="voto_medio">'.$libro["voto_medio"].'</span></li>
