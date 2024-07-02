@@ -35,24 +35,24 @@
         <main id="content">
             <section id="cerca">
                 <h2>Cerca un libro</h2>
-                <form class="rimuovi_print" method="post" action="cerca.php">
+                <form method="post" action="cerca.php">
                     {messaggiForm}
-                    <fieldset>
+                    <fieldset class="non_rimuovi_print">
                         <legend>Ricerca</legend>
                         <label for="stringa">Ricerca generale:</label>
-                        <input type="text" id="stringa" name="stringa" maxlength="50" placeholder="Cerca un libro..." value="{stringa}">
+                        <input class="non_rimuovi_print" type="text" id="stringa" name="stringa" maxlength="50" placeholder="Cerca un libro..." value="{stringa}">
                         <input type="submit" id="cerca_generale" name="cerca_generale" value="Cerca">
                     </fieldset>
-                    <fieldset>
+                    <fieldset class="non_rimuovi_print">
                         <legend>Filtri</legend>
                         <label for="autore">Autore:</label>
-                        <input type="text" id="autore" name="autore" maxlength="50" value="{autore}">
+                        <input class="non_rimuovi_print" type="text" id="autore" name="autore" maxlength="50" value="{autore}">
                         <label for="genere">Genere: </label>
-                        <select name="genere" id="genere">
+                        <select class="non_rimuovi_print" name="genere" id="genere">
                             {opzioneGeneri}
                         </select>
                         <label for="selezionalingua">Lingua:</label>
-                        <input type="text" list="lingua" id="selezionalingua" name="lingua" maxlength="15" value="{lingua}">
+                        <input class="non_rimuovi_print" type="text" list="lingua" id="selezionalingua" name="lingua" maxlength="15" value="{lingua}">
                         <datalist id="lingua">
                             {listaLingue}
                         </datalist>

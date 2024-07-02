@@ -45,7 +45,7 @@ if($connectionOk) {
                                 Ogni riga descrive un libro con tre colonne: "titolo", "autore" e "seleziona", ovvero una <span lang="en">checkbox</span> con cui è possibile selezionare i libri per poi iniziarli o eliminarli.
                             </p>
                             <fieldset class="righealternate">
-                                <legend>Elenco dei libri salvati</legend>
+                                <legend class="rimuovi_print">Elenco dei libri salvati</legend>
                                 <table aria-describedby="descr">
                                     <caption>Lista dei libri salvati</caption>
                                     <tr>
