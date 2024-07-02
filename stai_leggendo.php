@@ -51,7 +51,7 @@ if($connectionOk) {
                                 La terza colonna è un campo per modificare il numero del capitolo a cui sei arrivato/a nella lettura, con la possibilità di aumentarli fino a terminare il libro o diminuirli.
                             </p>
                             <fieldset class="righealternate">
-                                <legend>Elenco dei libri che stai leggendo</legend>
+                                <legend class="rimuovi_print">Elenco dei libri che stai leggendo</legend>
                                 <table aria-describedby="descr">
                                     <caption>Lista dei libri che stai leggendo</caption>
                                     <tr>

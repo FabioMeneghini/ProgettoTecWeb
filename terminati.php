@@ -36,7 +36,7 @@ if($connectionOk) {
         $listaLibri .= '<form method="post" action="terminati.php" onsubmit="return conferma(\'Sei sicuro di voler eliminare i libri selezionati dalla lista dei tuoi libri terminati? Eventuali valutazioni assegnate ad essi verranno perse definitivamente.\')">
                         <p id="descr">La tabella contiene l\'elenco dei libri che hai terminato. Ogni riga descrive un libro con cinque colonne: "titolo", "autore", "data di fine lettura", "voto assegnato" e "seleziona", ovvero una colonna utile per selezionare tramite <span lang="en">checkbox</span> i libri che si vogliono eliminare.</p>
                         <fieldset class="righealternate">
-                            <legend>Elenco dei libri che hai terminato</legend>
+                            <legend class="rimuovi_print">Elenco dei libri che hai terminato</legend>
                             <table aria-describedby="descr">
                                 <caption>Lista dei libri che hai terminato</caption>
                                 <tr>
