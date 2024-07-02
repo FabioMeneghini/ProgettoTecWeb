@@ -9,7 +9,15 @@ ELS(".slider-wrapper").forEach(EL_par => {
     const tot = Math.ceil(ELS_items.length / sub);
     let c = 0;
     
-    const anim = () => EL_slider.style.transform = `translateX(-${c*100}%)`;
+    const anim = () => {
+        for (let i = 0; i < EL_slider.classList.length; i++) { //rimuove tutte le classi che iniziano con 'slide-pos-'
+            if (EL_slider.classList[i].startsWith('slide-pos-')) {
+                EL_slider.classList.remove(EL_slider.classList[i]);
+                i--;
+            }
+        }
+        EL_slider.classList.add(`slide-pos-${c}`); //aggiunge la nuova classe per la posizione corrente
+    };
     const prev = () => (c = mod(c-1, tot), anim());
     const next = () => (c = mod(c+1, tot), anim());
     
