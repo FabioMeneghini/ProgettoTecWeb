@@ -69,23 +69,23 @@ if($connectionOk) {
     
     if(!empty($resultUtenti)){
         $utenti.= '<p id="descr">
-                        La tabella contiene l&apos; elenco di tutti gli utenti registrati al sito.
-                        Ogni riga descrive un utente con 5 colonne nominate: "nome", "cognome", "username", "email", "data di iscrizione al sito"s.
+                        La tabella contiene l&apos;elenco di tutti gli utenti registrati al sito.
+                        Ogni riga descrive un utente con 5 colonne nominate: "username", "nome", "cognome", "email", "data di iscrizione al sito".
                     </p>
                     <table aria-describedby="descr" class="righealternate">
                     <caption>Tutti gli utenti del sito</caption>
                     <tr>
+                        <th scope="col"><span lang="en">Username</span></th>
                         <th scope="col">Nome</th>
                         <th scope="col">Cognome</th>
-                        <th scope="col"><span lang="en">Username</span></th>
                         <th class="rimuovi" scope="col"><span lang="en">Email</span></th>
                         <th class="rimuovi" scope="col" abbr="Data isc">Data di iscrizione</th>
                     </tr>';
         foreach($resultUtenti as $utente) {
             $utenti .= '<tr>
-                            <th scope="row">'.$utente["nome"].'</th>
+                            <th scope="row">'.$utente["username"].'</td>
+                            <td>'.$utente["nome"].'</th>
                             <td>'.$utente["cognome"].'</td>
-                            <td>'.$utente["username"].'</td>
                             <td class="rimuovi">'.$utente["email"].'</td>
                             <td class="rimuovi"><time datetime="'.$utente["data_iscrizione"].'">'.$utente["data_iscrizione"].'</time></td>
                         </tr>';
