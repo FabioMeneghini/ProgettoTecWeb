@@ -164,7 +164,7 @@ if($connectionOk) {
     $trama = $libro["trama"];
     $n_capitoli = $libro["n_capitoli"];
     $copertina = $libro["titolo_ir"];
-    $alt = $libro["descrizione"];
+    $alt = "Copertina del libro ".$libro["titolo"];
     $keywords = $libro["keywords"];
     $description = $libro["descrizione_pagina"];
 
@@ -219,23 +219,25 @@ if($connectionOk) {
                     <fieldset>
                         <legend>Inizia a leggere</legend>
                         <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                        <label for="username">Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label>
+                        <p>Prima di poter recensire questo libro devi averlo terminato.</p>
+                        <p>Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</p>
                         <input type="submit" id="inizia" name="inizia" value="inizia">
                     </fieldset>
                 </form>';
         }
         else if($iniziato) {
-            $arearecensionevoto='<p>Prima di poter recensire questo libro devi averlo terminato. Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>';
+            $arearecensionevoto='<p>Prima di poter recensire questo libro devi averlo terminato.</p>
+            <p>Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>';
         }
         else  {
             $arearecensionevoto='
             <form action="scheda_libro.php" method="post" class="form-bottoni">
                 <fieldset>
-                    <legend>Prima di poter recensire questo libro devi averlo terminato</legend>
+                    <legend>Salva o inizia il libro</legend>
+                    <p>Prima di poter recensire questo libro devi averlo terminato.</p>
+                    <p>Questo libro non si trova nella lista dei tuoi libri da leggere. Vuoi aggiungerlo?</p>
                     <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                    <label for="username">Salva per leggerlo più tardi:</label> 
                     <input type="submit" id="salva" name="salva" value="Salva">
-                    <label for="username">Inizia a leggere:</label> 
                     <input type="submit" id="inizia" name="inizia" value="Inizia a leggere">
                 </fieldset>
             </form>';
@@ -245,11 +247,11 @@ if($connectionOk) {
         $bottoni_admin='
             <div class="container_form">
                 <form action="modifica_libro.php" method="get">
-                    <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                    <input type="hidden" name="id" value='.$LibroSelezionato.'>
                     <input type="submit" id="modifica_libro" name="modifica_libro" value="Modifica">
                 </form>
                 <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
-                    <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                    <input type="hidden" name="id" value='.$LibroSelezionato.'>
                     <input type="submit" id="elimina" name="elimina" value="Elimina">
                 </form>
             </div>';
@@ -276,8 +278,6 @@ if($keywords=="")
     $keywords="libro, recensioni, lettura, autore, genere, lingua, trama, capitoli, voto, recensione, storia, personaggi";
 if($description=="")
     $description="Pagina dedicata al libro ".$titolo." di ".$autore." con trama, numero di capitoli, genere, lingua e media voti. Inoltre è possibile leggere le recensioni degli altri utenti e lasciare la propria valutazione.";
-if($alt=="")
-    $alt="Copertina del libro ".$titolo." di ".$autore;
 
 $paginaHTML = str_replace("{keywords}", $keywords, $paginaHTML);
 $paginaHTML = str_replace("{description}", $description, $paginaHTML);

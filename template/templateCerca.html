@@ -13,16 +13,16 @@
         <link rel="stylesheet" href="css/print.css" media="print">
     </head>
     <body>
-        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
+        <div id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></div>
         <header id="header">
             <nav aria-label="Aiuti alla navigazione">
                 <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
         </header>
-        <nav id="menu">
+        <nav id="menu" aria-label="Menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png" alt="">
+                <img src="menu.png" alt="Icona per aprire il menu ad hamburger">
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
@@ -48,11 +48,11 @@
                         <label for="autore">Autore:</label>
                         <input class="non_rimuovi_print" type="text" id="autore" name="autore" maxlength="50" value="{autore}">
                         <label for="genere">Genere: </label>
-                        <select class="non_rimuovi_print" name="genere" id="genere" required>
+                        <select name="genere" id="genere">
                             {opzioneGeneri}
                         </select>
-                        <label for="lingua">Lingua:</label>
-                        <input class="non_rimuovi_print" type="text" list="lingua" id="selezionalingua" name="lingua" maxlength="15" value="{lingua}">
+                        <label for="selezionalingua">Lingua:</label>
+                        <input type="text" list="lingua" id="selezionalingua" name="lingua" maxlength="15" value="{lingua}">
                         <datalist id="lingua">
                             {listaLingue}
                         </datalist>

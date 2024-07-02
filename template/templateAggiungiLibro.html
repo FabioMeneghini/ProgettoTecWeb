@@ -15,16 +15,16 @@
         <script src="controlli.js"></script>
     </head>
     <body>
-        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
+        <div id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></div>
         <header id="header">
             <nav aria-label="Aiuti alla navigazione">
                 <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
         </header>
-        <nav id="menu">
+        <nav id="menu" aria-label="Menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png"  alt="">
+                <img src="menu.png" alt="Icona per aprire il menu ad hamburger">
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
@@ -52,7 +52,7 @@
                     {messaggiForm}
                     <fieldset>
                         <legend>Informazioni generali</legend>
-                        <label for="titolo">Autore:</label>
+                        <label for="autore">Autore:</label>
                         <span><input type="text" id="autore" name="autore" maxlength="100" required></span>
                         
                         <label for="titolo">Titolo:</label>
