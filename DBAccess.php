@@ -2,15 +2,15 @@
 
 namespace DB;
 class DBAccess {
-    /*private $HOST_DB = "localhost"; //SERVER TECWEB
+    private $HOST_DB = "localhost"; //SERVER TECWEB
     private $DATABASE_NAME = "famenegh";
     private $USERNAME = "famenegh";
-    private $PASSWORD = "einohn7yie1soaBu";*/
+    private $PASSWORD = "einohn7yie1soaBu";
 
-    private $HOST_DB = "localhost"; //SERVER LOCALE
+    /*private $HOST_DB = "localhost"; //SERVER LOCALE
     private $DATABASE_NAME = "bookclub";
     private $USERNAME = "root";
-    private $PASSWORD = "";
+    private $PASSWORD = "";*/
 
     private $connection;
 
@@ -49,7 +49,7 @@ class DBAccess {
     }
 
     public function getListaBestSeller() {
-        $query = "SELECT libri.titolo, libri.titolo_ir, libri.autore, generi.nome AS genere, libri.descrizione, libri.id, AVG(recensioni.voto) AS voto_medio
+        $query = "SELECT libri.titolo, libri.titolo_ir, libri.autore, generi.nome AS genere, libri.id, AVG(recensioni.voto) AS voto_medio
               FROM libri
               JOIN generi ON libri.id_genere = generi.id
               LEFT JOIN recensioni ON libri.id = recensioni.id_libro
@@ -453,8 +453,7 @@ class DBAccess {
     }
 
     public function cercaLibro($stringa, $autore, $genere, $lingua) {
-        $query = "SELECT libri.id, libri.titolo, libri.titolo_ir,
-                         libri.descrizione, libri.autore, libri.lingua, generi.nome AS genere
+        $query = "SELECT libri.id, libri.titolo, libri.titolo_ir, libri.autore, libri.lingua, generi.nome AS genere
                   FROM libri
                   INNER JOIN generi ON libri.id_genere = generi.id
                   WHERE libri.titolo LIKE CONCAT('%', ?, '%')
@@ -656,22 +655,6 @@ class DBAccess {
         }
     }
 
-    public function getTuttiLibri() {
-        $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua FROM libri";
-        $queryResult = mysqli_query($this -> connection, $query);
-        if(mysqli_num_rows($queryResult) != 0){
-            $result = array();
-            while($row = mysqli_fetch_assoc($queryResult)) {
-                $result[] = $row;
-            }
-            $queryResult -> free();
-            return $result; 
-        }
-        else {
-            return null;
-        }
-    }
-
     public function aggiungiLibro($titolo, $autore, $lingua, $capitoli, $trama, $genere) {
         $query = "INSERT INTO libri (titolo, autore, lingua, n_capitoli, trama, id_genere,data_inserimento) 
                   VALUES (?, ?, ?, ?, ?, (SELECT id FROM generi WHERE nome = ?), NOW())";
@@ -744,17 +727,17 @@ class DBAccess {
 
     public function getTuttiLibriOrdinati($opzione) {
         if($opzione=="alfabetico")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY titolo ASC";
+            $query = "SELECT id, titolo_ir, titolo, autore, lingua, data_inserimento FROM libri ORDER BY titolo ASC";
         else if($opzione=="piu_recente")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY data_inserimento DESC";
+            $query = "SELECT id, titolo_ir, titolo, autore, lingua, data_inserimento FROM libri ORDER BY data_inserimento DESC";
         else if($opzione=="meno_recente")
-            $query = "SELECT id, titolo_ir, titolo, descrizione, autore, lingua, data_inserimento FROM libri ORDER BY data_inserimento ASC";
+            $query = "SELECT id, titolo_ir, titolo, autore, lingua, data_inserimento FROM libri ORDER BY data_inserimento ASC";
         else if($opzione=="popolarita")
-            $query = "SELECT l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua, data_inserimento, COUNT(hl.id_libro) + COUNT(sl.id_libro) AS conteggio
+            $query = "SELECT l.id, l.titolo_ir, l.titolo, l.autore, l.lingua, data_inserimento, COUNT(hl.id_libro) + COUNT(sl.id_libro) AS conteggio
                       FROM libri l
                       LEFT JOIN ha_letto hl ON l.id = hl.id_libro
                       LEFT JOIN sta_leggendo sl ON l.id = sl.id_libro
-                      GROUP BY l.id, l.titolo_ir, l.titolo, l.descrizione, l.autore, l.lingua
+                      GROUP BY l.id, l.titolo_ir, l.titolo, l.autore, l.lingua
                       ORDER BY conteggio DESC";
         $queryResult = mysqli_query($this -> connection, $query);
         if(mysqli_num_rows($queryResult) != 0){

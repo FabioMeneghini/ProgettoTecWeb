@@ -71,7 +71,7 @@ $paginaHTML = file_get_contents("template/templateAggiungiLibro.html");
 $listaGeneri = "";
 $messaggi = "";
 $lista_lingue="";
-$data_list_generi="";
+$data_list_generi="<option value=\"\">Seleziona</option>";
 
 $connection = new DBAccess();
 $connectionOk = $connection -> openDBConnection();

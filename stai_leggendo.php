@@ -51,6 +51,7 @@ if($connectionOk) {
                                 La terza colonna è un campo per modificare il numero del capitolo a cui sei arrivato/a nella lettura, con la possibilità di aumentarli fino a terminare il libro o diminuirli.
                             </p>
                             <fieldset class="righealternate">
+                                <legend>Elenco dei libri che stai leggendo</legend>
                                 <table aria-describedby="descr">
                                     <caption>Lista dei libri che stai leggendo</caption>
                                     <tr>
@@ -63,7 +64,7 @@ if($connectionOk) {
                                 <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                                 <td class="rimuovi">'.$libro["autore"].'</td>
                                 <td>
-                                    <input type="number" name="capitoli[]" class="non_rimuovi_print" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
+                                    <input aria-label="Aumenta o diminuisci i capitoli letti di '.$libro["titolo"].'" type="number" name="capitoli[]" class="non_rimuovi_print" min="0" max="'.$libro["n_capitoli"].'" required placeholder="'.$libro["n_capitoli_letti"].'" value="'.$libro["n_capitoli_letti"].'">
                                     <input type="hidden" name="id_libri[]" value="'.$libro['id'].'">
                                 </td>
                             </tr>';

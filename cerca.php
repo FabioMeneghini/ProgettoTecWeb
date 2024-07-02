@@ -87,6 +87,7 @@ if($connectionOk) {
         $stringa = isset($_POST['stringa']) ? pulisciInput($_POST['stringa']) : "";
         $autore = isset($_POST['autore']) ? pulisciInput($_POST['autore']) : "";
         $genereSelezionato = isset($_POST['genere']) ? pulisciInput($_POST['genere']) : "";
+        //$genereSelezionato = $genereSelezionato=="x" ? "" : $genereSelezionato;
         $lingua = isset($_POST['lingua']) ? pulisciInput($_POST['lingua']) : "";
         if($stringa=="" && $autore=="" && $genereSelezionato=="" && $lingua=="")
             $messaggi_form = '<p class="messaggiErrore">Inserisci almeno un parametro di ricerca</p>';
@@ -111,7 +112,7 @@ if($connectionOk) {
         foreach($libri_ricercati as $libro) {
             $rislutati_ricerca .= '<tr>
                                     <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
-                                    <td class="rimuovi_print"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
+                                    <td class="rimuovi_print"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="Copertina del libro '.$libro["titolo"].'" width="50" height="70"></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td class="rimuovi">'.$libro["genere"].'</td>
                                     <td class="rimuovi">'.$libro["lingua"].'</td>

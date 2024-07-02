@@ -71,7 +71,7 @@ if($connectionOk) {
         foreach($resultLibri as $libro) {
         $catalogo .= '<tr>
                         <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
-                        <td class="rimuovi_print"><img src="copertine_libri/'.$libro['titolo_ir'].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
+                        <td class="rimuovi_print"><img src="copertine_libri/'.$libro['titolo_ir'].'.jpg" alt="Copertina del libro '.$libro["titolo"].'" width="50" height="70"></td>
                         <td>'.$libro["autore"].'</td>
                         <td class="rimuovi">'.$libro["lingua"].'</td>
                         <td class="rimuovi"><time datetime="'.$libro["data_inserimento"].'">'.$libro["data_inserimento"].'</time></td>

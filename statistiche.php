@@ -37,9 +37,9 @@ if($connectionOk) {
     if ($n_libri_letti_anno == 0 && $n_libri_stai_leggendo == 0) {
         $messaggio_motivazionale = '<p>Ogni impresa inizia con piccoli passi, quest\'anno puoi ancora leggere molti libri! Lasciati ispirare dalle recensioni della <span lang="en">community</span> per iniziare nuove letture</p>';
     } elseif ($n_libri_letti_anno == 0 && $n_libri_stai_leggendo > 0) {
-        $messaggio_motivazionale = '</p>Dedica il giusto tempo alla lettura per crescere, rilassarti e imparare, e non dimenticarti di segnare i tuoi progressi e le recensioni per aiutare gli altri come te!</p>';
+        $messaggio_motivazionale = '<p>Dedica il giusto tempo alla lettura per crescere, rilassarti e imparare, e non dimenticarti di segnare i tuoi progressi e le recensioni per aiutare gli altri come te!</p>';
     } else {
-        $messaggio_motivazionale = '</p>Complimenti! Continua a leggere i tuoi libri, grazie a te ed alle tue recensioni altre persone scoprono e continuano ad amare il mondo dela lettura</p>';
+        $messaggio_motivazionale = '<p>Complimenti! Continua a leggere i tuoi libri, grazie a te ed alle tue recensioni altre persone scoprono e continuano ad amare il mondo dela lettura</p>';
     }
     }
 else {

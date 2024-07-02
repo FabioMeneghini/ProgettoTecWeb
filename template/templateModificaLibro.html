@@ -5,7 +5,7 @@
         <title>{TitoloLibro} - Modifica - BookClub</title>
         <meta name="keywords" content="modifica, cambia, libro, autore, titolo, genere, lingua, trama, capitoli">
         <meta name="description" content="Questa pagina serve per modificare i dati relativi al libro {titoloold}">
-        <meta name="author" content="">
+        <meta name="author" content="Leonardo Baldo">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
@@ -15,16 +15,16 @@
         <script src="controlli.js"></script>
     </head>
     <body>
-        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
+        <div id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></div>
         <header id="header">
             <nav aria-label="Aiuti alla navigazione">
                 <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
         </header>
-        <nav id="menu">
+        <nav id="menu" aria-label="Menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png" alt="">
+                <img src="menu.png" alt="Icona per aprire il menu ad hamburger">
             </label>
             <input id="hamburger" type="checkbox">
             <ul>
@@ -54,14 +54,14 @@
                     <fieldset>
                         <legend>Informazioni generali</legend>
                         <label for="autore">Autore:</label>
-                        <span><input type="text" id="autore" name="autore" placeholder="{autoreold}" value="{autoreold}" maxlength="100" required></span>
+                        <span><input type="text" id="autore" name="autore" placeholder="Inserisci l'autore..." value="{autoreold}" maxlength="100" required></span>
                         
                         <label for="titolo">Titolo:</label>
-                        <span><input type="text" name="titolo" id="titolo" placeholder="{titoloold}" value="{titoloold}" maxlength="100" required></span>
+                        <span><input type="text" name="titolo" id="titolo" placeholder="Inserisci il titolo..." value="{titoloold}" maxlength="100" required></span>
                         
                         <label for="genere">Genere:</label>
                         <span>
-                            <select name="genere" id="genere" placeholder="{genereold}" value="{genereold}" required>
+                            <select name="genere" id="genere" required>
                                 {selectGeneri}
                             </select>
                         </span>
@@ -69,18 +69,18 @@
                     <fieldset>
                         <legend>Informazioni specifiche</legend>
                         <label for="lingua">Lingua originale:</label>
-                        <span><input type="text" list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}" required></span>
+                        <span><input type="text" list="datalist_lingua" id="lingua" name="lingua" placeholder="Inserisci la lingua..." value="{linguaold}" required></span>
                         <datalist id="datalist_lingua">
                             {listaLingue}
                         </datalist>
                         
                         <label for="capitoli">Numero capitoli:</label>
-                        <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required placeholder="{capitoliold}" value="{capitoliold}"></span>
+                        <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required placeholder="Numero capitoli..." value="{capitoliold}"></span>
                     </fieldset>
                     <fieldset>
                         <legend>Trama</legend>
-                        <label for="trama">Trama del libro:</legend>
-                        <span><textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}" maxlength="3000" required>{tramaold}</textarea></span>
+                        <label for="trama">Trama del libro:</label>
+                        <span><textarea id="trama" name="trama" rows="20" cols="70" placeholder="Inserisci la trama..." maxlength="3000" required>{tramaold}</textarea></span>
                     </fieldset>
                     <fieldset>
                         <legend>Conferma o annulla le modifiche</legend>
