@@ -87,6 +87,7 @@ if($connectionOk) {
         $stringa = isset($_POST['stringa']) ? pulisciInput($_POST['stringa']) : "";
         $autore = isset($_POST['autore']) ? pulisciInput($_POST['autore']) : "";
         $genereSelezionato = isset($_POST['genere']) ? pulisciInput($_POST['genere']) : "";
+        //$genereSelezionato = $genereSelezionato=="x" ? "" : $genereSelezionato;
         $lingua = isset($_POST['lingua']) ? pulisciInput($_POST['lingua']) : "";
         if($stringa=="" && $autore=="" && $genereSelezionato=="" && $lingua=="")
             $messaggi_form = '<p class="messaggiErrore">Inserisci almeno un parametro di ricerca</p>';
