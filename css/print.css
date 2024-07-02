@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-img, #breadcrumbs, #menu, footer, input, select, nav, .torna_su, #menu_scheda_libro, .menu_scheda_libro, .rimuovi_print, #trama, .prev, .next, fieldset{
+img, #breadcrumbs, #menu, footer, input, select, nav, .torna_su, #menu_scheda_libro, .menu_scheda_libro, .rimuovi_print, #trama, .prev, .next, fieldset, #descr{
     display: none;
 }
 
@@ -74,7 +74,7 @@ legend {
 #componenti>dt {
     font-size: 1.5em;
 }
-
+/*
 a[href]:after {
     content: " (" attr(href) ")";
 }
@@ -82,7 +82,7 @@ a[href]:after {
 .no-link a[href]:after {
     content: "";
 }
-
+*/
 .item a {
     display: none;
 }
