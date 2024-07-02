@@ -251,14 +251,6 @@ nav.login{
     right: 50pt;
 }
 
-/*#cercaForm label {
-    display: inline-block;
-}*/
-
-/*#form_disconnetti_account, #form_elimina_account {
-    display: inline-block;
-}*/
-
 .container_form {
     display: flex;
     justify-content: center;
@@ -305,8 +297,6 @@ input[type=submit], input[type=reset] {
     border-radius: 4px;
 }
 
-
-/*da finire*/
 table tr.lista_libri{
     transition: width 2s, height 4s;
 }
@@ -318,17 +308,7 @@ table tr.lista_libri td:hover{
 main > div{
     text-align: center;
 }
-/*
-a.torna_su{
-    float: right;
-    padding: 0.2em 0.5em;
-    border: solid 2px;
-    border-color: var(--buttonColor);
-    border-radius: 10px;
-    background-color: white;
-    color: var(--buttonColor);
-}
-*/
+
 .torna_su{
     float: right;
     width: 50px;
@@ -337,11 +317,6 @@ a.torna_su{
     background-size: cover;
     background-repeat: no-repeat;
     text-indent: -9999px;
-    /*TODO: decidere se tenere il torna_su fisso a schermo
-    position: fixed;
-    right: 7%;
-    bottom: 7%;
-    */
 }
 
 /* FOOTER */

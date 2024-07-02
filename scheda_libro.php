@@ -219,23 +219,25 @@ if($connectionOk) {
                     <fieldset>
                         <legend>Inizia a leggere</legend>
                         <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                        <label for="username">Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label>
+                        <p>Prima di poter recensire questo libro devi averlo terminato.</p>
+                        <label for="inizia">Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label>
                         <input type="submit" id="inizia" name="inizia" value="inizia">
                     </fieldset>
                 </form>';
         }
         else if($iniziato) {
-            $arearecensionevoto='<p>Prima di poter recensire questo libro devi averlo terminato. Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>';
+            $arearecensionevoto='<p>Prima di poter recensire questo libro devi averlo terminato.</p>
+            <p>Questo libro si trova nella lista di libri che stai leggendo, per vedere il tuo avanzamento vai al link: <a href="stai_leggendo.php">Libri che stai leggendo</a></p>';
         }
         else  {
             $arearecensionevoto='
             <form action="scheda_libro.php" method="post" class="form-bottoni">
                 <fieldset>
-                    <legend>Prima di poter recensire questo libro devi averlo terminato</legend>
+                    <p>Prima di poter recensire questo libro devi averlo terminato.</p>
                     <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                    <label for="username">Salva per leggerlo più tardi:</label> 
+                    <label for="salva">Salva per leggerlo più tardi:</label> 
                     <input type="submit" id="salva" name="salva" value="Salva">
-                    <label for="username">Inizia a leggere:</label> 
+                    <label for="inizia">Inizia a leggere:</label> 
                     <input type="submit" id="inizia" name="inizia" value="Inizia a leggere">
                 </fieldset>
             </form>';
