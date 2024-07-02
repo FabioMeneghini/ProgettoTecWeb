@@ -7,7 +7,7 @@ img, #breadcrumbs, #menu, footer, input, select, nav, .torna_su, #menu_scheda_li
     display: none;
 }
 
-input.non_rimuovi_print, fieldset.righealternate{
+.non_rimuovi_print, fieldset.righealternate{
     display: block;
 }
 
