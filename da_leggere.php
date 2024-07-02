@@ -45,6 +45,7 @@ if($connectionOk) {
                                 Ogni riga descrive un libro con tre colonne: "titolo", "autore" e "seleziona", ovvero una <span lang="en">checkbox</span> con cui è possibile selezionare i libri per poi iniziarli o eliminarli.
                             </p>
                             <fieldset class="righealternate">
+                                <legend>Elenco dei libri salvati</legend>
                                 <table aria-describedby="descr">
                                     <caption>Lista dei libri salvati</caption>
                                     <tr>
@@ -56,7 +57,7 @@ if($connectionOk) {
             $listaLibri .= '<tr>
                                 <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
                                 <td>'.$libro["autore"].'</td>
-                                <td class="rimuovi_print"><input type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
+                                <td class="rimuovi_print"><input aria-label="Seleziona '.$libro["titolo"].' per poi eliminarlo o iniziarlo" type="checkbox" name="checkbox[]" value="'.$libro["id"].'"></td>
                             </tr>';
         }
         $listaLibri .= '    </table>

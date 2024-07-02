@@ -220,7 +220,7 @@ if($connectionOk) {
                         <legend>Inizia a leggere</legend>
                         <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
                         <p>Prima di poter recensire questo libro devi averlo terminato.</p>
-                        <label for="inizia">Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</label>
+                        <p>Questo libro &egrave; nella lista dei tuoi libri da leggere. &Egrave; il momento di iniziare a leggerlo?</p>
                         <input type="submit" id="inizia" name="inizia" value="inizia">
                     </fieldset>
                 </form>';
@@ -233,11 +233,11 @@ if($connectionOk) {
             $arearecensionevoto='
             <form action="scheda_libro.php" method="post" class="form-bottoni">
                 <fieldset>
+                    <legend>Salva o inizia il libro</legend>
                     <p>Prima di poter recensire questo libro devi averlo terminato.</p>
+                    <p>Questo libro non si trova nella lista dei tuoi libri da leggere. Vuoi aggiungerlo?</p>
                     <input type="hidden" id="id_libro" name="id_libro" value="'.$LibroSelezionato.'">
-                    <label for="salva">Salva per leggerlo più tardi:</label> 
                     <input type="submit" id="salva" name="salva" value="Salva">
-                    <label for="inizia">Inizia a leggere:</label> 
                     <input type="submit" id="inizia" name="inizia" value="Inizia a leggere">
                 </fieldset>
             </form>';

@@ -5,7 +5,7 @@
         <title>{TitoloLibro} - Modifica - BookClub</title>
         <meta name="keywords" content="modifica, cambia, libro, autore, titolo, genere, lingua, trama, capitoli">
         <meta name="description" content="Questa pagina serve per modificare i dati relativi al libro {titoloold}">
-        <meta name="author" content="">
+        <meta name="author" content="Leonardo Baldo">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/tablet.css" media="screen and (max-width:900px)">
@@ -15,16 +15,17 @@
         <script src="controlli.js"></script>
     </head>
     <body>
-        <nav id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></nav>
+        <div id="logo"><img src="logo.png" alt="Il logo è un libro aperto"></div>
         <header id="header">
             <nav aria-label="Aiuti alla navigazione">
                 <a class="navigationHelp" href="#content">Vai al contenuto</a>
             </nav> 
             <h1 class="titolo"><span lang="en">BookClub</span></h1>
         </header>
-        <nav id="menu">
+        <nav id="menu" aria-label="Menu">
             <label for="hamburger" tabindex="0">
-                <img src="menu.png" alt="">
+                Apri menu
+                <img src="menu.png" alt="Icona per aprire il menu ad hamburger">
             </label>
             <input id="hamburger" type="checkbox">
             <ul>

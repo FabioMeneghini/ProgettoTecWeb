@@ -810,6 +810,10 @@ blockquote {
     background-color: var(--bgcercabg);
 }
 
+.righealternate>legend{
+    display: none;
+}
+
 table{
     width: 100%;
     text-align: center;
