@@ -54,11 +54,11 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
 }
 else if(isset($_SESSION['username'])){
     $menu = $userMenu;
-    $menupersonale = '<li><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></li>';
+    $menupersonale = '<li><a class="menulibro" href="#tua_recensione">Vai alla tua recensione e voto</a></li>';
 }
 else {
     $menu = $NonRegistrato;
-    $menupersonale = '<li><a class="menulibro" href="#recensionetua">Vai alla tua recensione e voto</a></li>';
+    $menupersonale = '<li><a class="menulibro" href="#tua_recensione">Vai alla tua recensione e voto</a></li>';
 }
 
 $messaggiSuccesso = "";
@@ -91,9 +91,9 @@ function controlla($recensione, $voto) {
         $messaggi .= "<li>Il voto deve essere un numero intero</li>";
     }
     else
-    if($voto < 1 || $voto > 10) {
-        $messaggi .= "<li>Il voto deve essere compreso tra 1 e 10</li>";
-    }
+        if($voto < 1 || $voto > 10) {
+            $messaggi .= "<li>Il voto deve essere compreso tra 1 e 10</li>";
+        }
     return array("ok"=>$messaggi == "", "messaggi"=>$messaggi);
 }
 
@@ -186,8 +186,13 @@ if($connectionOk) {
         $iniziato= $connection -> is_iniziato($LibroSelezionato, $_SESSION['username']);
         if($terminato) {
             $recensione = $connection -> getTuaRecensione($LibroSelezionato, $_SESSION['username']);
-            $tuo_commento = $recensione["commento"];
-            $voto = $recensione["voto"];
+            if ($recensione !== null) {
+                $tuo_commento = $recensione["commento"] == null ? "" : $recensione["commento"];
+                $voto = $recensione["voto"] == null ? "" : $recensione["voto"];
+            } else {
+                $tuo_commento = "";
+                $voto = "";
+            }
 
             $arearecensionevoto='
                 <form method="post" action="scheda_libro.php" onsubmit="return validaSchedaLibro()" onreset="conferma(\'Sei sicuro di voler annullare le modifiche alla tua recensione e al tuo voto?\')"> 
@@ -281,7 +286,7 @@ $paginaHTML = str_replace("{listaGeneri}", $listaGeneri, $paginaHTML);
 $paginaHTML = str_replace("{menupersonale}", $menupersonale, $paginaHTML);
 
 //prima sostituisce l'area della recensione con un form poi lo compila 
-$paginaHTML = str_replace("{arearecensionevotoform}", $arearecensionevoto=="" ? "" : '<section><h2 class="tua_recensione">La tua recensione</h2>'.$arearecensionevoto.'</section>', $paginaHTML);
+$paginaHTML = str_replace("{arearecensionevotoform}", $arearecensionevoto=="" ? "" : '<section><h2 id="tua_recensione">La tua recensione</h2>'.$arearecensionevoto.'</section>', $paginaHTML);
 
 $paginaHTML = str_replace("{ImmagineLibro}", "copertine_libri/".$copertina.".jpg", $paginaHTML);
 $paginaHTML = str_replace("{altlibro}", $alt , $paginaHTML);

@@ -555,7 +555,7 @@ class DBAccess {
         if ($result->num_rows != 0) {
             $row = $result->fetch_assoc();
             $result->free();
-            return round($row['media_voti'], 2);
+            return round($row['media_voti'], 1);
         } else
             return null;
     }

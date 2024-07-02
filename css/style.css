@@ -526,7 +526,7 @@ body > *{
     border-radius: 5px;
 }
 
-.slider li{
+.slider li li{
     padding: 0.2em;
 }
 
@@ -550,6 +550,12 @@ body > *{
     background-image: url("../arrow.png");
     transform: rotate(90deg);
 }
+
+.slide-pos-0 { transform: translateX(0%); }
+.slide-pos-1 { transform: translateX(-100%); }
+.slide-pos-2 { transform: translateX(-200%); }
+.slide-pos-3 { transform: translateX(-300%); }
+.slide-pos-4 { transform: translateX(-400%); }
 
 /* Lista libri per genere */
 
