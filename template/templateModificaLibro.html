@@ -54,14 +54,14 @@
                     <fieldset>
                         <legend>Informazioni generali</legend>
                         <label for="autore">Autore:</label>
-                        <span><input type="text" id="autore" name="autore" placeholder="{autoreold}" value="{autoreold}" maxlength="100" required></span>
+                        <span><input type="text" id="autore" name="autore" placeholder="Inserisci l'autore..." value="{autoreold}" maxlength="100" required></span>
                         
                         <label for="titolo">Titolo:</label>
-                        <span><input type="text" name="titolo" id="titolo" placeholder="{titoloold}" value="{titoloold}" maxlength="100" required></span>
+                        <span><input type="text" name="titolo" id="titolo" placeholder="Inserisci il titolo..." value="{titoloold}" maxlength="100" required></span>
                         
                         <label for="genere">Genere:</label>
                         <span>
-                            <select name="genere" id="genere" placeholder="{genereold}" value="{genereold}" required>
+                            <select name="genere" id="genere" required>
                                 {selectGeneri}
                             </select>
                         </span>
@@ -69,18 +69,18 @@
                     <fieldset>
                         <legend>Informazioni specifiche</legend>
                         <label for="lingua">Lingua originale:</label>
-                        <span><input type="text" list="datalist_lingua" id="lingua" name="lingua" placeholder="{linguaold}" value="{linguaold}" required></span>
+                        <span><input type="text" list="datalist_lingua" id="lingua" name="lingua" placeholder="Inserisci la lingua..." value="{linguaold}" required></span>
                         <datalist id="datalist_lingua">
                             {listaLingue}
                         </datalist>
                         
                         <label for="capitoli">Numero capitoli:</label>
-                        <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required placeholder="{capitoliold}" value="{capitoliold}"></span>
+                        <span><input type="number" name="capitoli" id="capitoli" min="1" max="1000" required placeholder="Numero capitoli..." value="{capitoliold}"></span>
                     </fieldset>
                     <fieldset>
                         <legend>Trama</legend>
-                        <label for="trama">Trama del libro:</legend>
-                        <span><textarea id="trama" name="trama" rows="20" cols="70" placeholder="{tramaold}" maxlength="3000" required>{tramaold}</textarea></span>
+                        <label for="trama">Trama del libro:</label>
+                        <span><textarea id="trama" name="trama" rows="20" cols="70" placeholder="Inserisci la trama..." maxlength="3000" required>{tramaold}</textarea></span>
                     </fieldset>
                     <fieldset>
                         <legend>Conferma o annulla le modifiche</legend>

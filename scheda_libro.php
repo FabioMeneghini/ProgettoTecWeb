@@ -245,11 +245,11 @@ if($connectionOk) {
         $bottoni_admin='
             <div class="container_form">
                 <form action="modifica_libro.php" method="get">
-                    <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                    <input type="hidden" name="id" value='.$LibroSelezionato.'>
                     <input type="submit" id="modifica_libro" name="modifica_libro" value="Modifica">
                 </form>
                 <form action="elimina_libro.php" method="get" onsubmit="return conferma(\'Sei sicuro/sicura di voler eliminare questo libro?\')">
-                    <input type="hidden" id="libroId" name="id" value='.$LibroSelezionato.'>
+                    <input type="hidden" name="id" value='.$LibroSelezionato.'>
                     <input type="submit" id="elimina" name="elimina" value="Elimina">
                 </form>
             </div>';

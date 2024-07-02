@@ -72,7 +72,7 @@ $lingua = "";
 $trama = "";
 $n_capitoli = "";
 $lista_lingue="";
-$data_list_generi="";
+$data_list_generi="<option value=\"\">Seleziona un genere</option>";
 $messaggiForm = "";
 $messaggiErrore = "";
 

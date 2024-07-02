@@ -83,8 +83,8 @@ if($connectionOk) {
                     </tr>';
         foreach($resultUtenti as $utente) {
             $utenti .= '<tr>
-                            <th scope="row">'.$utente["username"].'</td>
-                            <td>'.$utente["nome"].'</th>
+                            <th scope="row">'.$utente["username"].'</th>
+                            <td>'.$utente["nome"].'</td>
                             <td>'.$utente["cognome"].'</td>
                             <td class="rimuovi">'.$utente["email"].'</td>
                             <td class="rimuovi"><time datetime="'.$utente["data_iscrizione"].'">'.$utente["data_iscrizione"].'</time></td>
