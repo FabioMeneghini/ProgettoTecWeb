@@ -112,7 +112,7 @@ if($connectionOk) {
         foreach($libri_ricercati as $libro) {
             $rislutati_ricerca .= '<tr>
                                     <th scope="row"><a href="scheda_libro.php?id='.$libro["id"].'">'.$libro["titolo"].'</a></th>
-                                    <td class="rimuovi_print"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="'.$libro["descrizione"].'" width="50" height="70"></td>
+                                    <td class="rimuovi_print"><img src="copertine_libri/'.$libro["titolo_ir"].'.jpg" alt="Copertina del libro '.$libro["titolo"].'" width="50" height="70"></td>
                                     <td>'.$libro["autore"].'</td>
                                     <td class="rimuovi">'.$libro["genere"].'</td>
                                     <td class="rimuovi">'.$libro["lingua"].'</td>

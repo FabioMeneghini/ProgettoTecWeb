@@ -164,7 +164,7 @@ if($connectionOk) {
     $trama = $libro["trama"];
     $n_capitoli = $libro["n_capitoli"];
     $copertina = $libro["titolo_ir"];
-    $alt = $libro["descrizione"];
+    $alt = "Copertina del libro ".$libro["titolo"];
     $keywords = $libro["keywords"];
     $description = $libro["descrizione_pagina"];
 
@@ -278,8 +278,6 @@ if($keywords=="")
     $keywords="libro, recensioni, lettura, autore, genere, lingua, trama, capitoli, voto, recensione, storia, personaggi";
 if($description=="")
     $description="Pagina dedicata al libro ".$titolo." di ".$autore." con trama, numero di capitoli, genere, lingua e media voti. Inoltre è possibile leggere le recensioni degli altri utenti e lasciare la propria valutazione.";
-if($alt=="")
-    $alt="Copertina del libro ".$titolo." di ".$autore;
 
 $paginaHTML = str_replace("{keywords}", $keywords, $paginaHTML);
 $paginaHTML = str_replace("{description}", $description, $paginaHTML);
