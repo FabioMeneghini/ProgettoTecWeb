@@ -114,6 +114,10 @@ body{
 
 /* MENU */
 
+#menu>label>span{
+    display: none;
+}
+
 #menu{
     grid-area: m;
     padding: 1em;
