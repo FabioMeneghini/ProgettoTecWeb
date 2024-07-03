@@ -554,7 +554,10 @@ class DBAccess {
         if ($result->num_rows != 0) {
             $row = $result->fetch_assoc();
             $result->free();
-            return round($row['media_voti'], 1);
+            if($row['media_voti'] != null)
+                return round($row['media_voti'], 1);
+            else
+                return 0.0;
         } else
             return null;
     }
@@ -871,7 +874,7 @@ class DBAccess {
     }
 
     public function aggiungiLibroStaLeggendo($username, $id_libro) {
-        $n = count($id_libri);
+        //$n = count($id_libri);
         $query = "INSERT INTO sta_leggendo (username, id_libro, n_capitoli_letti) VALUES (?, ?, 0)";
         $stmt = $this -> connection -> prepare($query);
         if($stmt === false) {
